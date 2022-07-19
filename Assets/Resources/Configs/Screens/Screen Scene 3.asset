@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
+  m_Name: Screen Scene 3
+  m_EditorClassIdentifier: 
+  sceneKey: screen_scene_3
+  bgEnum: 1
+  nextScenes:
+  - scene: {fileID: 11400000, guid: 73e5306236f6b484c8b5b2ce53506e71, type: 2}
+    chooseText: 
+  screenParts:
+  - screenPosition: 1
+    characterImage: {fileID: 21300000, guid: bc586860d082a8843b449461b3f8c73a, type: 3}
+    nameCharacter: "\u0406\u043B\u043E\u043D\u0430"
+    textShow: "\u041E\u0441\u044C \u0440\u0456\u0447\u043A\u0430 \u043F\u043B\u0438\u0432\u0435"
+  - screenPosition: 2
+    characterImage: {fileID: 21300000, guid: 0df9b88daf864594a8c8a829a78fc9a0, type: 3}
+    nameCharacter: "\u0406\u043B\u043E\u043D\u0430"
+    textShow: "'\u0444\u0445\u0445\u0445\u0445\u0445'"
+  - screenPosition: 2
+    characterImage: {fileID: 0}
+    nameCharacter: 
+    textShow: "'\u0431\u0443\u043B\u044C\u043A'"

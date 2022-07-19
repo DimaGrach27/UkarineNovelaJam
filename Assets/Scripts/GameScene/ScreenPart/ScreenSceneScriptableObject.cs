@@ -10,8 +10,8 @@ namespace GameScene.ScreenPart
     {
         [SerializeField] private string sceneKey;
         [SerializeField] private BgEnum bgEnum;
-        [SerializeField] private ScreenSceneScriptableObject[] nextScenes;
         
+        [SerializeField] private NextScene[] nextScenes;
         [SerializeField] private ScreenPart[] screenParts;
         
         public BgEnum Bg => bgEnum;
@@ -19,7 +19,7 @@ namespace GameScene.ScreenPart
         public string SceneKey => sceneKey;
 
         public ScreenPart[] ScreenParts => screenParts;
-        public ScreenSceneScriptableObject[] NextScenes => nextScenes;
+        public NextScene[] NextScenes => nextScenes;
     }
 
     [Serializable]
@@ -37,5 +37,16 @@ namespace GameScene.ScreenPart
         public Sprite Image => characterImage;
         
         public CharacterScreenPositionEnum Position => screenPosition;
+    }
+    
+    [Serializable]
+    public class NextScene
+    {
+        [SerializeField] private ScreenSceneScriptableObject scene;
+        [SerializeField, TextArea(1, 4)] private string chooseText;
+        
+        public string ChooseText => chooseText;
+        public ScreenSceneScriptableObject Scene => scene;
+        
     }
 }

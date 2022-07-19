@@ -10,23 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
-  m_Name: Screen Scene 0
+  m_Name: Screen Scene 4
   m_EditorClassIdentifier: 
-  sceneKey: screen_scene_0
-  bgEnum: 0
-  nextScenes:
-  - scene: {fileID: 11400000, guid: 1f083e7a5fa613a4990c04505454c58d, type: 2}
-    chooseText: 
+  sceneKey: screen_scene_4
+  bgEnum: 1
+  nextScenes: []
   screenParts:
   - screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: 
-    textShow: 123
-  - screenPosition: 0
-    characterImage: {fileID: 0}
-    nameCharacter: 
-    textShow: "\u042F \u0447\u0443\u044E..."
-  - screenPosition: 0
-    characterImage: {fileID: 0}
-    nameCharacter: 
-    textShow: ...
+    textShow: "\u041A\u0456\u043D\u0435\u0446\u044C"

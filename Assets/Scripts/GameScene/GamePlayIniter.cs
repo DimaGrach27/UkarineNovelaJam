@@ -1,5 +1,6 @@
 ﻿using GameScene.BgScreen;
 using GameScene.Characters;
+using GameScene.ChooseWindow;
 using GameScene.ScreenPart;
 using GameScene.ScreenText;
 using GameScene.Services;
@@ -10,12 +11,13 @@ namespace GameScene
     public class GamePlayIniter : MonoBehaviour
     {
         [SerializeField] private Transform uiCanvas;
-        [SerializeField] private ScreenPartsService screenPartsService;
+        private ScreenPartsService _screenPartsService;
 
         //Services
         private CharacterService _characterService;
         private ScreenTextService _screenTextService;
         private BgService _bgService;
+        private ChooseWindowService _chooseWindowService;
 
         //Handlers
         [SerializeField] private UiClickHandler uiClickHandler;
@@ -27,14 +29,15 @@ namespace GameScene
 
         private void Start()
         {
-            screenPartsService.
-                SetServices(
-                    _bgService,
-                    _characterService,
-                    _screenTextService,
-                    uiClickHandler);
+            _screenPartsService = new ScreenPartsService(
+                _bgService,
+                _characterService,
+                _screenTextService,
+                uiClickHandler,
+                _chooseWindowService
+                );
             
-            screenPartsService.Init();
+            _screenPartsService.Init();
             
             FadeService.FadeService.FadeOut();
         }
@@ -44,6 +47,7 @@ namespace GameScene
             _characterService = new CharacterService(uiCanvas);
             _screenTextService = new ScreenTextService(uiCanvas);
             _bgService = new BgService(uiCanvas);
+            _chooseWindowService = new ChooseWindowService(uiCanvas);
         }
     }
 }

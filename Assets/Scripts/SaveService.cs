@@ -28,7 +28,8 @@
      }
 
      private static bool ExistFile() =>  File.Exists(Path);
-     private static string Path => Application.dataPath + "/jsonSave.json";
+
+     private static string Path => Application.persistentDataPath + $"/progress_{Application.productName}.json";
 
      public static void SavePart(int current)
      {

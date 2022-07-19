@@ -2,35 +2,39 @@
 using System.Threading.Tasks;
 using GameScene.BgScreen;
 using GameScene.Characters;
+using GameScene.ChooseWindow;
 using GameScene.ScreenText;
 using GameScene.Services;
 using UnityEngine;
 
 namespace GameScene.ScreenPart
 {
-    public class ScreenPartsService : MonoBehaviour
+    public class ScreenPartsService 
     {
         private readonly Dictionary<string, ScreenSceneScriptableObject> _screenScenesMap = new();
         
         private int _currentPart;
         private string _currentScene;
 
-        private BgService _bgService;
-        private CharacterService _characterService;
-        private ScreenTextService _screenTextService;
+        private readonly BgService _bgService;
+        private readonly CharacterService _characterService;
+        private readonly ScreenTextService _screenTextService;
+        private readonly ChooseWindowService _chooseWindowService;
 
         private bool _blockClick;
 
-        public void SetServices(
+        public ScreenPartsService(
             BgService bgService,
             CharacterService characterService,
             ScreenTextService screenTextService,
-            UiClickHandler uiClickHandler
+            UiClickHandler uiClickHandler,
+            ChooseWindowService chooseWindowService
             )
         {
             _bgService = bgService;
             _characterService = characterService;
             _screenTextService = screenTextService;
+            _chooseWindowService = chooseWindowService;
 
             ScreenSceneScriptableObject[] list = 
                 Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
@@ -40,6 +44,7 @@ namespace GameScene.ScreenPart
                 _screenScenesMap.Add(screenScene.SceneKey, screenScene);
             }
 
+            chooseWindowService.OnChoose += OnChooseClick;
             uiClickHandler.OnClick += ShowNextPart;
         }
         
@@ -50,11 +55,12 @@ namespace GameScene.ScreenPart
             
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
+            _chooseWindowService.ChangeVisible(false);
             
             ShowScene();
         }
         
-        public void ShowNextScene(string key)
+        private void ShowNextScene(string key)
         {
             _currentScene = key;
             _currentPart = 0;
@@ -65,7 +71,7 @@ namespace GameScene.ScreenPart
             ShowScene();
         }
 
-        public void ShowScene()
+        private void ShowScene()
         {
             ScreenSceneScriptableObject scriptableObject = _screenScenesMap[_currentScene];
                 
@@ -74,7 +80,7 @@ namespace GameScene.ScreenPart
             ShowPart();
         }
         
-        public void ShowNextPart()
+        private void ShowNextPart()
         {
             if(_blockClick) return;
             
@@ -82,7 +88,7 @@ namespace GameScene.ScreenPart
 
             if (_currentPart == _screenScenesMap[_currentScene].ScreenParts.Length )
             {
-                print($"End scene: {_screenScenesMap[_currentScene].SceneKey}");
+                Debug.Log($"End scene: {_screenScenesMap[_currentScene].SceneKey}");
 
                 ChooseNextScene();
                 return;
@@ -93,7 +99,7 @@ namespace GameScene.ScreenPart
             SaveService.SavePart(_currentPart);
         }
         
-        public void ShowPart()
+        private void ShowPart()
         {
             if (_currentPart < _screenScenesMap[_currentScene].ScreenParts.Length)
             {
@@ -114,15 +120,20 @@ namespace GameScene.ScreenPart
                 return;
             }
 
-            ShowNextScene(_screenScenesMap[_currentScene].NextScenes[0].SceneKey);
+            ShowNextScene(_screenScenesMap[_currentScene].NextScenes[0].Scene.SceneKey);
         }
         
         private void Choose()
         {
-            foreach (var scriptableObject in _screenScenesMap[_currentScene].NextScenes)
-            {
-                print($"Scene: {scriptableObject.SceneKey}");
-            }
+            _characterService.HideAllCharacters();
+            _screenTextService.HideText();
+            
+            _chooseWindowService.SetChooses(_screenScenesMap[_currentScene].NextScenes);
+        }
+
+        private void OnChooseClick(NextScene chooseScene)
+        {
+            ShowNextScene(chooseScene.Scene.SceneKey);
         }
         
         private async void WaitClick()

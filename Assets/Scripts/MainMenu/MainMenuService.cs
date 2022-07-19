@@ -14,11 +14,20 @@ namespace MainMenu
 
         [SerializeField] private ConfirmScreen confirmScreen;
 
+        private bool IsGameWasStarted
+        {
+            get
+            {
+                int currentProgress = SaveService.GetPart();
+                string sceneKey = SaveService.GetScene();
+
+                return currentProgress > 0 || sceneKey != "screen_scene_0";
+            }
+        }
+        
         private void Start()
         {
-            int currentProgress = SaveService.GetPart();
-            string sceneKey = SaveService.GetScene();
-            continueButton.interactable = currentProgress > 0 || sceneKey != "screen_scene_0";
+            continueButton.interactable = IsGameWasStarted;
             
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
@@ -27,9 +36,7 @@ namespace MainMenu
 
         private void StartNewGame()
         {
-            int currentProgress = SaveService.GetPart();
-
-            if (currentProgress > 0)
+            if (IsGameWasStarted)
             {
                 string areYouSure = "Якщо ви почнете спочатку, то прогрессу буде втрачений. Ви впевнені?";
                 confirmScreen.Check(ConfirmStart, areYouSure);
@@ -39,6 +46,8 @@ namespace MainMenu
 
             ConfirmStart(true);
         }
+
+
         
         private void ConfirmStart(bool isConfirm)
         {
