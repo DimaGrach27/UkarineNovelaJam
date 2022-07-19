@@ -4,27 +4,27 @@ namespace GameScene.ScreenText
 {
     public class ScreenTextService
     {
-        private readonly ScreenServiceUiView _screenServiceUiView;
+        private readonly ScreenTextUiView _screenTextUiView;
 
         public ScreenTextService(Transform uiTransform)
         {
-            _screenServiceUiView = uiTransform.GetComponentInChildren<ScreenServiceUiView>();
+            _screenTextUiView = uiTransform.GetComponentInChildren<ScreenTextUiView>();
         }
 
         public void ShowText()
         {
-            _screenServiceUiView.Visible = true;
+            _screenTextUiView.Visible = true;
         }
         
         public void SetText(string name, string text)
         {
-            _screenServiceUiView.Name = name;
-            _screenServiceUiView.Text = text;
+            _screenTextUiView.Name = name;
+            _screenTextUiView.Text = text;
         }
         
         public void HideText()
         {
-            _screenServiceUiView.Visible = false;
+            _screenTextUiView.Visible = false;
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace GameScene.ScreenText
 {
-    public class ScreenServiceUiView : MonoBehaviour
+    public class ScreenTextUiView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI mainText;

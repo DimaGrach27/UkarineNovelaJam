@@ -4,30 +4,31 @@
 
  public static class SaveService
  {
+     private const string CAMERA_FILM_LEFT_KEY = "camera_film_left";
+     
      private static SaveFile _saveFile;
      private static SaveFile SaveFile
      {
          get
          {
-             if(_saveFile == null)
+             if (_saveFile != null) return _saveFile;
+             
+             if (!ExistFile)
              {
-                 if (!ExistFile())
-                 {
-                     _saveFile = new SaveFile();
+                 _saveFile = new SaveFile();
 
-                     File.WriteAllText(Path, JsonUtility.ToJson(_saveFile));
-                 }
-                 else
-                 {
-                     _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(Path));
-                 }
+                 File.WriteAllText(Path, JsonUtility.ToJson(_saveFile));
+             }
+             else
+             {
+                 _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(Path));
              }
 
              return _saveFile;
          }
      }
 
-     private static bool ExistFile() =>  File.Exists(Path);
+     private static bool ExistFile =>  File.Exists(Path);
 
      private static string Path => Application.persistentDataPath + $"/progress_{Application.productName}.json";
 
@@ -43,19 +44,22 @@
          File.WriteAllText(Path, JsonUtility.ToJson(SaveFile));
      }
 
-     public static int GetPart()
+     public static string GetScene => SaveFile.currentScene;
+     public static int GetPart => SaveFile.currentPart;
+
+     public static int CameraFilmLeft
      {
-         return SaveFile.currentPart;
-     }
-     public static string GetScene()
-     { 
-         return SaveFile.currentScene;
+         get => PlayerPrefs.GetInt(CAMERA_FILM_LEFT_KEY, 24);
+
+         set => PlayerPrefs.SetInt(CAMERA_FILM_LEFT_KEY, value);
      }
      
      public static void ResetAllSaves()
      {
          PlayerPrefs.DeleteAll();
-         File.Delete(Path);
+         
+         SaveFile.currentPart = 0;
+         SaveFile.currentScene = "screen_scene_0";
      }
  }
 

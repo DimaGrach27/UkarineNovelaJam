@@ -23,6 +23,7 @@ namespace GameScene.ChooseWindow
         }
 
         public void ChangeVisible(bool isVisible) => _chooseWindowUiView.Visible = isVisible;
+        
         private void OnChooseClick(NextScene chooseScene)
         {
             OnChoose?.Invoke(chooseScene);

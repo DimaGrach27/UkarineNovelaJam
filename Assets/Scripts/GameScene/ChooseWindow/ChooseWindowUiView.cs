@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using GameScene.ScreenPart;
 using UnityEngine;
 
@@ -13,11 +14,41 @@ namespace GameScene.ChooseWindow
         [SerializeField] private ChooseButtonUiView buttonPrefab;
 
         private readonly List<ChooseButtonUiView> _chooseButtonUiViews = new();
+        
+        private CanvasGroup _canvasGroup;
+        private CanvasGroup CanvasGroup
+        {
+            get
+            {
+                if (_canvasGroup == null)
+                    _canvasGroup = GetComponent<CanvasGroup>();
+                return _canvasGroup;
+            }
+        }
+
+        private bool _isVisible;
 
         public bool Visible
         {
-            set => gameObject.SetActive(value);
+            get => _isVisible;
+            
+            set
+            {
+                if (Visible && !value)
+                {
+                    DissolveOut();
+                }
+                
+                if (!Visible && value)
+                {
+                    DissolveIn();
+                }
+                
+                _isVisible = value;
+                gameObject.SetActive(_isVisible);
+            }
         }
+        
         public void InitButtons(NextScene[] scenes)
         {
             foreach (var choose in _chooseButtonUiViews)
@@ -43,6 +74,18 @@ namespace GameScene.ChooseWindow
         private void OnButtonChooseClick(NextScene choose)
         {
             OnChoose?.Invoke(choose);
+        }
+        
+        private void DissolveIn(float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
+        {
+            CanvasGroup.alpha = 0.0f;
+            CanvasGroup.DOFade(1.0f, duration);
+        }
+        
+        private void DissolveOut(float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
+        {
+            CanvasGroup.alpha = 1.0f;
+            CanvasGroup.DOFade(0.0f, duration);
         }
     }
 }

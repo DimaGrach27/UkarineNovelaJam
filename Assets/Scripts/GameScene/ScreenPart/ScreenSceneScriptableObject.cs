@@ -43,10 +43,17 @@ namespace GameScene.ScreenPart
     public class NextScene
     {
         [SerializeField] private ScreenSceneScriptableObject scene;
+        
         [SerializeField, TextArea(1, 4)] private string chooseText;
+        
+        [SerializeField] private bool isShowOnCameraAction = true;
+        [SerializeField] private bool isReadyToShow = true;
+
+        public bool IsShowOnCameraAction => isShowOnCameraAction;
+        public bool IsReadyToShow => isReadyToShow;
         
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
-        
+
     }
 }

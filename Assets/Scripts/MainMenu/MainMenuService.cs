@@ -18,8 +18,8 @@ namespace MainMenu
         {
             get
             {
-                int currentProgress = SaveService.GetPart();
-                string sceneKey = SaveService.GetScene();
+                int currentProgress = SaveService.GetPart;
+                string sceneKey = SaveService.GetScene;
 
                 return currentProgress > 0 || sceneKey != "screen_scene_0";
             }

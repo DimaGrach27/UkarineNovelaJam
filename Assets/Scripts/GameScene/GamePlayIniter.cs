@@ -1,6 +1,7 @@
 ﻿using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ChooseWindow;
+using GameScene.ChooseWindow.CameraAction;
 using GameScene.ScreenPart;
 using GameScene.ScreenText;
 using GameScene.Services;
@@ -18,6 +19,7 @@ namespace GameScene
         private ScreenTextService _screenTextService;
         private BgService _bgService;
         private ChooseWindowService _chooseWindowService;
+        private CameraActionService _cameraActionService;
 
         //Handlers
         [SerializeField] private UiClickHandler uiClickHandler;
@@ -34,7 +36,8 @@ namespace GameScene
                 _characterService,
                 _screenTextService,
                 uiClickHandler,
-                _chooseWindowService
+                _chooseWindowService,
+                _cameraActionService
                 );
             
             _screenPartsService.Init();
@@ -48,6 +51,7 @@ namespace GameScene
             _screenTextService = new ScreenTextService(uiCanvas);
             _bgService = new BgService(uiCanvas);
             _chooseWindowService = new ChooseWindowService(uiCanvas);
+            _cameraActionService = new CameraActionService(uiCanvas);
         }
     }
 }

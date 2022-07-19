@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ChooseWindow;
+using GameScene.ChooseWindow.CameraAction;
 using GameScene.ScreenText;
 using GameScene.Services;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace GameScene.ScreenPart
         private readonly CharacterService _characterService;
         private readonly ScreenTextService _screenTextService;
         private readonly ChooseWindowService _chooseWindowService;
+        private readonly CameraActionService _cameraActionService;
 
         private bool _blockClick;
 
@@ -28,13 +30,15 @@ namespace GameScene.ScreenPart
             CharacterService characterService,
             ScreenTextService screenTextService,
             UiClickHandler uiClickHandler,
-            ChooseWindowService chooseWindowService
+            ChooseWindowService chooseWindowService,
+            CameraActionService cameraActionService
             )
         {
             _bgService = bgService;
             _characterService = characterService;
             _screenTextService = screenTextService;
             _chooseWindowService = chooseWindowService;
+            _cameraActionService = cameraActionService;
 
             ScreenSceneScriptableObject[] list = 
                 Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
@@ -45,17 +49,19 @@ namespace GameScene.ScreenPart
             }
 
             chooseWindowService.OnChoose += OnChooseClick;
+            cameraActionService.OnTakePhoto += TakePhoto;
             uiClickHandler.OnClick += ShowNextPart;
         }
         
         public void Init()
         {
-            _currentPart = SaveService.GetPart();
-            _currentScene = SaveService.GetScene();
+            _currentPart = SaveService.GetPart;
+            _currentScene = SaveService.GetScene;
             
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             _chooseWindowService.ChangeVisible(false);
+            _cameraActionService.ChangeVisible(false);
             
             ShowScene();
         }
@@ -67,6 +73,11 @@ namespace GameScene.ScreenPart
 
             SaveService.SaveScene(_currentScene);
             SaveService.SavePart(_currentPart);
+            
+            _characterService.HideAllCharacters();
+            _screenTextService.HideText();
+            _chooseWindowService.ChangeVisible(false);
+            _cameraActionService.ChangeVisible(false);
             
             ShowScene();
         }
@@ -128,7 +139,47 @@ namespace GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             
-            _chooseWindowService.SetChooses(_screenScenesMap[_currentScene].NextScenes);
+            _cameraActionService.ChangeVisible(true);
+            
+            _chooseWindowService.SetChooses(
+                PrepareList(
+                    _screenScenesMap[_currentScene].NextScenes, 
+                    false, 
+                    true));
+        }
+
+        private void TakePhoto()
+        {
+            _characterService.HideAllCharacters();
+            _screenTextService.HideText();
+            
+            _chooseWindowService.SetChooses(
+                PrepareList(
+                    _screenScenesMap[_currentScene].NextScenes, 
+                    true, 
+                    false));
+        }
+
+        private NextScene[] PrepareList(NextScene[] list, bool isShowOnCameraAction, bool isReadyToShow)
+        {
+            List<NextScene> resultList = new List<NextScene>();
+
+            foreach (var nextScene in list)
+            {
+                if (nextScene.IsReadyToShow == isReadyToShow)
+                {
+                    if(!resultList.Contains(nextScene))
+                        resultList.Add(nextScene);
+                }
+                
+                if (nextScene.IsShowOnCameraAction == isShowOnCameraAction)
+                {
+                    if(!resultList.Contains(nextScene))
+                        resultList.Add(nextScene);
+                }
+            }
+            
+            return resultList.ToArray();
         }
 
         private void OnChooseClick(NextScene chooseScene)

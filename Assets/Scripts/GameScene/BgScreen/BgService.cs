@@ -8,8 +8,6 @@ namespace GameScene.BgScreen
         private readonly BgUiView _bgUiView;
         private readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
 
-        private BgEnum _currentBg;
-
         public BgService(Transform uiTransform)
         {
             _bgUiView = uiTransform.GetComponentInChildren<BgUiView>();
@@ -25,7 +23,6 @@ namespace GameScene.BgScreen
 
         public void Show(BgEnum bgEnum)
         {
-            _currentBg = bgEnum;
             _bgUiView.Image = _bgMap[bgEnum].Image;
             _bgUiView.Visible = true;
         }
