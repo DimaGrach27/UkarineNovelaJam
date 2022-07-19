@@ -1,6 +1,7 @@
 ﻿using System;
 using GameScene.BgScreen;
 using GameScene.Characters;
+using GameScene.ScreenPart.ActionScreens;
 using UnityEngine;
 
 namespace GameScene.ScreenPart
@@ -9,12 +10,15 @@ namespace GameScene.ScreenPart
     public class ScreenSceneScriptableObject : ScriptableObject
     {
         [SerializeField] private string sceneKey;
+        
         [SerializeField] private BgEnum bgEnum;
+        [SerializeField] private ActionType actionType;
         
         [SerializeField] private NextScene[] nextScenes;
         [SerializeField] private ScreenPart[] screenParts;
         
         public BgEnum Bg => bgEnum;
+        public ActionType ActionType => actionType;
         
         public string SceneKey => sceneKey;
 
@@ -25,7 +29,9 @@ namespace GameScene.ScreenPart
     [Serializable]
     public class ScreenPart
     {
+        [SerializeField] private ActionType actionType;
         [SerializeField] private CharacterScreenPositionEnum screenPosition;
+        
         [SerializeField] private Sprite characterImage;
         
         [SerializeField] private string nameCharacter;
@@ -37,6 +43,7 @@ namespace GameScene.ScreenPart
         public Sprite Image => characterImage;
         
         public CharacterScreenPositionEnum Position => screenPosition;
+        public ActionType ActionType => actionType;
     }
     
     [Serializable]

@@ -4,6 +4,7 @@ using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ChooseWindow;
 using GameScene.ChooseWindow.CameraAction;
+using GameScene.ScreenPart.ActionScreens;
 using GameScene.ScreenText;
 using GameScene.Services;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace GameScene.ScreenPart
         private readonly ScreenTextService _screenTextService;
         private readonly ChooseWindowService _chooseWindowService;
         private readonly CameraActionService _cameraActionService;
+        private readonly ActionScreenService _actionScreenService;
 
         private bool _blockClick;
 
@@ -31,7 +33,8 @@ namespace GameScene.ScreenPart
             ScreenTextService screenTextService,
             UiClickHandler uiClickHandler,
             ChooseWindowService chooseWindowService,
-            CameraActionService cameraActionService
+            CameraActionService cameraActionService,
+            ActionScreenService actionScreenService
             )
         {
             _bgService = bgService;
@@ -39,6 +42,7 @@ namespace GameScene.ScreenPart
             _screenTextService = screenTextService;
             _chooseWindowService = chooseWindowService;
             _cameraActionService = cameraActionService;
+            _actionScreenService = actionScreenService;
 
             ScreenSceneScriptableObject[] list = 
                 Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
@@ -86,6 +90,8 @@ namespace GameScene.ScreenPart
         {
             ScreenSceneScriptableObject scriptableObject = _screenScenesMap[_currentScene];
                 
+            _actionScreenService.Action(scriptableObject.ActionType);
+            
             _bgService.Show(scriptableObject.Bg);
 
             ShowPart();
@@ -115,6 +121,8 @@ namespace GameScene.ScreenPart
             if (_currentPart < _screenScenesMap[_currentScene].ScreenParts.Length)
             {
                 ScreenPart screenPart = _screenScenesMap[_currentScene].ScreenParts[_currentPart];
+                
+                _actionScreenService.Action(screenPart.ActionType);
                 
                 _characterService.ShowCharacter(screenPart.Position, screenPart.Image);
                 _screenTextService.SetText(screenPart.CharacterName, screenPart.TextShow);

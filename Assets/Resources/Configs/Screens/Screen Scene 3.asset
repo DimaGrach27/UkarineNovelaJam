@@ -14,19 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneKey: screen_scene_3
   bgEnum: 1
+  actionType: 228
   nextScenes:
   - scene: {fileID: 11400000, guid: 73e5306236f6b484c8b5b2ce53506e71, type: 2}
     chooseText: 
+    isShowOnCameraAction: 1
+    isReadyToShow: 1
   screenParts:
-  - screenPosition: 1
+  - actionType: 0
+    screenPosition: 1
     characterImage: {fileID: 21300000, guid: bc586860d082a8843b449461b3f8c73a, type: 3}
     nameCharacter: "\u0406\u043B\u043E\u043D\u0430"
-    textShow: "\u041E\u0441\u044C \u0440\u0456\u0447\u043A\u0430 \u043F\u043B\u0438\u0432\u0435"
-  - screenPosition: 2
+    textShow: "\u041E\u0441\u044C \u0440\u0456\u0447\u043A\u0430 \u0431\u0456\u0436\u0438\u0442\u044C"
+  - actionType: 0
+    screenPosition: 2
     characterImage: {fileID: 21300000, guid: 0df9b88daf864594a8c8a829a78fc9a0, type: 3}
     nameCharacter: "\u0406\u043B\u043E\u043D\u0430"
     textShow: "'\u0444\u0445\u0445\u0445\u0445\u0445'"
-  - screenPosition: 2
+  - actionType: 0
+    screenPosition: 2
     characterImage: {fileID: 0}
     nameCharacter: 
     textShow: "'\u0431\u0443\u043B\u044C\u043A'"
