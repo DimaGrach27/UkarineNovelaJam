@@ -10,6 +10,7 @@ namespace GameScene.ScreenPart.ActionScreens
         public ActionScreenService()
         {
             _actionMap.Add(ActionType.DEBUG, new ActionTestDebug());
+            _actionMap.Add(ActionType.CAMERA_SHAKER, new ActionCameraShaker());
         }
 
         public void Action(ActionType actionType)

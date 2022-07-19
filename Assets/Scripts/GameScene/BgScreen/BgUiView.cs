@@ -7,8 +7,10 @@ namespace GameScene.BgScreen
 {
     public class BgUiView : MonoBehaviour
     {
-        [SerializeField] private Image bgCurrent;
-        [SerializeField] private Image bgNew;
+        [SerializeField] private SpriteRenderer bgCurrent;
+        [SerializeField] private SpriteRenderer bgNew;
+        // [SerializeField] private Image bgCurrent;
+        // [SerializeField] private Image bgNew;
         
         public Sprite Image
         {

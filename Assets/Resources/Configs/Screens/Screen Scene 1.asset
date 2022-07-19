@@ -37,7 +37,7 @@ MonoBehaviour:
     characterImage: {fileID: 21300000, guid: bc586860d082a8843b449461b3f8c73a, type: 3}
     nameCharacter: "\u0406\u043B\u043E\u043D\u0430"
     textShow: "\u042F \u043F\u043E\u0447\u0438\u043D\u0430\u044E \u0431\u0430\u0447\u0438\u0442\u0438"
-  - actionType: 228
+  - actionType: 0
     screenPosition: 1
     characterImage: {fileID: 21300000, guid: bc586860d082a8843b449461b3f8c73a, type: 3}
     nameCharacter: "\u0406\u043B\u043E\u043D\u0430"

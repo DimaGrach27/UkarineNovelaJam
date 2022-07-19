@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Screen Scene 0
   m_EditorClassIdentifier: 
   sceneKey: screen_scene_0
-  bgEnum: 0
+  bgEnum: 1
   actionType: 0
   nextScenes:
   - scene: {fileID: 11400000, guid: 1f083e7a5fa613a4990c04505454c58d, type: 2}
@@ -26,7 +26,7 @@ MonoBehaviour:
     characterImage: {fileID: 0}
     nameCharacter: 
     textShow: 
-  - actionType: 0
+  - actionType: 1
     screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: 
