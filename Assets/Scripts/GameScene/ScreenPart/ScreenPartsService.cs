@@ -66,7 +66,7 @@ namespace GameScene.ScreenPart
             _currentPart = SaveService.GetPart;
             _currentScene = SaveService.GetScene;
             
-            _characterService.HideAllCharacters();
+            _characterService.HideAllCharactersInstant();
             _screenTextService.HideText();
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);

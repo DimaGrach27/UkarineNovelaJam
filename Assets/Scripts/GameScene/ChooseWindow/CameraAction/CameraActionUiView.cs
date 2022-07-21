@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,10 +14,6 @@ namespace GameScene.ChooseWindow.CameraAction
 
         [SerializeField] private TextMeshProUGUI countText;
         
-        [SerializeField] private Image cameraFlash;
-        [SerializeField] private AnimationCurve flashCurve;
-
-
         private void Awake()
         {
             Button.onClick.AddListener(TakePhoto);
@@ -50,35 +45,6 @@ namespace GameScene.ChooseWindow.CameraAction
             if(!IsReadyToTakePhoto) return;
             
             OnTakePhoto?.Invoke();
-            StartCoroutine(FlashRoutine());
-        }
-        
-        private IEnumerator FlashRoutine()
-        {
-            Color imageColor = GlobalConstant.ColorWitheClear;
-            cameraFlash.gameObject.SetActive(true);
-            cameraFlash.color = imageColor;
-            
-            float time = 0.0f;
-
-            while (time < GlobalConstant.CAMERA_ACTION_FLASH_DURATION)
-            {
-                float alpha = flashCurve.Evaluate(CalculateProgress());
-                time += Time.deltaTime;
-                
-                imageColor.a = alpha;
-                cameraFlash.color = imageColor;
-                
-                yield return null;
-            }
-            
-            cameraFlash.gameObject.SetActive(false);
-
-            float CalculateProgress()
-            {
-                float progress = time / GlobalConstant.CAMERA_ACTION_FLASH_DURATION;
-                return progress;
-            }
         }
     }
 }

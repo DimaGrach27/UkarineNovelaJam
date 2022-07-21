@@ -71,6 +71,7 @@ namespace GameScene.ScreenText
 
         private IEnumerator TypingRoutine(string text)
         {
+            _screenTextUiView.CanvasGroup.blocksRaycasts = false;
             _isTyping = true;
             string resultText = "";
 
@@ -110,7 +111,7 @@ namespace GameScene.ScreenText
                 CoroutineHelper.Inst.StopCoroutine(_typingCoroutine);
             
             _isTyping = false;
-            
+            _screenTextUiView.CanvasGroup.blocksRaycasts = true;
             if(_endText != null) _screenTextUiView.Text = _endText;
             
             _endText = null;

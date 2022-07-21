@@ -73,6 +73,15 @@ namespace GameScene.Characters
             }
         }
         
+        public void HideAllCharactersInstant()
+        {
+            foreach (var character in _characterUiViewMap.Values)
+            {
+                character.Image.sprite = null;
+                character.Visible = false;
+            }
+        }
+        
         private void DissolveIn(CharacterScreenPositionEnum screenPosition, 
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
         {

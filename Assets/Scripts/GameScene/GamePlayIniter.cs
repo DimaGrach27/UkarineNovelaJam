@@ -13,6 +13,7 @@ namespace GameScene
     public class GamePlayIniter : MonoBehaviour
     {
         [SerializeField] private Transform uiCanvas;
+
         private ScreenPartsService _screenPartsService;
 
         //Services
@@ -25,7 +26,7 @@ namespace GameScene
 
         //Handlers
         [SerializeField] private UiClickHandler uiClickHandler;
-
+        
         private void Awake()
         {
             InitServices();

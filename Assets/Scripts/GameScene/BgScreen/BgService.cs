@@ -23,7 +23,7 @@ namespace GameScene.BgScreen
 
         public void Show(BgEnum bgEnum)
         {
-            _bgUiView.Image = _bgMap[bgEnum].Image;
+            _bgUiView.Sprite = _bgMap[bgEnum].Image;
             _bgUiView.Visible = true;
         }
         

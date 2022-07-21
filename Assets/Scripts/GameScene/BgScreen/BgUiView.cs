@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameScene.BgScreen
 {
@@ -9,10 +8,8 @@ namespace GameScene.BgScreen
     {
         [SerializeField] private SpriteRenderer bgCurrent;
         [SerializeField] private SpriteRenderer bgNew;
-        // [SerializeField] private Image bgCurrent;
-        // [SerializeField] private Image bgNew;
-        
-        public Sprite Image
+
+        public Sprite Sprite
         {
             set
             {

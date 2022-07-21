@@ -8,11 +8,14 @@ namespace GameScene.ChooseWindow.CameraAction
         public event Action OnTakePhoto;
         
         private readonly CameraActionUiView _cameraActionUiView;
+        private readonly CameraActionFlash _cameraActionFlash;
         
         public CameraActionService(Transform uiTransform)
         {
             _cameraActionUiView = uiTransform.GetComponentInChildren<CameraActionUiView>();
             _cameraActionUiView.OnTakePhoto += OnTakePhotoAction;
+            
+            _cameraActionFlash = uiTransform.GetComponentInChildren<CameraActionFlash>();;
 
             _cameraActionUiView.FilmLeft = SaveService.CameraFilmLeft;
             _cameraActionUiView.IsReadyToTakePhoto = SaveService.CameraFilmLeft > 0;
@@ -23,6 +26,9 @@ namespace GameScene.ChooseWindow.CameraAction
         private void OnTakePhotoAction()
         {
             SaveService.CameraFilmLeft--;
+            
+            _cameraActionFlash.CallFlash();
+            
             _cameraActionUiView.FilmLeft = SaveService.CameraFilmLeft;
             _cameraActionUiView.IsReadyToTakePhoto = SaveService.CameraFilmLeft > 0;
             OnTakePhoto?.Invoke();
