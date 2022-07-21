@@ -51,7 +51,7 @@ namespace GameScene
         private void InitServices()
         {
             _characterService = new CharacterService(uiCanvas);
-            _screenTextService = new ScreenTextService(uiCanvas);
+            _screenTextService = new ScreenTextService(uiCanvas, uiClickHandler);
             _bgService = new BgService(uiCanvas);
             _chooseWindowService = new ChooseWindowService(uiCanvas);
             _cameraActionService = new CameraActionService(uiCanvas);

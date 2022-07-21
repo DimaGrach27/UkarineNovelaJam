@@ -7,7 +7,7 @@
      private const string CAMERA_FILM_LEFT_KEY = "camera_film_left";
      
      private static SaveFile _saveFile;
-     private static SaveFile SaveFile
+     public static SaveFile SaveFile
      {
          get
          {
@@ -68,4 +68,6 @@
  {
      public int currentPart = 0;
      public string currentScene = "screen_scene_0";
+
+     public bool bottle;
  }

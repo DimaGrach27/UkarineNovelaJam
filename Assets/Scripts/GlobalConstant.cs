@@ -2,6 +2,7 @@
 
 public static class GlobalConstant
 {
+    public const float TYPING_SPEED = 0.05f;
     public const float ANIMATION_DISSOLVE_DURATION = 0.75f;
     public const float DEFAULT_FADE_DURATION = 1.5f;
     public const float CAMERA_ACTION_FLASH_DURATION = 0.5f;

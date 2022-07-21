@@ -6,21 +6,32 @@ using UnityEngine;
 
 namespace GameScene.ScreenPart
 {
-    [CreateAssetMenu(fileName = "Screen Scene", menuName = "Frog Croaked Team/Create 'Screen Scene'", order = 0)]
+    [CreateAssetMenu(
+        fileName = "Screen Scene", 
+        menuName = "Frog Croaked Team/Create 'Screen Scene'", 
+        order = 0)]
+    
     public class ScreenSceneScriptableObject : ScriptableObject
     {
         [SerializeField] private string sceneKey;
         
         [SerializeField] private BgEnum bgEnum;
-        [SerializeField] private ActionType actionType;
+        [SerializeField] private ActionType[] actionsType;
         
+        [SerializeField] private StatusDependent statusDependent;
+        [SerializeField] private StatusSetter statusSetter;
+
+        [SerializeField] private bool isActiveCamera = false;
         [SerializeField] private NextScene[] nextScenes;
         [SerializeField] private ScreenPart[] screenParts;
         
         public BgEnum Bg => bgEnum;
-        public ActionType ActionType => actionType;
+        public ActionType[] ActionsType => actionsType;
+        public StatusDependent StatusDependent => statusDependent;
+        public StatusSetter StatusSetter => statusSetter;
         
         public string SceneKey => sceneKey;
+        public bool IsActiveCamera => isActiveCamera;
 
         public ScreenPart[] ScreenParts => screenParts;
         public NextScene[] NextScenes => nextScenes;
@@ -29,7 +40,7 @@ namespace GameScene.ScreenPart
     [Serializable]
     public class ScreenPart
     {
-        [SerializeField] private ActionType actionType;
+        [SerializeField] private ActionType[] actionsType;
         [SerializeField] private CharacterScreenPositionEnum screenPosition;
         
         [SerializeField] private Sprite characterImage;
@@ -43,7 +54,7 @@ namespace GameScene.ScreenPart
         public Sprite Image => characterImage;
         
         public CharacterScreenPositionEnum Position => screenPosition;
-        public ActionType ActionType => actionType;
+        public ActionType[] ActionsType => actionsType;
     }
     
     [Serializable]
@@ -62,5 +73,27 @@ namespace GameScene.ScreenPart
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
 
+    }
+
+    [Serializable]
+    public class StatusDependent
+    {
+        [SerializeField] private bool enable = false;
+        [SerializeField] private StatusEnum status = StatusEnum.NONE;
+
+        public bool Enable => enable;
+        public StatusEnum Status => status;
+    }
+    
+    [Serializable]
+    public class StatusSetter
+    {
+        [SerializeField] private bool enable = false;
+        [SerializeField] private bool statusFlag = true;
+        [SerializeField] private StatusEnum status = StatusEnum.NONE;
+
+        public bool Enable => enable;
+        public bool StatusFlag => statusFlag;
+        public StatusEnum Status => status;
     }
 }

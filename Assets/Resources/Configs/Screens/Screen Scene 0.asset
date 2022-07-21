@@ -14,24 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneKey: screen_scene_0
   bgEnum: 1
-  actionType: 0
+  actionsType: 
+  statusDependent:
+    enable: 0
+    status: 0
+  statusSetter:
+    enable: 0
+    statusFlag: 1
+    status: 0
+  isActiveCamera: 0
   nextScenes:
   - scene: {fileID: 11400000, guid: 1f083e7a5fa613a4990c04505454c58d, type: 2}
     chooseText: 
     isShowOnCameraAction: 1
     isReadyToShow: 1
   screenParts:
-  - actionType: 0
+  - actionsType: 
     screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: 
-    textShow: 
-  - actionType: 1
+    textShow: sdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdfsdfds fdsfsd fsd fsd fsd fsd
+      fsd fsdfsdfsdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdfsdfds fdsfsd fsd fsd fsd
+      fsd fsd fsdfsdfsdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdfsdfds fdsfsd fsd fsd
+      fsd fsd fsd fsdfsdfsdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdf
+  - actionsType: 
     screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: 
-    textShow: "\u042F \u0447\u0443\u044E..."
-  - actionType: 0
+    textShow: "\u042F \u0447\u0443\u044E... sdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdf
+      sdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdf sdfds fdsfsd fsd fsd fsd fsd fsd fsdfsdf"
+  - actionsType: 
     screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: 

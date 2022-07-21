@@ -14,7 +14,7 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
         
         public void Action()
         {
-            _camera.DOShakePosition(0.5f, 0.3f, 15, 90.0f, false);
+            _camera.DOShakePosition(0.25f, 0.3f, 15, 90.0f, false);
         }
 
         public ActionType ActionType => ActionType.CAMERA_SHAKER;

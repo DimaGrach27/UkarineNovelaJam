@@ -32,6 +32,8 @@ namespace MainMenu
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
             exitButton.onClick.AddListener(Exit);
+            
+            GameModel.Init();
         }
 
         private void StartNewGame()

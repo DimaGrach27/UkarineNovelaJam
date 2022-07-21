@@ -27,6 +27,9 @@ namespace GameScene.ScreenPart
 
         private bool _blockClick;
 
+        private ScreenSceneScriptableObject _currentSceneSo;
+        private ScreenPart _currentPartSo;
+
         public ScreenPartsService(
             BgService bgService,
             CharacterService characterService,
@@ -52,6 +55,7 @@ namespace GameScene.ScreenPart
                 _screenScenesMap.Add(screenScene.SceneKey, screenScene);
             }
 
+            screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
             cameraActionService.OnTakePhoto += TakePhoto;
             uiClickHandler.OnClick += ShowNextPart;
@@ -88,11 +92,22 @@ namespace GameScene.ScreenPart
 
         private void ShowScene()
         {
-            ScreenSceneScriptableObject scriptableObject = _screenScenesMap[_currentScene];
-                
-            _actionScreenService.Action(scriptableObject.ActionType);
+            _currentSceneSo = _screenScenesMap[_currentScene];
+
+            if (_currentSceneSo.StatusSetter.Enable)
+                GameModel.SetStatus(
+                        _currentSceneSo.StatusSetter.Status, 
+                        _currentSceneSo.StatusSetter.StatusFlag);
+
+            if(_currentSceneSo.ActionsType != null)
+            {
+                foreach (var actionType in _currentSceneSo.ActionsType)
+                {
+                    _actionScreenService.Action(actionType);
+                }
+            }
             
-            _bgService.Show(scriptableObject.Bg);
+            _bgService.Show(_currentSceneSo.Bg);
 
             ShowPart();
         }
@@ -103,9 +118,9 @@ namespace GameScene.ScreenPart
             
             _currentPart++;
 
-            if (_currentPart == _screenScenesMap[_currentScene].ScreenParts.Length )
+            if (_currentPart == _currentSceneSo.ScreenParts.Length )
             {
-                Debug.Log($"End scene: {_screenScenesMap[_currentScene].SceneKey}");
+                Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
 
                 ChooseNextScene();
                 return;
@@ -118,28 +133,43 @@ namespace GameScene.ScreenPart
         
         private void ShowPart()
         {
-            if (_currentPart < _screenScenesMap[_currentScene].ScreenParts.Length)
+            if (_currentPart < _currentSceneSo.ScreenParts.Length)
             {
-                ScreenPart screenPart = _screenScenesMap[_currentScene].ScreenParts[_currentPart];
+                _currentPartSo = _currentSceneSo.ScreenParts[_currentPart];
                 
-                _actionScreenService.Action(screenPart.ActionType);
+                if(_currentPartSo.ActionsType != null)
+                {
+                    foreach (var actionType in _currentPartSo.ActionsType)
+                    {
+                        _actionScreenService.Action(actionType);
+                    }
+                }
                 
-                _characterService.ShowCharacter(screenPart.Position, screenPart.Image);
-                _screenTextService.SetText(screenPart.CharacterName, screenPart.TextShow);
+                _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
+                _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow);
 
-                WaitClick();
+                _blockClick = true;
             }
         }
 
         private void ChooseNextScene()
         {
+            if (_screenScenesMap[_currentScene].StatusDependent.Enable)
+            {
+                ShowNextScene(GameModel.GetStatus(_currentSceneSo.StatusDependent.Status)
+                    ? _currentSceneSo.NextScenes[0].Scene.SceneKey
+                    : _currentSceneSo.NextScenes[^1].Scene.SceneKey);
+
+                return;
+            }
+            
             if (_screenScenesMap[_currentScene].NextScenes.Length > 1)
             {
                 Choose();
                 return;
             }
 
-            ShowNextScene(_screenScenesMap[_currentScene].NextScenes[0].Scene.SceneKey);
+            ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
         }
         
         private void Choose()
@@ -147,7 +177,7 @@ namespace GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             
-            _cameraActionService.ChangeVisible(true);
+            _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
             
             _chooseWindowService.SetChooses(
                 PrepareList(
@@ -163,7 +193,7 @@ namespace GameScene.ScreenPart
             
             _chooseWindowService.SetChooses(
                 PrepareList(
-                    _screenScenesMap[_currentScene].NextScenes, 
+                    _currentSceneSo.NextScenes, 
                     true, 
                     false));
         }
@@ -194,11 +224,9 @@ namespace GameScene.ScreenPart
         {
             ShowNextScene(chooseScene.Scene.SceneKey);
         }
-        
-        private async void WaitClick()
+
+        private void OnEndTyping()
         {
-            _blockClick = true;
-            await Task.Delay((int)(1050 * GlobalConstant.ANIMATION_DISSOLVE_DURATION));
             _blockClick = false;
         }
     }
