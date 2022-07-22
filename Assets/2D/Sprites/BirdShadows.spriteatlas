@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BirdShadows
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 2
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 585bd267d1f5daf45b7096228ea8fdc7, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 1ee4852262a33114cb86932c808ed0a0, type: 3}
+  - {fileID: 21300000, guid: fbb24e35ea2ab364c9f052eb959d6594, type: 3}
+  - {fileID: 21300000, guid: 37dd0726015313a47ae28c46667935cc, type: 3}
+  - {fileID: 21300000, guid: b6c42b565bf306f46a268e70a216b1d1, type: 3}
+  - {fileID: 21300000, guid: 54cdc978b7dec2e419f469fddde9b0f3, type: 3}
+  - {fileID: 21300000, guid: 13d9ce98ecd397949b78666acdf39177, type: 3}
+  - {fileID: 21300000, guid: 5a16121b762446b498334bbef6c6b2bb, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - bird_shadow_6
+  - bird_shadow_7
+  - bird_shadow_4
+  - bird_shadow_3
+  - bird_shadow_5
+  - bird_shadow_2
+  - bird_shadow_1
+  m_RenderDataMap: {}
+  m_Tag: BirdShadows
+  m_IsVariant: 0
