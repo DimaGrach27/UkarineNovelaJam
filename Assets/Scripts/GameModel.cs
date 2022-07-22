@@ -2,10 +2,16 @@
 
 public static class GameModel
 {
+
+    private static bool _gameWasInit = false;
+    
     private static readonly Dictionary<StatusEnum, bool> StatusMap = new();
 
     public static void Init()
     {
+        if(_gameWasInit) return;
+        
+        _gameWasInit = true;
         StatusMap.Add(StatusEnum.BOTTLE, SaveService.SaveFile.bottle);
     }
 

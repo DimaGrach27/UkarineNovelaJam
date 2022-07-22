@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameScene.BgScreen;
 using GameScene.Characters;
@@ -8,6 +9,7 @@ using GameScene.ScreenPart.ActionScreens;
 using GameScene.ScreenText;
 using GameScene.Services;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameScene.ScreenPart
 {
@@ -26,7 +28,9 @@ namespace GameScene.ScreenPart
         private readonly ActionScreenService _actionScreenService;
 
         private bool _blockClick;
+        private bool _inGame;
 
+        private Coroutine _loadCoroutine;
         private ScreenSceneScriptableObject _currentSceneSo;
         private ScreenPart _currentPartSo;
 
@@ -71,6 +75,8 @@ namespace GameScene.ScreenPart
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);
             
+            _inGame = true;
+            
             ShowScene();
         }
         
@@ -107,6 +113,11 @@ namespace GameScene.ScreenPart
                 }
             }
             
+            if(_currentSceneSo.StatusSetter.Enable)
+                GameModel.SetStatus(
+                    _currentSceneSo.StatusSetter.Status, 
+                    _currentSceneSo.StatusSetter.StatusFlag);
+            
             _bgService.Show(_currentSceneSo.Bg);
 
             ShowPart();
@@ -114,7 +125,7 @@ namespace GameScene.ScreenPart
         
         private void ShowNextPart()
         {
-            if(_blockClick) return;
+            if(_blockClick || !_inGame) return;
             
             _currentPart++;
 
@@ -144,10 +155,15 @@ namespace GameScene.ScreenPart
                         _actionScreenService.Action(actionType);
                     }
                 }
+
+                if(_currentPartSo.StatusSetter.Enable)
+                    GameModel.SetStatus(
+                        _currentPartSo.StatusSetter.Status, 
+                        _currentPartSo.StatusSetter.StatusFlag);
                 
                 _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
                 _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow);
-
+                
                 _blockClick = true;
             }
         }
@@ -169,6 +185,13 @@ namespace GameScene.ScreenPart
                 return;
             }
 
+            if (_currentSceneSo.NextScenes.Length == 0)
+            {
+                LoadEndGame();
+                _inGame = false;
+                return;
+            }
+            
             ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
         }
         
@@ -228,6 +251,20 @@ namespace GameScene.ScreenPart
         private void OnEndTyping()
         {
             _blockClick = false;
+        }
+
+        private void LoadEndGame()
+        {
+            if(_loadCoroutine != null) return;
+
+            _loadCoroutine = CoroutineHelper.Inst.StartCoroutine(LoadRoutine());
+        }
+
+        private IEnumerator LoadRoutine()
+        {
+            FadeService.FadeService.FadeIn();
+            yield return new WaitForSeconds(1.5f);
+            SceneManager.LoadScene("EndScene");
         }
     }
 }

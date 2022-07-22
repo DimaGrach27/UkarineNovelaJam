@@ -18,12 +18,13 @@ namespace GameScene.ScreenPart
         [SerializeField] private BgEnum bgEnum;
         [SerializeField] private ActionType[] actionsType;
         
+        [SerializeField] private bool isActiveCamera = false;
+        
         [SerializeField] private StatusDependent statusDependent;
         [SerializeField] private StatusSetter statusSetter;
 
-        [SerializeField] private bool isActiveCamera = false;
-        [SerializeField] private NextScene[] nextScenes;
         [SerializeField] private ScreenPart[] screenParts;
+        [SerializeField] private NextScene[] nextScenes;
         
         public BgEnum Bg => bgEnum;
         public ActionType[] ActionsType => actionsType;
@@ -41,6 +42,7 @@ namespace GameScene.ScreenPart
     public class ScreenPart
     {
         [SerializeField] private ActionType[] actionsType;
+        [SerializeField] private StatusSetter statusSetter;
         [SerializeField] private CharacterScreenPositionEnum screenPosition;
         
         [SerializeField] private Sprite characterImage;
@@ -52,6 +54,8 @@ namespace GameScene.ScreenPart
         public string TextShow => textShow;
         
         public Sprite Image => characterImage;
+        
+        public StatusSetter StatusSetter => statusSetter;
         
         public CharacterScreenPositionEnum Position => screenPosition;
         public ActionType[] ActionsType => actionsType;

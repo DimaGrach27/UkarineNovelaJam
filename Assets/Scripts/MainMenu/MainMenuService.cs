@@ -29,6 +29,8 @@ namespace MainMenu
         
         private void Start()
         {
+            FadeService.FadeService.FadeOut();
+            
             continueButton.interactable = IsGameWasStarted;
             
             continueButton.onClick.AddListener(LoadGameScene);
