@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace MainMenu
         [SerializeField] private Button exitButton;
 
         [SerializeField] private ConfirmScreen confirmScreen;
+        [SerializeField] private CanvasGroup buttonGroup;
 
         private bool IsGameWasStarted
         {
@@ -40,9 +42,10 @@ namespace MainMenu
         {
             if (IsGameWasStarted)
             {
-                string areYouSure = "Якщо ви почнете спочатку, то прогрессу буде втрачений. Ви впевнені?";
+                string areYouSure = "Попередній прогрес буде втрачений.\nПродовжити далі?";
                 confirmScreen.Check(ConfirmStart, areYouSure);
-                
+                buttonGroup.enabled = true;
+                buttonGroup.DOFade(0.0f, 0.3f);
                 return;
             }
 
@@ -57,6 +60,10 @@ namespace MainMenu
             {
                 SaveService.ResetAllSaves();
                 LoadGameScene();
+            }
+            else
+            {
+                buttonGroup.DOFade(1.0f, 0.5f);
             }
         }
         
@@ -79,12 +86,16 @@ namespace MainMenu
         {
             string areYouSure = "Ви точно плануєте вийти?";
             confirmScreen.Check(ConfirmExit, areYouSure);
+            buttonGroup.enabled = true;
+            buttonGroup.DOFade(0.0f, 0.3f);
         }
 
         private void ConfirmExit(bool isConfirm)
         {
             if(isConfirm)
                 Application.Quit();
+            else
+                buttonGroup.DOFade(1.0f, 0.5f);
         }
     }
 }
