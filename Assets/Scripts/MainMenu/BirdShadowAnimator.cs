@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace MainMenu
 {
@@ -18,14 +20,24 @@ namespace MainMenu
         [SerializeField] private float minDuration;
         [SerializeField] private float maxDuration;
         
+        [SerializeField] private float delay;
+        
         [SerializeField, Range(1, 10)] private int maxAnimaPart;
 
         private Transform _currentAnima;
         private Coroutine _coroutine;
-        
+
+        private void Start()
+        {
+            _coroutine = StartCoroutine(AnimationRoutine());
+        }
+
         [ContextMenu("Start Anima")]
         public void StartAnima()
         {
+            if(_coroutine != null)
+                StopCoroutine(_coroutine);
+            
             _coroutine = StartCoroutine(AnimationRoutine());
         }
         
@@ -60,6 +72,8 @@ namespace MainMenu
                 yield return new WaitForSeconds(duration);
                 
                 Destroy(_currentAnima.gameObject);
+                
+                yield return new WaitForSeconds(delay);
             }
         }
     }
