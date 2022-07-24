@@ -17,11 +17,15 @@ namespace GameScene.ChooseWindow
 
         private NextScene _chooseScene;
 
+        private void Awake()
+        {
+            Button.onClick.AddListener(ClickButton);
+        }
+
         public void InitButton(NextScene chooseScene)
         {
             textMeshProUGUI.text = chooseScene.ChooseText;
             _chooseScene = chooseScene;
-            Button.onClick.AddListener(ClickButton);
         }
 
         private void ClickButton() => OnChoose?.Invoke(_chooseScene);

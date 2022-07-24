@@ -25,6 +25,8 @@ namespace GameScene.ChooseWindow.CameraAction
 
         private void OnTakePhotoAction()
         {
+            Debug.Log("Take photo fff");
+            
             SaveService.CameraFilmLeft--;
             
             _cameraActionFlash.CallFlash();

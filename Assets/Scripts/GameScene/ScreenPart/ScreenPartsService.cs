@@ -129,7 +129,7 @@ namespace GameScene.ScreenPart
             
             _currentPart++;
 
-            if (_currentPart == _currentSceneSo.ScreenParts.Length )
+            if (_currentPart >= _currentSceneSo.ScreenParts.Length )
             {
                 Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
 
@@ -170,7 +170,7 @@ namespace GameScene.ScreenPart
 
         private void ChooseNextScene()
         {
-            if (_screenScenesMap[_currentScene].StatusDependent.Enable)
+            if (_currentSceneSo.StatusDependent.Enable)
             {
                 ShowNextScene(GameModel.GetStatus(_currentSceneSo.StatusDependent.Status)
                     ? _currentSceneSo.NextScenes[0].Scene.SceneKey
@@ -201,12 +201,55 @@ namespace GameScene.ScreenPart
             _screenTextService.HideText();
             
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
+
+            NextScene[] nextScenes = _screenScenesMap[_currentScene].NextScenes;
+            
+            if (_currentSceneSo.IsExclusionList)
+            {
+                nextScenes = CheckList();
+            }
             
             _chooseWindowService.SetChooses(
                 PrepareList(
-                    _screenScenesMap[_currentScene].NextScenes, 
+                    nextScenes, 
                     false, 
                     true));
+        }
+
+        private NextScene[] CheckList()
+        {
+            List<NextScene> list = new List<NextScene>();
+
+            ChoosesList choosesList = 
+                SaveService.GetListFromJson(_currentSceneSo.SceneKey, out bool isFirstInit);
+
+            if (isFirstInit)
+            {
+                int countChooses = _currentSceneSo.NextScenes.Length;
+                
+                choosesList.blockKey = _currentSceneSo.SceneKey;
+                choosesList.chooseKeys = new string[countChooses];
+                choosesList.chooseStatus = new bool[countChooses];
+                
+                for (int i = 0; i < countChooses; i++)
+                {
+                    choosesList.chooseKeys[i] = _currentSceneSo.NextScenes[i].Scene.SceneKey;
+                    choosesList.chooseStatus[i] = false;
+                }
+                
+                SaveService.SetChoosesList(_currentSceneSo.SceneKey, choosesList);
+            }
+
+            for (int i = 0; i < choosesList.chooseKeys.Length; i++)
+            {
+                if(!choosesList.chooseStatus[i])
+                    list.Add(_currentSceneSo.NextScenes[i]);
+            }
+            
+            if(!list.Contains(_currentSceneSo.NextScenes[^1]))
+                list.Add(_currentSceneSo.NextScenes[^1]);
+            
+            return list.ToArray();
         }
 
         private void TakePhoto()
@@ -214,9 +257,16 @@ namespace GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             
+            NextScene[] nextScenes = _currentSceneSo.NextScenes;
+            
+            if (_currentSceneSo.IsExclusionList)
+            {
+                nextScenes = CheckList();
+            }
+            
             _chooseWindowService.SetChooses(
                 PrepareList(
-                    _currentSceneSo.NextScenes, 
+                    nextScenes, 
                     true, 
                     false));
         }
@@ -245,6 +295,22 @@ namespace GameScene.ScreenPart
 
         private void OnChooseClick(NextScene chooseScene)
         {
+            if (_currentSceneSo.IsExclusionList)
+            {
+                SaveService.SetChoose(_currentSceneSo.SceneKey, chooseScene.Scene.SceneKey);
+            }
+
+            if (_currentSceneSo.IsSearchList)
+            {
+                if(chooseScene.FindStatus.Enable && 
+                   GameModel.GetStatus(chooseScene.FindStatus.Status))
+                {
+                    Choose();
+                    _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
+                    return;
+                }
+            }
+            
             ShowNextScene(chooseScene.Scene.SceneKey);
         }
 

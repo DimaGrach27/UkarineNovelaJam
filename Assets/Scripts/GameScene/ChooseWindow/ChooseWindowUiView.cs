@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using GameScene.ScreenPart;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace GameScene.ChooseWindow
         private readonly List<ChooseButtonUiView> _chooseButtonUiViews = new();
         
         private CanvasGroup _canvasGroup;
-        private CanvasGroup CanvasGroup
+        public CanvasGroup CanvasGroup
         {
             get
             {
@@ -25,28 +24,10 @@ namespace GameScene.ChooseWindow
                 return _canvasGroup;
             }
         }
-
-        private bool _isVisible;
-
+        
         public bool Visible
         {
-            get => _isVisible;
-            
-            set
-            {
-                if (Visible && !value)
-                {
-                    DissolveOut();
-                }
-                
-                if (!Visible && value)
-                {
-                    DissolveIn();
-                }
-                
-                _isVisible = value;
-                gameObject.SetActive(_isVisible);
-            }
+            set => gameObject.SetActive(value);
         }
         
         public void InitButtons(NextScene[] scenes)
@@ -74,18 +55,6 @@ namespace GameScene.ChooseWindow
         private void OnButtonChooseClick(NextScene choose)
         {
             OnChoose?.Invoke(choose);
-        }
-        
-        private void DissolveIn(float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
-        {
-            CanvasGroup.alpha = 0.0f;
-            CanvasGroup.DOFade(1.0f, duration);
-        }
-        
-        private void DissolveOut(float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
-        {
-            CanvasGroup.alpha = 1.0f;
-            CanvasGroup.DOFade(0.0f, duration);
         }
     }
 }

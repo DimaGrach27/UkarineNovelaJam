@@ -16,9 +16,13 @@ namespace GameScene.ScreenPart
         [SerializeField] private string sceneKey;
         
         [SerializeField] private BgEnum bgEnum;
-        [SerializeField] private ActionType[] actionsType;
         
         [SerializeField] private bool isActiveCamera = false;
+        [SerializeField] private bool isCheckStatus = false;
+        [SerializeField] private bool isExclusionList = false;
+        [SerializeField] private bool isSearchList = false;
+        
+        [SerializeField] private ActionType[] actionsType;
         
         [SerializeField] private StatusDependent statusDependent;
         [SerializeField] private StatusSetter statusSetter;
@@ -32,7 +36,11 @@ namespace GameScene.ScreenPart
         public StatusSetter StatusSetter => statusSetter;
         
         public string SceneKey => sceneKey;
+        
         public bool IsActiveCamera => isActiveCamera;
+        public bool IsExclusionList => isExclusionList;
+        public bool IsSearchList => isSearchList;
+        public bool IsCheckStatus => isCheckStatus;
 
         public ScreenPart[] ScreenParts => screenParts;
         public NextScene[] NextScenes => nextScenes;
@@ -71,11 +79,16 @@ namespace GameScene.ScreenPart
         [SerializeField] private bool isShowOnCameraAction = true;
         [SerializeField] private bool isReadyToShow = true;
 
+        [SerializeField] private StatusDependent findStatus;
+        [SerializeField] private StatusDependent checkStatus;
+        
         public bool IsShowOnCameraAction => isShowOnCameraAction;
         public bool IsReadyToShow => isReadyToShow;
         
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
+        public StatusDependent FindStatus => findStatus;
+        public StatusDependent CheckStatus => checkStatus;
 
     }
 

@@ -27,6 +27,15 @@ public static class GameModel
         if (!StatusMap.ContainsKey(statusEnum)) return;
 
         StatusMap[statusEnum] = status;
+
+        switch (statusEnum)
+        {
+            case StatusEnum.BOTTLE:
+                SaveService.SaveFile.bottle = status;
+                break;
+        }
+        
+        SaveService.SaveJson();
     }
 }
 

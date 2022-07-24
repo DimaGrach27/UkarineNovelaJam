@@ -44,6 +44,7 @@ namespace GameScene.ChooseWindow.CameraAction
         {
             if(!IsReadyToTakePhoto) return;
             
+            print("Take photo");
             OnTakePhoto?.Invoke();
         }
     }
