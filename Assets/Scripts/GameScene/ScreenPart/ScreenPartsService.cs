@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GameScene.BgScreen;
 using GameScene.Characters;
@@ -170,84 +171,47 @@ namespace GameScene.ScreenPart
 
         private void ChooseNextScene()
         {
-            List<NextScene> nextScenes = new List<NextScene>();
-            
-            
-            if (_currentSceneSo.IsCheckStatus)
+            if (_currentSceneSo.NextScenes.Length == 0)
             {
-                CheckStatus();
-                return;
+                LoadEndGame();
+                _inGame = false;
+            }
+            
+            if(_currentSceneSo.NextScenes.Length == 1)
+            {
+                ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
             }
             
             if (_currentSceneSo.NextScenes.Length > 1)
             {
                 Choose();
-                return;
             }
-
-            if (_currentSceneSo.NextScenes.Length == 0)
-            {
-                LoadEndGame();
-                _inGame = false;
-                return;
-            }
-            
-            if(nextScenes.Count == 1)
-                ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
         }
 
-        private void CheckStatus()
-        {
-            List<NextScene> listNextScenes = new();
-
-            foreach (var nextScene in _currentSceneSo.NextScenes)
-            {
-                if (nextScene.CheckStatus.Enable)
-                {
-                    if(GameModel.GetStatus(nextScene.CheckStatus.Status))
-                        listNextScenes.Add(nextScene);
-                }
-                else
-                {
-                    listNextScenes.Add(nextScene);
-                }
-            }
-            
-            _chooseWindowService.SetChooses(
-                PrepareList(
-                    listNextScenes.ToArray(), 
-                    false, 
-                    true));
-        }
-        
         private void Choose()
         {
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
-            
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
-
-            NextScene[] nextScenes = _screenScenesMap[_currentScene].NextScenes;
             
-            if (_currentSceneSo.IsExclusionList)
-            {
-                nextScenes = CheckList();
-            }
-            
-            _chooseWindowService.SetChooses(
-                PrepareList(
-                    nextScenes, 
-                    false, 
-                    true));
+            _chooseWindowService.SetChooses(PrepareList(false));
         }
 
-        private NextScene[] CheckList()
+        private void TakePhoto()
         {
-            List<NextScene> list = new List<NextScene>();
+            _characterService.HideAllCharacters();
+            _screenTextService.HideText();
+            
+            _chooseWindowService.SetChooses(PrepareList(true));
+        }
 
+        private NextScene[] PrepareList(bool isCamera)
+        {
             ChoosesList choosesList = 
                 SaveService.GetListFromJson(_currentSceneSo.SceneKey, out bool isFirstInit);
-
+            
+            int count = 0;
+            
             if (isFirstInit)
             {
                 int countChooses = _currentSceneSo.NextScenes.Length;
@@ -264,78 +228,61 @@ namespace GameScene.ScreenPart
                 
                 SaveService.SetChoosesList(_currentSceneSo.SceneKey, choosesList);
             }
+            
+            List<NextScene> nextScenes = new();
 
-            for (int i = 0; i < choosesList.chooseKeys.Length; i++)
+            foreach (var nextScene in _currentSceneSo.NextScenes)
             {
-                if(!choosesList.chooseStatus[i])
-                    list.Add(_currentSceneSo.NextScenes[i]);
-            }
-            
-            if(!list.Contains(_currentSceneSo.NextScenes[^1]))
-                list.Add(_currentSceneSo.NextScenes[^1]);
-            
-            return list.ToArray();
-        }
+                nextScenes.Add(nextScene);
 
-        private void TakePhoto()
-        {
-            _characterService.HideAllCharacters();
-            _screenTextService.HideText();
-            
-            NextScene[] nextScenes = _currentSceneSo.NextScenes;
-            
-            if (_currentSceneSo.IsExclusionList)
-            {
-                nextScenes = CheckList();
-            }
-            
-            _chooseWindowService.SetChooses(
-                PrepareList(
-                    nextScenes, 
-                    true, 
-                    false));
-        }
-
-        private NextScene[] PrepareList(NextScene[] list, bool isShowOnCameraAction, bool isReadyToShow)
-        {
-            List<NextScene> resultList = new List<NextScene>();
-
-            foreach (var nextScene in list)
-            {
-                if (nextScene.IsReadyToShow == isReadyToShow)
+                bool isRemove = false;
+                
+                if (nextScene.statusDependent.enable)
                 {
-                    if(!resultList.Contains(nextScene))
-                        resultList.Add(nextScene);
+                    if (nextScene.statusDependent.value !=
+                        GameModel.GetStatus(nextScene.statusDependent.status))
+                    {
+                        isRemove = true;
+                    }
                 }
                 
-                if (nextScene.IsShowOnCameraAction == isShowOnCameraAction)
+                if (nextScene.cameraDependent.enable)
                 {
-                    if(!resultList.Contains(nextScene))
-                        resultList.Add(nextScene);
+                    if(isCamera)
+                        isRemove |= !nextScene.cameraDependent.visibleOnPhoto;
+                    else
+                        isRemove |= !nextScene.cameraDependent.visibleOutPhoto;
                 }
+                
+                if (nextScene.exclusionDependent.enable)
+                {
+                    isRemove |= choosesList.chooseStatus[count];
+                }
+
+                if (isRemove) nextScenes.Remove(nextScene);
+
+                count++;
             }
-            
-            return resultList.ToArray();
+
+            return nextScenes.ToArray();
         }
 
         private void OnChooseClick(NextScene chooseScene)
         {
-            if (_currentSceneSo.IsExclusionList)
+            if (chooseScene.exclusionDependent.enable)
             {
                 SaveService.SetChoose(_currentSceneSo.SceneKey, chooseScene.Scene.SceneKey);
             }
 
-            if (_currentSceneSo.IsSearchList)
+            if (chooseScene.findDependent.enable &&
+                GameModel.GetStatus(chooseScene.findDependent.status) == 
+                chooseScene.findDependent.value)
             {
-                if(chooseScene.FindStatus.Enable && 
-                   GameModel.GetStatus(chooseScene.FindStatus.Status))
-                {
-                    Choose();
-                    _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
-                    return;
-                }
+                Choose();
+                _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
+                return;
             }
-            
+
             ShowNextScene(chooseScene.Scene.SceneKey);
         }
 

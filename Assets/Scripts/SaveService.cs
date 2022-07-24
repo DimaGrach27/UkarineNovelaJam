@@ -6,7 +6,7 @@
  public static class SaveService
  {
      private const string CAMERA_FILM_LEFT_KEY = "camera_film_left";
-     private const string HEALTH_COUNT_KEY = "camera_film_left";
+     private const string HEALTH_COUNT_KEY = "health_count";
 
      private static SaveFile _saveFile;
      public static SaveFile SaveFile

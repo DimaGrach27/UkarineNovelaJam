@@ -18,9 +18,7 @@ namespace GameScene.ScreenPart
         [SerializeField] private BgEnum bgEnum;
         
         [SerializeField] private bool isActiveCamera = false;
-        [SerializeField] private bool isCheckStatus = false;
-        [SerializeField] private bool isExclusionList = false;
-        [SerializeField] private bool isSearchList = false;
+
         
         [SerializeField] private ActionType[] actionsType;
         
@@ -37,9 +35,6 @@ namespace GameScene.ScreenPart
         public string SceneKey => sceneKey;
         
         public bool IsActiveCamera => isActiveCamera;
-        public bool IsExclusionList => isExclusionList;
-        public bool IsSearchList => isSearchList;
-        public bool IsCheckStatus => isCheckStatus;
 
         public ScreenPart[] ScreenParts => screenParts;
         public NextScene[] NextScenes => nextScenes;
@@ -72,33 +67,45 @@ namespace GameScene.ScreenPart
     public class NextScene
     {
         [SerializeField] private ScreenSceneScriptableObject scene;
-        
         [SerializeField, TextArea(1, 4)] private string chooseText;
-        
-        [SerializeField] private bool isShowOnCameraAction = true;
-        [SerializeField] private bool isReadyToShow = true;
 
-        [SerializeField] private StatusDependent findStatus;
-        [SerializeField] private StatusDependent checkStatus;
-        
-        public bool IsShowOnCameraAction => isShowOnCameraAction;
-        public bool IsReadyToShow => isReadyToShow;
-        
+        public StatusDependent statusDependent;
+        public CameraDependent cameraDependent;
+        public ExclusionDependent exclusionDependent;
+        public FindDependent findDependent;
+
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
-        public StatusDependent FindStatus => findStatus;
-        public StatusDependent CheckStatus => checkStatus;
-
     }
 
     [Serializable]
     public class StatusDependent
     {
-        [SerializeField] private bool enable = false;
-        [SerializeField] private StatusEnum status = StatusEnum.NONE;
-
-        public bool Enable => enable;
-        public StatusEnum Status => status;
+        public bool enable = false;
+        public bool value;
+        public StatusEnum status = StatusEnum.NONE;
+    }
+    
+    [Serializable]
+    public class CameraDependent
+    {
+        public bool enable;
+        public bool visibleOnPhoto;
+        public bool visibleOutPhoto;
+    }
+    
+    [Serializable]
+    public class ExclusionDependent
+    {
+        public bool enable;
+    }
+    
+    [Serializable]
+    public class FindDependent
+    {
+        public bool enable;
+        public bool value = true;
+        public StatusEnum status = StatusEnum.NONE;
     }
     
     [Serializable]
