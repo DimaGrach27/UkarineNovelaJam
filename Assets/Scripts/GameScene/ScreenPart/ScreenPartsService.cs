@@ -170,16 +170,16 @@ namespace GameScene.ScreenPart
 
         private void ChooseNextScene()
         {
-            if (_currentSceneSo.StatusDependent.Enable)
+            List<NextScene> nextScenes = new List<NextScene>();
+            
+            
+            if (_currentSceneSo.IsCheckStatus)
             {
-                ShowNextScene(GameModel.GetStatus(_currentSceneSo.StatusDependent.Status)
-                    ? _currentSceneSo.NextScenes[0].Scene.SceneKey
-                    : _currentSceneSo.NextScenes[^1].Scene.SceneKey);
-
+                CheckStatus();
                 return;
             }
             
-            if (_screenScenesMap[_currentScene].NextScenes.Length > 1)
+            if (_currentSceneSo.NextScenes.Length > 1)
             {
                 Choose();
                 return;
@@ -192,7 +192,32 @@ namespace GameScene.ScreenPart
                 return;
             }
             
-            ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
+            if(nextScenes.Count == 1)
+                ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
+        }
+
+        private void CheckStatus()
+        {
+            List<NextScene> listNextScenes = new();
+
+            foreach (var nextScene in _currentSceneSo.NextScenes)
+            {
+                if (nextScene.CheckStatus.Enable)
+                {
+                    if(GameModel.GetStatus(nextScene.CheckStatus.Status))
+                        listNextScenes.Add(nextScene);
+                }
+                else
+                {
+                    listNextScenes.Add(nextScene);
+                }
+            }
+            
+            _chooseWindowService.SetChooses(
+                PrepareList(
+                    listNextScenes.ToArray(), 
+                    false, 
+                    true));
         }
         
         private void Choose()

@@ -24,7 +24,6 @@ namespace GameScene.ScreenPart
         
         [SerializeField] private ActionType[] actionsType;
         
-        [SerializeField] private StatusDependent statusDependent;
         [SerializeField] private StatusSetter statusSetter;
 
         [SerializeField] private ScreenPart[] screenParts;
@@ -32,7 +31,7 @@ namespace GameScene.ScreenPart
         
         public BgEnum Bg => bgEnum;
         public ActionType[] ActionsType => actionsType;
-        public StatusDependent StatusDependent => statusDependent;
+
         public StatusSetter StatusSetter => statusSetter;
         
         public string SceneKey => sceneKey;
