@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneKey: screen_scene_1
   bgEnum: 1
-  isActiveCamera: 1
+  isActiveCamera: 0
   actionsType: 
   statusSetter:
     enable: 0
@@ -33,12 +33,12 @@ MonoBehaviour:
       \u0442\u0456\u043B\u043E"
   nextScenes:
   - scene: {fileID: 11400000, guid: 78ae9300a6581df45ad49269bc275e2c, type: 2}
-    chooseText: "\u0420\u043E\u0437\u0434\u0438\u0432\u0438\u0442\u0438\u0441\u044F
-      \u0440\u0438\u0431\u0430\u0446\u044C\u043A\u0438\u0439 \u0441\u043F\u043E\u0442."
+    chooseText: "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u0438\u0442\u0438\u0441\u044C
+      \u0434\u043E \u0441\u0442\u043E\u0440\u043E\u0436\u0438\u0432\u043E\u0457 \u0431\u0443\u0434\u043A\u0438."
     statusDependent:
-      enable: 0
-      value: 0
-      status: 0
+      enable: 1
+      value: 1
+      status: 100
     cameraDependent:
       enable: 0
       visibleOnPhoto: 0
@@ -46,12 +46,14 @@ MonoBehaviour:
     exclusionDependent:
       enable: 0
     findDependent:
-      enable: 1
+      enable: 0
       value: 1
       status: 100
   - scene: {fileID: 11400000, guid: 48ff49128e800c74999a864a4e24e1a2, type: 2}
-    chooseText: "\u041E\u0433\u043B\u044F\u043D\u0443\u0442\u0438 \u0441\u0442\u0430\u043D
-      \u0448\u043A\u0456\u0440\u0438."
+    chooseText: "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u0438\u0442\u0438\u0441\u044C
+      \u0434\u043E \u043C\u0456\u0441\u0446\u044F, \u0434\u0435 \u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430
+      \u0437\u0443\u0441\u0442\u0440\u0456\u043B\u0430 \u0406\u043B\u043E\u043D\u0443
+      \u0432\u043F\u0435\u0440\u0448\u0435."
     statusDependent:
       enable: 0
       value: 0
@@ -61,14 +63,13 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 1
+      enable: 0
     findDependent:
       enable: 0
       value: 1
       status: 0
   - scene: {fileID: 11400000, guid: 73e5306236f6b484c8b5b2ce53506e71, type: 2}
-    chooseText: "\u0417\u0430\u043F\u0438\u0442\u0430\u0442\u0438 \u043F\u0440\u043E
-      \u0440\u0435\u0447\u0456 \u0432\u0431\u0438\u0442\u043E\u0433\u043E."
+    chooseText: "\u041E\u0433\u043B\u0435\u0434\u0456\u0442\u0438 \u043F\u0456\u0434\u0432\u0430\u043B."
     statusDependent:
       enable: 0
       value: 0
@@ -84,26 +85,8 @@ MonoBehaviour:
       value: 1
       status: 0
   - scene: {fileID: 11400000, guid: 63bcb328296788b469fa7f7e7e4ad230, type: 2}
-    chooseText: "\u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0438\u0442\u0438 \u0437\u0430\u043B\u0438\u0448\u043A\u0438
-      \u043F\u0456\u0434 \u043D\u0456\u0433\u0442\u044F\u043C\u0438."
-    statusDependent:
-      enable: 0
-      value: 0
-      status: 0
-    cameraDependent:
-      enable: 1
-      visibleOnPhoto: 1
-      visibleOutPhoto: 0
-    exclusionDependent:
-      enable: 1
-    findDependent:
-      enable: 0
-      value: 1
-      status: 0
-  - scene: {fileID: 11400000, guid: 9ae8e6af3e8281c4d917e0cdc2eb2f50, type: 2}
-    chooseText: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0438 \u043E\u0433\u043B\u044F\u0434
-      \u0442\u0430 \u043F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u0438\u0441\u044F
-      \u0434\u043E \u0446\u0435\u043D\u0442\u0440\u0443 \u0441\u0435\u043B\u0430."
+    chooseText: "\u041E\u0431\u0448\u0443\u043A\u0430\u0442\u0438 \u0442\u0456\u043B\u043E
+      \u041E\u043B\u0435\u043A\u0441\u0456\u044F."
     statusDependent:
       enable: 0
       value: 0
@@ -113,7 +96,7 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 0
+      enable: 1
     findDependent:
       enable: 0
       value: 1

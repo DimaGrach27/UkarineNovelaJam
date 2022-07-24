@@ -32,7 +32,7 @@
 
      private static bool ExistFile =>  File.Exists(Path);
      private static string Path => Application.persistentDataPath + $"/progress_{Application.productName}.json";
-     public static void SaveJson() => File.WriteAllText(Path, JsonUtility.ToJson(SaveFile));
+     private static void SaveJson() => File.WriteAllText(Path, JsonUtility.ToJson(SaveFile));
      
      public static void SavePart(int current)
      {
@@ -126,6 +126,30 @@
          
          return choosesList;
      }
+
+     public static bool GetStatusValue(StatusEnum statusEnum)
+     {
+         int flag = PlayerPrefs.GetInt(statusEnum.ToString(), 0);
+
+         return flag != 0;
+     }
+     
+     public static void SetStatusValue(StatusEnum statusEnum, bool status)
+     {
+         int flag = status ? 1 : 0;
+
+         PlayerPrefs.SetInt(statusEnum.ToString(), flag);
+     }
+     
+     public static int GetIntValue(CountType countType)
+     {
+         return PlayerPrefs.GetInt(countType.ToString(), 0);
+     }
+     
+     public static void SetIntValue(CountType countType, int value)
+     {
+         PlayerPrefs.SetInt(countType.ToString(), value);
+     }
      
      public static void ResetAllSaves()
      {
@@ -144,8 +168,6 @@
      public string currentScene = "screen_scene_0";
 
      public List<ChoosesList> choosesLists = new ();
-
-     public bool bottle;
  }
 
  [Serializable]

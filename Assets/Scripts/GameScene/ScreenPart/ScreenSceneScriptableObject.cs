@@ -2,6 +2,7 @@
 using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ScreenPart.ActionScreens;
+using GameScene.ScreenPart.SpecialSO;
 using UnityEngine;
 
 namespace GameScene.ScreenPart
@@ -106,6 +107,13 @@ namespace GameScene.ScreenPart
         public bool enable;
         public bool value = true;
         public StatusEnum status = StatusEnum.NONE;
+    }
+    
+    [Serializable]
+    public class SpecialDependent
+    {
+        public bool enable;
+        public SpecialScriptableObjectBase special;
     }
     
     [Serializable]

@@ -2,7 +2,6 @@
 
 public static class GameModel
 {
-
     private static bool _gameWasInit = false;
     
     private static readonly Dictionary<StatusEnum, bool> StatusMap = new();
@@ -12,7 +11,7 @@ public static class GameModel
         if(_gameWasInit) return;
         
         _gameWasInit = true;
-        StatusMap.Add(StatusEnum.BOTTLE, SaveService.SaveFile.bottle);
+        StatusMap.Add(StatusEnum.BOTTLE, SaveService.GetStatusValue(StatusEnum.BOTTLE));
     }
 
     public static bool GetStatus(StatusEnum statusEnum)
@@ -28,15 +27,11 @@ public static class GameModel
 
         StatusMap[statusEnum] = status;
 
-        switch (statusEnum)
-        {
-            case StatusEnum.BOTTLE:
-                SaveService.SaveFile.bottle = status;
-                break;
-        }
-        
-        SaveService.SaveJson();
+        SaveService.SetStatusValue(statusEnum, status);
     }
+
+    public static int GetInt(CountType countType) => SaveService.GetIntValue(countType);
+    public static void SetInt(CountType countType, int value) => SaveService.SetIntValue(countType, value);
 }
 
 public enum StatusEnum
@@ -44,4 +39,12 @@ public enum StatusEnum
     NONE = 0,
     
     BOTTLE = 100
+}
+
+public enum CountType
+{
+    NONE = 0,
+    SEARCH_PLACE = 1,
+    BELIEF = 2,
+    ESCAPE = 3
 }

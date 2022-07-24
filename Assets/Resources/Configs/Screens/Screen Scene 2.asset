@@ -17,9 +17,9 @@ MonoBehaviour:
   isActiveCamera: 0
   actionsType: 
   statusSetter:
-    enable: 1
-    statusFlag: 1
-    status: 100
+    enable: 0
+    statusFlag: 0
+    status: 0
   screenParts:
   - actionsType: 
     statusSetter:
@@ -29,7 +29,7 @@ MonoBehaviour:
     screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: 
-    textShow: 
+    textShow: "\u0410\u0410\u0410\u0410"
   nextScenes:
   - scene: {fileID: 11400000, guid: 1f083e7a5fa613a4990c04505454c58d, type: 2}
     chooseText: 
