@@ -25,7 +25,7 @@ public static class GlobalConstant
         {
             if (_VILSHANKA_DEFAULT_SPRITE == null)
             {
-                _VILSHANKA_DEFAULT_SPRITE = Resources.Load<Sprite>("Characters/character_vilshanka");
+                _VILSHANKA_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_vilshanka");
             }
 
             return _VILSHANKA_DEFAULT_SPRITE;
@@ -39,7 +39,7 @@ public static class GlobalConstant
         {
             if (_ILONA_DEFAULT_SPRITE == null)
             {
-                _ILONA_DEFAULT_SPRITE = Resources.Load<Sprite>("Characters/character_ilona");
+                _ILONA_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_ilona");
             }
 
             return _ILONA_DEFAULT_SPRITE;
@@ -53,7 +53,7 @@ public static class GlobalConstant
         {
             if (_ZAHARES_DEFAULT_SPRITE == null)
             {
-                _ZAHARES_DEFAULT_SPRITE = Resources.Load<Sprite>("Characters/character_zakhares");
+                _ZAHARES_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_zakhares");
             }
 
             return _ZAHARES_DEFAULT_SPRITE;
@@ -67,7 +67,7 @@ public static class GlobalConstant
         {
             if (_OLEKSIY_DEFAULT_SPRITE == null)
             {
-                _OLEKSIY_DEFAULT_SPRITE = Resources.Load<Sprite>("Characters/character_oleksii");
+                _OLEKSIY_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_oleksii");
             }
 
             return _OLEKSIY_DEFAULT_SPRITE;
@@ -81,7 +81,7 @@ public static class GlobalConstant
         {
             if (_VILSHANKA_FUTURE_DEFAULT_SPRITE == null)
             {
-                _VILSHANKA_FUTURE_DEFAULT_SPRITE = Resources.Load<Sprite>("Characters/character_vilshanka_future");
+                _VILSHANKA_FUTURE_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_vilshanka_future");
             }
 
             return _VILSHANKA_FUTURE_DEFAULT_SPRITE;

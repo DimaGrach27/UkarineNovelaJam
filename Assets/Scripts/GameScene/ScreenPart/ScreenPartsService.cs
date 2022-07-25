@@ -56,7 +56,6 @@ namespace GameScene.ScreenPart
             foreach (var screenScene in list)
             {
                 _screenScenesMap.Add(screenScene.SceneKey, screenScene);
-                Debug.Log(screenScene.SceneKey);
             }
 
             screenTextService.OnEndTyping += OnEndTyping;

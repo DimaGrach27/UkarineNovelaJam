@@ -3,6 +3,10 @@
     public enum BgEnum
     {
         NONE = 0,
-        HOUSE = 1
+        CELLAR = 1,
+        FOREST = 2,
+        LAKE = 3,
+        MINE = 4,
+        ROAD = 5,
     }
 }
