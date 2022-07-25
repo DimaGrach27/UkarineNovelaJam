@@ -3,6 +3,7 @@ using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ScreenPart.ActionScreens;
 using GameScene.ScreenPart.SpecialSO;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GameScene.ScreenPart
@@ -16,20 +17,18 @@ namespace GameScene.ScreenPart
     {
         [SerializeField] private string sceneKey;
         
-        [SerializeField] private BgEnum bgEnum;
-        
         [SerializeField] private bool isActiveCamera = false;
-
+        
+        [SerializeField, Toggle("enable")] private ChangeBackGround changeBackGround;
+        [SerializeField, Toggle("enable")] private StatusSetter statusSetter;
+        [SerializeField, Toggle("enable")] private CountSetter countSetter;
         
         [SerializeField] private ActionType[] actionsType;
-        
-        [SerializeField] private StatusSetter statusSetter;
-        [SerializeField] private CountSetter countSetter;
 
         [SerializeField] private ScreenPart[] screenParts;
         [SerializeField] private NextScene[] nextScenes;
         
-        public BgEnum Bg => bgEnum;
+        public ChangeBackGround ChangeBackGround => changeBackGround;
         public ActionType[] ActionsType => actionsType;
 
         public StatusSetter StatusSetter => statusSetter;
@@ -47,18 +46,18 @@ namespace GameScene.ScreenPart
     public class ScreenPart
     {
         [SerializeField] private ActionType[] actionsType;
-        [SerializeField] private StatusSetter statusSetter;
-        [SerializeField] private CharacterScreenPositionEnum screenPosition;
+        [SerializeField, Toggle("enable")] private StatusSetter statusSetter;
         
-        [SerializeField] private Sprite characterImage;
+        [SerializeField, EnumPaging] private CharacterScreenPositionEnum screenPosition;
+        [SerializeField, EnumPaging] private CharacterSprite characterImage;
+        [SerializeField, EnumPaging] private CharacterName nameCharacter;
         
-        [SerializeField] private string nameCharacter;
         [SerializeField, TextArea(1, 4)] private string textShow;
         
-        public string CharacterName => nameCharacter;
+        public string CharacterName => GameModel.GetName(nameCharacter);
         public string TextShow => textShow;
         
-        public Sprite Image => characterImage;
+        public Sprite Image => GameModel.GetSprite(characterImage);
         
         public StatusSetter StatusSetter => statusSetter;
         
@@ -72,17 +71,23 @@ namespace GameScene.ScreenPart
         [SerializeField] private ScreenSceneScriptableObject scene;
         [SerializeField, TextArea(1, 4)] private string chooseText;
 
-        public StatusDependent statusDependent;
-        public CameraDependent cameraDependent;
-        public ExclusionDependent exclusionDependent;
-        public FindDependent findDependent;
-
-        public SpecialDependent specialDependent;
+        [Toggle("enable")] public StatusDependent statusDependent;
+        [Toggle("enable")] public CameraDependent cameraDependent;
+        [Toggle("enable")] public ExclusionDependent exclusionDependent;
+        [Toggle("enable")] public FindDependent findDependent;
+        [Toggle("enable")] public SpecialDependent specialDependent;
 
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
     }
 
+    [Serializable]
+    public class ChangeBackGround
+    {
+        public bool enable;
+        public BgEnum bgEnum;
+    }
+    
     [Serializable]
     public class StatusDependent
     {
@@ -135,9 +140,9 @@ namespace GameScene.ScreenPart
     [Serializable]
     public class CountSetter
     {
-        [SerializeField] private bool enable = false;
-        [SerializeField] private int count = 1;
-        [SerializeField] private CountType type = CountType.NONE;
+        [SerializeField] public bool enable = false;
+        [SerializeField] public int count = 1;
+        [SerializeField] public CountType type = CountType.NONE;
 
         public bool Enable => enable;
         public int Count => count;

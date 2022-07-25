@@ -52,5 +52,5 @@ MonoBehaviour:
       value: 1
       status: 0
     specialDependent:
-      enable: 1
+      enable: 0
       special: {fileID: 11400000, guid: 141719ee916de2943b0060ecc2e9c86f, type: 2}

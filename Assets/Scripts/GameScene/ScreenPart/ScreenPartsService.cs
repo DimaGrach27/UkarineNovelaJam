@@ -56,6 +56,7 @@ namespace GameScene.ScreenPart
             foreach (var screenScene in list)
             {
                 _screenScenesMap.Add(screenScene.SceneKey, screenScene);
+                Debug.Log(screenScene.SceneKey);
             }
 
             screenTextService.OnEndTyping += OnEndTyping;
@@ -73,6 +74,8 @@ namespace GameScene.ScreenPart
             _screenTextService.HideText();
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);
+            
+            _bgService.Show(SaveService.GetCurrentBg());
             
             _inGame = true;
             
@@ -122,7 +125,11 @@ namespace GameScene.ScreenPart
                 GameModel.SetInt(_currentSceneSo.CountSetter.Type, count);
             }
             
-            _bgService.Show(_currentSceneSo.Bg);
+            if(_currentSceneSo.ChangeBackGround.enable)
+            {
+                _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
+                SaveService.SetCurrentBg(_currentSceneSo.ChangeBackGround.bgEnum);
+            }
 
             ShowPart();
         }

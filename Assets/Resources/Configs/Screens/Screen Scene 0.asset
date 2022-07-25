@@ -15,7 +15,6 @@ MonoBehaviour:
   sceneKey: screen_scene_0
   bgEnum: 1
   isActiveCamera: 0
-  actionsType: 
   statusSetter:
     enable: 1
     statusFlag: 1
@@ -24,6 +23,7 @@ MonoBehaviour:
     enable: 0
     count: 1
     type: 0
+  actionsType: 
   screenParts:
   - actionsType: 
     statusSetter:

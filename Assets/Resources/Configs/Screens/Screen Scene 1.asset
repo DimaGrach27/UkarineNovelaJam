@@ -48,9 +48,9 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 1
-    findDependent:
       enable: 0
+    findDependent:
+      enable: 1
       value: 1
       status: 100
     specialDependent:
@@ -69,9 +69,9 @@ MonoBehaviour:
     exclusionDependent:
       enable: 1
     findDependent:
-      enable: 0
+      enable: 1
       value: 1
-      status: 0
+      status: 100
     specialDependent:
       enable: 0
       special: {fileID: 0}
@@ -87,11 +87,11 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 1
-    findDependent:
       enable: 0
+    findDependent:
+      enable: 1
       value: 1
-      status: 0
+      status: 100
     specialDependent:
       enable: 0
       special: {fileID: 0}
@@ -106,11 +106,11 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 1
-    findDependent:
       enable: 0
+    findDependent:
+      enable: 1
       value: 1
-      status: 0
+      status: 100
     specialDependent:
       enable: 0
       special: {fileID: 0}

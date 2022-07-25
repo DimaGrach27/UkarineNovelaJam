@@ -1,12 +1,14 @@
 ﻿ using System;
  using System.Collections.Generic;
  using System.IO;
+ using GameScene.BgScreen;
  using UnityEngine;
 
  public static class SaveService
  {
      private const string CAMERA_FILM_LEFT_KEY = "camera_film_left";
      private const string HEALTH_COUNT_KEY = "health_count";
+     private const string CURRENT_BG_KEY = "current_bg";
 
      private static SaveFile _saveFile;
      public static SaveFile SaveFile
@@ -78,6 +80,20 @@
                  SetChoosesList(key, choosesList);
              }
          }
+     }
+
+     public static BgEnum GetCurrentBg()
+     {
+         int bg = PlayerPrefs.GetInt(CURRENT_BG_KEY, 0);
+
+         return (BgEnum)bg;
+     }
+     
+     public static void SetCurrentBg(BgEnum bgEnum)
+     {
+         int bg = (int)bgEnum;
+
+         PlayerPrefs.SetInt(CURRENT_BG_KEY, bg);
      }
      
      public static void SetChoosesList(string key, ChoosesList choosesList)
@@ -165,7 +181,7 @@
  public class SaveFile
  {
      public int currentPart = 0;
-     public string currentScene = "screen_scene_0";
+     public string currentScene = "scene_0_0";
 
      public List<ChoosesList> choosesLists = new ();
  }
