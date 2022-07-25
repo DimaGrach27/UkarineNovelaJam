@@ -15,15 +15,15 @@ MonoBehaviour:
   sceneKey: screen_scene_5
   bgEnum: 1
   isActiveCamera: 0
-  isExclusionList: 0
   actionsType: 
-  statusDependent:
-    enable: 0
-    status: 0
   statusSetter:
     enable: 0
     statusFlag: 1
     status: 0
+  countSetter:
+    enable: 1
+    count: 1
+    type: 1
   screenParts:
   - actionsType: 
     statusSetter:
@@ -39,5 +39,20 @@ MonoBehaviour:
   nextScenes:
   - scene: {fileID: 11400000, guid: 1f083e7a5fa613a4990c04505454c58d, type: 2}
     chooseText: 
-    isShowOnCameraAction: 1
-    isReadyToShow: 1
+    statusDependent:
+      enable: 0
+      value: 0
+      status: 0
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      value: 1
+      status: 0
+    specialDependent:
+      enable: 1
+      special: {fileID: 11400000, guid: 141719ee916de2943b0060ecc2e9c86f, type: 2}

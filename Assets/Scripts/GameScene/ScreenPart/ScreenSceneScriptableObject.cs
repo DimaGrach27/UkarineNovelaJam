@@ -24,6 +24,7 @@ namespace GameScene.ScreenPart
         [SerializeField] private ActionType[] actionsType;
         
         [SerializeField] private StatusSetter statusSetter;
+        [SerializeField] private CountSetter countSetter;
 
         [SerializeField] private ScreenPart[] screenParts;
         [SerializeField] private NextScene[] nextScenes;
@@ -32,6 +33,7 @@ namespace GameScene.ScreenPart
         public ActionType[] ActionsType => actionsType;
 
         public StatusSetter StatusSetter => statusSetter;
+        public CountSetter CountSetter => countSetter;
         
         public string SceneKey => sceneKey;
         
@@ -74,6 +76,8 @@ namespace GameScene.ScreenPart
         public CameraDependent cameraDependent;
         public ExclusionDependent exclusionDependent;
         public FindDependent findDependent;
+
+        public SpecialDependent specialDependent;
 
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
@@ -126,5 +130,17 @@ namespace GameScene.ScreenPart
         public bool Enable => enable;
         public bool StatusFlag => statusFlag;
         public StatusEnum Status => status;
+    }
+    
+    [Serializable]
+    public class CountSetter
+    {
+        [SerializeField] private bool enable = false;
+        [SerializeField] private int count = 1;
+        [SerializeField] private CountType type = CountType.NONE;
+
+        public bool Enable => enable;
+        public int Count => count;
+        public CountType Type => type;
     }
 }

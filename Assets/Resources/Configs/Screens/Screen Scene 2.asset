@@ -20,6 +20,10 @@ MonoBehaviour:
     enable: 0
     statusFlag: 0
     status: 0
+  countSetter:
+    enable: 1
+    count: 1
+    type: 1
   screenParts:
   - actionsType: 
     statusSetter:
@@ -47,3 +51,6 @@ MonoBehaviour:
       enable: 0
       value: 1
       status: 0
+    specialDependent:
+      enable: 1
+      special: {fileID: 11400000, guid: 141719ee916de2943b0060ecc2e9c86f, type: 2}

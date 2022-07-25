@@ -17,9 +17,13 @@ MonoBehaviour:
   isActiveCamera: 0
   actionsType: 
   statusSetter:
-    enable: 0
+    enable: 1
     statusFlag: 1
-    status: 0
+    status: 100
+  countSetter:
+    enable: 0
+    count: 1
+    type: 0
   screenParts:
   - actionsType: 
     statusSetter:
@@ -29,14 +33,14 @@ MonoBehaviour:
     screenPosition: 0
     characterImage: {fileID: 0}
     nameCharacter: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430"
-    textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u0432\u0438\u0432\u0447\u0430\u0454
-      \u0442\u0456\u043B\u043E"
+    textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u043F\u043E\u0442\u0440\u0430\u043F\u043B\u044F\u0454
+      \u0434\u043E \u0441\u0442\u043E\u0440\u043E\u0436\u0438\u0432\u043E\u0457 \u0431\u0443\u0434\u043A\u0438"
   nextScenes:
   - scene: {fileID: 11400000, guid: 78ae9300a6581df45ad49269bc275e2c, type: 2}
-    chooseText: "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u0438\u0442\u0438\u0441\u044C
-      \u0434\u043E \u0441\u0442\u043E\u0440\u043E\u0436\u0438\u0432\u043E\u0457 \u0431\u0443\u0434\u043A\u0438."
+    chooseText: "\u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0438\u0442\u0438 \u0443
+      \u0441\u043C\u0456\u0442\u043D\u0438\u043A\u0443"
     statusDependent:
-      enable: 1
+      enable: 0
       value: 1
       status: 100
     cameraDependent:
@@ -44,16 +48,16 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 0
+      enable: 1
     findDependent:
       enable: 0
       value: 1
       status: 100
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}
   - scene: {fileID: 11400000, guid: 48ff49128e800c74999a864a4e24e1a2, type: 2}
-    chooseText: "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u0438\u0442\u0438\u0441\u044C
-      \u0434\u043E \u043C\u0456\u0441\u0446\u044F, \u0434\u0435 \u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430
-      \u0437\u0443\u0441\u0442\u0440\u0456\u043B\u0430 \u0406\u043B\u043E\u043D\u0443
-      \u0432\u043F\u0435\u0440\u0448\u0435."
+    chooseText: "\u0423\u0432\u0456\u043C\u043A\u043D\u0443\u0442\u0438 \u043A\u043E\u043C\u043F"
     statusDependent:
       enable: 0
       value: 0
@@ -63,13 +67,17 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 0
+      enable: 1
     findDependent:
       enable: 0
       value: 1
       status: 0
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}
   - scene: {fileID: 11400000, guid: 73e5306236f6b484c8b5b2ce53506e71, type: 2}
-    chooseText: "\u041E\u0433\u043B\u0435\u0434\u0456\u0442\u0438 \u043F\u0456\u0434\u0432\u0430\u043B."
+    chooseText: "\u041F\u043E\u0434\u0438\u0432\u0438\u0442\u0438\u0441\u044F \u043D\u0430
+      \u043F\u043E\u043B\u0438\u0446\u044F\u0445"
     statusDependent:
       enable: 0
       value: 0
@@ -84,9 +92,11 @@ MonoBehaviour:
       enable: 0
       value: 1
       status: 0
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}
   - scene: {fileID: 11400000, guid: 63bcb328296788b469fa7f7e7e4ad230, type: 2}
-    chooseText: "\u041E\u0431\u0448\u0443\u043A\u0430\u0442\u0438 \u0442\u0456\u043B\u043E
-      \u041E\u043B\u0435\u043A\u0441\u0456\u044F."
+    chooseText: "\u0417\u0430\u043A\u0456\u043D\u0447\u0438\u0442\u0438 \u043E\u0433\u043B\u044F\u0434"
     statusDependent:
       enable: 0
       value: 0
@@ -101,3 +111,6 @@ MonoBehaviour:
       enable: 0
       value: 1
       status: 0
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}

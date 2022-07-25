@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ChooseWindow;
@@ -100,12 +98,7 @@ namespace GameScene.ScreenPart
         private void ShowScene()
         {
             _currentSceneSo = _screenScenesMap[_currentScene];
-
-            if (_currentSceneSo.StatusSetter.Enable)
-                GameModel.SetStatus(
-                        _currentSceneSo.StatusSetter.Status, 
-                        _currentSceneSo.StatusSetter.StatusFlag);
-
+            
             if(_currentSceneSo.ActionsType != null)
             {
                 foreach (var actionType in _currentSceneSo.ActionsType)
@@ -114,10 +107,20 @@ namespace GameScene.ScreenPart
                 }
             }
             
-            if(_currentSceneSo.StatusSetter.Enable)
+            if (_currentSceneSo.StatusSetter.Enable)
+            {
                 GameModel.SetStatus(
-                    _currentSceneSo.StatusSetter.Status, 
+                    _currentSceneSo.StatusSetter.Status,
                     _currentSceneSo.StatusSetter.StatusFlag);
+            }
+
+            if (_currentSceneSo.CountSetter.Enable)
+            {
+                int count = GameModel.GetInt(_currentSceneSo.CountSetter.Type);
+                count += _currentSceneSo.CountSetter.Count;
+                
+                GameModel.SetInt(_currentSceneSo.CountSetter.Type, count);
+            }
             
             _bgService.Show(_currentSceneSo.Bg);
 
@@ -128,6 +131,8 @@ namespace GameScene.ScreenPart
         {
             if(_blockClick || !_inGame) return;
             
+            
+            Debug.Log($"SHOW next: {_currentPart}");
             _currentPart++;
 
             if (_currentPart >= _currentSceneSo.ScreenParts.Length )
@@ -171,20 +176,33 @@ namespace GameScene.ScreenPart
 
         private void ChooseNextScene()
         {
-            if (_currentSceneSo.NextScenes.Length == 0)
+            switch (_currentSceneSo.NextScenes.Length)
             {
-                LoadEndGame();
-                _inGame = false;
-            }
-            
-            if(_currentSceneSo.NextScenes.Length == 1)
-            {
-                ShowNextScene(_currentSceneSo.NextScenes[0].Scene.SceneKey);
-            }
-            
-            if (_currentSceneSo.NextScenes.Length > 1)
-            {
-                Choose();
+                case 0:
+                    LoadEndGame();
+                    _inGame = false;
+                    break;
+                
+                case 1:
+                {
+                    NextScene nextScene = _currentSceneSo.NextScenes[0];
+                    string nexSceneKey = nextScene.Scene.SceneKey;
+                
+                    if (nextScene.specialDependent.enable)
+                    {
+                        if (nextScene.specialDependent.special.Check())
+                        {
+                            nexSceneKey = nextScene.specialDependent.special.NextScene().Scene.SceneKey;
+                        }
+                    }
+                
+                    ShowNextScene(nexSceneKey);
+                    break;
+                }
+                
+                case > 1:
+                    Choose();
+                    break;
             }
         }
 
@@ -269,6 +287,8 @@ namespace GameScene.ScreenPart
 
         private void OnChooseClick(NextScene chooseScene)
         {
+            string nexSceneKey = chooseScene.Scene.SceneKey;
+            
             if (chooseScene.exclusionDependent.enable)
             {
                 SaveService.SetChoose(_currentSceneSo.SceneKey, chooseScene.Scene.SceneKey);
@@ -283,7 +303,15 @@ namespace GameScene.ScreenPart
                 return;
             }
 
-            ShowNextScene(chooseScene.Scene.SceneKey);
+            if (chooseScene.specialDependent.enable)
+            {
+                if (chooseScene.specialDependent.special.Check())
+                {
+                    nexSceneKey = chooseScene.specialDependent.special.NextScene().Scene.SceneKey;
+                }
+            }
+            
+            ShowNextScene(nexSceneKey);
         }
 
         private void OnEndTyping()
