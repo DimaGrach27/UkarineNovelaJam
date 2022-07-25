@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: scene_0_7
   m_EditorClassIdentifier: 
   sceneKey: scene_0_7
-  bgEnum: 0
   isActiveCamera: 0
+  changeBackGround:
+    enable: 0
+    bgEnum: 0
   statusSetter:
     enable: 0
     statusFlag: 1
@@ -31,10 +33,19 @@ MonoBehaviour:
       statusFlag: 1
       status: 0
     screenPosition: 0
-    characterImage: {fileID: 0}
-    nameCharacter: 
+    characterImage: 1
+    nameCharacter: 1
     textShow: "\u0416\u0438\u0432\u0430 \u0456 \u0432\u0438\u0431\u0438\u0440\u0430\u0454\u0442\u044C\u0441\u044F
       \u0437 \u043C\u0430\u0448\u0438\u043D\u0438"
+  - actionsType: 
+    statusSetter:
+      enable: 0
+      statusFlag: 1
+      status: 0
+    screenPosition: 0
+    characterImage: 1
+    nameCharacter: 1
+    textShow: "\u0424\u0443\u0445"
   nextScenes:
   - scene: {fileID: 11400000, guid: bfac4768a74202e4283d81e96ffc5a27, type: 2}
     chooseText: 

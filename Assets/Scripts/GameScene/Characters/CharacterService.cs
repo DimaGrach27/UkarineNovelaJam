@@ -11,14 +11,16 @@ namespace GameScene.Characters
         {
             foreach (var characterUi in uiCharacter.GetComponentsInChildren<CharacterUiView>())
             {
-                _dissolveRoutineMap.Add(characterUi.ScreenPosition, null);
                 _characterUiViewMap.Add(characterUi.ScreenPosition, characterUi);
+                _dissolveRoutineMap.Add(characterUi.ScreenPosition, null);
+                _dissolveTweenMap.Add(characterUi.ScreenPosition, null);
                 _enabledMap.Add(characterUi.ScreenPosition, true);
             }
         }
 
         private readonly Dictionary<CharacterScreenPositionEnum, CharacterUiView> _characterUiViewMap = new();
         private readonly Dictionary<CharacterScreenPositionEnum, Coroutine> _dissolveRoutineMap = new();
+        private readonly Dictionary<CharacterScreenPositionEnum, Tween> _dissolveTweenMap = new();
         private readonly Dictionary<CharacterScreenPositionEnum, bool> _enabledMap = new();
 
         public void ShowCharacter(CharacterScreenPositionEnum screenPosition, Sprite image)
@@ -33,15 +35,24 @@ namespace GameScene.Characters
                 DissolveIn(screenPosition);
             }
             
+            if(_dissolveRoutineMap[screenPosition] != null) 
+                CoroutineHelper.Inst.StopCoroutine(_dissolveRoutineMap[screenPosition]);
+            
+            if(_dissolveTweenMap[screenPosition] != null)
+                DOTween.Kill(_dissolveTweenMap[screenPosition]);
+            
             _characterUiViewMap[screenPosition].Sprite = image;
             _characterUiViewMap[screenPosition].Visible = true;
             _enabledMap[screenPosition] = true;
         }
         
-        public void HideCharacter(CharacterScreenPositionEnum screenPosition, bool isDissolve)
+        private void HideCharacter(CharacterScreenPositionEnum screenPosition, bool isDissolve)
         {
             if(_dissolveRoutineMap[screenPosition] != null)
                 CoroutineHelper.Inst.StopCoroutine(_dissolveRoutineMap[screenPosition]);
+            
+            if(_dissolveTweenMap[screenPosition] != null)
+                DOTween.Kill(_dissolveTweenMap[screenPosition]);
             
             if (isDissolve)
             {
@@ -65,6 +76,12 @@ namespace GameScene.Characters
                     CoroutineHelper.Inst.StopCoroutine(coroutine);
             }
             
+            foreach (var tween in _dissolveTweenMap.Values)
+            {
+                if(tween != null)
+                    DOTween.Kill(tween);
+            }
+            
             foreach (var character in _characterUiViewMap)
             {
                 if (_enabledMap[character.Key])
@@ -72,7 +89,7 @@ namespace GameScene.Characters
                         CoroutineHelper.Inst.StartCoroutine(DissolveOut(character.Key));
             }
         }
-        
+
         public void HideAllCharactersInstant()
         {
             foreach (var character in _characterUiViewMap.Values)
@@ -86,14 +103,18 @@ namespace GameScene.Characters
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
         {
             _characterUiViewMap[screenPosition].Image.color = GlobalConstant.ColorWitheClear;
-            _characterUiViewMap[screenPosition].Image.DOFade(1.0f, duration);
+            _dissolveTweenMap[screenPosition] = 
+                _characterUiViewMap[screenPosition].Image.DOFade(1.0f, duration);
         }
         
         private IEnumerator DissolveOut(CharacterScreenPositionEnum screenPosition, 
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
         {
+            yield return null;
+            
             _characterUiViewMap[screenPosition].Image.color = Color.white;
-            _characterUiViewMap[screenPosition].Image.DOFade(0.0f, duration);
+            _dissolveTweenMap[screenPosition] = 
+                _characterUiViewMap[screenPosition].Image.DOFade(0.0f, duration);
             
             yield return new WaitForSeconds(duration);
             
