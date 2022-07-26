@@ -93,6 +93,19 @@ public static class GameModel
 public enum StatusEnum
 {
     NONE = 0,
+    weirdtoZakh = 1,
+    RodandBuckettaken = 2,
+    inSearch = 3,
+    bulletFound = 4,
+    numberFound = 5,
+    IlonaRevealed = 6,
+    bulletAnalyze = 7,
+    diaryRead = 8,
+    rudetoIlona = 9,
+    connectionstoKorniy = 10,
+    locketFound = 11,
+    rudetoZakh = 12,
+    IlonaGuilty = 13,
     
     BOTTLE = 100
 }
