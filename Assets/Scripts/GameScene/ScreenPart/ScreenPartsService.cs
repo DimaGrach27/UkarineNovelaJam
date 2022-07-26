@@ -156,6 +156,13 @@ namespace GameScene.ScreenPart
         
         private void ShowPart()
         {
+            if (_currentSceneSo.ScreenParts.Length == 0)
+            {
+                Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
+                ChooseNextScene();
+                return;
+            }
+            
             if (_currentPart < _currentSceneSo.ScreenParts.Length)
             {
                 _currentPartSo = _currentSceneSo.ScreenParts[_currentPart];
