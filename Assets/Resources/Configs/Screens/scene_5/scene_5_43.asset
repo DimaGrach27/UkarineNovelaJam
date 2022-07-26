@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
   m_Name: scene_5_43
   m_EditorClassIdentifier: 
-  sceneKey: scene_3_29
+  sceneKey: scene_5_43
   isActiveCamera: 0
   changeBackGround:
     enable: 1
@@ -39,8 +39,9 @@ MonoBehaviour:
       \u043C\u0435\u0442\u0430\u043B\u0435\u0432\u0438\u0439 \u0432\u0438\u0442\u0438\u0439
       \u0437\u0430\u0431\u043E\u0440."
   nextScenes:
-  - scene: {fileID: 11400000, guid: 63d51671be8643d49a78fc3b02cdf80d, type: 2}
-    chooseText: 
+  - scene: {fileID: 11400000, guid: dceb6c01ab673db4aa6887586b2c38bc, type: 2}
+    chooseText: "\u041F\u0435\u0440\u0435\u043B\u0456\u0437\u0442\u0438 \u0447\u0435\u0440\u0435\u0437
+      \u0437\u0430\u0431\u043E\u0440."
     statusDependent:
       enable: 0
       statusesValues: []
@@ -55,4 +56,41 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}
+  - scene: {fileID: 11400000, guid: 0e26370d23fd3b745bf911d31e72a34a, type: 2}
+    chooseText: "\u041F\u043E\u0448\u0443\u043A\u0430\u0442\u0438 \u043B\u0430\u0437\u0456\u0432\u043A\u0443
+      \u0447\u0435\u0440\u0435\u0437 \u0437\u0430\u0431\u043E\u0440."
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  - scene: {fileID: 11400000, guid: 5cc32bbde8253b44c8ba8d301ce7074a, type: 2}
+    chooseText: "\u041F\u043E\u0448\u0443\u043A\u0430\u0442\u0438 \u0447\u0438\u043C
+      \u0440\u043E\u0437\u0440\u0456\u0437\u0430\u0442\u0438 \u0437\u0430\u0431\u043E\u0440."
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []

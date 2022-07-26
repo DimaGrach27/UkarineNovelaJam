@@ -4,7 +4,9 @@ namespace GameScene.ScreenPart.SpecialSO
 {
     public abstract class SpecialScriptableObjectBase : ScriptableObject
     {
+        [SerializeField] private NextScene nextScene;
+        
         public abstract bool Check();
-        public abstract NextScene NextScene();
+        public virtual NextScene NextScene => nextScene;
     }
 }

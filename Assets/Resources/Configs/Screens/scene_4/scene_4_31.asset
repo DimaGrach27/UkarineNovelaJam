@@ -18,8 +18,10 @@ MonoBehaviour:
     enable: 1
     bgEnum: 3
   statusSetter:
-    enable: 0
-    statusesValues: []
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 20
   countSetter:
     enable: 0
     count: 1
@@ -49,8 +51,8 @@ MonoBehaviour:
       enable: 0
     findDependent:
       enable: 0
-      value: 1
-      status: 0
+      statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}

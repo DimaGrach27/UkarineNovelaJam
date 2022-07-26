@@ -44,9 +44,6 @@ namespace GameScene.ScreenPart.SpecialSO
             return true;
         }
 
-        public override NextScene NextScene()
-        {
-            return _returnScene;
-        }
+        public override NextScene NextScene => _returnScene;
     }
 }

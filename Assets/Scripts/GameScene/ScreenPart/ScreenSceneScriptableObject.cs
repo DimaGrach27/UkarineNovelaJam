@@ -52,7 +52,7 @@ namespace GameScene.ScreenPart
         [SerializeField, EnumPaging] private CharacterSprite characterImage;
         [SerializeField, EnumPaging] private CharacterName nameCharacter;
         
-        [SerializeField, TextArea(1, 4)] private string textShow;
+        [SerializeField, TextArea(1, 6)] private string textShow;
         
         public string CharacterName => GameModel.GetName(nameCharacter);
         public string TextShow => textShow;
@@ -127,7 +127,7 @@ namespace GameScene.ScreenPart
     public class SpecialDependent
     {
         public bool enable;
-        public SpecialScriptableObjectBase special;
+        public SpecialScriptableObjectBase[] special;
     }
     
     [Serializable]

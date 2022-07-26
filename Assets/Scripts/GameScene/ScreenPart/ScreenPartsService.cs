@@ -200,9 +200,12 @@ namespace GameScene.ScreenPart
                 
                     if (nextScene.specialDependent.enable)
                     {
-                        if (nextScene.specialDependent.special.Check())
+                        foreach (var scriptableObject in nextScene.specialDependent.special)
                         {
-                            nexSceneKey = nextScene.specialDependent.special.NextScene().Scene.SceneKey;
+                            if (scriptableObject.Check())
+                            {
+                                nexSceneKey = scriptableObject.NextScene.Scene.SceneKey;
+                            }
                         }
                     }
                 
@@ -333,9 +336,12 @@ namespace GameScene.ScreenPart
 
             if (chooseScene.specialDependent.enable)
             {
-                if (chooseScene.specialDependent.special.Check())
+                foreach (var scriptableObject in chooseScene.specialDependent.special)
                 {
-                    nexSceneKey = chooseScene.specialDependent.special.NextScene().Scene.SceneKey;
+                    if (scriptableObject.Check())
+                    {
+                        nexSceneKey = scriptableObject.NextScene.Scene.SceneKey;
+                    }
                 }
             }
             

@@ -9,8 +9,6 @@ namespace GameScene.ScreenPart.SpecialSO
     
     public class CountSpecialScriptableObject : SpecialScriptableObjectBase
     {
-        [SerializeField] private NextScene nextScene;
-        
         [SerializeField] private StatusEnum status;
         [SerializeField] private bool valueStatus = true;
         
@@ -24,11 +22,6 @@ namespace GameScene.ScreenPart.SpecialSO
             isCount &= GameModel.GetStatus(status) == valueStatus;
             
             return isCount;
-        }
-
-        public override NextScene NextScene()
-        {
-            return nextScene;
         }
     }
 }

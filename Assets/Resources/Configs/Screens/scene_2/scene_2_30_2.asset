@@ -39,8 +39,10 @@ MonoBehaviour:
   - scene: {fileID: 11400000, guid: 03ef1480b5b2cee47af34dda6aa8314c, type: 2}
     chooseText: 
     statusDependent:
-      enable: 0
-      statusesValues: []
+      enable: 1
+      statusesValues:
+      - value: 0
+        status: 15
     cameraDependent:
       enable: 0
       visibleOnPhoto: 0
@@ -52,4 +54,24 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}
+  - scene: {fileID: 11400000, guid: 9d6314741f192454b86f04ab9e0281b2, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 1
+      statusesValues:
+      - value: 1
+        status: 15
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
