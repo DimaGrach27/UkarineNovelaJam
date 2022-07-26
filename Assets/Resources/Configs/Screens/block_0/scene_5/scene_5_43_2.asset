@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
-  m_Name: scene_5_44
+  m_Name: scene_5_43_2
   m_EditorClassIdentifier: 
-  sceneKey: scene_5_44
+  sceneKey: scene_5_43_2
   isActiveCamera: 0
   changeBackGround:
     enable: 0
-    bgEnum: 0
+    bgEnum: 4
   statusSetter:
     enable: 0
     statusesValues: []
@@ -26,22 +26,18 @@ MonoBehaviour:
     type: 0
   actionsType: 
   screenParts:
-  - actionsType: 02000000
+  - actionsType: 
     statusSetter:
       enable: 0
       statusesValues: []
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
-    textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u043F\u0435\u0440\u0435\u043B\u0456\u0437\u0430\u0454
-      \u0447\u0435\u0440\u0435\u0437 \u0437\u0430\u0431\u043E\u0440, \u043F\u0440\u043E\u0442\u0435
-      \u0432 \u043E\u0441\u0442\u0430\u043D\u043D\u0456\u0439 \u043C\u043E\u043C\u0435\u043D\u0442
-      \u0441\u0438\u043B\u044C\u043D\u043E \u0440\u0456\u0436\u0435\u0442\u044C\u0441\u044F
-      \u043C\u0435\u0442\u0430\u043B\u0435\u0432\u0438\u043C \u043F\u0440\u0443\u0442\u043E\u043C."
+    textShow: "\u041F\u043E\u0448\u0443\u043A\u0430\u0442\u0438 \u043B\u0430\u0437\u0456\u0432\u043A\u0443
+      \u0447\u0435\u0440\u0435\u0437 \u0437\u0430\u0431\u043E\u0440."
   nextScenes:
-  - scene: {fileID: 11400000, guid: 5cc32bbde8253b44c8ba8d301ce7074a, type: 2}
-    chooseText: "\u041F\u043E\u0448\u0443\u043A\u0430\u0442\u0438 \u0447\u0438\u043C
-      \u0440\u043E\u0437\u0440\u0456\u0437\u0430\u0442\u0438 \u0437\u0430\u0431\u043E\u0440."
+  - scene: {fileID: 11400000, guid: 28f7e0a9b775e0246982b7bbd5cee994, type: 2}
+    chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
@@ -56,4 +52,5 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special: []
+      special:
+      - {fileID: 0}

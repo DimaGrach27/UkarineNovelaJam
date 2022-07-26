@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
-  m_Name: scene_2_30_2
+  m_Name: scene_5_55_1
   m_EditorClassIdentifier: 
-  sceneKey: scene_2_30_2
+  sceneKey: scene_5_55_1
   isActiveCamera: 0
   changeBackGround:
     enable: 0
     bgEnum: 0
   statusSetter:
     enable: 0
-    statusesValues: []
+    statusesValues:
+    - value: 1
+      status: 0
   countSetter:
     enable: 0
     count: 1
@@ -33,16 +35,13 @@ MonoBehaviour:
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
-    textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u0432\u0456\u0434\u043F\u0440\u0430\u0432\u043B\u044F\u0454\u0442\u0441\u044F
-      \u043D\u0430 \u0440\u043E\u0434\u043E\u0432\u0438\u0449\u0430 \u0431\u0443\u0440\u0448\u0442\u0438\u043D\u0443"
+    textShow: "\u0428\u0443\u043A\u0430\u0442\u0438 \u0434\u0430\u043B\u0456."
   nextScenes:
-  - scene: {fileID: 11400000, guid: 03ef1480b5b2cee47af34dda6aa8314c, type: 2}
+  - scene: {fileID: 11400000, guid: e56cf6e757545a94c84098ee1f909bd9, type: 2}
     chooseText: 
     statusDependent:
-      enable: 1
-      statusesValues:
-      - value: 0
-        status: 15
+      enable: 0
+      statusesValues: []
     cameraDependent:
       enable: 0
       visibleOnPhoto: 0
@@ -56,22 +55,3 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: 9d6314741f192454b86f04ab9e0281b2, type: 2}
-    chooseText: 
-    statusDependent:
-      enable: 1
-      statusesValues:
-      - value: 1
-        status: 15
-    cameraDependent:
-      enable: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
-    exclusionDependent:
-      enable: 0
-    findDependent:
-      enable: 0
-      statusesValues: []
-    specialDependent:
-      enable: 0
-      special: []
