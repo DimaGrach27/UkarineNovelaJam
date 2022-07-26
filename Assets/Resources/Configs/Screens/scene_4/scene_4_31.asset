@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
-  m_Name: scene_2_17
+  m_Name: scene_4_31
   m_EditorClassIdentifier: 
-  sceneKey: scene_2_17
+  sceneKey: scene_4_31
   isActiveCamera: 0
   changeBackGround:
-    enable: 0
-    bgEnum: 0
-  statusSetter:
     enable: 1
-    statusesValues:
-    - value: 1
-      status: 1
+    bgEnum: 3
+  statusSetter:
+    enable: 0
+    statusesValues: []
   countSetter:
     enable: 0
     count: 1
@@ -35,9 +33,10 @@ MonoBehaviour:
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
-    textShow: "\u0424\u0456\u0433\u0443\u0440\u0430 \u0433\u0440\u043E\u0431\u0430\u0440\u044F"
+    textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u043F\u0440\u0438\u0431\u0443\u0432\u0430\u0454
+      \u043D\u0430 \u043E\u0437\u0435\u0440\u043E."
   nextScenes:
-  - scene: {fileID: 11400000, guid: 6d178bc34cb7b684995d46be143918e8, type: 2}
+  - scene: {fileID: 11400000, guid: 419b2f6cc2091fc4ab71bbfa37388a16, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

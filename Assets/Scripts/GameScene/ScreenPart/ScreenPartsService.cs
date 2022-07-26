@@ -109,11 +109,12 @@ namespace GameScene.ScreenPart
                 }
             }
             
-            if (_currentSceneSo.StatusSetter.Enable)
+            if(_currentSceneSo.StatusSetter.Enable)
             {
-                GameModel.SetStatus(
-                    _currentSceneSo.StatusSetter.Status,
-                    _currentSceneSo.StatusSetter.StatusFlag);
+                foreach (var statusesValue in _currentSceneSo.StatusSetter.StatusesValues)
+                {
+                    GameModel.SetStatus(statusesValue.status, statusesValue.value);
+                }
             }
 
             if (_currentSceneSo.CountSetter.Enable)
@@ -169,9 +170,12 @@ namespace GameScene.ScreenPart
                 }
 
                 if(_currentPartSo.StatusSetter.Enable)
-                    GameModel.SetStatus(
-                        _currentPartSo.StatusSetter.Status, 
-                        _currentPartSo.StatusSetter.StatusFlag);
+                {
+                    foreach (var statusesValue in _currentPartSo.StatusSetter.StatusesValues)
+                    {
+                        GameModel.SetStatus(statusesValue.status, statusesValue.value);
+                    }
+                }
                 
                 _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
                 _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow);
@@ -263,11 +267,20 @@ namespace GameScene.ScreenPart
                 
                 if (nextScene.statusDependent.enable)
                 {
-                    if (nextScene.statusDependent.value !=
-                        GameModel.GetStatus(nextScene.statusDependent.status))
+                    bool result = true;
+                    
+                    foreach (var statusValue in nextScene.statusDependent.statusesValues)
                     {
-                        isRemove = true;
+                        bool status = GameModel.GetStatus(statusValue.status);
+                        result &= status == statusValue.value;
                     }
+                    isRemove = !result;
+                    
+                    // if (nextScene.statusDependent.value !=
+                    //     GameModel.GetStatus(nextScene.statusDependent.status))
+                    // {
+                    //     isRemove = true;
+                    // }
                 }
                 
                 if (nextScene.cameraDependent.enable)
@@ -300,13 +313,22 @@ namespace GameScene.ScreenPart
                 SaveService.SetChoose(_currentSceneSo.SceneKey, chooseScene.Scene.SceneKey);
             }
 
-            if (chooseScene.findDependent.enable &&
-                GameModel.GetStatus(chooseScene.findDependent.status) == 
-                chooseScene.findDependent.value)
+            if (chooseScene.findDependent.enable)
             {
-                Choose();
-                _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
-                return;
+                bool result = true;
+                    
+                foreach (var statusValue in chooseScene.findDependent.statusesValues)
+                {
+                    bool status = GameModel.GetStatus(statusValue.status);
+                    result &= status == statusValue.value;
+                }
+                
+                if(result)
+                {
+                    Choose();
+                    _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
+                    return;
+                }
             }
 
             if (chooseScene.specialDependent.enable)

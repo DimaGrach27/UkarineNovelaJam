@@ -18,9 +18,10 @@ MonoBehaviour:
     enable: 0
     bgEnum: 0
   statusSetter:
-    enable: 0
-    statusFlag: 1
-    status: 0
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 16
   countSetter:
     enable: 0
     count: 1
@@ -30,8 +31,7 @@ MonoBehaviour:
   - actionsType: 
     statusSetter:
       enable: 0
-      statusFlag: 1
-      status: 0
+      statusesValues: []
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
@@ -42,8 +42,7 @@ MonoBehaviour:
     chooseText: 
     statusDependent:
       enable: 0
-      value: 0
-      status: 0
+      statusesValues: []
     cameraDependent:
       enable: 0
       visibleOnPhoto: 0

@@ -106,6 +106,13 @@ public enum StatusEnum
     locketFound = 11,
     rudetoZakh = 12,
     IlonaGuilty = 13,
+    isCanVisitBurshtyn = 14,
+    wasVisitBurshtyn = 15,
+    isCanVisitLake = 16,
+    isSearchFishingSpot = 17,
+    isSearchBeachSand = 18,
+    isSearchAroundLake = 19,
+    wasVisitLake = 20,
     
     BOTTLE = 100
 }

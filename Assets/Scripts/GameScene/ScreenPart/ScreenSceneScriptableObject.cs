@@ -92,7 +92,13 @@ namespace GameScene.ScreenPart
     public class StatusDependent
     {
         public bool enable = false;
-        public bool value;
+        public StatusesValue[] statusesValues;
+    }
+
+    [Serializable]
+    public class StatusesValue
+    {
+        public bool value = true;
         public StatusEnum status = StatusEnum.NONE;
     }
     
@@ -114,8 +120,7 @@ namespace GameScene.ScreenPart
     public class FindDependent
     {
         public bool enable;
-        public bool value = true;
-        public StatusEnum status = StatusEnum.NONE;
+        public StatusesValue[] statusesValues;
     }
     
     [Serializable]
@@ -129,12 +134,10 @@ namespace GameScene.ScreenPart
     public class StatusSetter
     {
         [SerializeField] private bool enable = false;
-        [SerializeField] private bool statusFlag = true;
-        [SerializeField] private StatusEnum status = StatusEnum.NONE;
+        [SerializeField] private StatusesValue[] statusesValues;
 
         public bool Enable => enable;
-        public bool StatusFlag => statusFlag;
-        public StatusEnum Status => status;
+        public StatusesValue[] StatusesValues => statusesValues;
     }
     
     [Serializable]
