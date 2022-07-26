@@ -15,8 +15,8 @@ MonoBehaviour:
   sceneKey: scene_2_special_1
   isActiveCamera: 0
   changeBackGround:
-    enable: 0
-    bgEnum: 0
+    enable: 1
+    bgEnum: 5
   statusSetter:
     enable: 0
     statusesValues: []
@@ -57,4 +57,5 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}

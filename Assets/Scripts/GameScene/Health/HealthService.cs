@@ -18,6 +18,11 @@ namespace GameScene.Health
 
             set
             {
+                if (value <= 0)
+                {
+                    SceneService.LoadEndGame();
+                }
+                
                 int health = Mathf.Clamp(value, 0, GlobalConstant.MAX_HEALTH);
                 _healthUiView.Health = health;
                 SaveService.HealthCount = health;

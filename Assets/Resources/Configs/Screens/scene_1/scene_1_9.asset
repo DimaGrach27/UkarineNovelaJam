@@ -19,8 +19,7 @@ MonoBehaviour:
     bgEnum: 2
   statusSetter:
     enable: 0
-    statusFlag: 1
-    status: 0
+    statusesValues: []
   countSetter:
     enable: 0
     count: 1
@@ -30,20 +29,18 @@ MonoBehaviour:
   - actionsType: 
     statusSetter:
       enable: 0
-      statusFlag: 1
-      status: 0
+      statusesValues: []
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
     textShow: "\u0416\u0438\u0432\u0430 \u0456 \u0432\u0438\u0431\u0438\u0440\u0430\u0454\u0442\u044C\u0441\u044F
       \u0437 \u043C\u0430\u0448\u0438\u043D\u0438"
   nextScenes:
-  - scene: {fileID: 11400000, guid: 8777b24727e6b7b4db5737c4441f67ac, type: 2}
+  - scene: {fileID: 11400000, guid: ca16584bde64f2547b6aab837a4ef6a9, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
-      value: 0
-      status: 0
+      statusesValues: []
     cameraDependent:
       enable: 0
       visibleOnPhoto: 0
@@ -52,8 +49,8 @@ MonoBehaviour:
       enable: 0
     findDependent:
       enable: 0
-      value: 1
-      status: 0
+      statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}

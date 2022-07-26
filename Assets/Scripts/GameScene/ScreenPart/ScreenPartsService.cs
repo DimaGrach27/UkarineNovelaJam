@@ -28,8 +28,7 @@ namespace GameScene.ScreenPart
 
         private bool _blockClick;
         private bool _inGame;
-
-        private Coroutine _loadCoroutine;
+        
         private ScreenSceneScriptableObject _currentSceneSo;
         private ScreenPart _currentPartSo;
 
@@ -189,7 +188,7 @@ namespace GameScene.ScreenPart
             switch (_currentSceneSo.NextScenes.Length)
             {
                 case 0:
-                    LoadEndGame();
+                    SceneService.LoadEndGame();
                     _inGame = false;
                     break;
                 
@@ -351,20 +350,6 @@ namespace GameScene.ScreenPart
         private void OnEndTyping()
         {
             _blockClick = false;
-        }
-
-        private void LoadEndGame()
-        {
-            if(_loadCoroutine != null) return;
-
-            _loadCoroutine = CoroutineHelper.Inst.StartCoroutine(LoadRoutine());
-        }
-
-        private IEnumerator LoadRoutine()
-        {
-            FadeService.FadeService.FadeIn();
-            yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene("EndScene");
         }
     }
 }
