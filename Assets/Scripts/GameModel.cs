@@ -107,6 +107,7 @@ public enum StatusEnum
     wasVisitLake = 20,
     isCanVisitIlonaAndTower = 21,
     isAngryToFriend = 22,
+    isThrowStick = 23,
     
     BOTTLE = 100
 }

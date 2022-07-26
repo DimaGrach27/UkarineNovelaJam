@@ -23,7 +23,7 @@ namespace MainMenu
                 int currentProgress = SaveService.GetPart;
                 string sceneKey = SaveService.GetScene;
 
-                return currentProgress > 0 || sceneKey != "screen_scene_0";
+                return currentProgress > 0 || sceneKey != "scene_0_0";
             }
         }
         

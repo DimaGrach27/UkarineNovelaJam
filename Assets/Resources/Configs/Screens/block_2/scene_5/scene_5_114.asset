@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
+  m_Name: scene_5_114
+  m_EditorClassIdentifier: 
+  sceneKey: scene_5_114
+  isActiveCamera: 1
+  changeBackGround:
+    enable: 0
+    bgEnum: 5
+  statusSetter:
+    enable: 0
+    statusesValues: []
+  countSetter:
+    enable: 0
+    count: 1
+    type: 0
+  actionsType: 
+  screenParts:
+  - actionsType: 
+    statusSetter:
+      enable: 0
+      statusesValues: []
+    screenPosition: 0
+    characterImage: 0
+    nameCharacter: 0
+    textShow: "\u0412\u0445\u0456\u0434 \u0437\u0430\u043F\u0430\u0440\u043E\u043B\u0435\u043D\u043E."
+  nextScenes:
+  - scene: {fileID: 11400000, guid: 2e897c7c1420fb7418048647613370d5, type: 2}
+    chooseText: "\u0421\u043F\u0440\u043E\u0431\u0443\u0432\u0430\u0442\u0438 \u043F\u0430\u0440\u043E\u043B\u044C
+      \"1111\""
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 1
+      visibleOnPhoto: 0
+      visibleOutPhoto: 1
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special:
+      - {fileID: 0}
+  - scene: {fileID: 11400000, guid: ee79e9fa4d3f6c5419e744272f452bec, type: 2}
+    chooseText: "\u041E\u0431\u043B\u0438\u0448\u0438\u0442\u0438 \u043C\u0430\u0440\u043D\u0443
+      \u0441\u043F\u0440\u0430\u0432\u0443."
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 1
+      visibleOnPhoto: 0
+      visibleOutPhoto: 1
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  - scene: {fileID: 11400000, guid: 5dd2e9e08ac088448872fbe51aa17a9f, type: 2}
+    chooseText: "\u0421\u043F\u0440\u043E\u0431\u0443\u0432\u0430\u0442\u0438 \u043F\u0430\u0440\u043E\u043B\u044C
+      \"krasav4ik\"."
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
