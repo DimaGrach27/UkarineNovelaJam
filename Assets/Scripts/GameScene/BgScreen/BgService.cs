@@ -7,6 +7,7 @@ namespace GameScene.BgScreen
     {
         private readonly BgUiView _bgUiView;
         private readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
+        private AnimationBg _currentAnimation;
 
         public BgService(Transform uiTransform)
         {
@@ -23,6 +24,14 @@ namespace GameScene.BgScreen
 
         public void Show(BgEnum bgEnum)
         {
+            if(_currentAnimation != null) 
+                Object.Destroy(_currentAnimation.gameObject);
+
+            if (_bgMap[bgEnum].AnimationScreen.enable)
+            {
+                _currentAnimation = Object.Instantiate(_bgMap[bgEnum].AnimationScreen.animationBg, _bgUiView.transform);
+            }
+            
             _bgUiView.Sprite = _bgMap[bgEnum].Image;
             _bgUiView.Visible = true;
         }

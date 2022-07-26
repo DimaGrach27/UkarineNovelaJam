@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameScene.Characters
@@ -18,6 +19,7 @@ namespace GameScene.Characters
         {
             set
             {
+                image.sprite = value;
                 image.sprite = value;
                 image.SetNativeSize();
             }

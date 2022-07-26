@@ -37,4 +37,62 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u0414\u0456\u0441\u0442\u0430\u043B\u0430\u0441\u044C \u043C\u0456\u0441\u0446\u044F
       \u043F\u0440\u0435\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F"
-  nextScenes: []
+  nextScenes:
+  - scene: {fileID: 11400000, guid: a8a2f73d5a3a3c247b8f0f90ff095122, type: 2}
+    chooseText: "\u0421\u0445\u043E\u0432\u0430\u0442\u0438\u0441\u044F."
+    statusDependent:
+      enable: 0
+      value: 0
+      status: 0
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      value: 1
+      status: 0
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}
+  - scene: {fileID: 11400000, guid: 8661f3edb4250684c86928e70345b12c, type: 2}
+    chooseText: "\u041F\u0440\u0438\u0433\u043E\u0442\u0443\u0432\u0430\u0442\u0438\u0441\u044C
+      \u0437\u0430\u0445\u0438\u0449\u0430\u0442\u0438\u0441\u044C."
+    statusDependent:
+      enable: 0
+      value: 0
+      status: 0
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      value: 1
+      status: 0
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}
+  - scene: {fileID: 11400000, guid: 8777b24727e6b7b4db5737c4441f67ac, type: 2}
+    chooseText: "\u041E\u043A\u043B\u0438\u043A\u043D\u0443\u0442\u0438 \u0444\u0456\u0433\u0443\u0440\u0443."
+    statusDependent:
+      enable: 0
+      value: 0
+      status: 0
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      value: 1
+      status: 0
+    specialDependent:
+      enable: 0
+      special: {fileID: 0}
