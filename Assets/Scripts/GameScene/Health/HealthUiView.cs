@@ -5,22 +5,15 @@ namespace GameScene.Health
 {
     public class HealthUiView : MonoBehaviour
     {
-        [SerializeField] private Image[] images;
+        [SerializeField] private Image fillBar;
 
-        public int Health
+        public float Health
         {
             set
             {
-                foreach (var image in images)
-                {
-                    image.enabled = false;
-                }
-
-                for (int i = 0; i < value; i++)
-                {
-                    images[i].enabled = true;
-                }
+                fillBar.fillAmount = value;
             }
         }
+        
     }
 }

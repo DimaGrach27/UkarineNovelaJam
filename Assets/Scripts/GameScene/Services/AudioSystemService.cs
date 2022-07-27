@@ -12,7 +12,9 @@ namespace GameScene.Services
         private void Awake()
         {
             Inst = this;
-            DontDestroyOnLoad(gameObject);
+
+            musicAudioSource.volume = SaveService.GetMusicVolume();
+            soundAudioSource.volume = SaveService.GetAudioVolume();
         }
 
         public void StarPlayMusic(AudioClip audioClip)
@@ -25,5 +27,8 @@ namespace GameScene.Services
         {
             soundAudioSource.PlayOneShot(audioClip);
         }
+
+        public void ChangeMusic(float value) => musicAudioSource.volume = value;
+        public void ChangeAudio(float value) => soundAudioSource.volume = value;
     }
 }

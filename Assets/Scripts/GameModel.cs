@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class GameModel
 {
@@ -25,6 +24,10 @@ public static class GameModel
 
     public static int GetInt(CountType countType) => SaveService.GetIntValue(countType);
     public static void SetInt(CountType countType, int value) => SaveService.SetIntValue(countType, value);
+    
+    public static int GetInt(KillerName countType) => SaveService.GetIntValue(countType);
+    public static void SetInt(KillerName countType, int value) => SaveService.SetIntValue(countType, value);
+    
 
     public static string GetName(CharacterName characterName)
     {
@@ -139,4 +142,12 @@ public enum CharacterSprite
     ZAHARES_DEFAULT = 3,
     OLEKSIY_DEFAULT = 4,
     VILSHANKA_FUTURE_DEFAULT = 5
+}
+
+public enum KillerName
+{
+    NONE_VOR = 0,
+    ILONA_VOR = 1,
+    ZAHARES_VOR = 2,
+    OLEKSIY_VOR = 3,
 }

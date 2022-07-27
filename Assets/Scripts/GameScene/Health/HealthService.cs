@@ -24,7 +24,8 @@ namespace GameScene.Health
                 }
                 
                 int health = Mathf.Clamp(value, 0, GlobalConstant.MAX_HEALTH);
-                _healthUiView.Health = health;
+                float amount = (float)health / GlobalConstant.MAX_HEALTH;
+                _healthUiView.Health = amount;
                 SaveService.HealthCount = health;
             }
         }

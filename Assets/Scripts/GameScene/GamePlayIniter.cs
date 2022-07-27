@@ -3,6 +3,7 @@ using GameScene.Characters;
 using GameScene.ChooseWindow;
 using GameScene.ChooseWindow.CameraAction;
 using GameScene.Health;
+using GameScene.NoteWindow;
 using GameScene.ScreenPart;
 using GameScene.ScreenPart.ActionScreens;
 using GameScene.ScreenText;
@@ -24,6 +25,7 @@ namespace GameScene
         private ChooseWindowService _chooseWindowService;
         private CameraActionService _cameraActionService;
         private ActionScreenService _actionScreenService;
+        private NoteService _noteService;
         private HealthService _healthService;
 
         //Handlers
@@ -59,6 +61,7 @@ namespace GameScene
             _chooseWindowService = new ChooseWindowService(uiCanvas);
             _cameraActionService = new CameraActionService(uiCanvas);
             _healthService = new HealthService(uiCanvas);
+            _noteService = new NoteService(uiCanvas);
 
             _actionScreenService = new ActionScreenService(_healthService, _cameraActionService, uiCanvas);
         }

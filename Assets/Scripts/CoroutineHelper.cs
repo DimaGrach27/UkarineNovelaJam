@@ -7,6 +7,5 @@ public class CoroutineHelper : MonoBehaviour
     private void Awake()
     {
         Inst = this;
-        DontDestroyOnLoad(gameObject);
     }
 }

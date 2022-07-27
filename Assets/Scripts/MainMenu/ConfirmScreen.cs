@@ -8,6 +8,8 @@ namespace MainMenu
 {
     public class ConfirmScreen : MonoBehaviour
     {
+        public static ConfirmScreen Ins { get; private set; }
+        
         [SerializeField] private TextMeshProUGUI textDescription;
         
         [SerializeField] private Button confirm;
@@ -20,6 +22,8 @@ namespace MainMenu
 
         private void Awake()
         {
+            Ins = this;
+            
             confirm.onClick.AddListener(Confirm);
             notConfirm.onClick.AddListener(NotConfirm);
             

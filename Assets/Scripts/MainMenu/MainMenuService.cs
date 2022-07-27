@@ -10,10 +10,8 @@ namespace MainMenu
     {
         [SerializeField] private Button continueButton;
         [SerializeField] private Button startButton;
-        [SerializeField] private Button settingsButton;
         [SerializeField] private Button exitButton;
 
-        [SerializeField] private ConfirmScreen confirmScreen;
         [SerializeField] private CanvasGroup buttonGroup;
 
         private bool IsGameWasStarted
@@ -45,7 +43,7 @@ namespace MainMenu
             if (IsGameWasStarted)
             {
                 string areYouSure = "Попередній прогрес буде втрачений.\nПродовжити далі?";
-                confirmScreen.Check(ConfirmStart, areYouSure);
+                ConfirmScreen.Ins.Check(ConfirmStart, areYouSure);
                 buttonGroup.enabled = true;
                 buttonGroup.DOFade(0.0f, 0.3f);
                 return;
@@ -87,7 +85,7 @@ namespace MainMenu
         private void Exit()
         {
             string areYouSure = "Ви точно плануєте вийти?";
-            confirmScreen.Check(ConfirmExit, areYouSure);
+            ConfirmScreen.Ins.Check(ConfirmExit, areYouSure);
             buttonGroup.enabled = true;
             buttonGroup.DOFade(0.0f, 0.3f);
         }

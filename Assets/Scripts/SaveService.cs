@@ -9,6 +9,10 @@
      private const string CAMERA_FILM_LEFT_KEY = "camera_film_left";
      private const string HEALTH_COUNT_KEY = "health_count";
      private const string CURRENT_BG_KEY = "current_bg";
+     
+     private const string TYPYNH_SPEED = "typyng_speed_key";
+     private const string MUSIC_VOLUME_KEY = "music_key";
+     private const string AUDIO_VOLUME_KEY = "audio_key";
 
      private static SaveFile _saveFile;
      public static SaveFile SaveFile
@@ -167,6 +171,16 @@
          PlayerPrefs.SetInt(countType.ToString(), value);
      }
      
+     public static int GetIntValue(KillerName countType)
+     {
+         return PlayerPrefs.GetInt(countType.ToString(), 0);
+     }
+     
+     public static void SetIntValue(KillerName countType, int value)
+     {
+         PlayerPrefs.SetInt(countType.ToString(), value);
+     }
+     
      public static void ResetAllSaves()
      {
          PlayerPrefs.DeleteAll();
@@ -175,6 +189,13 @@
 
          SaveJson();
      }
+
+     public static void SaveTypingSpeed(float speed) => PlayerPrefs.SetFloat(TYPYNH_SPEED, speed);
+     public static void SaveMusicVolume(float volume) => PlayerPrefs.SetFloat(MUSIC_VOLUME_KEY, volume);
+     public static void SaveAudioVolume(float volume) => PlayerPrefs.SetFloat(AUDIO_VOLUME_KEY, volume);
+     public static float GetAudioVolume() => PlayerPrefs.GetFloat(AUDIO_VOLUME_KEY, 1.0f);
+     public static float GetMusicVolume() => PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, 1.0f);
+     public static float GetTypingSpeed() => PlayerPrefs.GetFloat(TYPYNH_SPEED, 1.0f);
  }
 
  [Serializable]
