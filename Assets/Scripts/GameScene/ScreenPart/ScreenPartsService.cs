@@ -99,9 +99,9 @@ namespace GameScene.ScreenPart
             
             float volumeMax = SaveService.GetMusicVolume();
             yield return new WaitForSeconds(0.2f);
-            FadeService.FadeService.FadeOut(5.0f);
-            AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 4.0f);
-            yield return new WaitForSeconds(5.0f);
+            FadeService.FadeService.FadeOut(8.0f);
+            AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 7.0f);
+            yield return new WaitForSeconds(7.0f);
             
             ShowScene();
         }
