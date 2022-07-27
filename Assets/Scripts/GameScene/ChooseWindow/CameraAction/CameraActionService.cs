@@ -35,5 +35,11 @@ namespace GameScene.ChooseWindow.CameraAction
             _cameraActionUiView.IsReadyToTakePhoto = SaveService.CameraFilmLeft > 0;
             OnTakePhoto?.Invoke();
         }
+        
+        public void TakePhotoAction()
+        {
+            _cameraActionFlash.CallFlash();
+            _cameraActionUiView.FilmLeft = SaveService.CameraFilmLeft;
+        }
     }
 }

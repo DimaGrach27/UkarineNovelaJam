@@ -231,7 +231,7 @@ namespace GameScene.ScreenPart
             _screenTextService.HideText();
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
             
-            _chooseWindowService.SetChooses(PrepareList(false));
+            _chooseWindowService.SetChooses(PrepareList(false), _currentPartSo.TextShow);
         }
 
         private void TakePhoto()
@@ -239,7 +239,7 @@ namespace GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             
-            _chooseWindowService.SetChooses(PrepareList(true));
+            _chooseWindowService.SetChooses(PrepareList(true), _currentPartSo.TextShow);
         }
 
         private NextScene[] PrepareList(bool isCamera)

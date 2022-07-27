@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameScene.ChooseWindow.CameraAction;
 using GameScene.Health;
 using GameScene.ScreenPart.ActionScreens.Actions;
 using UnityEngine;
@@ -9,7 +10,10 @@ namespace GameScene.ScreenPart.ActionScreens
     {
         private readonly Dictionary<ActionType, IActionScreen> _actionMap = new();
 
-        public ActionScreenService(HealthService healthService, Transform ui)
+        public ActionScreenService(
+            HealthService healthService, 
+            CameraActionService cameraActionService, 
+            Transform ui)
         {
             _actionMap.Add(ActionType.DEBUG, new ActionTestDebug());
             _actionMap.Add(ActionType.CAMERA_SHAKER, new ActionCameraShaker());
@@ -17,6 +21,7 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.HEAL_ONE_HEALTH, new ActionHealOneHealth(healthService));
             _actionMap.Add(ActionType.HEAL_FULL_HEALTH, new ActionFullHeal(healthService));
             _actionMap.Add(ActionType.DAMAGE_ONE_HEALTH, new ActionDamageOneHealth(healthService));
+            _actionMap.Add(ActionType.TAKE_PHOTO, new ActionTakePhoto(cameraActionService));
             
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));

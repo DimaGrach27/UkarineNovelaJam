@@ -25,9 +25,9 @@ namespace GameScene.Characters
 
         public void ShowCharacter(CharacterScreenPositionEnum screenPosition, Sprite image)
         {
-            if(image == null) return;
-            
             HideAllCharacters();
+            
+            if(image == null) return;
             
             if(image != _characterUiViewMap[screenPosition].Image.sprite)
             {

@@ -60,7 +60,7 @@ namespace GameScene
             _cameraActionService = new CameraActionService(uiCanvas);
             _healthService = new HealthService(uiCanvas);
 
-            _actionScreenService = new ActionScreenService(_healthService, uiCanvas);
+            _actionScreenService = new ActionScreenService(_healthService, _cameraActionService, uiCanvas);
         }
     }
 }

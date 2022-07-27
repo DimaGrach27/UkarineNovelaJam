@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameScene.ScreenPart;
+using TMPro;
 using UnityEngine;
 
 namespace GameScene.ChooseWindow
@@ -8,7 +9,8 @@ namespace GameScene.ChooseWindow
     public class ChooseWindowUiView : MonoBehaviour
     {
         public event Action<NextScene> OnChoose;
-        
+
+        [SerializeField] private TextMeshProUGUI chooseText;
         [SerializeField] private Transform container;
         [SerializeField] private ChooseButtonUiView buttonPrefab;
 
@@ -50,6 +52,11 @@ namespace GameScene.ChooseWindow
                 _chooseButtonUiViews[i].InitButton(scenes[i]);
                 _chooseButtonUiViews[i].gameObject.SetActive(true);
             }
+        }
+
+        public void SetChooseText(string textChoose)
+        {
+            chooseText.SetText(textChoose);
         }
 
         private void OnButtonChooseClick(NextScene choose)
