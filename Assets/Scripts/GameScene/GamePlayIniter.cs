@@ -49,8 +49,6 @@ namespace GameScene
                 );
             
             _screenPartsService.Init();
-            
-            FadeService.FadeService.FadeOut();
         }
 
         private void InitServices()

@@ -9,6 +9,9 @@
         HEAL_FULL_HEALTH = 4,
         ALL_ITEM_WAS_FOUND = 5,
         TAKE_PHOTO = 6,
+        RADIO_CHANGE = 7,
+        FADE_OUT_IN = 8,
+        PLAY_CRASH_SOUND = 9,
         DEBUG = 228
     }
 }

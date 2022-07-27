@@ -17,6 +17,8 @@ public static class GlobalConstant
     public const string ILONA_NAME = "Ілона";
     public const string ZAHARES_NAME = "Захарес";
     public const string OLEKSIY_NAME = "Олексій";
+    public const string OREST_NAME = "Орест";
+    public const string UNKNOW_NAME = "???";
 
     private static Sprite _VILSHANKA_DEFAULT_SPRITE;
     public static Sprite VILSHANKA_DEFAULT_SPRITE

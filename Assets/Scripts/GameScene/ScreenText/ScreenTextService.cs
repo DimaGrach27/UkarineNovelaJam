@@ -18,7 +18,7 @@ namespace GameScene.ScreenText
      
         private readonly ScreenTextUiView _screenTextUiView;
         
-        private bool _isTextEnable;
+        private bool _isTextEnable = true;
         private bool _isTyping;
 
         private string _endText;

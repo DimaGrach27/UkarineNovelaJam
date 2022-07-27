@@ -22,7 +22,8 @@ namespace MainMenu
 
         private void Awake()
         {
-            Ins = this;
+            if(Ins == null)
+                Ins = this;
             
             confirm.onClick.AddListener(Confirm);
             notConfirm.onClick.AddListener(NotConfirm);

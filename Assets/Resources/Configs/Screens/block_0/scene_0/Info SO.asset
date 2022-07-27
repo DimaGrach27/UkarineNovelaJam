@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10efc0b3f59540de87533be07e42b446, type: 3}
+  m_Name: Info SO
+  m_EditorClassIdentifier: 
+  nextScene:
+    scene: {fileID: 11400000, guid: 7d07f14474715604b9332070d545114e, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  infoDescription: {fileID: 323033400513750974, guid: ff3b300b6af95754a8c3937ada286672, type: 3}

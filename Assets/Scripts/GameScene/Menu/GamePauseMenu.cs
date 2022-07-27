@@ -67,7 +67,6 @@ namespace GameScene.Menu
             float duration = 2.0f;
             FadeService.FadeService.FadeIn(duration);
             yield return new WaitForSeconds(duration);
-            SaveService.ResetAllSaves();
             SceneManager.LoadScene("MainMenu");
         }
         

@@ -3,6 +3,7 @@ using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ScreenPart.ActionScreens;
 using GameScene.ScreenPart.SpecialSO;
+using GameScene.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -46,6 +47,7 @@ namespace GameScene.ScreenPart
     public class ScreenPart
     {
         [SerializeField] private ActionType[] actionsType;
+        [SerializeField] private MusicType musicTypeOnStart = MusicType.NONE;
         [SerializeField, Toggle("enable")] private StatusSetter statusSetter;
         
         [SerializeField, EnumPaging] private CharacterScreenPositionEnum screenPosition;
@@ -53,6 +55,7 @@ namespace GameScene.ScreenPart
         [SerializeField, EnumPaging] private CharacterName nameCharacter;
         
         [SerializeField, TextArea(1, 6)] private string textShow;
+        [SerializeField] private ActionType[] actionsTypeEnd;
         
         public string CharacterName => GameModel.GetName(nameCharacter);
         public string TextShow => textShow;
@@ -63,6 +66,8 @@ namespace GameScene.ScreenPart
         
         public CharacterScreenPositionEnum Position => screenPosition;
         public ActionType[] ActionsType => actionsType;
+        public ActionType[] ActionsTypeEnd => actionsTypeEnd;
+        public MusicType MusicTypeOnStart => musicTypeOnStart;
     }
     
     [Serializable]

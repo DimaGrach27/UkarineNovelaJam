@@ -22,6 +22,9 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.HEAL_FULL_HEALTH, new ActionFullHeal(healthService));
             _actionMap.Add(ActionType.DAMAGE_ONE_HEALTH, new ActionDamageOneHealth(healthService));
             _actionMap.Add(ActionType.TAKE_PHOTO, new ActionTakePhoto(cameraActionService));
+            _actionMap.Add(ActionType.RADIO_CHANGE, new ActionRadioChange());
+            _actionMap.Add(ActionType.FADE_OUT_IN, new ActionFadeOutIn());
+            _actionMap.Add(ActionType.PLAY_CRASH_SOUND, new ActionCrashSound());
             
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));

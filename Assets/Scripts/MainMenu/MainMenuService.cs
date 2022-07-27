@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using GameScene.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,6 +35,8 @@ namespace MainMenu
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
             exitButton.onClick.AddListener(Exit);
+            
+            AudioSystemService.Inst.StopMusic();
             
             GameModel.Init();
         }

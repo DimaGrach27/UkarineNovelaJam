@@ -2,14 +2,14 @@
 
 public static class GameModel
 {
-    private static bool _gameWasInit = false;
+    public static bool GameWasInit = false;
     
 
     public static void Init()
     {
-        if(_gameWasInit) return;
+        if(GameWasInit) return;
         
-        _gameWasInit = true;
+        GameWasInit = true;
     }
 
     public static bool GetStatus(StatusEnum statusEnum)
@@ -52,6 +52,12 @@ public static class GameModel
                 break;
             case CharacterName.OLEKSIY:
                 result = GlobalConstant.OLEKSIY_NAME;
+                break;
+            case CharacterName.OREST:
+                result = GlobalConstant.OREST_NAME;
+                break;
+            case CharacterName.UNKNOW:
+                result = GlobalConstant.UNKNOW_NAME;
                 break;
         }
 
@@ -131,7 +137,9 @@ public enum CharacterName
     ILONA = 2,
     ZAHARES = 3,
     OLEKSIY = 4,
-    VILSHANKA_FUTURE = 5
+    VILSHANKA_FUTURE = 5,
+    OREST = 6,
+    UNKNOW = 7
 }
 
 public enum CharacterSprite

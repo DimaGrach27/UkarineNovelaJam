@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ChooseWindow;
@@ -8,7 +9,6 @@ using GameScene.ScreenPart.ActionScreens;
 using GameScene.ScreenText;
 using GameScene.Services;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace GameScene.ScreenPart
 {
@@ -77,6 +77,32 @@ namespace GameScene.ScreenPart
             
             _inGame = true;
             
+            if (_currentScene == "scene_0_0")
+            {
+                CoroutineHelper.Inst.StartCoroutine(FirstInit());
+                return;
+            }
+            
+            AudioSystemService.Inst.StarPlayMusic(MusicType.EMBIENT_SLOW);
+            FadeService.FadeService.FadeOut();
+            ShowScene();
+        }
+
+        IEnumerator FirstInit()
+        {
+                        
+            _currentSceneSo = _screenScenesMap[_currentScene];
+            _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
+            
+            AudioSystemService.Inst.StarPlayMusic(MusicType.NEBO);
+            AudioSystemService.Inst.AddQueueClip(MusicType.EMBIENT_SLOW);
+            
+            float volumeMax = SaveService.GetMusicVolume();
+            yield return new WaitForSeconds(0.2f);
+            FadeService.FadeService.FadeOut(5.0f);
+            AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 4.0f);
+            yield return new WaitForSeconds(5.0f);
+            
             ShowScene();
         }
         
@@ -137,6 +163,13 @@ namespace GameScene.ScreenPart
         {
             if(_blockClick || !_inGame) return;
             
+            if(_currentPartSo.ActionsTypeEnd != null)
+            {
+                foreach (var actionType in _currentPartSo.ActionsTypeEnd)
+                {
+                    _actionScreenService.Action(actionType);
+                }
+            }
             
             Debug.Log($"SHOW next: {_currentPart}");
             _currentPart++;
@@ -174,6 +207,8 @@ namespace GameScene.ScreenPart
                         _actionScreenService.Action(actionType);
                     }
                 }
+                
+                AudioSystemService.Inst.PlayShotSound(_currentPartSo.MusicTypeOnStart);
 
                 if(_currentPartSo.StatusSetter.Enable)
                 {
@@ -285,11 +320,6 @@ namespace GameScene.ScreenPart
                     }
                     isRemove = !result;
                     
-                    // if (nextScene.statusDependent.value !=
-                    //     GameModel.GetStatus(nextScene.statusDependent.status))
-                    // {
-                    //     isRemove = true;
-                    // }
                 }
                 
                 if (nextScene.cameraDependent.enable)
