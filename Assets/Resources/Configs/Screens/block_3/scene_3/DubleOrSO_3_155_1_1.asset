@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddc34513f30468caf72dc33de8f7471, type: 3}
+  m_Name: DubleOrSO_3_155_1_1
+  m_EditorClassIdentifier: 
+  nextScene:
+    scene: {fileID: 0}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  statusEnum:
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 12
+    - value: 1
+      status: 1
+  blockTrue:
+    scene: {fileID: 11400000, guid: 57d85e1012f0b8042880289d85a31043, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  blockFalse:
+    scene: {fileID: 11400000, guid: 58e3b099d79e51a41b47039d7521f14d, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []

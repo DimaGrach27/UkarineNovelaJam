@@ -14,11 +14,11 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
         private IEnumerator FadeDaleOut()
         {
             AudioSystemService.Inst.StopMusic();
-            FadeService.FadeService.FadeIn(2.0f);
+            FadeService.FadeService.FadeIn(3.0f);
             
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(4.0f);
             
-            FadeService.FadeService.FadeOut(2.0f);
+            FadeService.FadeService.FadeOut(3.0f);
             
             AudioSystemService.Inst.StarPlayMusic(MusicType.EMBIENT_SLOW);
         }

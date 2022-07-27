@@ -27,6 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -35,6 +36,7 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u0432 \u0446\u0435\u043D\u0442\u0440\u0456
       \u0441\u0435\u043B\u0430."
+    actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: 3e39026f91e35b1448cc22319c81cfda, type: 2}
     chooseText: "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u0438\u0442\u0438\u0441\u044C
@@ -77,12 +79,14 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  - scene: {fileID: 0}
+  - scene: {fileID: 11400000, guid: f2af0640c06d0384e8edbbaf4a753fb2, type: 2}
     chooseText: "\u041F\u043E\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u0438 \u0437
       \u0434\u0456\u0434\u043E\u043C \u0417\u0430\u0445\u0430\u0440\u0435\u0441\u043E\u043C."
     statusDependent:
-      enable: 0
-      statusesValues: []
+      enable: 1
+      statusesValues:
+      - value: 1
+        status: 8
     cameraDependent:
       enable: 0
       visibleOnPhoto: 0

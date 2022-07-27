@@ -22,14 +22,14 @@ namespace FadeService
         {
             FadeUiView.Fade = 0.0f;
             FadeUiView.Visible = true;
-            FadeUiView.CanvasGroup.DOFade(1.0f, duration);
+            FadeUiView.CanvasGroup.DOFade(1.0f, duration).SetEase(Ease.Linear);
         }
         
         public static async void FadeOut(float duration = GlobalConstant.DEFAULT_FADE_DURATION)
         {
             FadeUiView.Fade = 1.0f;
             FadeUiView.Visible = true;
-            FadeUiView.CanvasGroup.DOFade(0.0f, duration);
+            FadeUiView.CanvasGroup.DOFade(0.0f, duration).SetEase(Ease.Linear);
 
             await Task.Delay((int)(duration * 1000));
             FadeUiView.Visible = false;

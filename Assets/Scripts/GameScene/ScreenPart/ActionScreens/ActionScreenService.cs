@@ -17,6 +17,7 @@ namespace GameScene.ScreenPart.ActionScreens
         {
             _actionMap.Add(ActionType.DEBUG, new ActionTestDebug());
             _actionMap.Add(ActionType.CAMERA_SHAKER, new ActionCameraShaker());
+            _actionMap.Add(ActionType.CAMERA_SHAKER_LONG, new ActionCameraShakerLong());
             
             _actionMap.Add(ActionType.HEAL_ONE_HEALTH, new ActionHealOneHealth(healthService));
             _actionMap.Add(ActionType.HEAL_FULL_HEALTH, new ActionFullHeal(healthService));

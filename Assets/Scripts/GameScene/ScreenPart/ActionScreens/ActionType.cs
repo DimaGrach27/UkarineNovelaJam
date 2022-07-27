@@ -12,6 +12,7 @@
         RADIO_CHANGE = 7,
         FADE_OUT_IN = 8,
         PLAY_CRASH_SOUND = 9,
+        CAMERA_SHAKER_LONG = 9,
         DEBUG = 228
     }
 }
