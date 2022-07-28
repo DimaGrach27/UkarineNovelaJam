@@ -31,8 +31,8 @@ MonoBehaviour:
     statusSetter:
       enable: 0
       statusesValues: []
-    screenPosition: 2
-    characterImage: 3
+    screenPosition: 0
+    characterImage: 1
     nameCharacter: 1
     textShow: "\u0413\u0435\u0439, \u0445\u0442\u043E \u0431 \u0446\u0435 \u043D\u0435
       \u0431\u0443\u0432! \u041D\u0435 \u043B\u044F\u043A\u0430\u0439\u0442\u0435\u0441\u044C!
