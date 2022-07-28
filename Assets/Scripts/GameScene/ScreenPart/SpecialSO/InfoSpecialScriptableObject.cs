@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameScene.ScreenPart.SpecialSO
 {
@@ -9,11 +10,14 @@ namespace GameScene.ScreenPart.SpecialSO
     
     public class InfoSpecialScriptableObject : SpecialScriptableObjectBase
     {
+        [SerializeField, TextArea(1, 5)] private List<string> texts;
         [SerializeField] private InfoDescription infoDescription;
         
         public override bool Check()
         {
-            Object.Instantiate(infoDescription.gameObject);
+            InfoDescription infoDesc = Instantiate(infoDescription);
+            infoDesc.SetInfoDescription(texts);
+            
             return true;
         }
     }

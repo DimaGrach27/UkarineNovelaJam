@@ -6,8 +6,8 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
     {
         public void Action()
         {
-            AudioSystemService.Inst.StarPlayMusic(MusicType.RADIO_CHANGE);
-            AudioSystemService.Inst.AddQueueClip(MusicType.EMBIENT_SLOW);
+            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
+            AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
         }
 
         public ActionType ActionType => ActionType.RADIO_CHANGE;

@@ -8,43 +8,63 @@ namespace GameScene.Services
     {
         [SerializeField] private AudioSource musicAudioSource;
         [SerializeField] private AudioSource soundAudioSource;
-
-
-        private Dictionary<MusicType, AudioClip> _audioClipsMap = new();
+        [SerializeField] private AudioSource soundAudioLooperSource;
+        
+        private readonly Dictionary<MusicType, AudioClip> _audioClipsMap = new();
         public static AudioSystemService Inst { get; private set; }
 
-        private Queue<AudioClip> _audioClips = new();
+        private readonly Queue<AudioClip> _audioClips = new();
+        private readonly Queue<AudioClip> _audioClipsLooper = new();
 
         private AudioClip _audioClip;
 
         private Coroutine _coroutine;
+        private Coroutine _coroutineLoop;
+
+        public AudioSource AudioSourceMusic => musicAudioSource;
 
         private void Awake()
         {
-            if(Inst == null)
-                Inst = this;
+            if(Inst != null) return;
+            
+            Inst = this;
 
             musicAudioSource.volume = SaveService.GetMusicVolume();
             soundAudioSource.volume = SaveService.GetAudioVolume();
+            soundAudioLooperSource.volume = SaveService.GetAudioVolume();
 
             foreach (var musicSo in Resources.LoadAll<MusicSo>("Music"))
             {
                 _audioClipsMap.Add(musicSo.type, musicSo.clip);
             }
 
-            _coroutine = StartCoroutine(PlayRoutine());
+            _coroutine = StartCoroutine(PlayRoutineLoop());
+            _coroutineLoop = StartCoroutine(PlayRoutineLooper());
         }
 
-        public void StopMusic()
+        public void StopAllMusic()
         {
             if (_coroutine != null)
                 StopCoroutine(_coroutine);
             
+            if (_coroutineLoop != null)
+                StopCoroutine(_coroutineLoop);
+            
             _audioClip = null;
             musicAudioSource.Stop();
+            soundAudioLooperSource.Stop();
         }
         
-        public void StarPlayMusic(MusicType type)
+        public void StopSoundMusic()
+        {
+            if (_coroutineLoop != null)
+                StopCoroutine(_coroutineLoop);
+            
+            _audioClipsLooper.Clear();
+            soundAudioLooperSource.Stop();
+        }
+        
+        public void StarPlayMusicOnLoop(MusicType type)
         {
             if(!_audioClipsMap.ContainsKey(type)) return;
             if (_coroutine != null)
@@ -59,24 +79,38 @@ namespace GameScene.Services
             musicAudioSource.Stop();
             musicAudioSource.Play();
             
-            _coroutine = StartCoroutine(PlayRoutine());
+            _coroutine = StartCoroutine(PlayRoutineLoop());
         }
-        
-        public void StarPlayMusic(AudioClip audioClip)
+
+        public AudioClip GetClip(MusicType type)
         {
-            if (_coroutine != null)
-                StopCoroutine(_coroutine);
+            if (_audioClipsMap.ContainsKey(type))
+                return _audioClipsMap[type];
+
+            return null;
+        }
+        public void StarPlayMusicOnLooper(MusicType type)
+        {
+            if(!_audioClipsMap.ContainsKey(type)) return;
             
-            _audioClips.Clear();
+            if (_coroutineLoop != null)
+                StopCoroutine(_coroutineLoop);
             
-            _audioClip = audioClip;
+            _audioClipsLooper.Clear();
             
-            musicAudioSource.clip = audioClip;
+            _audioClip = _audioClipsMap[type];
             
-            musicAudioSource.Stop();
-            musicAudioSource.Play();
+            soundAudioLooperSource.clip = _audioClipsMap[type];
             
-            _coroutine = StartCoroutine(PlayRoutine());
+            soundAudioLooperSource.Stop();
+            soundAudioLooperSource.Play();
+            
+            _coroutineLoop = StartCoroutine(PlayRoutineLooper());
+        }
+
+        public bool LoopForLopper
+        {
+            set => soundAudioLooperSource.loop = value;
         }
         
         public void PlayShotSound(AudioClip audioClip)
@@ -91,12 +125,28 @@ namespace GameScene.Services
         }
 
         public void ChangeMusic(float value) => musicAudioSource.volume = value;
-        public void ChangeAudio(float value) => soundAudioSource.volume = value;
+        public void ChangeAudio(float value)
+        { 
+            soundAudioSource.volume = value;
+            soundAudioLooperSource.volume = value;
+        }
 
-        public AudioSource AudioSourceMusic => musicAudioSource;
-
-
-        IEnumerator PlayRoutine()
+        
+        public void AddQueueClipToLoop(MusicType type)
+        {
+            if(!_audioClipsMap.ContainsKey(type)) return;
+            
+            _audioClips.Enqueue(_audioClipsMap[type]);
+        }
+        
+        public void AddQueueClipToSound(MusicType type)
+        {
+            if(!_audioClipsMap.ContainsKey(type)) return;
+            
+            _audioClipsLooper.Enqueue(_audioClipsMap[type]);
+        }
+        
+        IEnumerator PlayRoutineLoop()
         {
             while (true)
             {
@@ -119,16 +169,25 @@ namespace GameScene.Services
             }
         }
         
-        public void AddQueueClip(AudioClip audioClip)
+        IEnumerator PlayRoutineLooper()
         {
-            _audioClips.Enqueue(audioClip);
-        }
-        
-        public void AddQueueClip(MusicType type)
-        {
-            if(!_audioClipsMap.ContainsKey(type)) return;
-            
-            _audioClips.Enqueue(_audioClipsMap[type]);
+            while (true)
+            {
+                if(!soundAudioLooperSource.loop)
+                {
+                    if (!soundAudioLooperSource.isPlaying)
+                    {
+                        if (_audioClipsLooper.TryDequeue(out AudioClip result))
+                        {
+                            soundAudioLooperSource.clip = result;
+
+                            soundAudioLooperSource.Play();
+                        }
+                    }
+                }
+                
+                yield return null;
+            }
         }
     }
 

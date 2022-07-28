@@ -16,8 +16,6 @@ namespace Settings
 
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
-
-        [SerializeField]private float typing;
         
         private void Start()
         {
@@ -54,9 +52,7 @@ namespace Settings
         {
             float valueTyping = 1.0f - value / 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
-            typing = valueTyping;
             GlobalConstant.TYPING_SPEED = valueTyping;
-            
             
             SaveService.SaveTypingSpeed(value / 10);
         }

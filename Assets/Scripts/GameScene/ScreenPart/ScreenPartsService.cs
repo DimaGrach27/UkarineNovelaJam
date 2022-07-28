@@ -14,7 +14,7 @@ namespace GameScene.ScreenPart
 {
     public class ScreenPartsService 
     {
-        private readonly Dictionary<string, ScreenSceneScriptableObject> _screenScenesMap = new();
+        // private readonly Dictionary<string, ScreenSceneScriptableObject> _screenScenesMap = new();
         
         private int _currentPart;
         private string _currentScene;
@@ -49,13 +49,13 @@ namespace GameScene.ScreenPart
             _cameraActionService = cameraActionService;
             _actionScreenService = actionScreenService;
 
-            ScreenSceneScriptableObject[] list = 
-                Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
+            // ScreenSceneScriptableObject[] list = 
+            //     Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
 
-            foreach (var screenScene in list)
-            {
-                _screenScenesMap.Add(screenScene.SceneKey, screenScene);
-            }
+            // foreach (var screenScene in list)
+            // {
+            //     _screenScenesMap.Add(screenScene.SceneKey, screenScene);
+            // }
 
             screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
@@ -83,19 +83,18 @@ namespace GameScene.ScreenPart
                 return;
             }
             
-            AudioSystemService.Inst.StarPlayMusic(MusicType.EMBIENT_SLOW);
+            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             FadeService.FadeService.FadeOut();
             ShowScene();
         }
 
         IEnumerator FirstInit()
         {
-                        
-            _currentSceneSo = _screenScenesMap[_currentScene];
+            _currentSceneSo = GameModel.GetScene(_currentScene);
             _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
             
-            AudioSystemService.Inst.StarPlayMusic(MusicType.NEBO);
-            AudioSystemService.Inst.AddQueueClip(MusicType.EMBIENT_SLOW);
+            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.NEBO);
+            AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
             
             float volumeMax = SaveService.GetMusicVolume();
             yield return new WaitForSeconds(0.2f);
@@ -106,7 +105,7 @@ namespace GameScene.ScreenPart
             ShowScene();
         }
         
-        private void ShowNextScene(string key)
+        public void ShowNextScene(string key)
         {
             _currentScene = key;
             _currentPart = 0;
@@ -124,7 +123,7 @@ namespace GameScene.ScreenPart
 
         private void ShowScene()
         {
-            _currentSceneSo = _screenScenesMap[_currentScene];
+            _currentSceneSo = GameModel.GetScene(_currentScene);
             
             if(_currentSceneSo.ActionsType != null)
             {

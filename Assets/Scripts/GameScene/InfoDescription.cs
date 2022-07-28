@@ -7,25 +7,36 @@ namespace GameScene
 {
     public class InfoDescription : MonoBehaviour
     {
-        [SerializeField, TextArea(1, 5)] private List<string> texts;
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private ClickHelper clickHelper;
         
+        private List<string> _texts;
         private Coroutine _delayWait;
+        
         private bool _isReadyToClick;
         private bool _isTyping;
         private void Awake()
         {
-            if (texts.Count > 0)
+            clickHelper.OnClick += OnPointerClick;
+        }
+
+        public void SetInfoDescription(List<string> textsShow)
+        {
+            _texts = new List<string>();
+            
+            foreach (var textShow in textsShow)
+            {
+                _texts.Add(textShow);
+            }
+            
+            if (_texts.Count > 0)
             {
                 if(_delayWait != null)
                     StopCoroutine(_delayWait);
                 _delayWait = StartCoroutine(TypingRoutine());
             }
-
-            clickHelper.OnClick += OnPointerClick;
         }
-
+        
         private void OnPointerClick()
         {
             if (_isTyping)
@@ -33,8 +44,8 @@ namespace GameScene
                 if(_delayWait != null)
                     StopCoroutine(_delayWait);
                 
-                text.text = texts[0];
-                texts.RemoveAt(0);
+                text.text = _texts[0];
+                _texts.RemoveAt(0);
                 _isReadyToClick = true;
                 _isTyping = false;
                 return;
@@ -42,7 +53,7 @@ namespace GameScene
             
             if(!_isReadyToClick) return;
             
-            if (texts.Count > 0)
+            if (_texts.Count > 0)
             {
                 if(_delayWait != null)
                     StopCoroutine(_delayWait);
@@ -60,14 +71,14 @@ namespace GameScene
             _isTyping = true;
             string resultText = "";
 
-            foreach (char symbol in texts[0])
+            foreach (char symbol in _texts[0])
             {
                 resultText += symbol;
                 text.text = resultText;
                 yield return new WaitForSeconds(GlobalConstant.TYPING_SPEED);
             }
 
-            texts.RemoveAt(0);
+            _texts.RemoveAt(0);
             _isReadyToClick = true;
             _isTyping = false;
         }

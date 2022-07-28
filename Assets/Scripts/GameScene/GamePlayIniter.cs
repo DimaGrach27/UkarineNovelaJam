@@ -48,6 +48,8 @@ namespace GameScene
                 _actionScreenService
                 );
             
+            _noteService = new NoteService(uiCanvas, _screenPartsService);
+            
             _screenPartsService.Init();
         }
 
@@ -59,7 +61,7 @@ namespace GameScene
             _chooseWindowService = new ChooseWindowService(uiCanvas);
             _cameraActionService = new CameraActionService(uiCanvas);
             _healthService = new HealthService(uiCanvas);
-            _noteService = new NoteService(uiCanvas);
+
 
             _actionScreenService = new ActionScreenService(_healthService, _cameraActionService, uiCanvas);
         }

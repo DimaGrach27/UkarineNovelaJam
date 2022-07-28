@@ -25,7 +25,7 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.TAKE_PHOTO, new ActionTakePhoto(cameraActionService));
             _actionMap.Add(ActionType.RADIO_CHANGE, new ActionRadioChange());
             _actionMap.Add(ActionType.FADE_OUT_IN, new ActionFadeOutIn());
-            _actionMap.Add(ActionType.PLAY_CRASH_SOUND, new ActionCrashSound());
+            _actionMap.Add(ActionType.PLAY_CRASH_SOUND, new ActionCrashSound(this));
             
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));

@@ -1,15 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using GameScene.ScreenPart;
+using UnityEngine;
 
 public static class GameModel
 {
     public static bool GameWasInit = false;
     
+    private static readonly Dictionary<string, ScreenSceneScriptableObject> ScreenScenesMap = new();
 
     public static void Init()
     {
         if(GameWasInit) return;
         
         GameWasInit = true;
+        
+        ScreenSceneScriptableObject[] list = 
+            Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
+
+        foreach (var screenScene in list)
+        {
+            ScreenScenesMap.Add(screenScene.SceneKey, screenScene);
+        }
+    }
+
+    public static ScreenSceneScriptableObject GetScene(string key)
+    {
+        if (ScreenScenesMap.ContainsKey(key))
+            return ScreenScenesMap[key];
+
+        return null;
     }
 
     public static bool GetStatus(StatusEnum statusEnum)

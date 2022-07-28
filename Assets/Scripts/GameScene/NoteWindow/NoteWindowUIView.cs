@@ -9,8 +9,10 @@ namespace GameScene.NoteWindow
 {
     public class NoteWindowUIView : MonoBehaviour
     {
+        private const string KEY_TUTUOR_NOTE = "NOTE_TUTOR_KEY";
         public event Action<int> OnChoose;
         
+        [SerializeField] private InfoDescription infoDescription;
         [SerializeField] private Button buttonReturn;
         [SerializeField] private Button buttonOpen;
         [SerializeField] private NoteButtonUiView[] buttonPrefab;
@@ -18,6 +20,13 @@ namespace GameScene.NoteWindow
         private Coroutine _routine;
 
         private readonly Dictionary<KillerName, NoteButtonUiView> _killersMap = new();
+
+        private bool IsTutorWasShow
+        {
+            get => PlayerPrefs.GetInt(KEY_TUTUOR_NOTE, 0) != 0;
+
+            set => PlayerPrefs.SetInt(KEY_TUTUOR_NOTE, value ? 1 :0);
+        }
 
         private void Awake()
         {
@@ -29,7 +38,7 @@ namespace GameScene.NoteWindow
                 _killersMap.Add(killerName, buttonPrefab[i]);
                 
                 buttonPrefab[i].Visible = false;
-                buttonPrefab[i].InitButton(i + 1);;
+                buttonPrefab[i].InitButton(i);;
             }
 
             buttonReturn.onClick.AddListener(Close);
@@ -63,7 +72,8 @@ namespace GameScene.NoteWindow
             {
                 int count = GameModel.GetInt(keyValue.Key);
                 keyValue.Value.UpdateButton(count);
-                keyValue.Value.Visible = count > 0;
+                // keyValue.Value.Visible = count > 0;
+                keyValue.Value.Visible = true;
             }
         }
 
@@ -89,7 +99,28 @@ namespace GameScene.NoteWindow
             CanvasGroup.blocksRaycasts = true;
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
             CanvasGroup.DOFade(1.0f, duration);
-            yield return null;
+            yield return new WaitForSeconds(duration * 2);
+
+            if (!IsTutorWasShow)
+            {
+                List<string> texts = new()
+                {
+                    "Перед тобою записник Вільшанки, з яким вона не розлучається з того моменту як поступила на службу " +
+                    "до поліції, він зберігає багато спогадів, розкритих і не розкритих справ.",
+                    
+                    "І цього разу вона буде використовувати його за призначенням. " +
+                    "Вільшанка буде заносити сюди підозрюваних, та кількість улік яких вона знайшла на підозрюваного. " +
+                    "І врешті решт, ти зможеш вибрати кого слід заарештувати. Але тільки коли ти будеш упевнена(ий). " +
+                    "Тому слід вибирати обачно, щоб ще один злочинець не залишився на волі через необачність поліції.",
+                    
+                    "Тому, коли будеш впевнена(ий) хто злодій, натисни на ім'я у списку."
+                };
+                
+                InfoDescription infoDesc = Instantiate(infoDescription);
+                infoDesc.SetInfoDescription(texts);
+
+                IsTutorWasShow = true;
+            }
         }
         
         private IEnumerator FadeOutWindow()

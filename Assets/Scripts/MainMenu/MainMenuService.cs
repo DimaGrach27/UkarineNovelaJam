@@ -30,13 +30,13 @@ namespace MainMenu
         {
             FadeService.FadeService.FadeOut();
             
-            continueButton.interactable = IsGameWasStarted;
             
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
             exitButton.onClick.AddListener(Exit);
             
-            AudioSystemService.Inst.StopMusic();
+            continueButton.gameObject.SetActive(IsGameWasStarted);;
+            AudioSystemService.Inst.StopAllMusic();
             
             GameModel.Init();
         }

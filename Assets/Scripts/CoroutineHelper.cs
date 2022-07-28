@@ -6,7 +6,8 @@ public class CoroutineHelper : MonoBehaviour
 
     private void Awake()
     {
-        if(Inst == null)
-            Inst = this;
+        if(Inst != null) return;
+        
+        Inst = this;
     }
 }
