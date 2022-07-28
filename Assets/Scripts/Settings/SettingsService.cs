@@ -51,6 +51,7 @@ namespace Settings
         private void ChangeSpeedText(float value)
         {
             float valueTyping = 1.0f - value / 10;
+            valueTyping /= 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
             GlobalConstant.TYPING_SPEED = valueTyping;
             

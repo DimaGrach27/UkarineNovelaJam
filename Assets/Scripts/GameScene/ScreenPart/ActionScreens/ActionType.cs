@@ -24,6 +24,8 @@
         FADE_IN_MUSIC_ON_LOPPER = 19,
         PLAY_BEEP_SOUND_ON_LOPPER = 20,
         PLAY_DOG_BARK_SOUND_ON_LOPPER = 21,
+        PLAY_EMBIENT_SLOW = 22,
+        PLAY_EMBIENT_FAST = 23,
         DEBUG = 228
     }
 }

@@ -10,46 +10,94 @@
      private const string HEALTH_COUNT_KEY = "health_count";
      private const string CURRENT_BG_KEY = "current_bg";
      
-     private const string TYPYNH_SPEED = "typyng_speed_key";
-     private const string MUSIC_VOLUME_KEY = "music_key";
-     private const string AUDIO_VOLUME_KEY = "audio_key";
+     private const string PROGRESS_KEY = "progress";
+     private const string SETTINGS_KEY = "settings";
+     
 
      private static SaveFile _saveFile;
-     public static SaveFile SaveFile
+     private static SaveFile SaveFile
      {
          get
          {
              if (_saveFile != null) return _saveFile;
              
-             if (!ExistFile)
+             if (!ExistFile(PROGRESS_KEY))
              {
                  _saveFile = new SaveFile();
 
-                 File.WriteAllText(Path, JsonUtility.ToJson(_saveFile));
+                 File.WriteAllText(Path(PROGRESS_KEY), JsonUtility.ToJson(_saveFile));
              }
              else
              {
-                 _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(Path));
+                 _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(Path(PROGRESS_KEY)));
              }
 
              return _saveFile;
          }
      }
-
-     private static bool ExistFile =>  File.Exists(Path);
-     private static string Path => Application.persistentDataPath + $"/progress_{Application.productName}.json";
-     private static void SaveJson() => File.WriteAllText(Path, JsonUtility.ToJson(SaveFile));
      
+     private static SettingFile _settingFile;
+     private static SettingFile SettingFile
+     {
+         get
+         {
+             if (_settingFile != null) return _settingFile;
+             
+             if (!ExistFile(SETTINGS_KEY))
+             {
+                 _settingFile = new SettingFile();
+
+                 File.WriteAllText(Path(SETTINGS_KEY), JsonUtility.ToJson(_settingFile));
+             }
+             else
+             {
+                 _settingFile = JsonUtility.FromJson<SettingFile>(File.ReadAllText(Path(SETTINGS_KEY)));
+             }
+
+             return _settingFile;
+         }
+     }
+
+     // private static bool ExistFileProgress =>  File.Exists(PathProgress);
+     // private static string PathProgress => Application.persistentDataPath + $"/{PROGRESS_KEY}_{Application.productName}.json";
+     // private static void SaveJsonProgress() => File.WriteAllText(PathProgress, JsonUtility.ToJson(SaveFile));
+     //
+     // private static bool ExistFileSetting =>  File.Exists(PathSetting);
+     // private static string PathSetting => Application.persistentDataPath + $"/{SETTINGS_KEY}_{Application.productName}.json";
+     // private static void SaveJsonSetting() => File.WriteAllText(PathSetting, JsonUtility.ToJson(SettingFile));
+     //
+     //
+     private static bool ExistFile(string key) =>  File.Exists(Path(key));
+     private static string Path(string key) => Application.persistentDataPath + $"/{key}_{Application.productName}.json";
+     private static void SaveJson(string key) => File.WriteAllText(Path(key), JsonUtility.ToJson(GetJson(key)));
+
+     private static object GetJson(string key)
+     {
+         object json = null;
+         
+         switch (key)
+         {
+             case PROGRESS_KEY:
+                 json = SaveFile;
+                 break;
+             
+             case SETTINGS_KEY:
+                 json = SettingFile;
+                 break;
+         }
+
+         return json;
+     }
      public static void SavePart(int current)
      {
          SaveFile.currentPart = current;
-         SaveJson();
+         SaveJson(PROGRESS_KEY);
      }
      
      public static void SaveScene(string sceneKey)
      {
          SaveFile.currentScene = sceneKey;
-         SaveJson();
+         SaveJson(PROGRESS_KEY);
      }
      
 
@@ -108,7 +156,7 @@
          chooses.chooseKeys = choosesList.chooseKeys;
          chooses.chooseStatus = choosesList.chooseStatus;
          
-         SaveJson();
+         SaveJson(PROGRESS_KEY);
      }
      
 
@@ -127,7 +175,7 @@
          
          isFirstInit = true;
          SaveFile.choosesLists.Add(choosesList);
-         SaveJson();
+         SaveJson(PROGRESS_KEY);
          
          return choosesList;
      }
@@ -187,15 +235,29 @@
          
          _saveFile = new SaveFile();
 
-         SaveJson();
+         SaveJson(PROGRESS_KEY);
      }
 
-     public static void SaveTypingSpeed(float speed) => PlayerPrefs.SetFloat(TYPYNH_SPEED, speed);
-     public static void SaveMusicVolume(float volume) => PlayerPrefs.SetFloat(MUSIC_VOLUME_KEY, volume);
-     public static void SaveAudioVolume(float volume) => PlayerPrefs.SetFloat(AUDIO_VOLUME_KEY, volume);
-     public static float GetAudioVolume() => PlayerPrefs.GetFloat(AUDIO_VOLUME_KEY, 1.0f);
-     public static float GetMusicVolume() => PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, 1.0f);
-     public static float GetTypingSpeed() => PlayerPrefs.GetFloat(TYPYNH_SPEED, 1.0f);
+     public static void SaveTypingSpeed(float speed)
+     {
+         SettingFile.typingSpeed = speed;
+         SaveJson(SETTINGS_KEY);
+     }
+
+     public static void SaveMusicVolume(float volume)
+     {
+         SettingFile.musicVolume = volume;
+         SaveJson(SETTINGS_KEY);
+     }
+
+     public static void SaveAudioVolume(float volume)
+     {
+         SettingFile.soundVolume = volume;
+         SaveJson(SETTINGS_KEY);
+     }
+     public static float GetAudioVolume() => SettingFile.soundVolume;
+     public static float GetMusicVolume() => SettingFile.musicVolume;
+     public static float GetTypingSpeed() => SettingFile.typingSpeed;
  }
 
  [Serializable]
@@ -205,6 +267,14 @@
      public string currentScene = "scene_0_0";
 
      public List<ChoosesList> choosesLists = new ();
+ }
+ 
+ [Serializable]
+ public class SettingFile
+ {
+     public float musicVolume = 1.0f;
+     public float soundVolume = 1.0f;
+     public float typingSpeed = 0.5f;
  }
 
  [Serializable]

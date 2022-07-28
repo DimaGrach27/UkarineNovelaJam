@@ -46,7 +46,7 @@ MonoBehaviour:
     nameCharacter: 1
     textShow: "\u041A\u0445\u0430\u2026 \u041A\u0445\u0430\u2026 "
     actionsTypeEnd: 
-  - actionsType: 
+  - actionsType: 16000000
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

@@ -19,8 +19,6 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
             yield return new WaitForSeconds(4.0f);
             
             FadeService.FadeService.FadeOut(3.0f);
-            
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
         }
 
         public ActionType ActionType => ActionType.FADE_OUT_IN;
