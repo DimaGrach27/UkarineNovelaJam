@@ -27,12 +27,13 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
     screenPosition: 0
     characterImage: 0
-    nameCharacter: 1
+    nameCharacter: 0
     textShow: "\u041C\u043E\u0436\u043B\u0438\u0432\u043E, \u0441\u043B\u0456\u0434
       \u0449\u0435 \u0440\u0430\u0437 \u043E\u0433\u043B\u044F\u043D\u0443\u0442\u0438
       \u0442\u0456\u043B\u043E \u0439 \u0441\u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0443\u0432\u0430\u0442\u0438
@@ -40,6 +41,7 @@ MonoBehaviour:
       - \u0446\u0435 \u043C\u043E\u0436\u0435 \u043F\u0440\u043E\u043B\u0438\u0442\u0438
       \u0441\u0432\u0456\u0442\u043B\u043E \u043D\u0430 \u043D\u043E\u0432\u0456
       \u0434\u0435\u0442\u0430\u043B\u0456."
+    actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: 869dc90e6e93976439946515a77f32b9, type: 2}
     chooseText: 
@@ -48,6 +50,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

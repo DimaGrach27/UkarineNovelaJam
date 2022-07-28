@@ -111,6 +111,7 @@ namespace GameScene.ScreenPart
     public class CameraDependent
     {
         public bool enable;
+        public bool isPrepAction;
         public bool visibleOnPhoto;
         public bool visibleOutPhoto;
     }

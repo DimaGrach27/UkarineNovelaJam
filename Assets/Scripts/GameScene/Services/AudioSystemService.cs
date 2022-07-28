@@ -201,6 +201,9 @@ namespace GameScene.Services
         PREPARE_CRASH = 5,
         CRASH = 6,
         PHONE_BEEP = 7,
+        FALLEN_TREE = 8,
+        WATER_SLAP = 9,
+        METAL_DRAG = 10,
     }
     
 }

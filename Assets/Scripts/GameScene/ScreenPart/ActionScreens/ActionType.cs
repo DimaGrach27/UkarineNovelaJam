@@ -13,6 +13,12 @@
         FADE_OUT_IN = 8,
         PLAY_CRASH_SOUND = 9,
         CAMERA_SHAKER_LONG = 10,
+        ADD_EVIDENCE_ILONA = 11,
+        ADD_EVIDENCE_ZAHARES = 12,
+        ADD_EVIDENCE_OLEKSII = 13,
+        FALLING_TREE = 14,
+        WATER_SLAP_SOUND = 15,
+        METAL_DRAG_SOUND = 16,
         DEBUG = 228
     }
 }

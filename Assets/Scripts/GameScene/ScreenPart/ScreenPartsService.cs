@@ -96,10 +96,11 @@ namespace GameScene.ScreenPart
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.NEBO);
             AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
             
+            AudioSystemService.Inst.AudioSourceMusic.volume = 0.0f;
             float volumeMax = SaveService.GetMusicVolume();
             yield return new WaitForSeconds(0.2f);
+            AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 8.0f).SetEase(Ease.Linear);
             FadeService.FadeService.FadeOut(8.0f);
-            AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 7.0f);
             yield return new WaitForSeconds(7.0f);
             
             ShowScene();
@@ -265,7 +266,10 @@ namespace GameScene.ScreenPart
             _screenTextService.HideText();
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
             
-            _chooseWindowService.SetChooses(PrepareList(false), _currentPartSo.TextShow);
+            _chooseWindowService.SetChooses(
+                PrepareList(false), 
+                _currentPartSo.TextShow, 
+                false);
         }
 
         private void TakePhoto()
@@ -273,7 +277,10 @@ namespace GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             
-            _chooseWindowService.SetChooses(PrepareList(true), _currentPartSo.TextShow);
+            _chooseWindowService.SetChooses(
+                PrepareList(true), 
+                _currentPartSo.TextShow, 
+                true);
         }
 
         private NextScene[] PrepareList(bool isCamera)

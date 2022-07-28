@@ -19,40 +19,30 @@ MonoBehaviour:
     bgEnum: 0
   statusSetter:
     enable: 0
-    statusFlag: 1
-    status: 0
+    statusesValues: []
   countSetter:
     enable: 0
     count: 1
     type: 0
   actionsType: 
-  screenParts:
-  - actionsType: 
-    statusSetter:
-      enable: 0
-      statusFlag: 1
-      status: 0
-    screenPosition: 0
-    characterImage: 0
-    nameCharacter: 0
-    textShow: "\u041A\u0438\u043C \u043F\u0440\u0430\u0446\u044E\u0432\u0430\u0432"
+  screenParts: []
   nextScenes:
   - scene: {fileID: 11400000, guid: d3c8dbccf27a409458674cee53e4194b, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
-      value: 0
-      status: 0
+      statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
       enable: 0
     findDependent:
       enable: 0
-      value: 1
-      status: 0
+      statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}

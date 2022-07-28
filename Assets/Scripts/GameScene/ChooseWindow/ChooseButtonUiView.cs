@@ -22,9 +22,19 @@ namespace GameScene.ChooseWindow
             Button.onClick.AddListener(ClickButton);
         }
 
-        public void InitButton(NextScene chooseScene)
+        public void InitButton(NextScene chooseScene, bool isCameraAction)
         {
             textMeshProUGUI.text = chooseScene.ChooseText;
+
+            if (isCameraAction)
+            {
+                textMeshProUGUI.fontStyle = FontStyles.Underline;
+            }
+            else
+            {
+                textMeshProUGUI.fontStyle = FontStyles.Normal;
+            }
+            
             _chooseScene = chooseScene;
         }
 

@@ -35,7 +35,7 @@ namespace MainMenu
             startButton.onClick.AddListener(StartNewGame);
             exitButton.onClick.AddListener(Exit);
             
-            continueButton.gameObject.SetActive(IsGameWasStarted);;
+            continueButton.targetGraphic.enabled = IsGameWasStarted;
             AudioSystemService.Inst.StopAllMusic();
             
             GameModel.Init();

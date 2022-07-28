@@ -32,7 +32,7 @@ namespace GameScene.ChooseWindow
             set => gameObject.SetActive(value);
         }
         
-        public void InitButtons(NextScene[] scenes)
+        public void InitButtons(NextScene[] scenes, bool isCameraAction)
         {
             foreach (var choose in _chooseButtonUiViews)
             {
@@ -49,7 +49,7 @@ namespace GameScene.ChooseWindow
                     _chooseButtonUiViews.Add(chooseButtonUiView);
                 }
 
-                _chooseButtonUiViews[i].InitButton(scenes[i]);
+                _chooseButtonUiViews[i].InitButton(scenes[i], isCameraAction);
                 _chooseButtonUiViews[i].gameObject.SetActive(true);
             }
         }

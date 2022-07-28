@@ -20,12 +20,12 @@ namespace GameScene.ChooseWindow
             _chooseWindowUiView.OnChoose += OnChooseClick;
         }
 
-        public void SetChooses(NextScene[] nextScenes, string textChoose)
+        public void SetChooses(NextScene[] nextScenes, string textChoose, bool isCameraAction)
         {
             if(_coroutine !=null) CoroutineHelper.Inst.StopCoroutine(_coroutine);
             _coroutine = CoroutineHelper.Inst.StartCoroutine(FadeInWindow());
             
-            _chooseWindowUiView.InitButtons(nextScenes);
+            _chooseWindowUiView.InitButtons(nextScenes, isCameraAction);
             _chooseWindowUiView.SetChooseText(textChoose);
         }
 

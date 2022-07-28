@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using GameScene.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +19,8 @@ namespace EndScene
 
         private void Awake()
         {
+            AudioSystemService.Inst.StopAllMusic();
+            
             tapToExit.alpha = 0.0f;
             groupImages.alpha = 0.0f;
             FadeService.FadeService.VisibleFade(false);

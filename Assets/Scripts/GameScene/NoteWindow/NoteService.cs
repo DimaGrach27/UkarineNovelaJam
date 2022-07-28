@@ -1,5 +1,4 @@
-﻿using System;
-using GameScene.ScreenPart;
+﻿using GameScene.ScreenPart;
 using MainMenu;
 using UnityEngine;
 

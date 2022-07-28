@@ -26,7 +26,7 @@ MonoBehaviour:
     type: 0
   actionsType: 
   screenParts:
-  - actionsType: 0a000000
+  - actionsType: 0e000000
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -140,6 +141,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -161,6 +163,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

@@ -35,7 +35,20 @@ namespace GameScene
         {
             InitServices();
         }
+        
+        private void InitServices()
+        {
+            _characterService = new CharacterService(uiCanvas);
+            _screenTextService = new ScreenTextService(uiCanvas, uiClickHandler);
+            _bgService = new BgService(uiCanvas);
+            _chooseWindowService = new ChooseWindowService(uiCanvas);
+            _cameraActionService = new CameraActionService(uiCanvas);
+            _healthService = new HealthService(uiCanvas);
 
+
+            _actionScreenService = new ActionScreenService(_healthService, _cameraActionService, uiCanvas);
+        }
+        
         private void Start()
         {
             _screenPartsService = new ScreenPartsService(
@@ -51,19 +64,6 @@ namespace GameScene
             _noteService = new NoteService(uiCanvas, _screenPartsService);
             
             _screenPartsService.Init();
-        }
-
-        private void InitServices()
-        {
-            _characterService = new CharacterService(uiCanvas);
-            _screenTextService = new ScreenTextService(uiCanvas, uiClickHandler);
-            _bgService = new BgService(uiCanvas);
-            _chooseWindowService = new ChooseWindowService(uiCanvas);
-            _cameraActionService = new CameraActionService(uiCanvas);
-            _healthService = new HealthService(uiCanvas);
-
-
-            _actionScreenService = new ActionScreenService(_healthService, _cameraActionService, uiCanvas);
         }
     }
 }

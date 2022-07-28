@@ -19,8 +19,7 @@ MonoBehaviour:
     bgEnum: 0
   statusSetter:
     enable: 0
-    statusFlag: 1
-    status: 0
+    statusesValues: []
   countSetter:
     enable: 0
     count: 1
@@ -28,32 +27,80 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
-      statusFlag: 1
-      status: 0
+      statusesValues: []
+    screenPosition: 0
+    characterImage: 3
+    nameCharacter: 3
+    textShow: "\u0411\u043E\u0433 \u0439\u043E\u0433\u043E \u0437\u043D\u0430! \u0416\u0438\u0432
+      \u041A\u043E\u0440\u043D\u0456\u0439, \u0437\u0434\u0430\u0454\u0442\u044C\u0441\u044F,
+      \u0434\u043E\u0441\u0438\u0442\u044C \u043D\u0435\u043F\u043E\u0433\u0430\u043D\u043E.
+      \u041F\u0440\u043E\u0441\u0442\u043E \u043D\u0456\u0445\u0442\u043E \u0442\u043E\u0447\u043D\u043E
+      \u043D\u0435 \u0437\u043D\u0430\u0432, \u0448\u043E \u0432\u0456\u043D \u0440\u043E\u0431\u0438\u0432
+      \u0456 \u0447\u0438\u043C \u0437\u0430\u0439\u043C\u0430\u0432\u0441\u044F\u2026
+      \u0425\u043E\u0447\u0430 \u043D\u0454, \u0440\u0430\u0434\u0448\u0435 \u043D\u0456\u0445\u0442\u043E
+      \u043D\u0435 \u0446\u0456\u043A\u0430\u0432\u0438\u0432\u0441\u044F. \u041A\u043E\u0440\u043D\u0456\u0439
+      \u0432\u0437\u0430\u0433\u0430\u043B\u0456 \u0431\u0443\u0432 \u0442\u0440\u043E\u0445\u0438
+      \u0432\u0456\u0434\u043B\u044E\u0434\u044C\u043A\u0443\u0432\u0430\u0442\u0438\u0439.
+      \u0410\u043B\u0435 \u043F\u0440\u043E \u043C\u0435\u0440\u0442\u0432\u0438\u0445
+      \u0430\u0431\u043E \u0434\u043E\u0431\u0440\u0435, \u0430\u0431\u043E \u043D\u0456\u0447\u043E\u0433\u043E,
+      \u0435\u0433\u0435 \u0436?"
+    actionsTypeEnd: 
+  - actionsType: 
+    musicTypeOnStart: 0
+    statusSetter:
+      enable: 0
+      statusesValues: []
+    screenPosition: 0
+    characterImage: 3
+    nameCharacter: 3
+    textShow: "\u0422\u0430 \u0448\u043E\u0441\u044C \u044F \u043D\u0435 \u0434\u0443\u0436\u0435
+      \u0440\u043E\u0437\u0443\u043C\u0456\u044E, \u043A\u0443\u0434\u0438 \u0442\u0438
+      \u0432\u0435\u0434\u0435\u0448. \u0412\u0436\u0435 \u0431\u0438\u0442\u0443
+      \u0433\u043E\u0434\u0438\u043D\u0443 \u0441\u0442\u0438\u0440\u0447\u0438\u0448
+      \u0442\u0443\u0442 \u0456 \u043E\u0433\u043B\u044F\u0434\u0430\u0454\u0448
+      \u043C\u0435\u0440\u0446\u044F. \u041C\u043E\u0436\u0435 \u0431 \u0442\u0438
+      \u043A\u0440\u0430\u0449\u0435 \u0441\u043F\u0438\u0442\u0430\u043B\u0430,
+      \u0434\u0435 \u044F \u0439\u043E\u0433\u043E \u0437\u043D\u0430\u0439\u0448\u043E\u0432?
+      \u0426\u0435 \u0436 \u043E\u0441\u043D\u043E\u0432\u043D\u0435, \u043A\u0443\u0434\u0438
+      \u0432\u0437\u0430\u0433\u0430\u043B\u0456 \u0442\u0440\u0435\u0431\u0430 \u0439\u0442\u0438,
+      \u0433\u043B\u0435\u0434\u0456\u0442\u0438. \u0423 \u0441\u0435\u0440\u0456\u0430\u043B\u0430\u0445
+      \u0442\u0430\u043A \u0442\u0456\u043A\u043E \u0434\u0435\u0442\u0435\u043A\u0442\u0438\u0432\u0438
+      \u0439 \u0440\u043E\u0431\u043B\u044F\u0442\u044C."
+    actionsTypeEnd: 
+  - actionsType: 
+    musicTypeOnStart: 0
+    statusSetter:
+      enable: 0
+      statusesValues: []
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
-    textShow: "\u041D\u0435 \u0431\u0443\u043B\u043E \u043F\u043E\u0441\u0442\u0456\u0439\u043D\u043E\u0433\u043E
-      \u043C\u0456\u0441\u0446\u044F"
+    textShow: "\u041C\u0435\u043D\u0456 \u0437\u0434\u0430\u043B\u043E\u0441\u044F,
+      \u0449\u043E \u0417\u0430\u0445\u0430\u0440\u0435\u0441 \u0437\u0430\u043D\u0430\u0434\u0442\u043E
+      \u043B\u044E\u0442\u043E \u0432\u0456\u0434\u0440\u0435\u0430\u0433\u0443\u0432\u0430\u0432
+      \u043D\u0430 \u0442\u0430\u043A\u0435 \u0437\u0432\u0438\u0447\u0430\u0439\u043D\u0435
+      \u0437\u0430\u043F\u0438\u0442\u0430\u043D\u043D\u044F\u2026"
+    actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: cff029efb9068c7479bddb1e3a7e24ea, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
-      value: 0
-      status: 0
+      statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
       enable: 0
     findDependent:
       enable: 0
-      value: 1
-      status: 0
+      statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}

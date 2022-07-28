@@ -72,8 +72,8 @@ namespace GameScene.NoteWindow
             {
                 int count = GameModel.GetInt(keyValue.Key);
                 keyValue.Value.UpdateButton(count);
-                // keyValue.Value.Visible = count > 0;
-                keyValue.Value.Visible = true;
+                keyValue.Value.Visible = count > 0;
+                // keyValue.Value.Visible = true;
             }
         }
 

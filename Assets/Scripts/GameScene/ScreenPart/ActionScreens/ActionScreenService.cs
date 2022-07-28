@@ -25,7 +25,14 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.TAKE_PHOTO, new ActionTakePhoto(cameraActionService));
             _actionMap.Add(ActionType.RADIO_CHANGE, new ActionRadioChange());
             _actionMap.Add(ActionType.FADE_OUT_IN, new ActionFadeOutIn());
+            _actionMap.Add(ActionType.WATER_SLAP_SOUND, new ActionWaterSlap());
+            _actionMap.Add(ActionType.METAL_DRAG_SOUND, new ActionDragMetal());
             _actionMap.Add(ActionType.PLAY_CRASH_SOUND, new ActionCrashSound(this));
+            _actionMap.Add(ActionType.FALLING_TREE, new ActionFallenTree(this));
+            
+            _actionMap.Add(ActionType.ADD_EVIDENCE_ILONA, new ActionAddEvidenceForIlona());
+            _actionMap.Add(ActionType.ADD_EVIDENCE_ZAHARES, new ActionAddEvidenceForZahares());
+            _actionMap.Add(ActionType.ADD_EVIDENCE_OLEKSII, new ActionAddEvidenceForOleksii());
             
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));
