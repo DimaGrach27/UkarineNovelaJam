@@ -59,7 +59,8 @@ namespace GameScene.Services
         {
             if (_coroutineLoop != null)
                 StopCoroutine(_coroutineLoop);
-            
+
+            LoopForLopper = false;
             _audioClipsLooper.Clear();
             soundAudioLooperSource.Stop();
         }
@@ -204,6 +205,7 @@ namespace GameScene.Services
         FALLEN_TREE = 8,
         WATER_SLAP = 9,
         METAL_DRAG = 10,
+        DOG_BARK = 11,
     }
     
 }

@@ -27,17 +27,7 @@ MonoBehaviour:
     count: 1
     type: 0
   actionsType: 
-  screenParts:
-  - actionsType: 
-    statusSetter:
-      enable: 0
-      statusesValues: []
-    screenPosition: 0
-    characterImage: 0
-    nameCharacter: 0
-    textShow: "\u0421\u043F\u0440\u043E\u0431\u0443\u0432\u0430\u0442\u0438 \u0432\u0438\u0442\u044F\u0433\u0442\u0438
-      \u043A\u0440\u0438\u0441\u0442\u0430\u043B \u0431\u0443\u0440\u0448\u0442\u0438\u043D\u0443
-      \u0440\u0443\u043A\u0430\u043C\u0438."
+  screenParts: []
   nextScenes:
   - scene: {fileID: 11400000, guid: 840121e452a36b24e87871bdd5b26e90, type: 2}
     chooseText: 
@@ -46,6 +36,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

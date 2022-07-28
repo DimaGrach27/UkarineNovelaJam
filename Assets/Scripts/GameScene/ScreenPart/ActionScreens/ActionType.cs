@@ -19,6 +19,11 @@
         FALLING_TREE = 14,
         WATER_SLAP_SOUND = 15,
         METAL_DRAG_SOUND = 16,
+        FADE_OUT_MUSIC_ON_LOPPER = 17,
+        STOP_MUSIC_ON_LOPPER = 18,
+        FADE_IN_MUSIC_ON_LOPPER = 19,
+        PLAY_BEEP_SOUND_ON_LOPPER = 20,
+        PLAY_DOG_BARK_SOUND_ON_LOPPER = 21,
         DEBUG = 228
     }
 }

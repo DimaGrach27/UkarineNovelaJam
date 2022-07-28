@@ -26,8 +26,8 @@ MonoBehaviour:
     type: 0
   actionsType: 
   screenParts:
-  - actionsType: 
-    musicTypeOnStart: 7
+  - actionsType: 14000000
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -38,7 +38,7 @@ MonoBehaviour:
       \u0432\u0438\u0434\u0430\u0432\u0430\u0432\u0441\u044F \u043D\u0435\u043F\u0440\u0438\u0441\u0442\u043E\u0439\u043D\u043E
       \u0434\u043E\u0432\u0433\u0438\u043C, \u0430 \u0437\u0432\u2019\u044F\u0437\u043E\u043A
       \u043B\u0435\u0434\u044C-\u043B\u0435\u0434\u044C \u043B\u043E\u0432\u0438\u0432."
-    actionsTypeEnd: 
+    actionsTypeEnd: 12000000
   - actionsType: 
     musicTypeOnStart: 0
     statusSetter:
@@ -145,6 +145,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -166,6 +167,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
