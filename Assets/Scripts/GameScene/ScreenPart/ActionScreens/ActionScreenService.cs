@@ -36,6 +36,7 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.STOP_MUSIC_ON_LOPPER, new ActionStopMusicOnLooper());
             _actionMap.Add(ActionType.STOP_ALL_MUSIC, new ActionStopAllMusic());
             _actionMap.Add(ActionType.PLAY_DOG_BARK_SOUND_ON_LOPPER, new ActionBarkLoop());
+            _actionMap.Add(ActionType.PLAY_HEART_BEEP_SOUND_ON_LOPPER, new ActionHeartBeepLoop());
             _actionMap.Add(ActionType.PLAY_BEEP_SOUND_ON_LOPPER, new ActionBeepLoop());
             _actionMap.Add(ActionType.PLAY_EMBIENT_SLOW, new ActionEmbientSlow());
             _actionMap.Add(ActionType.PLAY_EMBIENT_FAST, new ActionEmbientFast());

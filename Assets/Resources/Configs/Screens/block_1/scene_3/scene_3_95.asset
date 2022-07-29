@@ -27,20 +27,20 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
-    textShow: "\u0423 \u043A\u0430\u0440\u043C\u0430\u043D\u0456 \u0448\u0442\u0430\u043D\u0456\u0432
-      \u041E\u043B\u0435\u043A\u0441\u0456\u044F \u0454 \u0439\u043E\u0433\u043E
-      \u0442\u0435\u043B\u0435\u0444\u043E\u043D. \u041D\u0430 \u0449\u0430\u0441\u0442\u044F,
-      \u0437\u0432'\u044F\u0437\u043E\u043A \u043F\u0440\u0430\u0446\u044E\u0454."
+    textShow: "\u0414\u0430\u043B\u0456 \u044F \u0432\u0438\u0440\u0456\u0448\u0438\u043B\u0430\u2026"
+    actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: 2827f02c4528b1d4db1edb51441c79fa, type: 2}
     chooseText: "\u0417\u0430\u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0443\u0432\u0430\u0442\u0438
-      \u043D\u0430\u043F\u0430\u0440\u043D\u0438\u043A\u0443."
+      \u043D\u0430\u043F\u0430\u0440\u043D\u0438\u043A\u0443 \u0456 \u0437\u0430\u043F\u0438\u0442\u0430\u0442\u0438
+      \u043F\u0440\u043E \u043A\u0443\u043B\u044E."
     statusDependent:
       enable: 1
       statusesValues:
@@ -48,6 +48,7 @@ MonoBehaviour:
         status: 5
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -60,10 +61,9 @@ MonoBehaviour:
       special:
       - {fileID: 0}
   - scene: {fileID: 11400000, guid: 50d7f2d7fb4dfc24d91512535fb5e909, type: 2}
-    chooseText: "\u0417\u0430\u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0443\u0432\u0430\u0442\u0438
-      \u0437\u0430 \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u043D\u0430 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E\u043C\u0443
-      \u043D\u0430 \u0440\u043E\u0434\u043E\u0432\u0438\u0449\u0430\u0445 \u043A\u043B\u0430\u043F\u0442\u0438\u043A\u0443
-      \u043F\u0430\u043F\u0435\u0440\u0443."
+    chooseText: "\u0414\u0456\u0437\u043D\u0430\u0442\u0438\u0441\u044F, \u0447\u0438\u0439
+      \u043D\u043E\u043C\u0435\u0440 \u044F \u0437\u043D\u0430\u0439\u0448\u043B\u0430
+      \u043D\u0430 \u0440\u043E\u0434\u043E\u0432\u0438\u0449\u0430\u0445."
     statusDependent:
       enable: 1
       statusesValues:
@@ -71,6 +71,7 @@ MonoBehaviour:
         status: 4
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -88,6 +89,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

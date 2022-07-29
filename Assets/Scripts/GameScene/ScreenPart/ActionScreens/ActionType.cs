@@ -28,6 +28,7 @@
         PLAY_EMBIENT_FAST = 23,
         STOP_ALL_MUSIC = 24,
         OPEN_EYE_ANIMA = 25,
+        PLAY_HEART_BEEP_SOUND_ON_LOPPER = 26,
         DEBUG = 228
     }
 }

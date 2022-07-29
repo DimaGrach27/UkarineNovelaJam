@@ -27,6 +27,17 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
         public ActionType ActionType => ActionType.PLAY_BEEP_SOUND_ON_LOPPER;
     }
     
+    public class ActionHeartBeepLoop  : IActionScreen
+    {
+        public void Action()
+        {
+            AudioSystemService.Inst.LoopForLopper = true;
+            AudioSystemService.Inst.StarPlayMusicOnLooper(MusicType.HEART_BEEP);
+        }
+
+        public ActionType ActionType => ActionType.PLAY_HEART_BEEP_SOUND_ON_LOPPER;
+    }
+    
     public class ActionEmbientSlow  : IActionScreen
     {
         public void Action()

@@ -209,6 +209,8 @@ namespace GameScene.Services
         METAL_DRAG = 10,
         DOG_BARK = 11,
         RADIO_COPS = 12,
+        PUNCH = 13,
+        HEART_BEEP = 14,
     }
     
 }
