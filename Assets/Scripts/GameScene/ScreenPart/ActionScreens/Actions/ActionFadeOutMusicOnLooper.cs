@@ -46,4 +46,14 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
 
         public ActionType ActionType => ActionType.STOP_MUSIC_ON_LOPPER;
     }
+    
+    public class ActionStopAllMusic : IActionScreen
+    {
+        public void Action()
+        {
+            AudioSystemService.Inst.StopAllMusic();
+        }
+
+        public ActionType ActionType => ActionType.STOP_ALL_MUSIC;
+    }
 }

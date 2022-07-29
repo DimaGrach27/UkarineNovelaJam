@@ -13,6 +13,7 @@ namespace GameScene.ScreenPart.ActionScreens
         public ActionScreenService(
             HealthService healthService, 
             CameraActionService cameraActionService, 
+            ScreenPartsService screenPartsService, 
             Transform ui)
         {
             _actionMap.Add(ActionType.DEBUG, new ActionTestDebug());
@@ -33,6 +34,7 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.FADE_OUT_MUSIC_ON_LOPPER, new ActionFadeOutMusicOnLooper());
             _actionMap.Add(ActionType.FADE_IN_MUSIC_ON_LOPPER, new ActionFadeInMusicOnLooper());
             _actionMap.Add(ActionType.STOP_MUSIC_ON_LOPPER, new ActionStopMusicOnLooper());
+            _actionMap.Add(ActionType.STOP_ALL_MUSIC, new ActionStopAllMusic());
             _actionMap.Add(ActionType.PLAY_DOG_BARK_SOUND_ON_LOPPER, new ActionBarkLoop());
             _actionMap.Add(ActionType.PLAY_BEEP_SOUND_ON_LOPPER, new ActionBeepLoop());
             _actionMap.Add(ActionType.PLAY_EMBIENT_SLOW, new ActionEmbientSlow());
@@ -41,6 +43,8 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.ADD_EVIDENCE_ILONA, new ActionAddEvidenceForIlona());
             _actionMap.Add(ActionType.ADD_EVIDENCE_ZAHARES, new ActionAddEvidenceForZahares());
             _actionMap.Add(ActionType.ADD_EVIDENCE_OLEKSII, new ActionAddEvidenceForOleksii());
+            
+            _actionMap.Add(ActionType.OPEN_EYE_ANIMA, new ActionOpenEye(screenPartsService));
             
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));

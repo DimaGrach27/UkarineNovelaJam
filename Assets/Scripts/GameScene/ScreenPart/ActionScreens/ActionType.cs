@@ -26,6 +26,8 @@
         PLAY_DOG_BARK_SOUND_ON_LOPPER = 21,
         PLAY_EMBIENT_SLOW = 22,
         PLAY_EMBIENT_FAST = 23,
+        STOP_ALL_MUSIC = 24,
+        OPEN_EYE_ANIMA = 25,
         DEBUG = 228
     }
 }

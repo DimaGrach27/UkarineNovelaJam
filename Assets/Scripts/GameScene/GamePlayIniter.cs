@@ -46,7 +46,7 @@ namespace GameScene
             _healthService = new HealthService(uiCanvas);
 
 
-            _actionScreenService = new ActionScreenService(_healthService, _cameraActionService, uiCanvas);
+
         }
         
         private void Start()
@@ -62,6 +62,11 @@ namespace GameScene
                 );
             
             _noteService = new NoteService(uiCanvas, _screenPartsService);
+            _actionScreenService = new ActionScreenService(
+                _healthService, 
+                _cameraActionService, 
+                _screenPartsService, 
+                uiCanvas);
             
             _screenPartsService.Init();
         }

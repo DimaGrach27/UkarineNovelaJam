@@ -177,7 +177,7 @@ namespace GameScene.ScreenPart
             ShowPart();
         }
         
-        private void ShowNextPart()
+        public void ShowNextPart()
         {
             if(_blockClick || !_inGame) return;
             
