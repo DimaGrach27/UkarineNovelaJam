@@ -283,4 +283,5 @@
      public string blockKey;
      public string[] chooseKeys;
      public bool[] chooseStatus;
+     public bool isUseCamera;
  }

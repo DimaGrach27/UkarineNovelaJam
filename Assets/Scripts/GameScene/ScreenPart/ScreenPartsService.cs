@@ -291,6 +291,7 @@ namespace GameScene.ScreenPart
                 choosesList.blockKey = _currentSceneSo.SceneKey;
                 choosesList.chooseKeys = new string[countChooses];
                 choosesList.chooseStatus = new bool[countChooses];
+                choosesList.isUseCamera = isCamera;
                 
                 for (int i = 0; i < countChooses; i++)
                 {
@@ -300,6 +301,16 @@ namespace GameScene.ScreenPart
                 
                 SaveService.SetChoosesList(_currentSceneSo.SceneKey, choosesList);
             }
+
+            if (choosesList.isUseCamera)
+            {
+                isCamera = true;
+            }
+            else
+            {
+                choosesList.isUseCamera = isCamera;
+            }
+            
             
             List<NextScene> nextScenes = new();
 
