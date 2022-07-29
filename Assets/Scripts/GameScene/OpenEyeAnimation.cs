@@ -21,8 +21,19 @@ namespace GameScene
 
             Inst = this;
         }
+
+        public void PrepareEye()
+        {
+            StartCoroutine(PrepareEyeRoutine());
+        }
         
-        [ContextMenu("Open Eye")]
+        private IEnumerator PrepareEyeRoutine()
+        {
+            yield return new WaitForSeconds(3.0f);
+            eyeMat.SetFloat(OpenValue, 0.0f);
+            eyeSprite.SetActive(true);
+        }
+        
         public void PlayOpenEye(Action onDoneAnima)
         {
             StartCoroutine(OpenEyeRoutine(onDoneAnima));

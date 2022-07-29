@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 namespace GameScene.Services
 {
@@ -11,8 +10,6 @@ namespace GameScene.Services
         [SerializeField] private AudioSource soundAudioSource;
         [SerializeField] private AudioSource soundAudioLooperSource;
 
-        [SerializeField] private AudioMixer audioMixer;
-        
         private readonly Dictionary<MusicType, AudioClip> _audioClipsMap = new();
         public static AudioSystemService Inst { get; private set; }
 
@@ -25,7 +22,7 @@ namespace GameScene.Services
         private Coroutine _coroutineLoop;
 
         public AudioSource AudioSourceMusic => musicAudioSource;
-        public AudioMixer AudioMixer => audioMixer;
+        public AudioSource SoundAudioLooperSource => soundAudioLooperSource;
 
         private void Awake()
         {

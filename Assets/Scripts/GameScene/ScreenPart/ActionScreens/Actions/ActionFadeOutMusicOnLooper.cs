@@ -16,7 +16,7 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
         {
             float duration = 1.5f;
 
-            AudioSystemService.Inst.AudioSourceMusic.DOFade(0.0f, duration);
+            AudioSystemService.Inst.SoundAudioLooperSource.DOFade(0.0f, duration);
             yield return new WaitForSeconds(duration);
             AudioSystemService.Inst.ChangeAudio(SaveService.GetMusicVolume());
             AudioSystemService.Inst.StopSoundMusic();
@@ -30,8 +30,8 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
         public void Action()
         {
             float duration = 1.5f;
-            AudioSystemService.Inst.AudioSourceMusic.volume = 0.0f;
-            AudioSystemService.Inst.AudioSourceMusic.DOFade(SaveService.GetMusicVolume(), duration);
+            AudioSystemService.Inst.SoundAudioLooperSource.volume = 0.0f;
+            AudioSystemService.Inst.SoundAudioLooperSource.DOFade(SaveService.GetMusicVolume(), duration);
         }
 
         public ActionType ActionType => ActionType.FADE_IN_MUSIC_ON_LOPPER;

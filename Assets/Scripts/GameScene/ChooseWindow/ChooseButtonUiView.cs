@@ -25,8 +25,11 @@ namespace GameScene.ChooseWindow
         public void InitButton(NextScene chooseScene, bool isCameraAction)
         {
             textMeshProUGUI.text = chooseScene.ChooseText;
+            _chooseScene = chooseScene;
 
-            if (isCameraAction)
+            if(!isCameraAction) return;
+            
+            if (_chooseScene.cameraDependent.isPrepAction)
             {
                 textMeshProUGUI.fontStyle = FontStyles.Underline;
             }
@@ -35,7 +38,6 @@ namespace GameScene.ChooseWindow
                 textMeshProUGUI.fontStyle = FontStyles.Normal;
             }
             
-            _chooseScene = chooseScene;
         }
 
         private void ClickButton() => OnChoose?.Invoke(_chooseScene);

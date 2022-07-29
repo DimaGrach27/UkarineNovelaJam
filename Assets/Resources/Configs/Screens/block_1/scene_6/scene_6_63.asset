@@ -129,7 +129,7 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u042F \u0431\u0456\u043B\u044C\u0448\u0435 \u043D\u0435 \u043C\u043E\u0433\u043B\u0430
       \u0441\u0442\u0440\u0438\u043C\u0430\u0442\u0438 \u0441\u043B\u0456\u0437."
-    actionsTypeEnd: 
+    actionsTypeEnd: 1b000000
   nextScenes:
   - scene: {fileID: 11400000, guid: dd6e7d5aad4a1d747ab4943dad4ab8db, type: 2}
     chooseText: 

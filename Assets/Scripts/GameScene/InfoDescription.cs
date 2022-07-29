@@ -75,8 +75,10 @@ namespace GameScene
             {
                 resultText += symbol;
                 text.text = resultText;
-                yield return new WaitForSeconds(GlobalConstant.TYPING_SPEED);
+                // yield return new WaitForSeconds(GlobalConstant.TYPING_SPEED);
             }
+            
+            yield return null;
 
             _texts.RemoveAt(0);
             _isReadyToClick = true;

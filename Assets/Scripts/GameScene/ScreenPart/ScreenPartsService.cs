@@ -16,12 +16,12 @@ namespace GameScene.ScreenPart
         private int _currentPart;
         private string _currentScene;
 
-        private readonly BgService _bgService;
-        private readonly CharacterService _characterService;
-        private readonly ScreenTextService _screenTextService;
-        private readonly ChooseWindowService _chooseWindowService;
-        private readonly CameraActionService _cameraActionService;
-        private readonly ActionScreenService _actionScreenService;
+        private BgService _bgService;
+        private CharacterService _characterService;
+        private ScreenTextService _screenTextService;
+        private ChooseWindowService _chooseWindowService;
+        private CameraActionService _cameraActionService;
+        private ActionScreenService _actionScreenService;
 
         private bool _blockClick;
         private bool _inGame;
@@ -31,15 +31,13 @@ namespace GameScene.ScreenPart
 
         private Coroutine _changeBgRoutine;
 
-        public ScreenPartsService(
-            BgService bgService,
+        public void InitServices(BgService bgService,
             CharacterService characterService,
             ScreenTextService screenTextService,
             UiClickHandler uiClickHandler,
             ChooseWindowService chooseWindowService,
             CameraActionService cameraActionService,
-            ActionScreenService actionScreenService
-            )
+            ActionScreenService actionScreenService)
         {
             _bgService = bgService;
             _characterService = characterService;
@@ -68,7 +66,7 @@ namespace GameScene.ScreenPart
             
             _inGame = true;
             
-            if (_currentScene == "scene_0_0")
+            if (_currentScene == "scene_0_0" && _currentPart == 0)
             {
                 CoroutineHelper.Inst.StartCoroutine(FirstInit());
                 return;
@@ -134,9 +132,24 @@ namespace GameScene.ScreenPart
         {
             float duration = 3.0f;
             FadeService.FadeService.FadeIn(duration);
+            
             yield return new WaitForSeconds(duration);
+            
+            ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(_currentScene);
+            
+            if(currentSceneSo.ChangeBackGround.enable)
+            {
+                BgEnum bgEnum = currentSceneSo.ChangeBackGround.bgEnum;
+                _bgService.Show(bgEnum);
+                SaveService.SetCurrentBg(bgEnum);
+            }
+            
+            yield return new WaitForSeconds(1.0f);
+            
             FadeService.FadeService.FadeOut(duration);
+            
             yield return new WaitForSeconds(duration / 2);
+            
             ShowScene();
         }
 
@@ -165,6 +178,7 @@ namespace GameScene.ScreenPart
                 int count = GameModel.GetInt(_currentSceneSo.CountSetter.Type);
                 count += _currentSceneSo.CountSetter.Count;
                 
+                Debug.Log($"{_currentSceneSo.CountSetter.Type} = {count}");
                 GameModel.SetInt(_currentSceneSo.CountSetter.Type, count);
             }
             
@@ -285,9 +299,9 @@ namespace GameScene.ScreenPart
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
             
             _chooseWindowService.SetChooses(
-                PrepareList(false), 
+                PrepareList(false, out bool isCameraAfter), 
                 _currentPartSo.TextShow, 
-                false);
+                isCameraAfter);
         }
 
         private void TakePhoto()
@@ -296,12 +310,12 @@ namespace GameScene.ScreenPart
             _screenTextService.HideText();
             
             _chooseWindowService.SetChooses(
-                PrepareList(true), 
+                PrepareList(true, out bool isCameraAfter), 
                 _currentPartSo.TextShow, 
-                true);
+                isCameraAfter);
         }
 
-        private NextScene[] PrepareList(bool isCamera)
+        private NextScene[] PrepareList(bool isCamera, out bool isCameraAfter)
         {
             ChoosesList choosesList = 
                 SaveService.GetListFromJson(_currentSceneSo.SceneKey, out bool isFirstInit);
@@ -375,6 +389,7 @@ namespace GameScene.ScreenPart
                 count++;
             }
 
+            isCameraAfter = isCamera;
             return nextScenes.ToArray();
         }
 

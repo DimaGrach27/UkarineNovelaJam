@@ -46,6 +46,7 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.ADD_EVIDENCE_OLEKSII, new ActionAddEvidenceForOleksii());
             
             _actionMap.Add(ActionType.OPEN_EYE_ANIMA, new ActionOpenEye(screenPartsService));
+            _actionMap.Add(ActionType.PREPARE_OPEN_EYE_ANIMA, new ActionPrepareOpenEye());
             
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));

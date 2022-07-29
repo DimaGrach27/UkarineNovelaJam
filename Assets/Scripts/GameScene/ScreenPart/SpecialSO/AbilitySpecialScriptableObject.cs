@@ -23,7 +23,7 @@ namespace GameScene.ScreenPart.SpecialSO
             int escapeCount = GameModel.GetInt(escape);
             int beliefCount = GameModel.GetInt(belief);
 
-            if (escapeCount < 2 || beliefCount < 2)
+            if (escapeCount < 2 && beliefCount < 2)
             {
                 _returnScene = wastedScene;
                 return true;

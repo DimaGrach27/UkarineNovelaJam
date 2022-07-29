@@ -21,4 +21,15 @@
         
         public ActionType ActionType => ActionType.OPEN_EYE_ANIMA;
     }
+    
+    public class ActionPrepareOpenEye : IActionScreen
+    {
+
+        public void Action()
+        {
+            OpenEyeAnimation.Inst.PrepareEye();
+        }
+        
+        public ActionType ActionType => ActionType.PREPARE_OPEN_EYE_ANIMA;
+    }
 }
