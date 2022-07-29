@@ -1,4 +1,7 @@
-﻿using GameScene.Services;
+﻿using System.Collections;
+using DG.Tweening;
+using GameScene.Services;
+using UnityEngine;
 
 namespace GameScene.ScreenPart.ActionScreens.Actions
 {
@@ -28,6 +31,14 @@ namespace GameScene.ScreenPart.ActionScreens.Actions
     {
         public void Action()
         {
+            CoroutineHelper.Inst.StartCoroutine(ChangeMusicRoutine());
+        }
+
+        private IEnumerator ChangeMusicRoutine()
+        {
+            AudioSystemService.Inst.AudioSourceMusic.DOFade(0.0f, 1.0f);
+            yield return new WaitForSeconds(1.0f);
+            AudioSystemService.Inst.ChangeMusic(SaveService.GetMusicVolume());
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
         }
 

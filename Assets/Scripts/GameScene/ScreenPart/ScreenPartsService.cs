@@ -29,6 +29,8 @@ namespace GameScene.ScreenPart
         private ScreenSceneScriptableObject _currentSceneSo;
         private ScreenPart _currentPartSo;
 
+        private Coroutine _changeBgRoutine;
+
         public ScreenPartsService(
             BgService bgService,
             CharacterService characterService,
@@ -85,16 +87,17 @@ namespace GameScene.ScreenPart
             yield return new WaitForSeconds(1.0f);
             
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_COPS);
+            
             yield return new WaitForSeconds(4.5f);
+            
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
             AudioSystemService.Inst.AddQueueClipToLoop(MusicType.NEBO);
             AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
             
-            // AudioSystemService.Inst.AudioSourceMusic.volume = 0.0f;
-            // float volumeMax = SaveService.GetMusicVolume();
             yield return new WaitForSeconds(2.0f);
-            // AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 8.0f).SetEase(Ease.Linear);
+            
             FadeService.FadeService.FadeOut(8.0f);
+            
             yield return new WaitForSeconds(8.0f);
             
             ShowScene();
@@ -112,7 +115,28 @@ namespace GameScene.ScreenPart
             _screenTextService.HideText();
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);
+
+            if (GameModel.GetScene(_currentScene).ChangeBackGround.enable && 
+                SaveService.GetCurrentBg() != GameModel.GetScene(_currentScene).ChangeBackGround.bgEnum)
+            {
+                if(_changeBgRoutine != null)
+                    CoroutineHelper.Inst.StopCoroutine(_changeBgRoutine);
+                
+                _changeBgRoutine = CoroutineHelper.Inst.StartCoroutine(ChangeBgRoutine());
+                
+                return;
+            }
             
+            ShowScene();
+        }
+
+        private IEnumerator ChangeBgRoutine()
+        {
+            float duration = 3.0f;
+            FadeService.FadeService.FadeIn(duration);
+            yield return new WaitForSeconds(duration);
+            FadeService.FadeService.FadeOut(duration);
+            yield return new WaitForSeconds(duration / 2);
             ShowScene();
         }
 

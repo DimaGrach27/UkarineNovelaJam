@@ -16,7 +16,7 @@ MonoBehaviour:
   isActiveCamera: 0
   changeBackGround:
     enable: 1
-    bgEnum: 2
+    bgEnum: 0
   statusSetter:
     enable: 0
     statusesValues: []
@@ -27,6 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -36,6 +37,7 @@ MonoBehaviour:
     textShow: "\u0411\u0456\u0441\u043E\u0432\u0456 \u043D\u0435\u0442\u0440\u0456\u2026"
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -46,6 +48,7 @@ MonoBehaviour:
       \u0441\u043A\u0456\u043D\u0447\u0438\u0442\u044C\u0441\u044F?!"
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -64,6 +67,7 @@ MonoBehaviour:
       \u043F\u043E\u0445\u043C\u0443\u0440\u043E\u0433\u043E \u0433\u043D\u0456\u0437\u0434\u0430."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -75,6 +79,7 @@ MonoBehaviour:
       \u043D\u0435 \u043F\u0435\u0440\u0435\u0433\u0440\u0430\u0454\u0448."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -98,6 +103,7 @@ MonoBehaviour:
       \u043F\u043E\u0440\u0443\u0447 \u0456 \u0434\u043E\u0432\u0433\u043E \u0441\u043F\u043E\u0441\u0442\u0435\u0440\u0456\u0433\u0430\u0442\u0438."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -117,6 +123,7 @@ MonoBehaviour:
       \u0441\u0432\u043E\u0433\u043E \u043D\u043E\u0441\u0430\u2026 \u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430\xBB."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -139,6 +146,7 @@ MonoBehaviour:
       \u0431\u0440\u0430\u0442\u0438 \u0446\u044E \u0441\u043F\u0440\u0430\u0432\u0443."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -162,6 +170,7 @@ MonoBehaviour:
       \u0433\u0456\u0434\u043D\u043E\u0441\u0442\u0456\u2026"
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -182,6 +191,7 @@ MonoBehaviour:
       \u043F\u0440\u043E \u0446\u0435 \u0437\u0430\u0440\u0430\u0437."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -203,6 +213,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -222,6 +233,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -242,6 +254,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
