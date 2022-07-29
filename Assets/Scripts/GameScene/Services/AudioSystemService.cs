@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace GameScene.Services
 {
@@ -9,6 +10,8 @@ namespace GameScene.Services
         [SerializeField] private AudioSource musicAudioSource;
         [SerializeField] private AudioSource soundAudioSource;
         [SerializeField] private AudioSource soundAudioLooperSource;
+
+        [SerializeField] private AudioMixer audioMixer;
         
         private readonly Dictionary<MusicType, AudioClip> _audioClipsMap = new();
         public static AudioSystemService Inst { get; private set; }
@@ -16,12 +19,13 @@ namespace GameScene.Services
         private readonly Queue<AudioClip> _audioClips = new();
         private readonly Queue<AudioClip> _audioClipsLooper = new();
 
-        private AudioClip _audioClip;
+        private AudioClip _audioClipLoop;
 
         private Coroutine _coroutine;
         private Coroutine _coroutineLoop;
 
         public AudioSource AudioSourceMusic => musicAudioSource;
+        public AudioMixer AudioMixer => audioMixer;
 
         private void Awake()
         {
@@ -50,7 +54,7 @@ namespace GameScene.Services
             if (_coroutineLoop != null)
                 StopCoroutine(_coroutineLoop);
             
-            _audioClip = null;
+            _audioClipLoop = null;
             musicAudioSource.Stop();
             soundAudioLooperSource.Stop();
         }
@@ -73,7 +77,7 @@ namespace GameScene.Services
             
             _audioClips.Clear();
             
-            _audioClip = _audioClipsMap[type];
+            _audioClipLoop = _audioClipsMap[type];
             
             musicAudioSource.clip = _audioClipsMap[type];
             
@@ -98,9 +102,7 @@ namespace GameScene.Services
                 StopCoroutine(_coroutineLoop);
             
             _audioClipsLooper.Clear();
-            
-            _audioClip = _audioClipsMap[type];
-            
+
             soundAudioLooperSource.clip = _audioClipsMap[type];
             
             soundAudioLooperSource.Stop();
@@ -155,12 +157,12 @@ namespace GameScene.Services
                 {
                     if (_audioClips.TryDequeue(out AudioClip result))
                     {
-                        _audioClip = result;
+                        _audioClipLoop = result;
                     }
 
-                    if (_audioClip != null)
+                    if (_audioClipLoop != null)
                     {
-                        musicAudioSource.clip = _audioClip;
+                        musicAudioSource.clip = _audioClipLoop;
                     
                         musicAudioSource.Play();
                     }
@@ -206,6 +208,7 @@ namespace GameScene.Services
         WATER_SLAP = 9,
         METAL_DRAG = 10,
         DOG_BARK = 11,
+        RADIO_COPS = 12,
     }
     
 }

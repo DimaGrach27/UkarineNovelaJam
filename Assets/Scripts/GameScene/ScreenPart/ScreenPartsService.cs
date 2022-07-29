@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ChooseWindow;
@@ -14,8 +13,6 @@ namespace GameScene.ScreenPart
 {
     public class ScreenPartsService 
     {
-        // private readonly Dictionary<string, ScreenSceneScriptableObject> _screenScenesMap = new();
-        
         private int _currentPart;
         private string _currentScene;
 
@@ -48,15 +45,7 @@ namespace GameScene.ScreenPart
             _chooseWindowService = chooseWindowService;
             _cameraActionService = cameraActionService;
             _actionScreenService = actionScreenService;
-
-            // ScreenSceneScriptableObject[] list = 
-            //     Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
-
-            // foreach (var screenScene in list)
-            // {
-            //     _screenScenesMap.Add(screenScene.SceneKey, screenScene);
-            // }
-
+            
             screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
             cameraActionService.OnTakePhoto += TakePhoto;
@@ -93,15 +82,20 @@ namespace GameScene.ScreenPart
             _currentSceneSo = GameModel.GetScene(_currentScene);
             _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
             
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.NEBO);
+            yield return new WaitForSeconds(1.0f);
+            
+            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_COPS);
+            yield return new WaitForSeconds(4.5f);
+            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
+            AudioSystemService.Inst.AddQueueClipToLoop(MusicType.NEBO);
             AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
             
-            AudioSystemService.Inst.AudioSourceMusic.volume = 0.0f;
-            float volumeMax = SaveService.GetMusicVolume();
-            yield return new WaitForSeconds(0.2f);
-            AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 8.0f).SetEase(Ease.Linear);
+            // AudioSystemService.Inst.AudioSourceMusic.volume = 0.0f;
+            // float volumeMax = SaveService.GetMusicVolume();
+            yield return new WaitForSeconds(2.0f);
+            // AudioSystemService.Inst.AudioSourceMusic.DOFade(volumeMax, 8.0f).SetEase(Ease.Linear);
             FadeService.FadeService.FadeOut(8.0f);
-            yield return new WaitForSeconds(7.0f);
+            yield return new WaitForSeconds(8.0f);
             
             ShowScene();
         }

@@ -18,6 +18,16 @@ namespace GameScene.Health
 
             set
             {
+                if (value < Health)
+                {
+                    _healthUiView.TakeDamage();
+                }
+                
+                if (value > Health)
+                {
+                    _healthUiView.Heal();
+                }
+                
                 if (value <= 0)
                 {
                     SceneService.LoadEndGame();
@@ -26,6 +36,7 @@ namespace GameScene.Health
                 int health = Mathf.Clamp(value, 0, GlobalConstant.MAX_HEALTH);
                 float amount = (float)health / GlobalConstant.MAX_HEALTH;
                 _healthUiView.Health = amount;
+
                 SaveService.HealthCount = health;
             }
         }

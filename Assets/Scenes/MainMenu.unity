@@ -2468,6 +2468,7 @@ MonoBehaviour:
   musicAudioSource: {fileID: 987214180}
   soundAudioSource: {fileID: 1532408870}
   soundAudioLooperSource: {fileID: 1786026411}
+  audioMixer: {fileID: 24100000, guid: 7aa80e15b6550ed43b26da4f82a3d038, type: 2}
 --- !u!1 &1124452010
 GameObject:
   m_ObjectHideFlags: 0

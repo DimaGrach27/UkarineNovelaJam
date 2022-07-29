@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MusicSo_radio_change
   m_EditorClassIdentifier: 
   type: 4
-  clip: {fileID: 8300000, guid: b86019350d164534393cf495c0924cf7, type: 3}
+  clip: {fileID: 8300000, guid: 30d051fe15ef0284598664d1995767f6, type: 3}
