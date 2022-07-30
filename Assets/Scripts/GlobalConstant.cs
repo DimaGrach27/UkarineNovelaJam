@@ -20,73 +20,73 @@ public static class GlobalConstant
     public const string OREST_NAME = "Орест";
     public const string UNKNOW_NAME = "???";
 
-    private static Sprite _VILSHANKA_DEFAULT_SPRITE;
-    public static Sprite VILSHANKA_DEFAULT_SPRITE
-    {
-        get
-        {
-            if (_VILSHANKA_DEFAULT_SPRITE == null)
-            {
-                _VILSHANKA_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_vilshanka");
-            }
-
-            return _VILSHANKA_DEFAULT_SPRITE;
-        }
-    }
-    
-    private static Sprite _ILONA_DEFAULT_SPRITE;
-    public static Sprite ILONA_DEFAULT_SPRITE
-    {
-        get
-        {
-            if (_ILONA_DEFAULT_SPRITE == null)
-            {
-                _ILONA_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_ilona");
-            }
-
-            return _ILONA_DEFAULT_SPRITE;
-        }
-    }
-    
-    private static Sprite _ZAHARES_DEFAULT_SPRITE;
-    public static Sprite ZAHARES_DEFAULT_SPRITE
-    {
-        get
-        {
-            if (_ZAHARES_DEFAULT_SPRITE == null)
-            {
-                _ZAHARES_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_zakhares");
-            }
-
-            return _ZAHARES_DEFAULT_SPRITE;
-        }
-    }
-    
-    private static Sprite _OLEKSIY_DEFAULT_SPRITE;
-    public static Sprite OLEKSIY_DEFAULT_SPRITE
-    {
-        get
-        {
-            if (_OLEKSIY_DEFAULT_SPRITE == null)
-            {
-                _OLEKSIY_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_oleksii");
-            }
-
-            return _OLEKSIY_DEFAULT_SPRITE;
-        }
-    }
-    
-    private static Sprite _VILSHANKA_FUTURE_DEFAULT_SPRITE;
-    public static Sprite VILSHANKA_FUTURE_DEFAULT_SPRITE
-    {
-        get
-        {
-            if (_VILSHANKA_FUTURE_DEFAULT_SPRITE == null)
-            {
-                _VILSHANKA_FUTURE_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_vilshanka_future");
-            }
-
-            return _VILSHANKA_FUTURE_DEFAULT_SPRITE;
-        }
-    }
+    // private static Sprite _VILSHANKA_DEFAULT_SPRITE;
+    // public static Sprite VILSHANKA_DEFAULT_SPRITE
+    // {
+    //     get
+    //     {
+    //         if (_VILSHANKA_DEFAULT_SPRITE == null)
+    //         {
+    //             _VILSHANKA_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_vilshanka");
+    //         }
+    //
+    //         return _VILSHANKA_DEFAULT_SPRITE;
+    //     }
+    // }
+    //
+    // private static Sprite _ILONA_DEFAULT_SPRITE;
+    // public static Sprite ILONA_DEFAULT_SPRITE
+    // {
+    //     get
+    //     {
+    //         if (_ILONA_DEFAULT_SPRITE == null)
+    //         {
+    //             _ILONA_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_ilona");
+    //         }
+    //
+    //         return _ILONA_DEFAULT_SPRITE;
+    //     }
+    // }
+    //
+    // private static Sprite _ZAHARES_DEFAULT_SPRITE;
+    // public static Sprite ZAHARES_DEFAULT_SPRITE
+    // {
+    //     get
+    //     {
+    //         if (_ZAHARES_DEFAULT_SPRITE == null)
+    //         {
+    //             _ZAHARES_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_zakhares");
+    //         }
+    //
+    //         return _ZAHARES_DEFAULT_SPRITE;
+    //     }
+    // }
+    //
+    // private static Sprite _OLEKSIY_DEFAULT_SPRITE;
+    // public static Sprite OLEKSIY_DEFAULT_SPRITE
+    // {
+    //     get
+    //     {
+    //         if (_OLEKSIY_DEFAULT_SPRITE == null)
+    //         {
+    //             _OLEKSIY_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_oleksii");
+    //         }
+    //
+    //         return _OLEKSIY_DEFAULT_SPRITE;
+    //     }
+    // }
+    //
+    // private static Sprite _VILSHANKA_FUTURE_DEFAULT_SPRITE;
+    // public static Sprite VILSHANKA_FUTURE_DEFAULT_SPRITE
+    // {
+    //     get
+    //     {
+    //         if (_VILSHANKA_FUTURE_DEFAULT_SPRITE == null)
+    //         {
+    //             _VILSHANKA_FUTURE_DEFAULT_SPRITE = Resources.Load<Sprite>("Configs/Characters/character_vilshanka_future");
+    //         }
+    //
+    //         return _VILSHANKA_FUTURE_DEFAULT_SPRITE;
+    //     }
+    // }
 }

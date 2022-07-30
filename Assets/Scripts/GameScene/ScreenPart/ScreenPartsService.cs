@@ -313,6 +313,7 @@ namespace GameScene.ScreenPart
             else
             {
                 choosesList.isUseCamera = isCamera;
+                SaveService.SetChoosesList(_currentSceneSo.SceneKey, choosesList);
             }
             
             

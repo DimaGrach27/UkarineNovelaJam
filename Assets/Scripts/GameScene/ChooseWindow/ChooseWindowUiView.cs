@@ -49,8 +49,8 @@ namespace GameScene.ChooseWindow
                     _chooseButtonUiViews.Add(chooseButtonUiView);
                 }
 
-                _chooseButtonUiViews[i].InitButton(scenes[i], isCameraAction);
                 _chooseButtonUiViews[i].gameObject.SetActive(true);
+                _chooseButtonUiViews[i].InitButton(scenes[i], isCameraAction);
             }
         }
 

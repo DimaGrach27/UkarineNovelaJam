@@ -1,4 +1,5 @@
 ﻿using System;
+using Characters;
 using GameScene.BgScreen;
 using GameScene.Characters;
 using GameScene.ScreenPart.ActionScreens;
@@ -60,7 +61,7 @@ namespace GameScene.ScreenPart
         public string CharacterName => GameModel.GetName(nameCharacter);
         public string TextShow => textShow;
         
-        public Sprite Image => GameModel.GetSprite(characterImage);
+        public Sprite Image => CharactersService.GetSprite(characterImage);
         
         public StatusSetter StatusSetter => statusSetter;
         

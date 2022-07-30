@@ -83,31 +83,31 @@ public static class GameModel
         return result;
     }
     
-    public static Sprite GetSprite(CharacterSprite characterName)
-    {
-        Sprite result = null;
-        
-        switch (characterName)
-        {
-            case CharacterSprite.VILSHANKA_DEFAULT :
-                result = GlobalConstant.VILSHANKA_DEFAULT_SPRITE;
-                break;
-            case CharacterSprite.VILSHANKA_FUTURE_DEFAULT :
-                result = GlobalConstant.VILSHANKA_FUTURE_DEFAULT_SPRITE;
-                break;
-            case CharacterSprite.ILONA_DEFAULT :
-                result = GlobalConstant.ILONA_DEFAULT_SPRITE;
-                break;
-            case CharacterSprite.ZAHARES_DEFAULT :
-                result = GlobalConstant.ZAHARES_DEFAULT_SPRITE;
-                break;
-            case CharacterSprite.OLEKSIY_DEFAULT :
-                result = GlobalConstant.OLEKSIY_DEFAULT_SPRITE;
-                break;
-        }
-
-        return result;
-    }
+    // public static Sprite GetSprite(CharacterSprite characterName)
+    // {
+    //     Sprite result = null;
+    //     
+    //     switch (characterName)
+    //     {
+    //         case CharacterSprite.VILSHANKA_DEFAULT :
+    //             result = GlobalConstant.VILSHANKA_DEFAULT_SPRITE;
+    //             break;
+    //         case CharacterSprite.VILSHANKA_FUTURE_DEFAULT :
+    //             result = GlobalConstant.VILSHANKA_FUTURE_DEFAULT_SPRITE;
+    //             break;
+    //         case CharacterSprite.ILONA_DEFAULT :
+    //             result = GlobalConstant.ILONA_DEFAULT_SPRITE;
+    //             break;
+    //         case CharacterSprite.ZAHARES_DEFAULT :
+    //             result = GlobalConstant.ZAHARES_DEFAULT_SPRITE;
+    //             break;
+    //         case CharacterSprite.OLEKSIY_DEFAULT :
+    //             result = GlobalConstant.OLEKSIY_DEFAULT_SPRITE;
+    //             break;
+    //     }
+    //
+    //     return result;
+    // }
 }
 
 public enum StatusEnum
@@ -168,7 +168,9 @@ public enum CharacterSprite
     ILONA_DEFAULT = 2,
     ZAHARES_DEFAULT = 3,
     OLEKSIY_DEFAULT = 4,
-    VILSHANKA_FUTURE_DEFAULT = 5
+    VILSHANKA_FUTURE_DEFAULT = 5,
+    ZAHARES_DARK = 6,
+    OLEKSIY_DARK = 7,
 }
 
 public enum KillerName

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using GameScene.ScreenPart;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace GameScene.ChooseWindow
 
         private NextScene _chooseScene;
 
+        private Coroutine _coroutine;
+        
         private void Awake()
         {
             Button.onClick.AddListener(ClickButton);
@@ -29,17 +32,46 @@ namespace GameScene.ChooseWindow
 
             if(!isCameraAction) return;
             
+            if(_coroutine != null) StopCoroutine(_coroutine);
+            
             if (_chooseScene.cameraDependent.isPrepAction)
             {
-                textMeshProUGUI.fontStyle = FontStyles.Underline;
+                _coroutine = StartCoroutine(ChooseBlinkRoutine());
             }
             else
             {
-                textMeshProUGUI.fontStyle = FontStyles.Normal;
+                ColorBlock colorBlock = Button.colors;
+                colorBlock.normalColor = Color.black;
+                Button.colors = colorBlock;
             }
             
         }
 
         private void ClickButton() => OnChoose?.Invoke(_chooseScene);
+
+        private IEnumerator ChooseBlinkRoutine()
+        {
+            while (true)
+            {
+                ColorBlock colorBlock = Button.colors;
+                Color colorButton;
+                
+                for (float i = 0; i <= 1.0f; i += Time.deltaTime * 1.5f)
+                {
+                    colorButton = Color.Lerp(Color.black, Color.green, i);
+                    colorBlock.normalColor = colorButton;
+                    Button.colors = colorBlock;
+                    yield return null;
+                }
+                
+                for (float i = 1.0f; i >= 0.0f; i -= Time.deltaTime * 1.5f)
+                {
+                    colorButton = Color.Lerp(Color.black, Color.green, i);
+                    colorBlock.normalColor = colorButton;
+                    Button.colors = colorBlock;
+                    yield return null;
+                }
+            }
+        }
     }
 }
