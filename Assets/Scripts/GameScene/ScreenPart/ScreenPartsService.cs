@@ -119,40 +119,11 @@ namespace GameScene.ScreenPart
             if (currentSceneSo.ChangeBackGround.enable)
             {
                 _bgService.Show(currentSceneSo.ChangeBackGround.bgEnum, ShowScene);
-                // if(_changeBgRoutine != null)
-                //     CoroutineHelper.Inst.StopCoroutine(_changeBgRoutine);
-                //
-                // _changeBgRoutine = CoroutineHelper.Inst.StartCoroutine(ChangeBgRoutine());
-                
                 return;
             }
             
             ShowScene();
         }
-
-        // private IEnumerator ChangeBgRoutine()
-        // {
-        //     float duration = 3.0f;
-        //     FadeService.FadeService.FadeIn(duration);
-        //     
-        //     yield return new WaitForSeconds(duration);
-        //     
-        //     ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(_currentScene);
-        //     
-        //     if(currentSceneSo.ChangeBackGround.enable)
-        //     {
-        //         BgEnum bgEnum = currentSceneSo.ChangeBackGround.bgEnum;
-        //         _bgService.Show(bgEnum);
-        //     }
-        //     
-        //     yield return new WaitForSeconds(1.0f);
-        //     
-        //     FadeService.FadeService.FadeOut(duration);
-        //     
-        //     yield return new WaitForSeconds(duration / 2);
-        //     
-        //     ShowScene();
-        // }
 
         private void ShowScene()
         {
@@ -182,11 +153,6 @@ namespace GameScene.ScreenPart
                 Debug.Log($"{_currentSceneSo.CountSetter.Type} = {count}");
                 GameModel.SetInt(_currentSceneSo.CountSetter.Type, count);
             }
-            //
-            // if(_currentSceneSo.ChangeBackGround.enable)
-            // {
-            //     _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
-            // }
 
             ShowPart();
         }
