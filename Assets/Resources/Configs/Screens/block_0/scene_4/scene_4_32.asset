@@ -15,8 +15,8 @@ MonoBehaviour:
   sceneKey: scene_4_32
   isActiveCamera: 0
   changeBackGround:
-    enable: 0
-    bgEnum: 0
+    enable: 1
+    bgEnum: 4
   statusSetter:
     enable: 0
     statusesValues: []

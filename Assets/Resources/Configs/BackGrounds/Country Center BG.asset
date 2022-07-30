@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927a52c7641546cdbe368b7fd51be4bf, type: 3}
+  m_Name: Country Center BG
+  m_EditorClassIdentifier: 
+  image: {fileID: 21300000, guid: 1de3fc796329882418007519fda51f47, type: 3}
+  bgEnum: 2
+  animationScreen:
+    enable: 0
+    animationBg: {fileID: 6197987236897390934, guid: 102444e5ccb96604ab55acfc00d4c6c2, type: 3}

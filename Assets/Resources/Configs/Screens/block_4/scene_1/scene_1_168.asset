@@ -16,7 +16,7 @@ MonoBehaviour:
   isActiveCamera: 0
   changeBackGround:
     enable: 1
-    bgEnum: 2
+    bgEnum: 1
   statusSetter:
     enable: 0
     statusesValues: []
@@ -34,6 +34,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

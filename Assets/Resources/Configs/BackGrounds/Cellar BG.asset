@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Cellar BG
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 0995cf86aaf73e244aa1eb217cba80d3, type: 3}
-  bgEnum: 1
+  bgEnum: 3
+  animationScreen:
+    enable: 0
+    animationBg: {fileID: 0}

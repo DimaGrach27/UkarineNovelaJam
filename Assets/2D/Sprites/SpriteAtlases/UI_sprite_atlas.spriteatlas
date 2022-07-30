@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI_sprite_atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 4b8bebc4ab342ce48ae24cb38ec59c04, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c4a9f210e21d8b048aff9248367fc6e8, type: 3}
+  - {fileID: 21300000, guid: d03405c0a5691eb409e5c4f2720087c0, type: 3}
+  - {fileID: 21300000, guid: e769c7e0ee2abc346a9bb6944afad210, type: 3}
+  - {fileID: 21300000, guid: d892f371129ce72488e4edc5841e47da, type: 3}
+  - {fileID: 21300000, guid: ce8bf2815dc358a42a27ee933ad6f7b6, type: 3}
+  - {fileID: 21300000, guid: 9f2831916d97820418c97a1792eda389, type: 3}
+  - {fileID: 21300000, guid: dcbe75024a5d63c47a0c0fc4d80a10ab, type: 3}
+  - {fileID: 21300000, guid: aa5a9f342417e854c952fdc6f6e7c412, type: 3}
+  - {fileID: 21300000, guid: c3c82ea50ca4b3242b18166f1469535e, type: 3}
+  - {fileID: 21300000, guid: d29142c6929ea36458b40e7239bf34d2, type: 3}
+  - {fileID: 21300000, guid: 1056dcebc8ea0ce4c904ab45576fd644, type: 3}
+  - {fileID: 21300000, guid: 2a06b82c069f4454ab1c88d5aa422559, type: 3}
+  - {fileID: 21300000, guid: 3a8455ceaab863d4e96d79e09bc73c6d, type: 3}
+  - {fileID: 21300000, guid: 90a87d3f0f047934090ba9848ec600da, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Group
+  - Rectangle 1
+  - right-arrow 1
+  - Menu
+  - Group 7
+  - Wings
+  - "\u0414\u0438\u0437\u0430\u0439\u043D \u0431\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+    (1) 2"
+  - choice top
+  - Rectangle 26
+  - textbox
+  - Wings_in
+  - Component 1
+  - pngfind 2
+  - Rectangle 25
+  m_RenderDataMap: {}
+  m_Tag: UI_sprite_atlas
+  m_IsVariant: 0

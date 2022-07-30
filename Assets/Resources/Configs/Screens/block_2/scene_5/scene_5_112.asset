@@ -15,7 +15,7 @@ MonoBehaviour:
   sceneKey: scene_5_112
   isActiveCamera: 0
   changeBackGround:
-    enable: 0
+    enable: 1
     bgEnum: 5
   statusSetter:
     enable: 0
@@ -27,6 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -35,6 +36,7 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430 \u043F\u043E\u0442\u0440\u0430\u043F\u043B\u044F\u0454
       \u0434\u043E \u0441\u0442\u043E\u0440\u043E\u0436\u043E\u0432\u043E\u0457 \u0431\u0443\u0434\u043A\u0438. "
+    actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: d2866ba2b1d08774ba71834a5ca3226e, type: 2}
     chooseText: "\u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0438\u0442\u0438 \u0443
@@ -44,6 +46,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -62,6 +65,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -80,6 +84,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -98,6 +103,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -116,6 +122,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -135,6 +142,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

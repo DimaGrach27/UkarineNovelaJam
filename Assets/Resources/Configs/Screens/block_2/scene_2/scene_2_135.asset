@@ -15,8 +15,8 @@ MonoBehaviour:
   sceneKey: scene_2_135
   isActiveCamera: 0
   changeBackGround:
-    enable: 0
-    bgEnum: 5
+    enable: 1
+    bgEnum: 2
   statusSetter:
     enable: 0
     statusesValues: []
@@ -48,6 +48,7 @@ MonoBehaviour:
         status: 23
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -69,6 +70,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -89,6 +91,7 @@ MonoBehaviour:
         status: 8
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

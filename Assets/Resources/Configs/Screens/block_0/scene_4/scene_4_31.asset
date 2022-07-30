@@ -16,7 +16,7 @@ MonoBehaviour:
   isActiveCamera: 0
   changeBackGround:
     enable: 1
-    bgEnum: 3
+    bgEnum: 4
   statusSetter:
     enable: 1
     statusesValues:

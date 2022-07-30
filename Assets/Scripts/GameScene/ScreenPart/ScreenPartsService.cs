@@ -62,7 +62,7 @@ namespace GameScene.ScreenPart
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);
             
-            _bgService.Show(SaveService.GetCurrentBg());
+            _bgService.Show(SaveService.GetCurrentBg(), null);
             
             _inGame = true;
             
@@ -80,7 +80,7 @@ namespace GameScene.ScreenPart
         IEnumerator FirstInit()
         {
             _currentSceneSo = GameModel.GetScene(_currentScene);
-            _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
+            _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum, null);
             
             yield return new WaitForSeconds(1.0f);
             
@@ -114,13 +114,15 @@ namespace GameScene.ScreenPart
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);
 
-            if (GameModel.GetScene(_currentScene).ChangeBackGround.enable && 
-                SaveService.GetCurrentBg() != GameModel.GetScene(_currentScene).ChangeBackGround.bgEnum)
+            ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(_currentScene);
+            
+            if (currentSceneSo.ChangeBackGround.enable)
             {
-                if(_changeBgRoutine != null)
-                    CoroutineHelper.Inst.StopCoroutine(_changeBgRoutine);
-                
-                _changeBgRoutine = CoroutineHelper.Inst.StartCoroutine(ChangeBgRoutine());
+                _bgService.Show(currentSceneSo.ChangeBackGround.bgEnum, ShowScene);
+                // if(_changeBgRoutine != null)
+                //     CoroutineHelper.Inst.StopCoroutine(_changeBgRoutine);
+                //
+                // _changeBgRoutine = CoroutineHelper.Inst.StartCoroutine(ChangeBgRoutine());
                 
                 return;
             }
@@ -128,30 +130,29 @@ namespace GameScene.ScreenPart
             ShowScene();
         }
 
-        private IEnumerator ChangeBgRoutine()
-        {
-            float duration = 3.0f;
-            FadeService.FadeService.FadeIn(duration);
-            
-            yield return new WaitForSeconds(duration);
-            
-            ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(_currentScene);
-            
-            if(currentSceneSo.ChangeBackGround.enable)
-            {
-                BgEnum bgEnum = currentSceneSo.ChangeBackGround.bgEnum;
-                _bgService.Show(bgEnum);
-                SaveService.SetCurrentBg(bgEnum);
-            }
-            
-            yield return new WaitForSeconds(1.0f);
-            
-            FadeService.FadeService.FadeOut(duration);
-            
-            yield return new WaitForSeconds(duration / 2);
-            
-            ShowScene();
-        }
+        // private IEnumerator ChangeBgRoutine()
+        // {
+        //     float duration = 3.0f;
+        //     FadeService.FadeService.FadeIn(duration);
+        //     
+        //     yield return new WaitForSeconds(duration);
+        //     
+        //     ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(_currentScene);
+        //     
+        //     if(currentSceneSo.ChangeBackGround.enable)
+        //     {
+        //         BgEnum bgEnum = currentSceneSo.ChangeBackGround.bgEnum;
+        //         _bgService.Show(bgEnum);
+        //     }
+        //     
+        //     yield return new WaitForSeconds(1.0f);
+        //     
+        //     FadeService.FadeService.FadeOut(duration);
+        //     
+        //     yield return new WaitForSeconds(duration / 2);
+        //     
+        //     ShowScene();
+        // }
 
         private void ShowScene()
         {
@@ -181,12 +182,11 @@ namespace GameScene.ScreenPart
                 Debug.Log($"{_currentSceneSo.CountSetter.Type} = {count}");
                 GameModel.SetInt(_currentSceneSo.CountSetter.Type, count);
             }
-            
-            if(_currentSceneSo.ChangeBackGround.enable)
-            {
-                _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
-                SaveService.SetCurrentBg(_currentSceneSo.ChangeBackGround.bgEnum);
-            }
+            //
+            // if(_currentSceneSo.ChangeBackGround.enable)
+            // {
+            //     _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum);
+            // }
 
             ShowPart();
         }

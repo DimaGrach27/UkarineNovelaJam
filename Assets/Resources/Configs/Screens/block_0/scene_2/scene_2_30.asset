@@ -16,7 +16,7 @@ MonoBehaviour:
   isActiveCamera: 0
   changeBackGround:
     enable: 1
-    bgEnum: 5
+    bgEnum: 2
   statusSetter:
     enable: 0
     statusesValues: []
@@ -47,6 +47,8 @@ MonoBehaviour:
       statusesValues:
       - value: 1
         status: 16
+      - value: 0
+        status: 20
     cameraDependent:
       enable: 0
       isPrepAction: 0
@@ -61,6 +63,29 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
+  - scene: {fileID: 11400000, guid: 419b2f6cc2091fc4ab71bbfa37388a16, type: 2}
+    chooseText: "\u0412\u0456\u0434\u043F\u0440\u0430\u0432\u0438\u0442\u0438\u0441\u044C
+      \u043D\u0430 \u0431\u0435\u0440\u0435\u0433 \u043E\u0437\u0435\u0440\u0430."
+    statusDependent:
+      enable: 1
+      statusesValues:
+      - value: 1
+        status: 16
+      - value: 1
+        status: 20
+    cameraDependent:
+      enable: 0
+      isPrepAction: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
   - scene: {fileID: 11400000, guid: ee26de2d54ca3d34e884e390a6a0bcdb, type: 2}
     chooseText: "\u0421\u043F\u0440\u043E\u0431\u0443\u0432\u0430\u0442\u0438 \u043F\u043E\u0442\u0440\u0430\u043F\u0438\u0442\u0438
       \u043D\u0430 \u0440\u043E\u0434\u043E\u0432\u0438\u0449\u0430 \u0431\u0443\u0440\u0448\u0442\u0438\u043D\u0443."

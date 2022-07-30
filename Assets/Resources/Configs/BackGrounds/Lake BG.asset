@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Lake BG
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2310ce1660520cf4cb51e1fc3fa169aa, type: 3}
-  bgEnum: 3
+  bgEnum: 4
+  animationScreen:
+    enable: 0
+    animationBg: {fileID: 0}

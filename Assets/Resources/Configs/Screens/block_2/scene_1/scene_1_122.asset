@@ -16,7 +16,7 @@ MonoBehaviour:
   isActiveCamera: 0
   changeBackGround:
     enable: 1
-    bgEnum: 2
+    bgEnum: 1
   statusSetter:
     enable: 0
     statusesValues: []
@@ -27,6 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -38,6 +39,7 @@ MonoBehaviour:
       \u0443 \u043B\u0456\u0441\u0456. \u041F\u043E\u043C\u0456\u0447\u0430\u0454,
       \u0449\u043E \u0432 \u043C\u0430\u0448\u0438\u043D\u0456 \u0433\u043E\u0440\u0438\u0442\u044C
       \u0441\u0432\u0456\u0442\u043B\u043E."
+    actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: 0e460022bf1bce94d92a5c79fbd066ef, type: 2}
     chooseText: 
@@ -46,6 +48,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

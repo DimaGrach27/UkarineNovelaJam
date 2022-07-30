@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 927a52c7641546cdbe368b7fd51be4bf, type: 3}
-  m_Name: Road BG
+  m_Name: Screen Car BG
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 1de3fc796329882418007519fda51f47, type: 3}
-  bgEnum: 5
+  image: {fileID: 21300000, guid: f78afe39336f95d48a05ab46bca5b93f, type: 3}
+  bgEnum: 0
+  animationScreen:
+    enable: 1
+    animationBg: {fileID: 5916142893623838018, guid: 8dcd11bbd318ddd4f836ce2aff254949, type: 3}

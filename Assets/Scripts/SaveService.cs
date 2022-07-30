@@ -136,7 +136,7 @@
 
      public static BgEnum GetCurrentBg()
      {
-         int bg = PlayerPrefs.GetInt(CURRENT_BG_KEY, 0);
+         int bg = PlayerPrefs.GetInt(CURRENT_BG_KEY, -1);
 
          return (BgEnum)bg;
      }

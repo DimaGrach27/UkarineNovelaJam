@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 927a52c7641546cdbe368b7fd51be4bf, type: 3}
-  m_Name: Forest BG
+  m_Name: Dreem BG
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: b2a690749526152438097e2fe5a151c8, type: 3}
-  bgEnum: 2
+  image: {fileID: 21300000, guid: f3de59900dbdaf4498f39bcc92a954dd, type: 3}
+  bgEnum: 6
   animationScreen:
     enable: 0
-    animationBg: {fileID: 6197987236897390934, guid: 102444e5ccb96604ab55acfc00d4c6c2, type: 3}
+    animationBg: {fileID: 0}
