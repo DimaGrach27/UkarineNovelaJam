@@ -34,6 +34,7 @@ namespace GameScene.BgScreen
         {
             if(bgEnum == _currentBg)
             {
+                onDoneAnimation?.Invoke();
                 return;
             }
 

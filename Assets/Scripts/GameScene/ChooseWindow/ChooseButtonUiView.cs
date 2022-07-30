@@ -30,6 +30,10 @@ namespace GameScene.ChooseWindow
             textMeshProUGUI.text = chooseScene.ChooseText;
             _chooseScene = chooseScene;
 
+            ColorBlock colorBlock = Button.colors;
+            colorBlock.normalColor = Color.black;
+            Button.colors = colorBlock;
+            
             if(!isCameraAction) return;
             
             if(_coroutine != null) StopCoroutine(_coroutine);
@@ -38,13 +42,6 @@ namespace GameScene.ChooseWindow
             {
                 _coroutine = StartCoroutine(ChooseBlinkRoutine());
             }
-            else
-            {
-                ColorBlock colorBlock = Button.colors;
-                colorBlock.normalColor = Color.black;
-                Button.colors = colorBlock;
-            }
-            
         }
 
         private void ClickButton() => OnChoose?.Invoke(_chooseScene);
