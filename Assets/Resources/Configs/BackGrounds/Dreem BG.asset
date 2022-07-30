@@ -15,5 +15,5 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: c104cbe2c38b9f24ea47630e0afe40dc, type: 3}
   bgEnum: 6
   animationScreen:
-    enable: 0
-    animationBg: {fileID: 0}
+    enable: 1
+    animationBg: {fileID: 6197987236897390934, guid: a75adfc904181c54c914f9a4001d0e99, type: 3}

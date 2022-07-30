@@ -12,5 +12,6 @@
         DREAM = 6,
         FOREST_PSICHODEL = 7,
         DARKNESS = 8,
+        CELLAR_WITHOUT_BODY = 9,
     }
 }
