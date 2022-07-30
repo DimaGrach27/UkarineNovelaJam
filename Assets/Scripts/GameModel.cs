@@ -171,6 +171,11 @@ public enum CharacterSprite
     VILSHANKA_FUTURE_DEFAULT = 5,
     ZAHARES_DARK = 6,
     OLEKSIY_DARK = 7,
+    VILSHANKA_PSYCHO = 8,
+    OLEKSIY_PSYCHO = 9,
+    ZAHARES_PSYCHO = 10,
+    ILONA_PSYCHO = 11,
+    VILSHANKA_FUTURE_PSYCHO = 12,
 }
 
 public enum KillerName

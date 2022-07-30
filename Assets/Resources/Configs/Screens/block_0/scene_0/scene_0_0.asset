@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: scene_0_0
   m_EditorClassIdentifier: 
   sceneKey: scene_0_0
-  isActiveCamera: 1
+  isActiveCamera: 0
   changeBackGround:
-    enable: 1
+    enable: 0
     bgEnum: 0
   statusSetter:
     enable: 0

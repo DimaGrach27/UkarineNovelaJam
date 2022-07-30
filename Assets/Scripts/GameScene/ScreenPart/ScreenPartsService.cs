@@ -81,12 +81,13 @@ namespace GameScene.ScreenPart
         {
             _currentSceneSo = GameModel.GetScene(_currentScene);
             _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum, null);
-            
+
             yield return new WaitForSeconds(1.0f);
             
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_COPS);
+            yield return GameNameAnimation.Inst.StartAnima();
             
-            yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(0.5f);
             
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
             AudioSystemService.Inst.AddQueueClipToLoop(MusicType.NEBO);

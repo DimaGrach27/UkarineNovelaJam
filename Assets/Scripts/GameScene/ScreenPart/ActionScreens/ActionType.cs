@@ -30,6 +30,8 @@
         OPEN_EYE_ANIMA = 25,
         PLAY_HEART_BEEP_SOUND_ON_LOPPER = 26,
         PREPARE_OPEN_EYE_ANIMA = 27,
+        START_ABERRATION_LOOP = 28,
+        STOP_ABERRATION_LOOP = 29,
         DEBUG = 228
     }
 }

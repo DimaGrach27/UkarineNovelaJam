@@ -41,6 +41,9 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.PLAY_EMBIENT_SLOW, new ActionEmbientSlow());
             _actionMap.Add(ActionType.PLAY_EMBIENT_FAST, new ActionEmbientFast());
             
+            _actionMap.Add(ActionType.START_ABERRATION_LOOP, new ActionStartAberrationLoop());
+            _actionMap.Add(ActionType.STOP_ABERRATION_LOOP, new ActionStopAberrationLoop());
+            
             _actionMap.Add(ActionType.ADD_EVIDENCE_ILONA, new ActionAddEvidenceForIlona());
             _actionMap.Add(ActionType.ADD_EVIDENCE_ZAHARES, new ActionAddEvidenceForZahares());
             _actionMap.Add(ActionType.ADD_EVIDENCE_OLEKSII, new ActionAddEvidenceForOleksii());

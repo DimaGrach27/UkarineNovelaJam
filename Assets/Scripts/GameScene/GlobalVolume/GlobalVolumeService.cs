@@ -16,6 +16,8 @@ namespace GameScene.GlobalVolume
 
         private ChromaticAberration _chromaticAberration;
         private Vignette _vignette;
+
+        private Coroutine _aberrationRoutine;
         
         private void Awake()
         {
@@ -36,11 +38,27 @@ namespace GameScene.GlobalVolume
             StartCoroutine(OpenEyeRoutine());
         }
 
+        public void PlayAberrationLoop()
+        {
+            StopAberrationLoop();
+            
+            _chromaticAberration.active = true;
+            _aberrationRoutine = StartCoroutine(AberrationPulseRoutine());
+        }
+        
+        public void StopAberrationLoop()
+        {
+            if(_aberrationRoutine != null)
+                StopCoroutine(_aberrationRoutine);
+            
+            _chromaticAberration.active = false;
+        }
+        
         private IEnumerator AberrationPulseRoutine()
         {
             while (true)
             {
-                for (float i = 0; i <= 1.0f; i += Time.deltaTime)
+                for (float i = 0; i <= 1.0f; i += Time.deltaTime / 2)
                 {
                     _chromaticAberration.intensity.value = aberrationPulseCurve.Evaluate(i);
                     yield return null;

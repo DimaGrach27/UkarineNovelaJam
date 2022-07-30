@@ -29,14 +29,16 @@ namespace MainMenu
         private void Start()
         {
             FadeService.FadeService.FadeOut();
+            AudioSystemService.Inst.StopAllMusic();
+            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             
+            if(GameModel.GameWasInit) return;
             
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
             exitButton.onClick.AddListener(Exit);
             
             continueButton.targetGraphic.enabled = IsGameWasStarted;
-            AudioSystemService.Inst.StopAllMusic();
             
             GameModel.Init();
         }
@@ -68,10 +70,12 @@ namespace MainMenu
             {
                 buttonGroup.DOFade(1.0f, 0.5f);
             }
+            
         }
         
         private void LoadGameScene()
         {
+            AudioSystemService.Inst.StopAllMusic();
             StartCoroutine(LoadGameSceneRoutine());
         }
 
