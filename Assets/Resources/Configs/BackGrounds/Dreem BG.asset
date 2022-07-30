@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927a52c7641546cdbe368b7fd51be4bf, type: 3}
   m_Name: Dreem BG
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: f3de59900dbdaf4498f39bcc92a954dd, type: 3}
+  image: {fileID: 21300000, guid: c104cbe2c38b9f24ea47630e0afe40dc, type: 3}
   bgEnum: 6
   animationScreen:
     enable: 0

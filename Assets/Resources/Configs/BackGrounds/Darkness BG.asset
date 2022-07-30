@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927a52c7641546cdbe368b7fd51be4bf, type: 3}
   m_Name: Darkness BG
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 2310ce1660520cf4cb51e1fc3fa169aa, type: 3}
+  image: {fileID: 21300000, guid: fbd94b58d6441194da6cee4e9a7ee040, type: 3}
   bgEnum: 8
   animationScreen:
     enable: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
     type: 0
   actionsType: 
   screenParts:
-  - actionsType: 
+  - actionsType: 16000000
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
