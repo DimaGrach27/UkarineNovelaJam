@@ -78,36 +78,19 @@ public static class GameModel
             case CharacterName.UNKNOW:
                 result = GlobalConstant.UNKNOW_NAME;
                 break;
+            case CharacterName.ILONA_SUR:
+                result = GlobalConstant.ILONA_SURNAME;
+                break;
+            case CharacterName.ZAHARES_SUR:
+                result = GlobalConstant.ZAHARES_SUR_NAME;
+                break;
+            case CharacterName.OLEKSIY_SUR:
+                result = GlobalConstant.OLEKSIY_SUR_NAME;
+                break;
         }
 
         return result;
     }
-    
-    // public static Sprite GetSprite(CharacterSprite characterName)
-    // {
-    //     Sprite result = null;
-    //     
-    //     switch (characterName)
-    //     {
-    //         case CharacterSprite.VILSHANKA_DEFAULT :
-    //             result = GlobalConstant.VILSHANKA_DEFAULT_SPRITE;
-    //             break;
-    //         case CharacterSprite.VILSHANKA_FUTURE_DEFAULT :
-    //             result = GlobalConstant.VILSHANKA_FUTURE_DEFAULT_SPRITE;
-    //             break;
-    //         case CharacterSprite.ILONA_DEFAULT :
-    //             result = GlobalConstant.ILONA_DEFAULT_SPRITE;
-    //             break;
-    //         case CharacterSprite.ZAHARES_DEFAULT :
-    //             result = GlobalConstant.ZAHARES_DEFAULT_SPRITE;
-    //             break;
-    //         case CharacterSprite.OLEKSIY_DEFAULT :
-    //             result = GlobalConstant.OLEKSIY_DEFAULT_SPRITE;
-    //             break;
-    //     }
-    //
-    //     return result;
-    // }
 }
 
 public enum StatusEnum
@@ -158,7 +141,10 @@ public enum CharacterName
     OLEKSIY = 4,
     VILSHANKA_FUTURE = 5,
     OREST = 6,
-    UNKNOW = 7
+    UNKNOW = 7,
+    ILONA_SUR = 8,
+    ZAHARES_SUR = 9,
+    OLEKSIY_SUR = 10,
 }
 
 public enum CharacterSprite

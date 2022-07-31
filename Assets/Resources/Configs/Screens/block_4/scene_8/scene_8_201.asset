@@ -16,7 +16,7 @@ MonoBehaviour:
   isActiveCamera: 0
   changeBackGround:
     enable: 1
-    bgEnum: 6
+    bgEnum: 8
   statusSetter:
     enable: 0
     statusesValues: []
@@ -24,7 +24,7 @@ MonoBehaviour:
     enable: 0
     count: 1
     type: 0
-  actionsType: 
+  actionsType: 06000000
   screenParts: []
   nextScenes:
   - scene: {fileID: 11400000, guid: a22e506dca6900c46bb1f05b88028e47, type: 2}

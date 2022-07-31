@@ -209,6 +209,7 @@ namespace GameScene.Services
         PUNCH = 13,
         HEART_BEEP = 14,
         CREAKING_DOOR = 15,
+        PISTOL_SHOT = 16,
     }
     
 }

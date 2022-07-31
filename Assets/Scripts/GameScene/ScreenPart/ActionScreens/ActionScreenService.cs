@@ -48,6 +48,10 @@ namespace GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.ADD_EVIDENCE_ZAHARES, new ActionAddEvidenceForZahares());
             _actionMap.Add(ActionType.ADD_EVIDENCE_OLEKSII, new ActionAddEvidenceForOleksii());
             
+            _actionMap.Add(ActionType.CHANGE_GLITCH_SCREEN, new ActionChangeScreenGlitch(screenPartsService));
+            _actionMap.Add(ActionType.CHANGE_DARK_SCREEN, new ActionChangeScreenDark(screenPartsService));
+            _actionMap.Add(ActionType.CHANGE_FOREST_SCREEN, new ActionChangeScreenForest(screenPartsService));
+            
             _actionMap.Add(ActionType.OPEN_EYE_ANIMA, new ActionOpenEye(screenPartsService));
             _actionMap.Add(ActionType.PREPARE_OPEN_EYE_ANIMA, new ActionPrepareOpenEye());
             

@@ -157,6 +157,11 @@ namespace GameScene.ScreenPart
 
             ShowPart();
         }
+
+        public void ChangeBack(BgEnum bgEnum)
+        {
+            _bgService.Show(bgEnum, null);
+        }
         
         public void ShowNextPart()
         {
