@@ -18,13 +18,15 @@ MonoBehaviour:
     enable: 1
     bgEnum: 3
   statusSetter:
-    enable: 0
-    statusesValues: []
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 25
   countSetter:
     enable: 0
     count: 1
     type: 0
-  actionsType: 
+  actionsType: 0c000000
   screenParts:
   - actionsType: 
     musicTypeOnStart: 0

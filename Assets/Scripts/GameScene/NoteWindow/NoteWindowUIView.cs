@@ -72,7 +72,22 @@ namespace GameScene.NoteWindow
             {
                 int count = GameModel.GetInt(keyValue.Key);
                 keyValue.Value.UpdateButton(count);
-                keyValue.Value.Visible = count > 0;
+
+                switch (keyValue.Key)
+                {
+                    case KillerName.ILONA_VOR:
+                        keyValue.Value.Visible = SaveService.GetStatusValue(StatusEnum.ILONA_HAVE_SHOW);
+                        break;
+                    
+                    case KillerName.OLEKSIY_VOR:
+                        keyValue.Value.Visible = SaveService.GetStatusValue(StatusEnum.OLEKSII_HAVE_SHOW);
+                        break;
+                    
+                    case KillerName.ZAHARES_VOR:
+                        keyValue.Value.Visible = SaveService.GetStatusValue(StatusEnum.ZAHARES_HAVE_SHOW);
+                        break;
+                }
+                // keyValue.Value.Visible = count > 0;
                 // keyValue.Value.Visible = true;
             }
         }

@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: scene_2_135
   m_EditorClassIdentifier: 
   sceneKey: scene_2_135
-  isActiveCamera: 0
+  isActiveCamera: 1
   changeBackGround:
     enable: 1
     bgEnum: 2
   statusSetter:
-    enable: 0
-    statusesValues: []
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 24
   countSetter:
     enable: 0
     count: 1
@@ -52,10 +54,10 @@ MonoBehaviour:
       - value: 0
         status: 23
     cameraDependent:
-      enable: 0
-      isPrepAction: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      enable: 1
+      isPrepAction: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 0
     findDependent:
@@ -93,10 +95,10 @@ MonoBehaviour:
       - value: 1
         status: 8
     cameraDependent:
-      enable: 0
-      isPrepAction: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      enable: 1
+      isPrepAction: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 0
     findDependent:

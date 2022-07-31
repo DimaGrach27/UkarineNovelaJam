@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: scene_3_158
   m_EditorClassIdentifier: 
   sceneKey: scene_3_158
-  isActiveCamera: 0
+  isActiveCamera: 1
   changeBackGround:
     enable: 0
     bgEnum: 5
@@ -115,10 +115,10 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     cameraDependent:
-      enable: 0
-      isPrepAction: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      enable: 1
+      isPrepAction: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 0
     findDependent:

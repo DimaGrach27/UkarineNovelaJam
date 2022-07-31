@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: scene_5_112
   m_EditorClassIdentifier: 
   sceneKey: scene_5_112
-  isActiveCamera: 0
+  isActiveCamera: 1
   changeBackGround:
     enable: 1
     bgEnum: 5
@@ -65,10 +65,10 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     cameraDependent:
-      enable: 0
-      isPrepAction: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      enable: 1
+      isPrepAction: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 1
     findDependent:
@@ -122,10 +122,10 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     cameraDependent:
-      enable: 0
-      isPrepAction: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      enable: 1
+      isPrepAction: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 1
     findDependent:

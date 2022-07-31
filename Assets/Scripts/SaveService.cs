@@ -58,15 +58,6 @@
          }
      }
 
-     // private static bool ExistFileProgress =>  File.Exists(PathProgress);
-     // private static string PathProgress => Application.persistentDataPath + $"/{PROGRESS_KEY}_{Application.productName}.json";
-     // private static void SaveJsonProgress() => File.WriteAllText(PathProgress, JsonUtility.ToJson(SaveFile));
-     //
-     // private static bool ExistFileSetting =>  File.Exists(PathSetting);
-     // private static string PathSetting => Application.persistentDataPath + $"/{SETTINGS_KEY}_{Application.productName}.json";
-     // private static void SaveJsonSetting() => File.WriteAllText(PathSetting, JsonUtility.ToJson(SettingFile));
-     //
-     //
      private static bool ExistFile(string key) =>  File.Exists(Path(key));
      private static string Path(string key) => Application.persistentDataPath + $"/{key}_{Application.productName}.json";
      private static void SaveJson(string key) => File.WriteAllText(Path(key), JsonUtility.ToJson(GetJson(key)));
@@ -213,6 +204,7 @@
      {
          return PlayerPrefs.GetInt(countType.ToString(), 0);
      }
+     
      
      public static void SetIntValue(CountType countType, int value)
      {

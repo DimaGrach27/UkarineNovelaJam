@@ -119,6 +119,9 @@ public enum StatusEnum
     isCanVisitIlonaAndTower = 21,
     isAngryToFriend = 22,
     isThrowStick = 23,
+    ILONA_HAVE_SHOW = 24,
+    ZAHARES_HAVE_SHOW = 25,
+    OLEKSII_HAVE_SHOW = 26,
     
     BOTTLE = 100
 }

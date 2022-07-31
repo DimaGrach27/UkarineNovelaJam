@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: scene_2_143
   m_EditorClassIdentifier: 
   sceneKey: scene_2_143
-  isActiveCamera: 0
+  isActiveCamera: 1
   changeBackGround:
     enable: 0
     bgEnum: 5
@@ -24,7 +24,7 @@ MonoBehaviour:
     enable: 0
     count: 1
     type: 0
-  actionsType: 
+  actionsType: 0c0000000b000000
   screenParts:
   - actionsType: 
     musicTypeOnStart: 0
@@ -205,10 +205,10 @@ MonoBehaviour:
       - value: 1
         status: 4
     cameraDependent:
-      enable: 0
-      isPrepAction: 0
-      visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      enable: 1
+      isPrepAction: 1
+      visibleOnPhoto: 1
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 0
     findDependent:
