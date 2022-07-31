@@ -42,7 +42,7 @@ namespace GameScene.ScreenText
         {
             if (string.IsNullOrEmpty(text))
             {
-                _screenTextUiView.Visible = false;
+                HideText();
                 return;
             }
 
