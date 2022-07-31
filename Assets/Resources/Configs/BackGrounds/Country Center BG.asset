@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927a52c7641546cdbe368b7fd51be4bf, type: 3}
   m_Name: Country Center BG
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 1de3fc796329882418007519fda51f47, type: 3}
+  image: {fileID: 21300000, guid: aa36de384b81e4a459573dc1765d48ef, type: 3}
   bgEnum: 2
   animationScreen:
     enable: 0

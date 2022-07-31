@@ -27,6 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 02000000
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -46,6 +47,7 @@ MonoBehaviour:
       \u043D\u0430\u0431\u043B\u0438\u0436\u0430\u0432\u0441\u044F. "
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -68,6 +70,7 @@ MonoBehaviour:
       \u0456 \u043F\u0440\u0438\u044F\u0437\u043D\u043E\u044E \u0434\u043E \u043C\u0435\u043D\u0435."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -87,6 +90,7 @@ MonoBehaviour:
       \u0442\u0440\u0435\u043C\u0442\u0456\u043D\u043D\u044F."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -101,7 +105,7 @@ MonoBehaviour:
       \u043F\u0440\u043E \u0446\u0435 \u043D\u0435 \u0434\u0456\u0437\u043D\u0430\u044E\u0442\u044C\u0441\u044F.
       \u041C\u043E\u044F \u0441\u043C\u0435\u0440\u0442\u044C \u0442\u0430\u043A
       \u0456 \u0437\u0430\u043B\u0438\u0448\u0438\u0442\u044C\u0441\u044F \xAB\u0442\u0430\u0454\u043C\u043D\u0438\u0446\u0435\u044E
-      \u0437\u043D\u0438\u043A\u043D\u0435\u043D\u043D\u044F \u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0430\xBB.
+      \u0437\u043D\u0438\u043A\u043D\u0435\u043D\u043D\u044F \u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u0438\xBB.
       \u041F\u0440\u0438\u0431\u043B\u0438\u0437\u043D\u043E \u0442\u0430\u043A\u0438\u043C
       \u0447\u0438\u043D\u043E\u043C \u043F\u0440\u043E\u0434\u043E\u0432\u0436\u0443\u0432\u0430\u0432\u0441\u044F
       \u0445\u0456\u0434 \u043C\u043E\u0457\u0445 \u0434\u0443\u043C\u043E\u043A,
@@ -117,6 +121,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

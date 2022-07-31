@@ -52,10 +52,11 @@ namespace GameScene.ChooseWindow
             {
                 ColorBlock colorBlock = Button.colors;
                 Color colorButton;
+                Color amber = new Color(0.74f, 0.37f, 0.05f);
                 
                 for (float i = 0; i <= 1.0f; i += Time.deltaTime * 1.5f)
                 {
-                    colorButton = Color.Lerp(Color.black, Color.green, i);
+                    colorButton = Color.Lerp(Color.black, amber, i);
                     colorBlock.normalColor = colorButton;
                     Button.colors = colorBlock;
                     yield return null;
@@ -63,7 +64,7 @@ namespace GameScene.ChooseWindow
                 
                 for (float i = 1.0f; i >= 0.0f; i -= Time.deltaTime * 1.5f)
                 {
-                    colorButton = Color.Lerp(Color.black, Color.green, i);
+                    colorButton = Color.Lerp(Color.black, amber, i);
                     colorBlock.normalColor = colorButton;
                     Button.colors = colorBlock;
                     yield return null;
