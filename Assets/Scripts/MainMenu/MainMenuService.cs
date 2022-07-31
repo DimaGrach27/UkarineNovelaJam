@@ -32,13 +32,13 @@ namespace MainMenu
             AudioSystemService.Inst.StopAllMusic();
             AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             
-            if(GameModel.GameWasInit) return;
-            
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
             exitButton.onClick.AddListener(Exit);
             
             continueButton.targetGraphic.enabled = IsGameWasStarted;
+            
+            if(GameModel.GameWasInit) return;
             
             GameModel.Init();
         }

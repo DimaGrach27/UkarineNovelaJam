@@ -38,6 +38,7 @@ namespace GameScene.NoteWindow
         {
             if (isConfirm)
             {
+                GameModel.SetStatus(StatusEnum.CHOOSE_WAS_PICK, true);
                 _screenPartsService.ShowNextScene(_nextScenes[_selectIndex]);
             }
 

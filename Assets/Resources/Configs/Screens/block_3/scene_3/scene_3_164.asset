@@ -18,8 +18,10 @@ MonoBehaviour:
     enable: 0
     bgEnum: 5
   statusSetter:
-    enable: 0
-    statusesValues: []
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 27
   countSetter:
     enable: 0
     count: 1
@@ -61,7 +63,7 @@ MonoBehaviour:
     actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: 5d3bf2a866e07954fbbb322dbd98e252, type: 2}
-    chooseText: 
+    chooseText: "\u0417\u0430\u0445\u0430\u0440\u0435\u0441\u0430"
     statusDependent:
       enable: 0
       statusesValues: []
@@ -80,7 +82,7 @@ MonoBehaviour:
       special:
       - {fileID: 0}
   - scene: {fileID: 11400000, guid: fff3fecfddfc85e4ab3eeb49d96f5448, type: 2}
-    chooseText: 
+    chooseText: "\u041E\u043B\u0435\u043A\u0441\u0456\u044F"
     statusDependent:
       enable: 0
       statusesValues: []
@@ -98,7 +100,7 @@ MonoBehaviour:
       enable: 0
       special: []
   - scene: {fileID: 11400000, guid: 77aba9ae439d28c4984c2584ec74b21f, type: 2}
-    chooseText: 
+    chooseText: "\u0406\u043B\u043E\u043D\u0443"
     statusDependent:
       enable: 0
       statusesValues: []

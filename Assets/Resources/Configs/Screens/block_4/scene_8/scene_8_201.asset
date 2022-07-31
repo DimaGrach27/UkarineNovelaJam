@@ -43,5 +43,6 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     specialDependent:
-      enable: 0
-      special: []
+      enable: 1
+      special:
+      - {fileID: 11400000, guid: 2a297a0a125ef11498c821bc8559e36e, type: 2}

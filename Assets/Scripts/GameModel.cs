@@ -122,6 +122,7 @@ public enum StatusEnum
     ILONA_HAVE_SHOW = 24,
     ZAHARES_HAVE_SHOW = 25,
     OLEKSII_HAVE_SHOW = 26,
+    CHOOSE_WAS_PICK = 27,
     
     BOTTLE = 100
 }

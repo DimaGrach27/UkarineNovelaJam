@@ -101,6 +101,8 @@ namespace GameScene.NoteWindow
         }
         private void Open()
         {
+            if(GameModel.GetStatus(StatusEnum.CHOOSE_WAS_PICK)) return;
+            
             if(_routine != null)
                 CoroutineHelper.Inst.StopCoroutine(_routine);
 

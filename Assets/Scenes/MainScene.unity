@@ -2621,7 +2621,7 @@ SpriteRenderer:
   m_Size: {x: 24.96, y: 15.124687}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &661524587
@@ -2984,16 +2984,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text New TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew TextNew
-    TextNew TextNew TextNew TextNew TextNew Text
+  m_text: "foreach (var nextScene in _currentSceneSo.NextScenes)\r{\r\n nextScenes.Add(nextScene);\r\nbool
+    isRemove = false;\r\nif (nextScene.statusDependent.enable)\r{\r\n                   
+    bool result = true;\r\n                    \r\n                    foreach (var
+    statusValue in nextScene.statusDependent.statusesValues)\r\n                   
+    {\r\n                        bool status = GameModel.GetStatus(statusValue.status);\r\n                       
+    result &= status == statusValue.value;\r\n                    }\r\n                   
+    isRemove = !result;\r\n                    \r\n                }\r\n               
+    \r\n                if (nextScene.cameraDependent.enable)\r\n               
+    {\r\n                    if(isCamera)\r\n                        isRemove |=
+    !nextScene.cameraDependent.visibleOnPhoto;\r\n                    else\r\n                       
+    isRemove |= !nextScene.cameraDependent.visibleOutPhoto;\r\n                }\r\n               
+    \r\n                if (nextScene.exclusionDependent.enable)\r\n               
+    {\r\n                    isRemove |= choosesList.chooseStatus[count];\r\n               
+    }\r\n\r\n                if (isRemove) nextScenes.Remove(nextScene);\r\n\r\n               
+    count++;\r\n            }"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85330719c75bf804fb5a828cd03c8217, type: 2}
   m_sharedMaterial: {fileID: 4239115820397631735, guid: 85330719c75bf804fb5a828cd03c8217, type: 2}
@@ -5710,8 +5715,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1709558372}
   m_HandleRect: {fileID: 1854319916}
   m_Direction: 2
-  m_Value: 0.99999344
-  m_Size: 0.2649187
+  m_Value: 0.9999981
+  m_Size: 0.09609946
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
