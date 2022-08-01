@@ -97,7 +97,7 @@
 
      public static int CameraFilmLeft
      {
-         get => PlayerPrefs.GetInt(CAMERA_FILM_LEFT_KEY, 24);
+         get => PlayerPrefs.GetInt(CAMERA_FILM_LEFT_KEY, 10);
          set => PlayerPrefs.SetInt(CAMERA_FILM_LEFT_KEY, value);
      }
      
