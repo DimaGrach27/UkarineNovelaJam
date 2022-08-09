@@ -1,19 +1,20 @@
 ﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.MainMenu;
-using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
 {
     public class NoteService
     {
-        private readonly ScreenPartsService _screenPartsService;
+        private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly string[] _nextScenes;
         
         private int _selectIndex = -1;
 
-        public NoteService(Transform ui,ScreenPartsService screenPartsService)
+        [Inject]
+        public NoteService(GamePlayCanvas gamePlayCanvas, ScreenPartsServiceFacade screenPartsServiceFacade)
         {
-            _screenPartsService = screenPartsService;
+            _screenPartsServiceFacade = screenPartsServiceFacade;
             
             _nextScenes = new string[3];
 
@@ -21,7 +22,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
             _nextScenes[1] = "scene_3_164_1";
             _nextScenes[2] = "scene_3_164_2";
             
-            var noteWindowUIView = ui.GetComponentInChildren<NoteWindowUIView>();
+            var noteWindowUIView = gamePlayCanvas.GetComponentInChildren<NoteWindowUIView>();
             noteWindowUIView.OnChoose += OnChooseClick;
         }
 
@@ -39,7 +40,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
             if (isConfirm)
             {
                 GameModel.SetStatus(StatusEnum.CHOOSE_WAS_PICK, true);
-                _screenPartsService.ShowNextScene(_nextScenes[_selectIndex]);
+                _screenPartsServiceFacade.PlayNextScene(_nextScenes[_selectIndex]);
             }
 
             _selectIndex = -1;

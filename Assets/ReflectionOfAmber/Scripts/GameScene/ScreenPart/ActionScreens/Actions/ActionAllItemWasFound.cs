@@ -1,13 +1,10 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using UnityEngine;
-
-namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
     public class ActionAllItemWasFound : IActionScreen
     {
-        public ActionAllItemWasFound(Transform ui)
+        public ActionAllItemWasFound(GamePlayCanvas gamePlayCanvas)
         {
-            _allItemWasFoundUiView = ui.GetComponentInChildren<AllItemWasFoundUiView>();
+            _allItemWasFoundUiView = gamePlayCanvas.GetComponentInChildren<AllItemWasFoundUiView>();
         }
         
         private readonly AllItemWasFoundUiView _allItemWasFoundUiView;

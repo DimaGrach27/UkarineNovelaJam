@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
@@ -17,9 +18,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
         private AnimationBg _currentAnimation;
         private Coroutine _changeBgRoutine;
         
-        public BgService(Transform uiTransform)
+        [Inject]
+        public BgService(GamePlayCanvas gamePlayCanvas)
         {
-            _bgUiView = uiTransform.GetComponentInChildren<BgUiView>();
+            _bgUiView = gamePlayCanvas.GetComponentInChildren<BgUiView>();
 
             BgScriptableObject[] bgScriptableObjects =
                 Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");

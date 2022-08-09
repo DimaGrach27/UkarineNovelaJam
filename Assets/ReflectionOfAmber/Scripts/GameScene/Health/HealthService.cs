@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Health
 {
     public class HealthService
     {
         private readonly HealthUiView _healthUiView;
-        public HealthService(Transform transform)
+        
+        [Inject]
+        public HealthService(GamePlayCanvas gamePlayCanvas)
         {
-            _healthUiView = transform.GetComponentInChildren<HealthUiView>();
+            _healthUiView = gamePlayCanvas.GetComponentInChildren<HealthUiView>();
 
             Health = Health;
         }

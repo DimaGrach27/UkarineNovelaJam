@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Characters
 {
     public class CharacterService 
     {
-        public CharacterService(Transform uiCharacter)
+        [Inject]
+        public CharacterService(GamePlayCanvas gamePlayCanvas)
         {
-            foreach (var characterUi in uiCharacter.GetComponentsInChildren<CharacterUiView>())
+            foreach (var characterUi in gamePlayCanvas.GetComponentsInChildren<CharacterUiView>())
             {
                 _characterUiViewMap.Add(characterUi.ScreenPosition, characterUi);
                 _dissolveRoutineMap.Add(characterUi.ScreenPosition, null);

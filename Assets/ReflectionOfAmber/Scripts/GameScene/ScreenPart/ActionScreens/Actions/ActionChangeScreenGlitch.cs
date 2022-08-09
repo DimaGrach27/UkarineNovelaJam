@@ -4,16 +4,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
     public class ActionChangeScreenGlitch : IActionScreen
     {
-        private readonly ScreenPartsService _screenPartsService;
+        private readonly BgService _bgService;
         
-        public ActionChangeScreenGlitch(ScreenPartsService screenPartsService)
+        public ActionChangeScreenGlitch(BgService bgService)
         {
-            _screenPartsService = screenPartsService;
+            _bgService = bgService;
         }
         
         public void Action()
         {
-            _screenPartsService.ChangeBack(BgEnum.GLITCH_SCREEN);
+            _bgService.Show(BgEnum.GLITCH_SCREEN, null);
         }
 
         public ActionType ActionType => ActionType.CHANGE_GLITCH_SCREEN;
@@ -21,16 +21,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
     
     public class ActionChangeScreenDark : IActionScreen
     {
-        private readonly ScreenPartsService _screenPartsService;
+        private readonly BgService _bgService;
         
-        public ActionChangeScreenDark(ScreenPartsService screenPartsService)
+        public ActionChangeScreenDark(BgService bgService)
         {
-            _screenPartsService = screenPartsService;
+            _bgService = bgService;
         }
         
         public void Action()
         {
-            _screenPartsService.ChangeBack(BgEnum.DARKNESS);
+            _bgService.Show(BgEnum.DARKNESS, null);
         }
 
         public ActionType ActionType => ActionType.CHANGE_DARK_SCREEN;
@@ -38,16 +38,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
     
     public class ActionChangeScreenForest : IActionScreen
     {
-        private readonly ScreenPartsService _screenPartsService;
+        private readonly BgService _bgService;
         
-        public ActionChangeScreenForest(ScreenPartsService screenPartsService)
+        public ActionChangeScreenForest(BgService bgService)
         {
-            _screenPartsService = screenPartsService;
+            _bgService = bgService;
         }
         
         public void Action()
         {
-            _screenPartsService.ChangeBack(BgEnum.FOREST_NORMAL);
+            _bgService.Show(BgEnum.FOREST_NORMAL, null);
         }
 
         public ActionType ActionType => ActionType.CHANGE_FOREST_SCREEN;

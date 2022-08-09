@@ -4,6 +4,7 @@ using DG.Tweening;
 using ReflectionOfAmber.Scripts;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 {
@@ -15,9 +16,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         private Coroutine _coroutine;
 
-        public ChooseWindowService(Transform transform)
+        [Inject]
+        public ChooseWindowService(GamePlayCanvas gamePlayCanvas)
         {
-            _chooseWindowUiView = transform.GetComponentInChildren<ChooseWindowUiView>();
+            _chooseWindowUiView = gamePlayCanvas.GetComponentInChildren<ChooseWindowUiView>();
             _chooseWindowUiView.OnChoose += OnChooseClick;
         }
 

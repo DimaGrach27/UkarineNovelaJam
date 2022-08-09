@@ -1,6 +1,7 @@
 ﻿using System;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
 {
@@ -11,12 +12,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
         private readonly CameraActionUiView _cameraActionUiView;
         private readonly CameraActionFlash _cameraActionFlash;
         
-        public CameraActionService(Transform uiTransform)
+        [Inject]
+        public CameraActionService(GamePlayCanvas gamePlayCanvas)
         {
-            _cameraActionUiView = uiTransform.GetComponentInChildren<CameraActionUiView>();
+            _cameraActionUiView = gamePlayCanvas.GetComponentInChildren<CameraActionUiView>();
             _cameraActionUiView.OnTakePhoto += OnTakePhotoAction;
             
-            _cameraActionFlash = uiTransform.GetComponentInChildren<CameraActionFlash>();;
+            _cameraActionFlash = gamePlayCanvas.GetComponentInChildren<CameraActionFlash>();;
 
             _cameraActionUiView.FilmLeft = SaveService.CameraFilmLeft;
             _cameraActionUiView.IsReadyToTakePhoto = SaveService.CameraFilmLeft > 0;

@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
 {
@@ -10,9 +11,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
     {
         public event Action OnEndTyping;
         
-        public ScreenTextService(Transform uiTransform, UiClickHandler uiClickHandler)
+        [Inject]
+        public ScreenTextService(GamePlayCanvas gamePlayCanvas, UiClickHandler uiClickHandler)
         {
-            _screenTextUiView = uiTransform.GetComponentInChildren<ScreenTextUiView>();
+            _screenTextUiView = gamePlayCanvas.GetComponentInChildren<ScreenTextUiView>();
             uiClickHandler.OnClick += EndTyping;
         }
      

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
@@ -8,20 +9,42 @@ using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 {
-    public class ScreenPartsService 
+    public class ScreenPartsService : IInitializable
     {
         private int _currentPart;
+        private int CurrentPart
+        {
+            get => _currentPart;
+            set
+            {
+                _currentPart = value;
+                _debugHelperService.ShowPartCount(_currentPart);
+            }
+        }
+        
         private string _currentScene;
+        private string CurrentScene
+        {
+            get => _currentScene;
+            set
+            {
+                _currentScene = value;
+                _debugHelperService.ShowSceneId(_currentScene);
+            }
+        }
 
-        private BgService _bgService;
-        private CharacterService _characterService;
-        private ScreenTextService _screenTextService;
-        private ChooseWindowService _chooseWindowService;
-        private CameraActionService _cameraActionService;
-        private ActionScreenService _actionScreenService;
+        private readonly BgService _bgService;
+        private readonly CharacterService _characterService;
+        private readonly ScreenTextService _screenTextService;
+        private readonly ChooseWindowService _chooseWindowService;
+        private readonly CameraActionService _cameraActionService;
+        private readonly ActionScreenService _actionScreenService;
+        
+        private readonly DebugHelperService _debugHelperService;
 
         private bool _blockClick;
         private bool _inGame;
@@ -31,13 +54,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private Coroutine _changeBgRoutine;
 
-        public void InitServices(BgService bgService,
+        [Inject]
+        public ScreenPartsService(BgService bgService,
             CharacterService characterService,
             ScreenTextService screenTextService,
             UiClickHandler uiClickHandler,
             ChooseWindowService chooseWindowService,
             CameraActionService cameraActionService,
-            ActionScreenService actionScreenService)
+            ActionScreenService actionScreenService,
+            ScreenPartsServiceFacade screenPartsService,
+            DebugHelperService debugHelperService
+        )
         {
             _bgService = bgService;
             _characterService = characterService;
@@ -45,17 +72,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _chooseWindowService = chooseWindowService;
             _cameraActionService = cameraActionService;
             _actionScreenService = actionScreenService;
+            _debugHelperService = debugHelperService;
             
             screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
             cameraActionService.OnTakePhoto += TakePhoto;
             uiClickHandler.OnClick += ShowNextPart;
+            screenPartsService.OnPlayNextPart += ShowNextPart;
+            screenPartsService.OnPlayNextScene += ShowNextScene;
         }
         
-        public void Init()
+        public void Initialize()
         {
-            _currentPart = SaveService.GetPart;
-            _currentScene = SaveService.GetScene;
+            CurrentPart = SaveService.GetPart;
+            CurrentScene = SaveService.GetScene;
             
             _characterService.HideAllCharactersInstant();
             _screenTextService.HideText();
@@ -66,7 +96,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             _inGame = true;
             
-            if (_currentScene == "scene_0_0" && _currentPart == 0)
+            if (CurrentScene == "scene_0_0" && CurrentPart == 0)
             {
                 CoroutineHelper.Inst.StartCoroutine(FirstInit());
                 return;
@@ -79,7 +109,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         IEnumerator FirstInit()
         {
-            _currentSceneSo = GameModel.GetScene(_currentScene);
+            _currentSceneSo = GameModel.GetScene(CurrentScene);
             _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum, null);
 
             yield return new WaitForSeconds(1.0f);
@@ -102,20 +132,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             ShowScene();
         }
         
-        public void ShowNextScene(string key)
+        private void ShowNextScene(string key)
         {
-            _currentScene = key;
-            _currentPart = 0;
+            CurrentScene = key;
+            CurrentPart = 0;
 
-            SaveService.SaveScene(_currentScene);
-            SaveService.SavePart(_currentPart);
+            SaveService.SaveScene(CurrentScene);
+            SaveService.SavePart(CurrentPart);
             
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             _chooseWindowService.ChangeVisible(false);
             _cameraActionService.ChangeVisible(false);
 
-            ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(_currentScene);
+            ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(CurrentScene);
             
             if (currentSceneSo.ChangeBackGround.enable)
             {
@@ -128,7 +158,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private void ShowScene()
         {
-            _currentSceneSo = GameModel.GetScene(_currentScene);
+            _currentSceneSo = GameModel.GetScene(CurrentScene);
             
             if(_currentSceneSo.ActionsType != null)
             {
@@ -158,12 +188,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             ShowPart();
         }
 
-        public void ChangeBack(BgEnum bgEnum)
-        {
-            _bgService.Show(bgEnum, null);
-        }
-        
-        public void ShowNextPart()
+        private void ShowNextPart()
         {
             if(_blockClick || !_inGame) return;
             
@@ -175,10 +200,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 }
             }
             
-            Debug.Log($"SHOW next: {_currentPart}");
-            _currentPart++;
+            Debug.Log($"SHOW next: {CurrentPart}");
+            CurrentPart++;
 
-            if (_currentPart >= _currentSceneSo.ScreenParts.Length )
+            if (CurrentPart >= _currentSceneSo.ScreenParts.Length )
             {
                 Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
 
@@ -188,7 +213,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             ShowPart();
             
-            SaveService.SavePart(_currentPart);
+            SaveService.SavePart(CurrentPart);
         }
         
         private void ShowPart()
@@ -200,9 +225,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 return;
             }
             
-            if (_currentPart < _currentSceneSo.ScreenParts.Length)
+            if (CurrentPart < _currentSceneSo.ScreenParts.Length)
             {
-                _currentPartSo = _currentSceneSo.ScreenParts[_currentPart];
+                _currentPartSo = _currentSceneSo.ScreenParts[CurrentPart];
                 
                 if(_currentPartSo.ActionsType != null)
                 {

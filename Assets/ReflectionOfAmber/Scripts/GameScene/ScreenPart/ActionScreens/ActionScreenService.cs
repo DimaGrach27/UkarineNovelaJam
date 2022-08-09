@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using ReflectionOfAmber.Scripts.GameScene.Health;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions;
-using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
 {
@@ -11,11 +11,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
     {
         private readonly Dictionary<ActionType, IActionScreen> _actionMap = new();
 
+        [Inject]
         public ActionScreenService(
             HealthService healthService, 
-            CameraActionService cameraActionService, 
-            ScreenPartsService screenPartsService, 
-            Transform ui)
+            CameraActionService cameraActionService,
+            BgService bgService,
+            GamePlayCanvas gamePlayCanvas,
+            ScreenPartsServiceFacade screenPartsServiceFacade
+            )
         {
             _actionMap.Add(ActionType.DEBUG, new ActionTestDebug());
             _actionMap.Add(ActionType.CAMERA_SHAKER, new ActionCameraShaker());
@@ -49,18 +52,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
             _actionMap.Add(ActionType.ADD_EVIDENCE_ZAHARES, new ActionAddEvidenceForZahares());
             _actionMap.Add(ActionType.ADD_EVIDENCE_OLEKSII, new ActionAddEvidenceForOleksii());
             
-            _actionMap.Add(ActionType.CHANGE_GLITCH_SCREEN, new ActionChangeScreenGlitch(screenPartsService));
-            _actionMap.Add(ActionType.CHANGE_DARK_SCREEN, new ActionChangeScreenDark(screenPartsService));
-            _actionMap.Add(ActionType.CHANGE_FOREST_SCREEN, new ActionChangeScreenForest(screenPartsService));
+            _actionMap.Add(ActionType.CHANGE_GLITCH_SCREEN, new ActionChangeScreenGlitch(bgService));
+            _actionMap.Add(ActionType.CHANGE_DARK_SCREEN, new ActionChangeScreenDark(bgService));
+            _actionMap.Add(ActionType.CHANGE_FOREST_SCREEN, new ActionChangeScreenForest(bgService));
             
-            _actionMap.Add(ActionType.OPEN_EYE_ANIMA, new ActionOpenEye(screenPartsService));
+            _actionMap.Add(ActionType.OPEN_EYE_ANIMA, new ActionOpenEye(screenPartsServiceFacade));
             _actionMap.Add(ActionType.PREPARE_OPEN_EYE_ANIMA, new ActionPrepareOpenEye());
             
-            
-            _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(ui));
+            _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound(gamePlayCanvas));
         }
         
-
         public void Action(ActionType actionType)
         {
             if(!_actionMap.ContainsKey(actionType)) return;

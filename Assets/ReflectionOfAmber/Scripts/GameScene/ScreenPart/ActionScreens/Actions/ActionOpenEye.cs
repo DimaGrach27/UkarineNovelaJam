@@ -1,16 +1,13 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using ReflectionOfAmber.Scripts.GameScene;
-
-namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
     public class ActionOpenEye : IActionScreen
     {
-        public ActionOpenEye(ScreenPartsService screenPartsService)
+        public ActionOpenEye(ScreenPartsServiceFacade screenPartsServiceFacade)
         {
-            _screenPartsService = screenPartsService;
+            _screenPartsServiceFacade = screenPartsServiceFacade;
         }
 
-        private readonly ScreenPartsService _screenPartsService;
+        private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         
         public void Action()
         {
@@ -19,7 +16,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 
         private void OnDoneOpenAnima()
         {
-            _screenPartsService.ShowNextPart();
+            _screenPartsServiceFacade.PlatNextPart();
         }
         
         public ActionType ActionType => ActionType.OPEN_EYE_ANIMA;
