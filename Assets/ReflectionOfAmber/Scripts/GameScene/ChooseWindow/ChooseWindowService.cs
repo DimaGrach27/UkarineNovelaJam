@@ -11,22 +11,25 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
     public class ChooseWindowService
     {
         private readonly ChooseWindowUiView _chooseWindowUiView;
+        private readonly CoroutineHelper _coroutineHelper;
 
         public event Action<NextScene> OnChoose;
 
         private Coroutine _coroutine;
 
         [Inject]
-        public ChooseWindowService(GamePlayCanvas gamePlayCanvas)
+        public ChooseWindowService(GamePlayCanvas gamePlayCanvas, CoroutineHelper coroutineHelper)
         {
             _chooseWindowUiView = gamePlayCanvas.GetComponentInChildren<ChooseWindowUiView>();
+            _coroutineHelper = coroutineHelper;
+            
             _chooseWindowUiView.OnChoose += OnChooseClick;
         }
 
         public void SetChooses(NextScene[] nextScenes, string textChoose, bool isCameraAction)
         {
-            if(_coroutine !=null) CoroutineHelper.Inst.StopCoroutine(_coroutine);
-            _coroutine = CoroutineHelper.Inst.StartCoroutine(FadeInWindow());
+            if(_coroutine !=null) _coroutineHelper.StopCoroutine(_coroutine);
+            _coroutine = _coroutineHelper.StartCoroutine(FadeInWindow());
             
             _chooseWindowUiView.InitButtons(nextScenes, isCameraAction);
             _chooseWindowUiView.SetChooseText(textChoose);
@@ -36,8 +39,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         
         private void OnChooseClick(NextScene chooseScene)
         {
-            if(_coroutine !=null) CoroutineHelper.Inst.StopCoroutine(_coroutine);
-            _coroutine = CoroutineHelper.Inst.StartCoroutine(FadeOutWindow());
+            if(_coroutine !=null) _coroutineHelper.StopCoroutine(_coroutine);
+            _coroutine = _coroutineHelper.StartCoroutine(FadeOutWindow());
             
             OnChoose?.Invoke(chooseScene);
         }

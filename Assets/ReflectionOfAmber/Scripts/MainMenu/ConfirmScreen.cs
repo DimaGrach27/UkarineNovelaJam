@@ -8,8 +8,6 @@ namespace ReflectionOfAmber.Scripts.MainMenu
 {
     public class ConfirmScreen : MonoBehaviour
     {
-        public static ConfirmScreen Ins { get; private set; }
-        
         [SerializeField] private TextMeshProUGUI textDescription;
         
         [SerializeField] private Button confirm;
@@ -22,10 +20,6 @@ namespace ReflectionOfAmber.Scripts.MainMenu
 
         private void Awake()
         {
-            if(Ins != null) return;
-            
-            Ins = this;
-            
             confirm.onClick.AddListener(Confirm);
             notConfirm.onClick.AddListener(NotConfirm);
             

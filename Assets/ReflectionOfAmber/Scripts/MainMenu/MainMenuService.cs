@@ -4,6 +4,7 @@ using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.MainMenu
 {
@@ -25,12 +26,22 @@ namespace ReflectionOfAmber.Scripts.MainMenu
                 return currentProgress > 0 || sceneKey != "scene_0_0";
             }
         }
+
+        private AudioSystemService _audioSystemService;
+        private ConfirmScreen _confirmScreen;
+        
+        [Inject]
+        public void Construct(ConfirmScreen confirmScreen, AudioSystemService audioSystemService)
+        {
+            _audioSystemService = audioSystemService;
+            _confirmScreen = confirmScreen;
+        }
         
         private void Start()
         {
             FadeService.FadeService.FadeOut();
-            AudioSystemService.Inst.StopAllMusic();
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
+            _audioSystemService.StopAllMusic();
+            _audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
@@ -48,7 +59,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             if (IsGameWasStarted)
             {
                 string areYouSure = "Попередній прогрес буде втрачений.\nПродовжити далі?";
-                ConfirmScreen.Ins.Check(ConfirmStart, areYouSure);
+                _confirmScreen.Check(ConfirmStart, areYouSure);
                 buttonGroup.enabled = true;
                 buttonGroup.DOFade(0.0f, 0.3f);
                 return;
@@ -75,7 +86,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         
         private void LoadGameScene()
         {
-            AudioSystemService.Inst.StopAllMusic();
+            _audioSystemService.StopAllMusic();
             StartCoroutine(LoadGameSceneRoutine());
         }
 
@@ -92,7 +103,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         private void Exit()
         {
             string areYouSure = "Ви точно плануєте вийти?";
-            ConfirmScreen.Ins.Check(ConfirmExit, areYouSure);
+            _confirmScreen.Check(ConfirmExit, areYouSure);
             buttonGroup.enabled = true;
             buttonGroup.DOFade(0.0f, 0.3f);
         }

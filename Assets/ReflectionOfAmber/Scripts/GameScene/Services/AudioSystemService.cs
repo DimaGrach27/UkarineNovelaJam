@@ -11,8 +11,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         [SerializeField] private AudioSource soundAudioLooperSource;
 
         private readonly Dictionary<MusicType, AudioClip> _audioClipsMap = new();
-        public static AudioSystemService Inst { get; private set; }
-
+        
         private readonly Queue<AudioClip> _audioClips = new();
         private readonly Queue<AudioClip> _audioClipsLooper = new();
 
@@ -26,10 +25,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
 
         private void Awake()
         {
-            if(Inst != null) return;
-            
-            Inst = this;
-
             musicAudioSource.volume = SaveService.GetMusicVolume();
             soundAudioSource.volume = SaveService.GetAudioVolume();
             soundAudioLooperSource.volume = SaveService.GetAudioVolume();
@@ -210,6 +205,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         HEART_BEEP = 14,
         CREAKING_DOOR = 15,
         PISTOL_SHOT = 16,
+        PHOTO_CLICK = 17,
     }
     
 }

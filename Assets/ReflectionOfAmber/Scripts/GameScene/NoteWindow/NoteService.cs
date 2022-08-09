@@ -7,14 +7,18 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
     public class NoteService
     {
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
+        private readonly ConfirmScreen _confirmScreen;
         private readonly string[] _nextScenes;
         
         private int _selectIndex = -1;
 
         [Inject]
-        public NoteService(GamePlayCanvas gamePlayCanvas, ScreenPartsServiceFacade screenPartsServiceFacade)
+        public NoteService(GamePlayCanvas gamePlayCanvas, 
+            ScreenPartsServiceFacade screenPartsServiceFacade,
+            ConfirmScreen confirmScreen)
         {
             _screenPartsServiceFacade = screenPartsServiceFacade;
+            _confirmScreen = confirmScreen;
             
             _nextScenes = new string[3];
 
@@ -32,7 +36,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
             string description = "Ви впевнені, що саме цей підозрюваний являється злодієм? " +
                                  "Помилка призведе до необачних дій...";
             
-            ConfirmScreen.Ins.Check(ConfirmAction, description);
+            _confirmScreen.Check(ConfirmAction, description);
         }
 
         private void ConfirmAction(bool isConfirm)

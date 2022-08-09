@@ -1,22 +1,12 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.Health;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-
-namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionFullHeal : IActionScreen
+    public class ActionFullHeal : ActionBase
     {
-        private readonly HealthService _healthService;
-        
-        public ActionFullHeal(HealthService healthService)
+        public override void Action()
         {
-            _healthService = healthService;
-        }
-        
-        public void Action()
-        {
-            _healthService.Health = GlobalConstant.MAX_HEALTH;
+            ActionScreenService.HealthService.Health = GlobalConstant.MAX_HEALTH;
         }
 
-        public ActionType ActionType => ActionType.HEAL_FULL_HEALTH;
+        public override ActionType ActionType => ActionType.HEAL_FULL_HEALTH;
     }
 }

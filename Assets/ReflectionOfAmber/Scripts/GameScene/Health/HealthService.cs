@@ -6,12 +6,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.Health
     public class HealthService
     {
         private readonly HealthUiView _healthUiView;
+        private readonly SceneService _sceneService;
         
         [Inject]
-        public HealthService(GamePlayCanvas gamePlayCanvas)
+        public HealthService(GamePlayCanvas gamePlayCanvas, SceneService sceneService)
         {
             _healthUiView = gamePlayCanvas.GetComponentInChildren<HealthUiView>();
-
+            _sceneService = sceneService;
+            
             Health = Health;
         }
         
@@ -33,7 +35,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Health
                 
                 if (value <= 0)
                 {
-                    SceneService.LoadEndGame();
+                    _sceneService.LoadEndGame();
                 }
                 
                 int health = Mathf.Clamp(value, 0, GlobalConstant.MAX_HEALTH);

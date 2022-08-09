@@ -1,25 +1,24 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using ReflectionOfAmber.Scripts.GameScene.Services;
+﻿using ReflectionOfAmber.Scripts.GameScene.Services;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionWaterSlap : IActionScreen
+    public class ActionWaterSlap : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.PlayShotSound(MusicType.WATER_SLAP);
+            ActionScreenService.AudioSystemService.PlayShotSound(MusicType.WATER_SLAP);
         }
 
-        public ActionType ActionType => ActionType.WATER_SLAP_SOUND;
+        public override ActionType ActionType => ActionType.WATER_SLAP_SOUND;
     }
     
-    public class ActionDragMetal : IActionScreen
+    public class ActionDragMetal : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.PlayShotSound(MusicType.METAL_DRAG);
+            ActionScreenService.AudioSystemService.PlayShotSound(MusicType.METAL_DRAG);
         }
 
-        public ActionType ActionType => ActionType.METAL_DRAG_SOUND;
+        public override ActionType ActionType => ActionType.METAL_DRAG_SOUND;
     }
 }

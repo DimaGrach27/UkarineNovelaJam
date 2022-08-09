@@ -12,13 +12,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         public event Action OnEndTyping;
         
         [Inject]
-        public ScreenTextService(GamePlayCanvas gamePlayCanvas, UiClickHandler uiClickHandler)
+        public ScreenTextService(GamePlayCanvas gamePlayCanvas, 
+            UiClickHandler uiClickHandler, 
+            CoroutineHelper coroutineHelper)
         {
+            _coroutineHelper = coroutineHelper;
             _screenTextUiView = gamePlayCanvas.GetComponentInChildren<ScreenTextUiView>();
             uiClickHandler.OnClick += EndTyping;
         }
      
         private readonly ScreenTextUiView _screenTextUiView;
+        private readonly CoroutineHelper _coroutineHelper;
         
         private bool _isTextEnable = true;
         private bool _isTyping;
@@ -33,7 +37,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             if(_isTextEnable) return;
             
             if(_dissolveCoroutine != null)
-                CoroutineHelper.Inst.StopCoroutine(_dissolveCoroutine);
+                _coroutineHelper.StopCoroutine(_dissolveCoroutine);
             
             _isTextEnable = true;
             _screenTextUiView.Visible = true;
@@ -52,9 +56,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _endText = text;
             
             if(_typingCoroutine != null)
-                CoroutineHelper.Inst.StopCoroutine(_typingCoroutine);
+                _coroutineHelper.StopCoroutine(_typingCoroutine);
             
-            _typingCoroutine = CoroutineHelper.Inst.StartCoroutine(TypingRoutine(text));
+            _typingCoroutine = _coroutineHelper.StartCoroutine(TypingRoutine(text));
             
             ShowText();
         }
@@ -64,9 +68,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             if(!_isTextEnable) return;
             
             if(_dissolveCoroutine != null)
-                CoroutineHelper.Inst.StopCoroutine(_dissolveCoroutine);
+                _coroutineHelper.StopCoroutine(_dissolveCoroutine);
             
-            _dissolveCoroutine = CoroutineHelper.Inst.StartCoroutine(DissolveOut());
+            _dissolveCoroutine = _coroutineHelper.StartCoroutine(DissolveOut());
             
             _isTextEnable = false;
         }
@@ -110,7 +114,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             }
             
             if(_typingCoroutine != null)
-                CoroutineHelper.Inst.StopCoroutine(_typingCoroutine);
+                _coroutineHelper.StopCoroutine(_typingCoroutine);
             
             _isTyping = false;
             _screenTextUiView.CanvasGroup.blocksRaycasts = true;

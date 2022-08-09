@@ -15,6 +15,40 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 {
     public class ScreenPartsService : IInitializable
     {
+        [Inject]
+        public ScreenPartsService(BgService bgService,
+            CharacterService characterService,
+            ScreenTextService screenTextService,
+            UiClickHandler uiClickHandler,
+            ChooseWindowService chooseWindowService,
+            CameraActionService cameraActionService,
+            ActionScreenService actionScreenService,
+            ScreenPartsServiceFacade screenPartsService,
+            CoroutineHelper coroutineHelper,
+            SceneService sceneService,
+            AudioSystemService audioSystemService,
+            DebugHelperService debugHelperService
+        )
+        {
+            _bgService = bgService;
+            _characterService = characterService;
+            _screenTextService = screenTextService;
+            _chooseWindowService = chooseWindowService;
+            _cameraActionService = cameraActionService;
+            _actionScreenService = actionScreenService;
+            _coroutineHelper = coroutineHelper;
+            _sceneService = sceneService;
+            _debugHelperService = debugHelperService;
+            _audioSystemService = audioSystemService;
+            
+            screenTextService.OnEndTyping += OnEndTyping;
+            chooseWindowService.OnChoose += OnChooseClick;
+            cameraActionService.OnTakePhoto += TakePhoto;
+            uiClickHandler.OnClick += ShowNextPart;
+            screenPartsService.OnPlayNextPart += ShowNextPart;
+            screenPartsService.OnPlayNextScene += ShowNextScene;
+        }
+        
         private int _currentPart;
         private int CurrentPart
         {
@@ -43,6 +77,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly ChooseWindowService _chooseWindowService;
         private readonly CameraActionService _cameraActionService;
         private readonly ActionScreenService _actionScreenService;
+        private readonly CoroutineHelper _coroutineHelper;
+        private readonly SceneService _sceneService;
+        private readonly AudioSystemService _audioSystemService;
         
         private readonly DebugHelperService _debugHelperService;
 
@@ -54,34 +91,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private Coroutine _changeBgRoutine;
 
-        [Inject]
-        public ScreenPartsService(BgService bgService,
-            CharacterService characterService,
-            ScreenTextService screenTextService,
-            UiClickHandler uiClickHandler,
-            ChooseWindowService chooseWindowService,
-            CameraActionService cameraActionService,
-            ActionScreenService actionScreenService,
-            ScreenPartsServiceFacade screenPartsService,
-            DebugHelperService debugHelperService
-        )
-        {
-            _bgService = bgService;
-            _characterService = characterService;
-            _screenTextService = screenTextService;
-            _chooseWindowService = chooseWindowService;
-            _cameraActionService = cameraActionService;
-            _actionScreenService = actionScreenService;
-            _debugHelperService = debugHelperService;
-            
-            screenTextService.OnEndTyping += OnEndTyping;
-            chooseWindowService.OnChoose += OnChooseClick;
-            cameraActionService.OnTakePhoto += TakePhoto;
-            uiClickHandler.OnClick += ShowNextPart;
-            screenPartsService.OnPlayNextPart += ShowNextPart;
-            screenPartsService.OnPlayNextScene += ShowNextScene;
-        }
-        
         public void Initialize()
         {
             CurrentPart = SaveService.GetPart;
@@ -98,11 +107,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             if (CurrentScene == "scene_0_0" && CurrentPart == 0)
             {
-                CoroutineHelper.Inst.StartCoroutine(FirstInit());
+                _coroutineHelper.StartCoroutine(FirstInit());
                 return;
             }
             
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
+            _audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             FadeService.FadeService.FadeOut();
             ShowScene();
         }
@@ -114,14 +123,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
             yield return new WaitForSeconds(1.0f);
             
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_COPS);
+            _audioSystemService.StarPlayMusicOnLoop(MusicType.RADIO_COPS);
             yield return GameNameAnimation.Inst.StartAnima();
             
             yield return new WaitForSeconds(0.5f);
             
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
-            AudioSystemService.Inst.AddQueueClipToLoop(MusicType.NEBO);
-            AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
+            _audioSystemService.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
+            _audioSystemService.AddQueueClipToLoop(MusicType.NEBO);
+            _audioSystemService.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
             
             yield return new WaitForSeconds(2.0f);
             
@@ -237,7 +246,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                     }
                 }
                 
-                AudioSystemService.Inst.PlayShotSound(_currentPartSo.MusicTypeOnStart);
+                _audioSystemService.PlayShotSound(_currentPartSo.MusicTypeOnStart);
 
                 if(_currentPartSo.StatusSetter.Enable)
                 {
@@ -259,7 +268,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             switch (_currentSceneSo.NextScenes.Length)
             {
                 case 0:
-                    SceneService.LoadEndGame();
+                    _sceneService.LoadEndGame();
                     _inGame = false;
                     break;
                 

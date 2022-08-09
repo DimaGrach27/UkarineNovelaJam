@@ -12,17 +12,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
     {
         private BgEnum _currentBg = BgEnum.NONE;
         
+        private readonly CoroutineHelper _coroutineHelper;
         private readonly BgUiView _bgUiView;
         private readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
+        
         
         private AnimationBg _currentAnimation;
         private Coroutine _changeBgRoutine;
         
         [Inject]
-        public BgService(GamePlayCanvas gamePlayCanvas)
+        public BgService(GamePlayCanvas gamePlayCanvas, CoroutineHelper coroutineHelper)
         {
             _bgUiView = gamePlayCanvas.GetComponentInChildren<BgUiView>();
-
+            _coroutineHelper = coroutineHelper;
+            
             BgScriptableObject[] bgScriptableObjects =
                 Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
             
@@ -59,9 +62,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
             }
             
             if(_changeBgRoutine != null)
-                CoroutineHelper.Inst.StopCoroutine(_changeBgRoutine);
+                _coroutineHelper.StopCoroutine(_changeBgRoutine);
 
-            _changeBgRoutine = CoroutineHelper.Inst.StartCoroutine(ChangeBgRoutine(onDoneAnimation));
+            _changeBgRoutine = _coroutineHelper.StartCoroutine(ChangeBgRoutine(onDoneAnimation));
         }
         
         public void Hide()

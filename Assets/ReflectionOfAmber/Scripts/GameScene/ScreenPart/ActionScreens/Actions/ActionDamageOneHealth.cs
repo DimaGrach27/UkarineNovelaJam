@@ -1,26 +1,13 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.Health;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-
-namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionDamageOneHealth : IActionScreen
+    public class ActionDamageOneHealth : ActionBase
     {
-        private readonly HealthService _healthService;
-        private readonly ActionScreenService _actionScreenService;
-        
-        public ActionDamageOneHealth(HealthService healthService, 
-            ActionScreenService actionScreenService)
+        public override void Action()
         {
-            _healthService = healthService;
-            _actionScreenService = actionScreenService;
-        }
-        
-        public void Action()
-        {
-            _healthService.Health--;
-            _actionScreenService.Action(ActionType.CAMERA_SHAKER);
+            ActionScreenService.HealthService.Health--;
+            ActionScreenService.Action(ActionType.CAMERA_SHAKER);
         }
 
-        public ActionType ActionType => ActionType.DAMAGE_ONE_HEALTH;
+        public override ActionType ActionType => ActionType.DAMAGE_ONE_HEALTH;
     }
 }

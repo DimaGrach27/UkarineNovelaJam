@@ -2,17 +2,23 @@
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
 {
     public class CameraActionFlash : MonoBehaviour
     {
-        [SerializeField] private AudioClip clickClip;
         [SerializeField] private AnimationCurve flashCurve;
         [SerializeField] private Image flashImage;
 
         private Coroutine _flashRoutine;
-        
+        private AudioSystemService _audioSystemService;
+
+        [Inject]
+        public void Construct(AudioSystemService audioSystemService)
+        {
+            _audioSystemService = audioSystemService;
+        }
         public void CallFlash()
         {
             if(_flashRoutine != null)
@@ -27,10 +33,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
             flashImage.gameObject.SetActive(true);
             flashImage.color = imageColor;
             
+            _audioSystemService.PlayShotSound(MusicType.PHOTO_CLICK);
             float time = 0.0f;
 
-            AudioSystemService.Inst.PlayShotSound(clickClip);
-            
             while (time < GlobalConstant.CAMERA_ACTION_FLASH_DURATION)
             {
                 float alpha = flashCurve.Evaluate(CalculateProgress());

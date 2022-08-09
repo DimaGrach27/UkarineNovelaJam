@@ -7,8 +7,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.GlobalVolume
 {
     public class GlobalVolumeService : MonoBehaviour
     {
-        public static GlobalVolumeService Inst { get; private set; }
-
         private Volume _volume;
 
         [SerializeField] private AnimationCurve aberrationPulseCurve;
@@ -21,9 +19,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.GlobalVolume
         
         private void Awake()
         {
-            if(Inst != null) return;
-
-            Inst = this;
             _volume = GetComponent<Volume>();
 
             _chromaticAberration = _volume.profile.components[0] as ChromaticAberration;

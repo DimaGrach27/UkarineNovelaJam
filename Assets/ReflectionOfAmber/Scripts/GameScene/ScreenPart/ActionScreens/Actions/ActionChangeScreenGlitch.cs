@@ -2,54 +2,33 @@
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionChangeScreenGlitch : IActionScreen
+    public class ActionChangeScreenGlitch : ActionBase
     {
-        private readonly BgService _bgService;
-        
-        public ActionChangeScreenGlitch(BgService bgService)
+        public override void Action()
         {
-            _bgService = bgService;
-        }
-        
-        public void Action()
-        {
-            _bgService.Show(BgEnum.GLITCH_SCREEN, null);
+            ActionScreenService.BgService.Show(BgEnum.GLITCH_SCREEN, null);
         }
 
-        public ActionType ActionType => ActionType.CHANGE_GLITCH_SCREEN;
+        public override ActionType ActionType => ActionType.CHANGE_GLITCH_SCREEN;
     }
     
-    public class ActionChangeScreenDark : IActionScreen
+    public class ActionChangeScreenDark : ActionBase
     {
-        private readonly BgService _bgService;
-        
-        public ActionChangeScreenDark(BgService bgService)
+        public override void Action()
         {
-            _bgService = bgService;
-        }
-        
-        public void Action()
-        {
-            _bgService.Show(BgEnum.DARKNESS, null);
+            ActionScreenService.BgService.Show(BgEnum.DARKNESS, null);
         }
 
-        public ActionType ActionType => ActionType.CHANGE_DARK_SCREEN;
+        public override ActionType ActionType => ActionType.CHANGE_DARK_SCREEN;
     }
     
-    public class ActionChangeScreenForest : IActionScreen
+    public class ActionChangeScreenForest : ActionBase
     {
-        private readonly BgService _bgService;
-        
-        public ActionChangeScreenForest(BgService bgService)
+        public override void Action()
         {
-            _bgService = bgService;
-        }
-        
-        public void Action()
-        {
-            _bgService.Show(BgEnum.FOREST_NORMAL, null);
+            ActionScreenService.BgService.Show(BgEnum.FOREST_NORMAL, null);
         }
 
-        public ActionType ActionType => ActionType.CHANGE_FOREST_SCREEN;
+        public override ActionType ActionType => ActionType.CHANGE_FOREST_SCREEN;
     }
 }

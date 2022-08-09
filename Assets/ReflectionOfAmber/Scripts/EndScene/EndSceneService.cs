@@ -4,6 +4,7 @@ using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.EndScene
 {
@@ -15,14 +16,21 @@ namespace ReflectionOfAmber.Scripts.EndScene
         private bool _isReadyToTap;
 
         private Coroutine _delayLoad;
+        private AudioSystemService _audioSystemService;
+
+        [Inject]
+        public void Construct(AudioSystemService audioSystemService)
+        {
+            _audioSystemService = audioSystemService;
+        }
 
         private void Awake()
         {
-            AudioSystemService.Inst.StopAllMusic();
+            _audioSystemService.StopAllMusic();
             
             tapToExit.alpha = 0.0f;
             groupImages.alpha = 0.0f;
-            ReflectionOfAmber.Scripts.FadeService.FadeService.VisibleFade(false);
+            FadeService.FadeService.VisibleFade(false);
         }
 
         private void Start()

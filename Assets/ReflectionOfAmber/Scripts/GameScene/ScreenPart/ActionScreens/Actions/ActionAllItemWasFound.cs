@@ -1,19 +1,27 @@
 ﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionAllItemWasFound : IActionScreen
+    public class ActionAllItemWasFound : ActionBase
     {
-        public ActionAllItemWasFound(GamePlayCanvas gamePlayCanvas)
+        private AllItemWasFoundUiView _allItemWasFoundUiView;
+        private AllItemWasFoundUiView AllItemWasFoundUiView
         {
-            _allItemWasFoundUiView = gamePlayCanvas.GetComponentInChildren<AllItemWasFoundUiView>();
+            get
+            {
+                if (_allItemWasFoundUiView == null)
+                {
+                    _allItemWasFoundUiView =
+                        ActionScreenService.GamePlayCanvas.GetComponentInChildren<AllItemWasFoundUiView>();
+                }
+
+                return _allItemWasFoundUiView;
+            }
         }
         
-        private readonly AllItemWasFoundUiView _allItemWasFoundUiView;
-        
-        public void Action()
+        public override void Action()
         {
-            _allItemWasFoundUiView.Show();
+            AllItemWasFoundUiView.Show();
         }
 
-        public ActionType ActionType => ActionType.ALL_ITEM_WAS_FOUND;
+        public override ActionType ActionType => ActionType.ALL_ITEM_WAS_FOUND;
     }
 }

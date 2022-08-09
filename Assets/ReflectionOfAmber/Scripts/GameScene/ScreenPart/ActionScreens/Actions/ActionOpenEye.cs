@@ -1,35 +1,28 @@
 ﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionOpenEye : IActionScreen
+    public class ActionOpenEye : ActionBase
     {
-        public ActionOpenEye(ScreenPartsServiceFacade screenPartsServiceFacade)
+        public override void Action()
         {
-            _screenPartsServiceFacade = screenPartsServiceFacade;
-        }
-
-        private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
-        
-        public void Action()
-        {
-            OpenEyeAnimation.Inst.PlayOpenEye(OnDoneOpenAnima);
+            ActionScreenService.OpenEyeAnimation.PlayOpenEye(OnDoneOpenAnima);
         }
 
         private void OnDoneOpenAnima()
         {
-            _screenPartsServiceFacade.PlatNextPart();
+            ActionScreenService.ScreenPartsServiceFacade.PlatNextPart();
         }
         
-        public ActionType ActionType => ActionType.OPEN_EYE_ANIMA;
+        public override ActionType ActionType => ActionType.OPEN_EYE_ANIMA;
     }
     
-    public class ActionPrepareOpenEye : IActionScreen
+    public class ActionPrepareOpenEye : ActionBase
     {
 
-        public void Action()
+        public override void Action()
         {
-            OpenEyeAnimation.Inst.PrepareEye();
+            ActionScreenService.OpenEyeAnimation.PrepareEye();
         }
         
-        public ActionType ActionType => ActionType.PREPARE_OPEN_EYE_ANIMA;
+        public override ActionType ActionType => ActionType.PREPARE_OPEN_EYE_ANIMA;
     }
 }

@@ -1,16 +1,15 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using ReflectionOfAmber.Scripts.GameScene.Services;
+﻿using ReflectionOfAmber.Scripts.GameScene.Services;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionRadioChange : IActionScreen
+    public class ActionRadioChange : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
-            AudioSystemService.Inst.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
+            ActionScreenService.AudioSystemService.StarPlayMusicOnLoop(MusicType.RADIO_CHANGE);
+            ActionScreenService.AudioSystemService.AddQueueClipToLoop(MusicType.EMBIENT_SLOW);
         }
 
-        public ActionType ActionType => ActionType.RADIO_CHANGE;
+        public override ActionType ActionType => ActionType.RADIO_CHANGE;
     }
 }

@@ -2,9 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using ReflectionOfAmber.Scripts;
-using ReflectionOfAmber.Scripts.GameScene;
-using ReflectionOfAmber.Scripts.GameScene.NoteWindow;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -98,19 +95,19 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         private void Close()
         {
             if(_routine != null)
-                CoroutineHelper.Inst.StopCoroutine(_routine);
+                StopCoroutine(_routine);
 
-            _routine = CoroutineHelper.Inst.StartCoroutine(FadeOutWindow());
+            _routine = StartCoroutine(FadeOutWindow());
         }
         private void Open()
         {
             if(GameModel.GetStatus(StatusEnum.CHOOSE_WAS_PICK)) return;
             
             if(_routine != null)
-                CoroutineHelper.Inst.StopCoroutine(_routine);
+                StopCoroutine(_routine);
 
             InitNote();
-            _routine = CoroutineHelper.Inst.StartCoroutine(FadeInWindow());
+            _routine = StartCoroutine(FadeInWindow());
         }
         
         private IEnumerator FadeInWindow()

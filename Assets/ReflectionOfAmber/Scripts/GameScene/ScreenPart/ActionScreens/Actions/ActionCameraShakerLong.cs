@@ -1,23 +1,27 @@
 ﻿using DG.Tweening;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionCameraShakerLong  : IActionScreen
+    public class ActionCameraShakerLong : ActionBase
     {
-        private readonly Camera _camera;
-
-        public ActionCameraShakerLong()
+        private Camera _camera;
+        private Camera Camera
         {
-            _camera = Camera.main;
+            get
+            {
+                if(_camera == null)
+                    _camera = Camera.main;
+                
+                return _camera;
+            }
         }
         
-        public void Action()
+        public override void Action()
         {
-            _camera.DOShakePosition(1.25f, 0.35f, 15, 90.0f, false);
+            Camera.DOShakePosition(1.25f, 0.35f, 15, 90.0f, false);
         }
 
-        public ActionType ActionType => ActionType.CAMERA_SHAKER_LONG;
+        public override ActionType ActionType => ActionType.CAMERA_SHAKER_LONG;
     }
 }

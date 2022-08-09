@@ -4,6 +4,7 @@ using ReflectionOfAmber.Scripts.GameScene;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.Settings
 {
@@ -15,8 +16,15 @@ namespace ReflectionOfAmber.Scripts.Settings
 
         [SerializeField] private Button button;
 
+        private AudioSystemService _audioSystemService;
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
+
+        [Inject]
+        public void Construct(AudioSystemService audioSystemService)
+        {
+            _audioSystemService = audioSystemService;
+        }
         
         private void Start()
         {
@@ -61,31 +69,31 @@ namespace ReflectionOfAmber.Scripts.Settings
         
         private void ChangeMusicVolume(float value)
         {
-            AudioSystemService.Inst.ChangeMusic(value / 10);
+            _audioSystemService.ChangeMusic(value / 10);
             SaveService.SaveMusicVolume(value / 10);
         }
         
                 
         private void ChangeSoundVolume(float value)
         {
-            AudioSystemService.Inst.ChangeAudio(value / 10);
+            _audioSystemService.ChangeAudio(value / 10);
             SaveService.SaveAudioVolume(value / 10);
         }
 
         private void Close()
         {
             if(_routine != null)
-                CoroutineHelper.Inst.StopCoroutine(_routine);
+                StopCoroutine(_routine);
 
-            _routine = CoroutineHelper.Inst.StartCoroutine(FadeOutWindow());
+            _routine = StartCoroutine(FadeOutWindow());
         }
 
         private void Open()
         {
             if(_routine != null)
-                CoroutineHelper.Inst.StopCoroutine(_routine);
+                StopCoroutine(_routine);
             
-            _routine = CoroutineHelper.Inst.StartCoroutine(FadeInWindow());
+            _routine = StartCoroutine(FadeInWindow());
         }
         
         private IEnumerator FadeInWindow()

@@ -1,22 +1,12 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-
-namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionTakePhoto : IActionScreen
+    public class ActionTakePhoto : ActionBase
     {
-        public ActionTakePhoto(CameraActionService actionService)
+        public override void Action()
         {
-            _cameraActionService = actionService;
+            ActionScreenService.CameraActionService.TakePhotoAction();
         }
 
-        private readonly CameraActionService _cameraActionService;
-        
-        public void Action()
-        {
-            _cameraActionService.TakePhotoAction();
-        }
-
-        public ActionType ActionType => ActionType.TAKE_PHOTO;
+        public override ActionType ActionType => ActionType.TAKE_PHOTO;
     }
 }

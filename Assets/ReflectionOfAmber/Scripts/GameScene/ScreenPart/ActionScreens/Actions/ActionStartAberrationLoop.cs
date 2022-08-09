@@ -1,25 +1,22 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.GlobalVolume;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-
-namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionStartAberrationLoop : IActionScreen
+    public class ActionStartAberrationLoop : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            GlobalVolumeService.Inst.PlayAberrationLoop();
+            ActionScreenService.GlobalVolumeService.PlayAberrationLoop();
         }
 
-        public ActionType ActionType => ActionType.START_ABERRATION_LOOP;
+        public override ActionType ActionType => ActionType.START_ABERRATION_LOOP;
     }
     
-    public class ActionStopAberrationLoop : IActionScreen
+    public class ActionStopAberrationLoop : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            GlobalVolumeService.Inst.StopAberrationLoop();
+            ActionScreenService.GlobalVolumeService.StopAberrationLoop();
         }
 
-        public ActionType ActionType => ActionType.STOP_ABERRATION_LOOP;
+        public override ActionType ActionType => ActionType.STOP_ABERRATION_LOOP;
     }
 }

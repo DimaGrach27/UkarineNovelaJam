@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.MainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Menu
 {
@@ -12,9 +14,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         [SerializeField] private Button continueButton;
         [SerializeField] private Button exitToMenuButton;
         
+        private ConfirmScreen _confirmScreen;
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
         private Coroutine _delayLoad;
+
+        [Inject]
+        public void Construct(ConfirmScreen confirmScreen)
+        {
+            _confirmScreen = confirmScreen;
+        }
         
         private void Awake()
         {
@@ -33,9 +42,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         private void Close()
         {
             if(_routine != null)
-                CoroutineHelper.Inst.StopCoroutine(_routine);
+                StopCoroutine(_routine);
 
-            _routine = CoroutineHelper.Inst.StartCoroutine(FadeOutWindow());
+            _routine = StartCoroutine(FadeOutWindow());
         }
         
         private void Open(CallKeyType type)
@@ -43,14 +52,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
             if(type != CallKeyType.GAME_PAUSE_MENU) return;
             
             if(_routine != null)
-                CoroutineHelper.Inst.StopCoroutine(_routine);
+                StopCoroutine(_routine);
             
-            _routine = CoroutineHelper.Inst.StartCoroutine(FadeInWindow());
+            _routine = StartCoroutine(FadeInWindow());
         }
         
         private void ClickExit()
         {
-            ConfirmScreen.Ins.Check(ConfirmExit, "Ви точно бажаєте вийти?");
+            _confirmScreen.Check(ConfirmExit, "Ви точно бажаєте вийти?");
         }
         
         private void ConfirmExit(bool isExit)
@@ -85,6 +94,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
             _canvasGroup.DOFade(0.0f, duration);
             yield return new WaitForSeconds(duration);
             _canvasGroup.blocksRaycasts = false;
+        }
+
+        private void OnDestroy()
+        {
+            GlobalEvent.OnCallType -= Open;
         }
     }
 }

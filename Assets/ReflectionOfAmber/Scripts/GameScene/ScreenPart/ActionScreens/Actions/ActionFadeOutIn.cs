@@ -1,21 +1,18 @@
 ﻿using System.Collections;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using ReflectionOfAmber.Scripts;
-using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionFadeOutIn : IActionScreen
+    public class ActionFadeOutIn : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            CoroutineHelper.Inst.StartCoroutine(FadeDaleOut());
+            ActionScreenService.CoroutineHelper.StartCoroutine(FadeDaleOut());
         }
 
         private IEnumerator FadeDaleOut()
         {
-            AudioSystemService.Inst.StopAllMusic();
+            ActionScreenService.AudioSystemService.StopAllMusic();
             FadeService.FadeService.FadeIn(3.0f);
             
             yield return new WaitForSeconds(4.0f);
@@ -23,6 +20,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
             FadeService.FadeService.FadeOut(3.0f);
         }
 
-        public ActionType ActionType => ActionType.FADE_OUT_IN;
+        public override ActionType ActionType => ActionType.FADE_OUT_IN;
     }
 }

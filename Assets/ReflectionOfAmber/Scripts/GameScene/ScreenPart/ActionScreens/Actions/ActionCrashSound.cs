@@ -4,29 +4,23 @@ using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionCrashSound : IActionScreen
+    public class ActionCrashSound : ActionBase
     {
-        private readonly ActionScreenService _actionScreenService;
-        public ActionCrashSound(ActionScreenService actionScreenService)
+        public override void Action()
         {
-            _actionScreenService = actionScreenService;
-        }
-        
-        public void Action()
-        {
-            CoroutineHelper.Inst.StartCoroutine(CrashAnimaSound());
+            ActionScreenService.CoroutineHelper.StartCoroutine(CrashAnimaSound());
         }
 
         private IEnumerator CrashAnimaSound()
         {
-            AudioSystemService.Inst.PlayShotSound(MusicType.PREPARE_CRASH);
-            AudioClip audioClip = AudioSystemService.Inst.GetClip(MusicType.PREPARE_CRASH);
+            ActionScreenService.AudioSystemService.PlayShotSound(MusicType.PREPARE_CRASH);
+            AudioClip audioClip = ActionScreenService.AudioSystemService.GetClip(MusicType.PREPARE_CRASH);
             float prepareDuration = audioClip.length;
             yield return new WaitForSeconds(prepareDuration);
-            _actionScreenService.Action(ActionType.CAMERA_SHAKER_LONG);
-            AudioSystemService.Inst.PlayShotSound(MusicType.CRASH);
+            ActionScreenService.Action(ActionType.CAMERA_SHAKER_LONG);
+            ActionScreenService.AudioSystemService.PlayShotSound(MusicType.CRASH);
         }
 
-        public ActionType ActionType => ActionType.PLAY_CRASH_SOUND;
+        public override ActionType ActionType => ActionType.PLAY_CRASH_SOUND;
     }
 }

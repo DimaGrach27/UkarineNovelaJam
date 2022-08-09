@@ -1,69 +1,68 @@
 ﻿using System.Collections;
 using DG.Tweening;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionBarkLoop  : IActionScreen
+    public class ActionBarkLoop : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.LoopForLopper = true;
-            AudioSystemService.Inst.StarPlayMusicOnLooper(MusicType.DOG_BARK);
+            ActionScreenService.AudioSystemService.LoopForLopper = true;
+            ActionScreenService.AudioSystemService.StarPlayMusicOnLooper(MusicType.DOG_BARK);
         }
 
-        public ActionType ActionType => ActionType.PLAY_DOG_BARK_SOUND_ON_LOPPER;
+        public override ActionType ActionType => ActionType.PLAY_DOG_BARK_SOUND_ON_LOPPER;
     }
     
-    public class ActionBeepLoop  : IActionScreen
+    public class ActionBeepLoop : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.LoopForLopper = true;
-            AudioSystemService.Inst.StarPlayMusicOnLooper(MusicType.PHONE_BEEP);
+            ActionScreenService.AudioSystemService.LoopForLopper = true;
+            ActionScreenService.AudioSystemService.StarPlayMusicOnLooper(MusicType.PHONE_BEEP);
         }
 
-        public ActionType ActionType => ActionType.PLAY_BEEP_SOUND_ON_LOPPER;
+        public override ActionType ActionType => ActionType.PLAY_BEEP_SOUND_ON_LOPPER;
     }
     
-    public class ActionHeartBeepLoop  : IActionScreen
+    public class ActionHeartBeepLoop : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.LoopForLopper = true;
-            AudioSystemService.Inst.StarPlayMusicOnLooper(MusicType.HEART_BEEP);
+            ActionScreenService.AudioSystemService.LoopForLopper = true;
+            ActionScreenService.AudioSystemService.StarPlayMusicOnLooper(MusicType.HEART_BEEP);
         }
 
-        public ActionType ActionType => ActionType.PLAY_HEART_BEEP_SOUND_ON_LOPPER;
+        public override ActionType ActionType => ActionType.PLAY_HEART_BEEP_SOUND_ON_LOPPER;
     }
     
-    public class ActionEmbientSlow  : IActionScreen
+    public class ActionEmbientSlow : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            CoroutineHelper.Inst.StartCoroutine(ChangeMusicRoutine());
+            ActionScreenService.CoroutineHelper.StartCoroutine(ChangeMusicRoutine());
         }
 
         private IEnumerator ChangeMusicRoutine()
         {
-            AudioSystemService.Inst.AudioSourceMusic.DOFade(0.0f, 1.0f);
+            ActionScreenService.AudioSystemService.AudioSourceMusic.DOFade(0.0f, 1.0f);
             yield return new WaitForSeconds(1.0f);
-            AudioSystemService.Inst.ChangeMusic(SaveService.GetMusicVolume());
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
+            ActionScreenService.AudioSystemService.ChangeMusic(SaveService.GetMusicVolume());
+            ActionScreenService.AudioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
         }
 
-        public ActionType ActionType => ActionType.PLAY_EMBIENT_SLOW;
+        public override ActionType ActionType => ActionType.PLAY_EMBIENT_SLOW;
     }
     
-    public class ActionEmbientFast  : IActionScreen
+    public class ActionEmbientFast : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.StarPlayMusicOnLoop(MusicType.EMBIENT_FAST);
+            ActionScreenService.AudioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_FAST);
         }
 
-        public ActionType ActionType => ActionType.PLAY_EMBIENT_FAST;
+        public override ActionType ActionType => ActionType.PLAY_EMBIENT_FAST;
     }
 }

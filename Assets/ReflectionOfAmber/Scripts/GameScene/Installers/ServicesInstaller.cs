@@ -3,6 +3,7 @@ using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
+using ReflectionOfAmber.Scripts.GameScene.GlobalVolume;
 using ReflectionOfAmber.Scripts.GameScene.Health;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindow;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
@@ -19,6 +20,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         [SerializeField] private DebugHelperService debugHelperService;
         [SerializeField] private GamePlayCanvas gamePlayCanvas;
         [SerializeField] private UiClickHandler uiClickHandler;
+        [SerializeField] private GlobalVolumeService globalVolumeService;
+        [SerializeField] private OpenEyeAnimation openEyeAnimation;
         
         public override void InstallBindings()
         {
@@ -43,6 +46,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         {
             Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
             
+            Container.Bind<GlobalVolumeService>().FromInstance(globalVolumeService).AsSingle().NonLazy();
+            Container.Bind<OpenEyeAnimation>().FromInstance(openEyeAnimation).AsSingle().NonLazy();
             Container.Bind<CharacterService>().AsSingle().NonLazy();
             Container.Bind<ScreenTextService>().AsSingle().NonLazy();
             Container.Bind<BgService>().AsSingle().NonLazy();

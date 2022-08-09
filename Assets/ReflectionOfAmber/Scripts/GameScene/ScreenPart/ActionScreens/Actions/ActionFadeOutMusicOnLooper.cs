@@ -1,61 +1,58 @@
 ﻿using System.Collections;
 using DG.Tweening;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using ReflectionOfAmber.Scripts;
-using ReflectionOfAmber.Scripts.GameScene.Services;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionFadeOutMusicOnLooper : IActionScreen
+    public class ActionFadeOutMusicOnLooper : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            CoroutineHelper.Inst.StartCoroutine(Fade());
+            ActionScreenService.CoroutineHelper.StartCoroutine(Fade());
         }
 
         private IEnumerator Fade()
         {
             float duration = 1.5f;
 
-            AudioSystemService.Inst.SoundAudioLooperSource.DOFade(0.0f, duration);
+            ActionScreenService.AudioSystemService.SoundAudioLooperSource.DOFade(0.0f, duration);
             yield return new WaitForSeconds(duration);
-            AudioSystemService.Inst.ChangeAudio(SaveService.GetMusicVolume());
-            AudioSystemService.Inst.StopSoundMusic();
+            ActionScreenService.AudioSystemService.ChangeAudio(SaveService.GetMusicVolume());
+            ActionScreenService.AudioSystemService.StopSoundMusic();
         }
         
-        public ActionType ActionType => ActionType.FADE_OUT_MUSIC_ON_LOPPER;
+        public override ActionType ActionType => ActionType.FADE_OUT_MUSIC_ON_LOPPER;
     }
     
-    public class ActionFadeInMusicOnLooper : IActionScreen
+    public class ActionFadeInMusicOnLooper : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
             float duration = 1.5f;
-            AudioSystemService.Inst.SoundAudioLooperSource.volume = 0.0f;
-            AudioSystemService.Inst.SoundAudioLooperSource.DOFade(SaveService.GetMusicVolume(), duration);
+            ActionScreenService.AudioSystemService.SoundAudioLooperSource.volume = 0.0f;
+            ActionScreenService.AudioSystemService.SoundAudioLooperSource.DOFade(SaveService.GetMusicVolume(), duration);
         }
 
-        public ActionType ActionType => ActionType.FADE_IN_MUSIC_ON_LOPPER;
+        public override ActionType ActionType => ActionType.FADE_IN_MUSIC_ON_LOPPER;
     }
     
-    public class ActionStopMusicOnLooper : IActionScreen
+    public class ActionStopMusicOnLooper : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.StopSoundMusic();
+            ActionScreenService.AudioSystemService.StopSoundMusic();
         }
 
-        public ActionType ActionType => ActionType.STOP_MUSIC_ON_LOPPER;
+        public override ActionType ActionType => ActionType.STOP_MUSIC_ON_LOPPER;
     }
     
-    public class ActionStopAllMusic : IActionScreen
+    public class ActionStopAllMusic : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
-            AudioSystemService.Inst.StopAllMusic();
+            ActionScreenService.AudioSystemService.StopAllMusic();
         }
 
-        public ActionType ActionType => ActionType.STOP_ALL_MUSIC;
+        public override ActionType ActionType => ActionType.STOP_ALL_MUSIC;
     }
 }

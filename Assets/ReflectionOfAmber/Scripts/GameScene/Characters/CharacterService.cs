@@ -9,8 +9,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
     public class CharacterService 
     {
         [Inject]
-        public CharacterService(GamePlayCanvas gamePlayCanvas)
+        public CharacterService(GamePlayCanvas gamePlayCanvas, CoroutineHelper coroutineHelper)
         {
+            _coroutineHelper = coroutineHelper;
+            
             foreach (var characterUi in gamePlayCanvas.GetComponentsInChildren<CharacterUiView>())
             {
                 _characterUiViewMap.Add(characterUi.ScreenPosition, characterUi);
@@ -20,6 +22,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
             }
         }
 
+        private readonly CoroutineHelper _coroutineHelper;
+        
         private readonly Dictionary<CharacterScreenPositionEnum, CharacterUiView> _characterUiViewMap = new();
         private readonly Dictionary<CharacterScreenPositionEnum, Coroutine> _dissolveRoutineMap = new();
         private readonly Dictionary<CharacterScreenPositionEnum, Tween> _dissolveTweenMap = new();
@@ -38,7 +42,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
             }
             
             if(_dissolveRoutineMap[screenPosition] != null) 
-                CoroutineHelper.Inst.StopCoroutine(_dissolveRoutineMap[screenPosition]);
+                _coroutineHelper.StopCoroutine(_dissolveRoutineMap[screenPosition]);
             
             if(_dissolveTweenMap[screenPosition] != null)
                 DOTween.Kill(_dissolveTweenMap[screenPosition]);
@@ -51,7 +55,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
         private void HideCharacter(CharacterScreenPositionEnum screenPosition, bool isDissolve)
         {
             if(_dissolveRoutineMap[screenPosition] != null)
-                CoroutineHelper.Inst.StopCoroutine(_dissolveRoutineMap[screenPosition]);
+                _coroutineHelper.StopCoroutine(_dissolveRoutineMap[screenPosition]);
             
             if(_dissolveTweenMap[screenPosition] != null)
                 DOTween.Kill(_dissolveTweenMap[screenPosition]);
@@ -60,7 +64,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
             {
                 if (_enabledMap[screenPosition])
                     _dissolveRoutineMap[screenPosition] =
-                        CoroutineHelper.Inst.StartCoroutine(DissolveOut(screenPosition));
+                        _coroutineHelper.StartCoroutine(DissolveOut(screenPosition));
             }
             else
             {
@@ -75,7 +79,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
             foreach (var coroutine in _dissolveRoutineMap.Values)
             {
                 if(coroutine != null)
-                    CoroutineHelper.Inst.StopCoroutine(coroutine);
+                    _coroutineHelper.StopCoroutine(coroutine);
             }
             
             foreach (var tween in _dissolveTweenMap.Values)
@@ -88,7 +92,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
             {
                 if (_enabledMap[character.Key])
                     _dissolveRoutineMap[character.Key] =
-                        CoroutineHelper.Inst.StartCoroutine(DissolveOut(character.Key));
+                        _coroutineHelper.StartCoroutine(DissolveOut(character.Key));
             }
         }
 

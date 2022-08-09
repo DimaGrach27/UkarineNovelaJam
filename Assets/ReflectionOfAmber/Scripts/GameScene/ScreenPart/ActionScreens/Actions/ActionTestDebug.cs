@@ -1,15 +1,14 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
-    public class ActionTestDebug : IActionScreen
+    public class ActionTestDebug : ActionBase
     {
-        public void Action()
+        public override void Action()
         {
             Debug.Log("Debug action!");
         }
 
-        public ActionType ActionType => ActionType.DEBUG;
+        public override ActionType ActionType => ActionType.DEBUG;
     }
 }
