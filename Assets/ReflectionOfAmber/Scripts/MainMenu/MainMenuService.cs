@@ -42,6 +42,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             _audioSystemService = audioSystemService;
             _confirmScreen = confirmScreen;
             _sceneService = sceneService;
+            _fadeService = fadeService;
         }
         
         private void Start()

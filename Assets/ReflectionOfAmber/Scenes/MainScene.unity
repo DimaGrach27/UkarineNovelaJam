@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de72f08d4154b95932ef488492579b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickClip: {fileID: 8300000, guid: eac86118665b7664695a57ff25c5fe36, type: 3}
   flashCurve:
     serializedVersion: 2
     m_Curve:
@@ -6936,6 +6935,8 @@ MonoBehaviour:
   debugHelperService: {fileID: 705750660}
   gamePlayCanvas: {fileID: 583981878}
   uiClickHandler: {fileID: 406505779}
+  globalVolumeService: {fileID: 330141712}
+  openEyeAnimation: {fileID: 250535343}
 --- !u!114 &1867921975
 MonoBehaviour:
   m_ObjectHideFlags: 0

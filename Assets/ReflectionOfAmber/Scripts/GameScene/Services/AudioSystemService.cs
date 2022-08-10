@@ -30,7 +30,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
             soundAudioSource.volume = SaveService.GetAudioVolume();
             soundAudioLooperSource.volume = SaveService.GetAudioVolume();
 
-            foreach (var musicSo in Resources.LoadAll<MusicSo>("Music"))
+            foreach (var musicSo in Resources.LoadAll<MusicSo>("Configs/Music"))
             {
                 _audioClipsMap.Add(musicSo.type, musicSo.clip);
             }

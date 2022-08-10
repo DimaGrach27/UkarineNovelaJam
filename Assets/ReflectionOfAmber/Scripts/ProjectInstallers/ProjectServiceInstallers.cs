@@ -2,6 +2,7 @@
 using ReflectionOfAmber.Scripts.MainMenu;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,8 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         
         private void ServicesInstallers()
         {
+            Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
+            
             Container.Bind<CoroutineHelper>().FromInstance(coroutineHelper).AsSingle().NonLazy();
             Container.Bind<AudioSystemService>().FromInstance(audioSystemService).AsSingle().NonLazy();
             Container.Bind<ConfirmScreen>().FromInstance(confirmScreen).AsSingle().NonLazy();

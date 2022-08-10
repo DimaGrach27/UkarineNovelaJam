@@ -50,7 +50,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             chooseWindowService.OnChoose += OnChooseClick;
             cameraActionService.OnTakePhoto += TakePhoto;
             uiClickHandler.OnClick += ShowNextPart;
-            screenPartsService.OnPlayNextPart += ShowNextPart;
+            screenPartsService.OnPlayNextPart += ForceShowNextPart;
             screenPartsService.OnPlayNextScene += ShowNextScene;
         }
         
@@ -90,7 +90,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly DebugHelperService _debugHelperService;
 
         private bool _blockClick;
-        private bool _inGame;
         
         private ScreenSceneScriptableObject _currentSceneSo;
         private ScreenPart _currentPartSo;
@@ -109,7 +108,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             _bgService.Show(SaveService.GetCurrentBg(), null);
             
-            _inGame = true;
+            GameModel.IsGamePlaying = true;
             
             if (CurrentScene == "scene_0_0" && CurrentPart == 0)
             {
@@ -147,10 +146,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             ShowScene();
         }
         
-        private void ShowNextScene(string key)
+        private void ShowNextScene(string key, int part = 0)
         {
             CurrentScene = key;
-            CurrentPart = 0;
+            CurrentPart = part;
 
             SaveService.SaveScene(CurrentScene);
             SaveService.SavePart(CurrentPart);
@@ -205,8 +204,34 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private void ShowNextPart()
         {
-            if(_blockClick || !_inGame) return;
+            if(_blockClick || !GameModel.IsGamePlaying) return;
             
+            if(_currentPartSo.ActionsTypeEnd != null)
+            {
+                foreach (var actionType in _currentPartSo.ActionsTypeEnd)
+                {
+                    _actionScreenService.Action(actionType);
+                }
+            }
+            
+            Debug.Log($"SHOW next: {CurrentPart}");
+            CurrentPart++;
+
+            if (CurrentPart >= _currentSceneSo.ScreenParts.Length )
+            {
+                Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
+
+                ChooseNextScene();
+                return;
+            }
+            
+            ShowPart();
+            
+            SaveService.SavePart(CurrentPart);
+        }
+
+        private void ForceShowNextPart()
+        {
             if(_currentPartSo.ActionsTypeEnd != null)
             {
                 foreach (var actionType in _currentPartSo.ActionsTypeEnd)
@@ -275,7 +300,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             {
                 case 0:
                     _sceneService.LoadEndGame();
-                    _inGame = false;
+                    GameModel.IsGamePlaying = false;
                     break;
                 
                 case 1:

@@ -2,8 +2,5 @@
 
 namespace ReflectionOfAmber.Scripts.GameScene
 {
-    public class GamePlayCanvas : MonoBehaviour
-    {
-        
-    }
+    public class GamePlayCanvas : MonoBehaviour { }
 }

@@ -2,6 +2,8 @@
 using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
+using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.MainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +19,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         
         private FadeService _fadeService;
         private ConfirmScreen _confirmScreen;
+        private SceneService _sceneService;
         
         private CanvasGroup _canvasGroup;
         
@@ -24,11 +27,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         private Coroutine _delayLoad;
 
         [Inject]
-        public void Construct(ConfirmScreen confirmScreen,
-            FadeService fadeService)
+        public void Construct(
+            ConfirmScreen confirmScreen,
+            FadeService fadeService,
+            SceneService sceneService
+            )
         {
             _confirmScreen = confirmScreen;
             _fadeService = fadeService;
+            _sceneService = sceneService;
         }
         
         private void Awake()
@@ -71,19 +78,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         private void ConfirmExit(bool isExit)
         {
             if(!isExit) return;
-            if(_delayLoad != null) return;
-            
-            _delayLoad = StartCoroutine(DelayLoadMainMenu());
+            GameModel.IsGamePlaying = false;
+            _sceneService.LoadMainMenuScene();
         }
-        
-        private IEnumerator DelayLoadMainMenu()
-        {
-            float duration = 2.0f;
-            _fadeService.FadeIn(duration);
-            yield return new WaitForSeconds(duration);
-            SceneManager.LoadScene("MainMenu");
-        }
-        
+
         private IEnumerator FadeInWindow()
         {
             _canvasGroup.interactable = true;

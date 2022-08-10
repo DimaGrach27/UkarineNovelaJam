@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReflectionOfAmber.Scripts.MainMenu
+namespace ReflectionOfAmber.Scripts.GlobalProject
 {
     public class ConfirmScreen : MonoBehaviour
     {

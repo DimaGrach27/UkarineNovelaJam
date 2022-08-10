@@ -44,8 +44,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         
         private void ServicesInstallers()
         {
-            Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
-            
             Container.Bind<GlobalVolumeService>().FromInstance(globalVolumeService).AsSingle().NonLazy();
             Container.Bind<OpenEyeAnimation>().FromInstance(openEyeAnimation).AsSingle().NonLazy();
             Container.Bind<CharacterService>().AsSingle().NonLazy();

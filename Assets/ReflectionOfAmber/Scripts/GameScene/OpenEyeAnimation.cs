@@ -41,6 +41,8 @@ namespace ReflectionOfAmber.Scripts.GameScene
                 eyeMat.SetFloat(OpenValue, eyeCurve.Evaluate(i));
                 yield return null;
             }
+
+            yield return new WaitForSeconds(0.5f);
             
             onDoneAnima?.Invoke();
             rayCastImage.SetActive(true);
