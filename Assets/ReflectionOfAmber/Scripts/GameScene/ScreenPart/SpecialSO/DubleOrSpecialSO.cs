@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GlobalProject;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -21,7 +22,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 
             foreach (var statusesValue in statusEnum.statusesValues)
             {
-                result &= statusesValue.value == GameModel.GetStatus(statusesValue.status);
+                result &= statusesValue.value == SaveService.GetStatusValue(statusesValue.status);
             }
             
             _nextScene = result ? blockTrue : blockFalse;

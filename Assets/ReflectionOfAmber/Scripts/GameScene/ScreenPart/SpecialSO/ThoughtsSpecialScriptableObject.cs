@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -14,7 +16,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
         
         public override bool Check()
         {
-            return GameModel.GetStatus(status) == valueStatus;
+            return SaveService.GetStatusValue(status) == valueStatus;
         }
     }
 }

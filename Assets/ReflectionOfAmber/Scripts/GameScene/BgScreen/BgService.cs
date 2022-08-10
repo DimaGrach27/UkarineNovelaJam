@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.FadeScreen;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
@@ -14,17 +17,21 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
         
         private readonly CoroutineHelper _coroutineHelper;
         private readonly BgUiView _bgUiView;
-        private readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
+        private readonly FadeService _fadeService;
         
+        private readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
         
         private AnimationBg _currentAnimation;
         private Coroutine _changeBgRoutine;
         
         [Inject]
-        public BgService(GamePlayCanvas gamePlayCanvas, CoroutineHelper coroutineHelper)
+        public BgService(GamePlayCanvas gamePlayCanvas, 
+            CoroutineHelper coroutineHelper,
+            FadeService fadeService)
         {
             _bgUiView = gamePlayCanvas.GetComponentInChildren<BgUiView>();
             _coroutineHelper = coroutineHelper;
+            _fadeService = fadeService;
             
             BgScriptableObject[] bgScriptableObjects =
                 Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
@@ -75,7 +82,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
         private IEnumerator ChangeBgRoutine(Action onDoneAnima)
         {
             float duration = 3.0f;
-            FadeService.FadeService.FadeIn(duration);
+            _fadeService.FadeIn(duration);
             
             yield return new WaitForSeconds(duration);
             
@@ -101,7 +108,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
             
             yield return new WaitForSeconds(1.0f);
             
-            FadeService.FadeService.FadeOut(duration);
+            _fadeService.FadeOut(duration);
             
             yield return new WaitForSeconds(duration / 2);
             

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -17,11 +19,14 @@ namespace ReflectionOfAmber.Scripts.EndScene
 
         private Coroutine _delayLoad;
         private AudioSystemService _audioSystemService;
+        private FadeService _fadeService;
 
         [Inject]
-        public void Construct(AudioSystemService audioSystemService)
+        public void Construct(AudioSystemService audioSystemService,
+            FadeService fadeService)
         {
             _audioSystemService = audioSystemService;
+            _fadeService = fadeService;
         }
 
         private void Awake()
@@ -30,7 +35,7 @@ namespace ReflectionOfAmber.Scripts.EndScene
             
             tapToExit.alpha = 0.0f;
             groupImages.alpha = 0.0f;
-            FadeService.FadeService.VisibleFade(false);
+            _fadeService.VisibleFade(false);
         }
 
         private void Start()
@@ -60,7 +65,7 @@ namespace ReflectionOfAmber.Scripts.EndScene
         private IEnumerator DelayLoadMainMenu()
         {
             float duration = 2.0f;
-            ReflectionOfAmber.Scripts.FadeService.FadeService.FadeIn(duration);
+            _fadeService.FadeIn(duration);
             yield return new WaitForSeconds(duration);
             SaveService.ResetAllSaves();
             SceneManager.LoadScene("MainMenu");

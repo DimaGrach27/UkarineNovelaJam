@@ -1,4 +1,6 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.MainMenu;
 using Zenject;
 
@@ -43,7 +45,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         {
             if (isConfirm)
             {
-                GameModel.SetStatus(StatusEnum.CHOOSE_WAS_PICK, true);
+                SaveService.SetStatusValue(StatusEnum.CHOOSE_WAS_PICK, true);
                 _screenPartsServiceFacade.PlayNextScene(_nextScenes[_selectIndex]);
             }
 

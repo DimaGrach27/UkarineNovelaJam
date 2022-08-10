@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,7 +72,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         {
             foreach (var keyValue in _killersMap)
             {
-                int count = GameModel.GetInt(keyValue.Key);
+                int count = SaveService.GetIntValue(keyValue.Key);
                 keyValue.Value.UpdateButton(count);
 
                 switch (keyValue.Key)
@@ -87,8 +89,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
                         keyValue.Value.Visible = SaveService.GetStatusValue(StatusEnum.ZAHARES_HAVE_SHOW);
                         break;
                 }
-                // keyValue.Value.Visible = count > 0;
-                // keyValue.Value.Visible = true;
             }
         }
 
@@ -101,7 +101,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         }
         private void Open()
         {
-            if(GameModel.GetStatus(StatusEnum.CHOOSE_WAS_PICK)) return;
+            if(SaveService.GetStatusValue(StatusEnum.CHOOSE_WAS_PICK)) return;
             
             if(_routine != null)
                 StopCoroutine(_routine);

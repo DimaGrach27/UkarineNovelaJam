@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ReflectionOfAmber.Scripts
+namespace ReflectionOfAmber.Scripts.GlobalProject
 {
     public class CoroutineHelper : MonoBehaviour
     {

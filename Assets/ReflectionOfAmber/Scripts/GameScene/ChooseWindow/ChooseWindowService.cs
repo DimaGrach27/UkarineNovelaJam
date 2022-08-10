@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using Zenject;
 

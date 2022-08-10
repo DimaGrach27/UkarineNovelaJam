@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using ReflectionOfAmber.Scripts.GameScene.GlobalVolume;
 using ReflectionOfAmber.Scripts.GameScene.Health;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
@@ -21,6 +23,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
         public readonly AudioSystemService AudioSystemService;
         public readonly GlobalVolumeService GlobalVolumeService;
         public readonly OpenEyeAnimation OpenEyeAnimation;
+        public readonly FadeService FadeService;
         public readonly CoroutineHelper CoroutineHelper;
 
         [Inject]
@@ -33,6 +36,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
             AudioSystemService audioSystemService,
             GlobalVolumeService globalVolumeService,
             OpenEyeAnimation openEyeAnimation,
+            FadeService fadeService,
             CoroutineHelper coroutineHelper
             )
         {
@@ -45,6 +49,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
             GlobalVolumeService = globalVolumeService;
             OpenEyeAnimation = openEyeAnimation;
             CoroutineHelper = coroutineHelper;
+            FadeService = fadeService;
             
             _actionMap.Add(ActionType.DEBUG, new ActionTestDebug());
             _actionMap.Add(ActionType.CAMERA_SHAKER, new ActionCameraShaker());

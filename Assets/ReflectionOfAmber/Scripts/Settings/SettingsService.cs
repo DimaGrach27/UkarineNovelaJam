@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -36,7 +38,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             
             float valueTyping = 1.0f - SaveService.GetTypingSpeed() / 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
-            GlobalConstant.TYPING_SPEED = valueTyping;
+            GameModel.TYPING_SPEED = valueTyping;
             
             speedText.SetValue(SaveService.GetTypingSpeed() * 10);
             musicVolume.SetValue(SaveService.GetMusicVolume() * 10);
@@ -62,7 +64,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             float valueTyping = 1.0f - value / 10;
             valueTyping /= 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
-            GlobalConstant.TYPING_SPEED = valueTyping;
+            GameModel.TYPING_SPEED = valueTyping;
             
             SaveService.SaveTypingSpeed(value / 10);
         }

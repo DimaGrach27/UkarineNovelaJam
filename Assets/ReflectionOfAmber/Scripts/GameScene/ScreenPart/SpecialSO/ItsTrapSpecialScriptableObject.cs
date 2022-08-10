@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GlobalProject;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -18,7 +19,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 
             foreach (var statusesValue in statusDependent.statusesValues)
             {
-                result &= GameModel.GetStatus(statusesValue.status) == statusesValue.value;
+                result &= SaveService.GetStatusValue(statusesValue.status) == statusesValue.value;
             }
             
             return result;

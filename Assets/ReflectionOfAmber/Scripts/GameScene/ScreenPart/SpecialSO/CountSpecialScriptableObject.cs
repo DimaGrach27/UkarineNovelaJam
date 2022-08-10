@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -17,9 +19,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
         
         public override bool Check()
         {
-            bool isCount = GameModel.GetInt(countType) >= valueCount;
+            bool isCount = SaveService.GetIntValue(countType) >= valueCount;
 
-            isCount &= GameModel.GetStatus(status) == valueStatus;
+            isCount &= SaveService.GetStatusValue(status) == valueStatus;
             
             return isCount;
         }

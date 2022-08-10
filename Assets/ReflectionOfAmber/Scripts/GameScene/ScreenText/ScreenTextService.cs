@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using Zenject;
 
@@ -85,7 +87,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             {
                 resultText += symbol;
                 _screenTextUiView.Text = resultText;
-                yield return new WaitForSeconds(GlobalConstant.TYPING_SPEED);
+                yield return new WaitForSeconds(GameModel.TYPING_SPEED);
             }
 
             EndTyping();

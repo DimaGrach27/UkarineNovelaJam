@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.BgScreen;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.Characters

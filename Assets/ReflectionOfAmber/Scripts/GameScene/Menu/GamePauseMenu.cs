@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.MainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,15 +15,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         [SerializeField] private Button continueButton;
         [SerializeField] private Button exitToMenuButton;
         
+        private FadeService _fadeService;
         private ConfirmScreen _confirmScreen;
+        
         private CanvasGroup _canvasGroup;
+        
         private Coroutine _routine;
         private Coroutine _delayLoad;
 
         [Inject]
-        public void Construct(ConfirmScreen confirmScreen)
+        public void Construct(ConfirmScreen confirmScreen,
+            FadeService fadeService)
         {
             _confirmScreen = confirmScreen;
+            _fadeService = fadeService;
         }
         
         private void Awake()
@@ -73,7 +79,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         private IEnumerator DelayLoadMainMenu()
         {
             float duration = 2.0f;
-            FadeService.FadeService.FadeIn(duration);
+            _fadeService.FadeIn(duration);
             yield return new WaitForSeconds(duration);
             SceneManager.LoadScene("MainMenu");
         }

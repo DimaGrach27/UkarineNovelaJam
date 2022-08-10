@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ReflectionOfAmber.Scripts.FadeService
+namespace ReflectionOfAmber.Scripts.FadeScreen
 {
     public class FadeUiView : MonoBehaviour
     {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -11,7 +13,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 
             foreach (var status in statusList)
             {
-                isCheck &= GameModel.GetStatus(status);
+                isCheck &= SaveService.GetStatusValue(status);
             }
             
             return isCheck;

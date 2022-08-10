@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions

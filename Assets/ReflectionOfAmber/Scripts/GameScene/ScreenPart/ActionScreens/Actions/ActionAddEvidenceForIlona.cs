@@ -1,13 +1,16 @@
-﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
+
+namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
     public class ActionAddEvidenceForIlona : ActionBase
     {
         public override void Action()
         {
-            int count = GameModel.GetInt(KillerName.ILONA_VOR);
+            int count = SaveService.GetIntValue(KillerName.ILONA_VOR);
             count++;
             
-            GameModel.SetInt(KillerName.ILONA_VOR, count);
+            SaveService.SetIntValue(KillerName.ILONA_VOR, count);
         }
 
         public override ActionType ActionType => ActionType.ADD_EVIDENCE_ILONA;
@@ -17,10 +20,10 @@
     {
         public override void Action()
         {
-            int count = GameModel.GetInt(KillerName.ZAHARES_VOR);
+            int count = SaveService.GetIntValue(KillerName.ZAHARES_VOR);
             count++;
             
-            GameModel.SetInt(KillerName.ZAHARES_VOR, count);
+            SaveService.SetIntValue(KillerName.ZAHARES_VOR, count);
         }
 
         public override ActionType ActionType => ActionType.ADD_EVIDENCE_ZAHARES;
@@ -30,10 +33,10 @@
     {
         public override void Action()
         {
-            int count = GameModel.GetInt(KillerName.OLEKSIY_VOR);
+            int count = SaveService.GetIntValue(KillerName.OLEKSIY_VOR);
             count++;
             
-            GameModel.SetInt(KillerName.OLEKSIY_VOR, count);
+            SaveService.SetIntValue(KillerName.OLEKSIY_VOR, count);
         }
 
         public override ActionType ActionType => ActionType.ADD_EVIDENCE_OLEKSII;

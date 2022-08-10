@@ -1,4 +1,6 @@
 ﻿using ReflectionOfAmber.Scripts;
+using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
@@ -21,8 +23,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
         
         public override bool Check()
         {
-            int escapeCount = GameModel.GetInt(escape);
-            int beliefCount = GameModel.GetInt(belief);
+            int escapeCount = SaveService.GetIntValue(escape);
+            int beliefCount = SaveService.GetIntValue(belief);
 
             if (escapeCount < 2 && beliefCount < 2)
             {

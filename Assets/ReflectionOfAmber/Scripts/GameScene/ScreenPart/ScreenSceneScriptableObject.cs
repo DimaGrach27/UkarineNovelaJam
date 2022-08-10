@@ -1,5 +1,6 @@
 ﻿using System;
 using ReflectionOfAmber.Scripts.Characters;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;

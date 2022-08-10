@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -18,7 +20,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
         
         public override bool Check()
         {
-            bool state = GameModel.GetStatus(statusEnum);
+            bool state = SaveService.GetStatusValue(statusEnum);
 
             _nextScene = state ? blockTrue : blockFalse;
             return true;

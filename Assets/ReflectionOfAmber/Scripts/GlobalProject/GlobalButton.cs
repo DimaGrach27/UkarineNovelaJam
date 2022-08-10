@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReflectionOfAmber.Scripts
+namespace ReflectionOfAmber.Scripts.GlobalProject
 {
     public class GlobalButton : MonoBehaviour
     {

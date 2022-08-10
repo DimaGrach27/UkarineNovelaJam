@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.DebugHelper;
+using ReflectionOfAmber.Scripts.FadeScreen;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
@@ -8,6 +10,7 @@ using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using Zenject;
 
@@ -27,6 +30,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             CoroutineHelper coroutineHelper,
             SceneService sceneService,
             AudioSystemService audioSystemService,
+            FadeService fadeService,
             DebugHelperService debugHelperService
         )
         {
@@ -40,6 +44,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _sceneService = sceneService;
             _debugHelperService = debugHelperService;
             _audioSystemService = audioSystemService;
+            _fadeService = fadeService;
             
             screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
@@ -80,6 +85,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly CoroutineHelper _coroutineHelper;
         private readonly SceneService _sceneService;
         private readonly AudioSystemService _audioSystemService;
+        private readonly FadeService _fadeService;
         
         private readonly DebugHelperService _debugHelperService;
 
@@ -112,7 +118,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             }
             
             _audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
-            FadeService.FadeService.FadeOut();
+            _fadeService.FadeOut();
             ShowScene();
         }
 
@@ -134,7 +140,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             yield return new WaitForSeconds(2.0f);
             
-            FadeService.FadeService.FadeOut(8.0f);
+            _fadeService.FadeOut(8.0f);
             
             yield return new WaitForSeconds(8.0f);
             
@@ -181,17 +187,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             {
                 foreach (var statusesValue in _currentSceneSo.StatusSetter.StatusesValues)
                 {
-                    GameModel.SetStatus(statusesValue.status, statusesValue.value);
+                    SaveService.SetStatusValue(statusesValue.status, statusesValue.value);
                 }
             }
 
             if (_currentSceneSo.CountSetter.Enable)
             {
-                int count = GameModel.GetInt(_currentSceneSo.CountSetter.Type);
+                int count = SaveService.GetIntValue(_currentSceneSo.CountSetter.Type);
                 count += _currentSceneSo.CountSetter.Count;
                 
                 Debug.Log($"{_currentSceneSo.CountSetter.Type} = {count}");
-                GameModel.SetInt(_currentSceneSo.CountSetter.Type, count);
+                SaveService.SetIntValue(_currentSceneSo.CountSetter.Type, count);
             }
 
             ShowPart();
@@ -252,7 +258,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 {
                     foreach (var statusesValue in _currentPartSo.StatusSetter.StatusesValues)
                     {
-                        GameModel.SetStatus(statusesValue.status, statusesValue.value);
+                        SaveService.SetStatusValue(statusesValue.status, statusesValue.value);
                     }
                 }
                 
@@ -371,7 +377,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                     
                     foreach (var statusValue in nextScene.statusDependent.statusesValues)
                     {
-                        bool status = GameModel.GetStatus(statusValue.status);
+                        bool status = SaveService.GetStatusValue(statusValue.status);
                         result &= status == statusValue.value;
                     }
                     isRemove = !result;
@@ -415,7 +421,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                     
                 foreach (var statusValue in chooseScene.findDependent.statusesValues)
                 {
-                    bool status = GameModel.GetStatus(statusValue.status);
+                    bool status = SaveService.GetStatusValue(statusValue.status);
                     result &= status == statusValue.value;
                 }
                 

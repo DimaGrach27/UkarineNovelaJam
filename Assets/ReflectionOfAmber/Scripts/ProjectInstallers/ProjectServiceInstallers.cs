@@ -1,5 +1,8 @@
 ﻿using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.MainMenu;
+using ReflectionOfAmber.Scripts.FadeScreen;
+using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -14,6 +17,8 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         
         public override void InstallBindings()
         {
+            GameModel.Init();
+            
             ServicesInstallers();
 
             SceneManager.LoadScene("MainMenu");
@@ -25,6 +30,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.Bind<AudioSystemService>().FromInstance(audioSystemService).AsSingle().NonLazy();
             Container.Bind<ConfirmScreen>().FromInstance(confirmScreen).AsSingle().NonLazy();
             Container.Bind<SceneService>().AsSingle().NonLazy();
+            Container.Bind<FadeService>().AsSingle().NonLazy();
         }
     }
 }
