@@ -31,4 +31,4 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  titreAnima: {fileID: 6182064012499372330, guid: 91470e3969d1b4b4c9853902787953cd, type: 3}
+  titreAnima: {fileID: 4273921996725694194, guid: 91470e3969d1b4b4c9853902787953cd, type: 3}

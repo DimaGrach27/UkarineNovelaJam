@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 6182064012499372324}
   - component: {fileID: 6182064012499372327}
   - component: {fileID: 6182064012499372320}
+  - component: {fileID: 4273921996725694194}
   m_Layer: 5
   m_Name: Canvas Titres
   m_TagString: Untagged
@@ -952,6 +953,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4273921996725694194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182064012499372330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af335c36ae54a5e9a3a1a8e22f6d4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6182064012519140126
 GameObject:
   m_ObjectHideFlags: 0

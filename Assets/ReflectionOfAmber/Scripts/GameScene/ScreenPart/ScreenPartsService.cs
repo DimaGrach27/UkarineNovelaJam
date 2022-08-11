@@ -44,6 +44,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _sceneService = sceneService;
             _debugHelperService = debugHelperService;
             _audioSystemService = audioSystemService;
+            _screenPartsServiceFacade = screenPartsService;
             _fadeService = fadeService;
             
             screenTextService.OnEndTyping += OnEndTyping;
@@ -85,6 +86,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly CoroutineHelper _coroutineHelper;
         private readonly SceneService _sceneService;
         private readonly AudioSystemService _audioSystemService;
+        private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly FadeService _fadeService;
         
         private readonly DebugHelperService _debugHelperService;
@@ -312,6 +314,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                     {
                         foreach (var scriptableObject in nextScene.specialDependent.special)
                         {
+                            scriptableObject.SetService = _screenPartsServiceFacade;
                             if (scriptableObject.Check())
                             {
                                 nexSceneKey = scriptableObject.NextScene.Scene.SceneKey;

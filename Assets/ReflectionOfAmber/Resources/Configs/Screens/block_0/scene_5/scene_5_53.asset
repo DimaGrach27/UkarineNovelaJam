@@ -51,7 +51,7 @@ MonoBehaviour:
       visibleOnPhoto: 1
       visibleOutPhoto: 1
     exclusionDependent:
-      enable: 0
+      enable: 1
     findDependent:
       enable: 0
       statusesValues: []
@@ -72,7 +72,7 @@ MonoBehaviour:
       visibleOnPhoto: 1
       visibleOutPhoto: 1
     exclusionDependent:
-      enable: 0
+      enable: 1
     findDependent:
       enable: 0
       statusesValues: []
@@ -91,7 +91,7 @@ MonoBehaviour:
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
-      enable: 0
+      enable: 1
     findDependent:
       enable: 0
       statusesValues: []

@@ -6,6 +6,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
     {
         [SerializeField] private NextScene nextScene;
         
+        protected ScreenPartsServiceFacade ServiceFacade;
+        public ScreenPartsServiceFacade SetService
+        {
+            set => ServiceFacade = value;
+        } 
+        
         public abstract bool Check();
         public virtual NextScene NextScene => nextScene;
     }

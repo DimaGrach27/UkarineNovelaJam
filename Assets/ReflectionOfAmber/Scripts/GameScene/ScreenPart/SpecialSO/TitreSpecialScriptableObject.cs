@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.GameScene.TitreScreen;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -8,15 +9,19 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
         order = 0)]
     public class TitreSpecialScriptableObject : SpecialScriptableObjectBase
     {
-        [SerializeField] private GameObject titreAnima;
+        [SerializeField] private TitreAnimation titreAnima;
         
         public override bool Check()
         {
-            GameObject titre = Instantiate(titreAnima);
-            
-            Destroy(titre, 31.0f);
+            TitreAnimation titre = Instantiate(titreAnima);
+            titre.OnEndAnimation += OnEndAnimationHandler;
             
             return false;
+        }
+
+        private void OnEndAnimationHandler()
+        {
+            ServiceFacade.PlatNextPart();
         }
     }
 }

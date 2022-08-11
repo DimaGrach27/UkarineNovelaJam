@@ -34,6 +34,16 @@ MonoBehaviour:
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0
+    textShow: 
+    actionsTypeEnd: 
+  - actionsType: 
+    musicTypeOnStart: 0
+    statusSetter:
+      enable: 0
+      statusesValues: []
+    screenPosition: 0
+    characterImage: 0
+    nameCharacter: 0
     textShow: "\u0414\u0443\u043C\u0430\u0454\u0448 \u043A\u0456\u043D\u0435\u0446\u044C?"
     actionsTypeEnd: 
   - actionsType: 
