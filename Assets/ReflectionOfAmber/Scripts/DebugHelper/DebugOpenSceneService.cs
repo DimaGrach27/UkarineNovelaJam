@@ -62,7 +62,7 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
 
         private void SetToSave()
         {
-            ScreenSceneScriptableObject scriptableObject = GameModel.GetScene(sceneField.text);
+            ScreenSceneScriptableObject scriptableObject = GameModel.GetScene(SceneIndex(sceneField.text));
             if(scriptableObject == null) return;
 
             int part = 0;
@@ -79,7 +79,7 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
         
         private void ShowScene()
         {
-            ScreenSceneScriptableObject scriptableObject = GameModel.GetScene(sceneField.text);
+            ScreenSceneScriptableObject scriptableObject = GameModel.GetScene(SceneIndex(sceneField.text));
             if(scriptableObject == null) return;
 
             int part = 0;
@@ -89,6 +89,18 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
             }
             
             _screenPartsServiceFacade.PlayNextScene(scriptableObject.SceneKey, part);
+        }
+
+        private string SceneIndex(string id)
+        {
+            string sceneName = "scene_";
+
+            if (id.Contains(sceneName))
+            {
+                return id;
+            }
+            
+            return sceneName + id;
         }
     }
 }

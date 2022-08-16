@@ -35,6 +35,7 @@
         CHANGE_GLITCH_SCREEN = 30,
         CHANGE_DARK_SCREEN = 31,
         CHANGE_FOREST_SCREEN = 32,
+        OPEN_NOTE_ACTION = 33,
         DEBUG = 228
     }
 }

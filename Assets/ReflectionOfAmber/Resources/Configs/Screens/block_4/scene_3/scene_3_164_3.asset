@@ -18,8 +18,10 @@ MonoBehaviour:
     enable: 0
     bgEnum: 5
   statusSetter:
-    enable: 0
-    statusesValues: []
+    enable: 1
+    statusesValues:
+    - value: 1
+      status: 27
   countSetter:
     enable: 0
     count: 1
@@ -34,6 +36,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

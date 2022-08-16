@@ -12,6 +12,8 @@ namespace ReflectionOfAmber.Scripts.GameScene
     {
         NONE = 0,
         OPEN_SETTINGS = 1,
-        GAME_PAUSE_MENU = 2
+        GAME_PAUSE_MENU = 2,
+        NOTE_BOOKE = 3,
+        NOTE_BOOKE_WITHOUT_EXIT = 4
     }
 }

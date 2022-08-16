@@ -16,7 +16,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         
         [SerializeField] private InfoDescription infoDescription;
         [SerializeField] private Button buttonReturn;
-        [SerializeField] private Button buttonOpen;
         [SerializeField] private NoteButtonUiView[] buttonPrefab;
 
         private Coroutine _routine;
@@ -44,7 +43,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
             }
 
             buttonReturn.onClick.AddListener(Close);
-            buttonOpen.onClick.AddListener(Open);
             
             CanvasGroup.interactable = false;
             CanvasGroup.blocksRaycasts = false;
@@ -99,7 +97,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
 
             _routine = StartCoroutine(FadeOutWindow());
         }
-        private void Open()
+        public void Open(bool canExit = true)
         {
             if(SaveService.GetStatusValue(StatusEnum.CHOOSE_WAS_PICK)) return;
             
@@ -108,8 +106,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
 
             InitNote();
             _routine = StartCoroutine(FadeInWindow());
+            buttonReturn.gameObject.SetActive(canExit);
         }
-        
+
         private IEnumerator FadeInWindow()
         {
             CanvasGroup.interactable = true;

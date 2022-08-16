@@ -1,7 +1,6 @@
 ﻿using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
-using ReflectionOfAmber.Scripts.MainMenu;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
@@ -10,6 +9,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
     {
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly ConfirmScreen _confirmScreen;
+        private readonly NoteWindowUIView _noteWindowUIView;
         private readonly string[] _nextScenes;
         
         private int _selectIndex = -1;
@@ -28,8 +28,25 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
             _nextScenes[1] = "scene_3_164_1";
             _nextScenes[2] = "scene_3_164_2";
             
-            var noteWindowUIView = gamePlayCanvas.GetComponentInChildren<NoteWindowUIView>();
-            noteWindowUIView.OnChoose += OnChooseClick;
+            _noteWindowUIView = gamePlayCanvas.GetComponentInChildren<NoteWindowUIView>();
+            _noteWindowUIView.OnChoose += OnChooseClick;
+
+            GlobalEvent.OnCallType += OpenNote;
+            GlobalEvent.OnCallType += OpenNoteWithoutExit;
+        }
+
+        private void OpenNote(CallKeyType callKeyType)
+        {
+            if(callKeyType != CallKeyType.NOTE_BOOKE) return;
+            
+            _noteWindowUIView.Open();
+        }
+        
+        private void OpenNoteWithoutExit(CallKeyType callKeyType)
+        {
+            if(callKeyType != CallKeyType.NOTE_BOOKE_WITHOUT_EXIT) return;
+            
+            _noteWindowUIView.Open(false);
         }
 
         private void OnChooseClick(int index)
