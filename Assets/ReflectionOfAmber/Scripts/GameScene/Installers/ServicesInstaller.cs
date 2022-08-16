@@ -1,5 +1,6 @@
 using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
+using ReflectionOfAmber.Scripts.GameScene.ChapterNotes;
 using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
@@ -57,6 +58,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
             Container.Bind<ActionScreenService>().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<ScreenPartsService>().AsSingle().NonLazy();
+
+            Container.Bind<ChapterNotesSaveService>().AsSingle().NonLazy();
+            Container.Bind<ChapterNotesService>().AsSingle().NonLazy();
         }
     }
 }

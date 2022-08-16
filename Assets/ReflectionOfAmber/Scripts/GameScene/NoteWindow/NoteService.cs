@@ -52,7 +52,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         private void OnChooseClick(int index)
         {
             _selectIndex = index;
-            string description = "Ви впевнені, що саме цей підозрюваний являється злодієм? " +
+            string description = "Ви впевнені, що саме цей підозрюваний являється злодієм?\n" +
                                  "Помилка призведе до необачних дій...";
             
             _confirmScreen.Check(ConfirmAction, description);

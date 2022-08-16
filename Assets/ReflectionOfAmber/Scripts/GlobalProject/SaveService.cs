@@ -14,11 +14,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          private const string CURRENT_BG_KEY = "current_bg";
 
          private const string PROGRESS_KEY = "progress";
+         private const string CHAPTER_NOTES_KEY = "chapter_notes";
          private const string SETTINGS_KEY = "settings";
 
 
          private static SaveFile _saveFile;
-
          private static SaveFile SaveFile
          {
              get
@@ -39,9 +39,30 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
                  return _saveFile;
              }
          }
+         
+         private static ChapterNotesFile _chapterNotesFile;
+         public static ChapterNotesFile ChapterNotesFile
+         {
+             get
+             {
+                 if (_chapterNotesFile != null) return _chapterNotesFile;
+
+                 if (!ExistFile(CHAPTER_NOTES_KEY))
+                 {
+                     _chapterNotesFile = new ChapterNotesFile();
+
+                     File.WriteAllText(Path(CHAPTER_NOTES_KEY), JsonUtility.ToJson(_chapterNotesFile));
+                 }
+                 else
+                 {
+                     _chapterNotesFile = JsonUtility.FromJson<ChapterNotesFile>(File.ReadAllText(Path(CHAPTER_NOTES_KEY)));
+                 }
+
+                 return _chapterNotesFile;
+             }
+         }
 
          private static SettingFile _settingFile;
-
          private static SettingFile SettingFile
          {
              get
@@ -69,6 +90,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              Application.persistentDataPath + $"/{key}_{Application.productName}.json";
 
          private static void SaveJson(string key) => File.WriteAllText(Path(key), JsonUtility.ToJson(GetJson(key)));
+         public static void SaveChapterNotesJson() => File.WriteAllText(Path(CHAPTER_NOTES_KEY), 
+             JsonUtility.ToJson(GetJson(CHAPTER_NOTES_KEY)));
 
          private static object GetJson(string key)
          {
@@ -82,6 +105,10 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
                  case SETTINGS_KEY:
                      json = SettingFile;
+                     break;
+                 
+                 case CHAPTER_NOTES_KEY:
+                     json = ChapterNotesFile;
                      break;
              }
 
@@ -235,7 +262,9 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              PlayerPrefs.DeleteAll();
 
              _saveFile = new SaveFile();
+             _chapterNotesFile = new ChapterNotesFile();
 
+             SaveJson(CHAPTER_NOTES_KEY);
              SaveJson(PROGRESS_KEY);
          }
 
@@ -286,5 +315,18 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          public string[] chooseKeys;
          public bool[] chooseStatus;
          public bool isUseCamera;
+     }
+     
+     [Serializable]
+     public class ChapterNotesFile
+     {
+         public List<NoteChapterPart> chapters = new();
+     }
+
+     [Serializable]
+     public class NoteChapterPart
+     {
+         public string name;
+         public string text;
      }
  }

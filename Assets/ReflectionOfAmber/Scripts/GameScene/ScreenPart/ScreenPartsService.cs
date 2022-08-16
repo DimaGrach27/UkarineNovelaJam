@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.FadeScreen;
@@ -73,9 +74,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             set
             {
                 _currentScene = value;
+                OnOpenScene?.Invoke(value);
                 _debugHelperService.ShowSceneId(_currentScene);
             }
         }
+
+        public event Action<string> OnOpenScene; 
+        public event Action<int> OnOpenPart; 
 
         private readonly BgService _bgService;
         private readonly CharacterService _characterService;
@@ -266,34 +271,34 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 ChooseNextScene();
                 return;
             }
-            
-            if (CurrentPart < _currentSceneSo.ScreenParts.Length)
-            {
-                _currentPartSo = _currentSceneSo.ScreenParts[CurrentPart];
-                
-                if(_currentPartSo.ActionsType != null)
-                {
-                    foreach (var actionType in _currentPartSo.ActionsType)
-                    {
-                        _actionScreenService.Action(actionType);
-                    }
-                }
-                
-                _audioSystemService.PlayShotSound(_currentPartSo.MusicTypeOnStart);
 
-                if(_currentPartSo.StatusSetter.Enable)
+            if (CurrentPart >= _currentSceneSo.ScreenParts.Length) return;
+            
+            _currentPartSo = _currentSceneSo.ScreenParts[CurrentPart];
+            OnOpenPart?.Invoke(CurrentPart);
+                
+            if(_currentPartSo.ActionsType != null)
+            {
+                foreach (var actionType in _currentPartSo.ActionsType)
                 {
-                    foreach (var statusesValue in _currentPartSo.StatusSetter.StatusesValues)
-                    {
-                        SaveService.SetStatusValue(statusesValue.status, statusesValue.value);
-                    }
+                    _actionScreenService.Action(actionType);
                 }
-                
-                _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
-                _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow);
-                
-                _blockClick = true;
             }
+                
+            _audioSystemService.PlayShotSound(_currentPartSo.MusicTypeOnStart);
+
+            if(_currentPartSo.StatusSetter.Enable)
+            {
+                foreach (var statusesValue in _currentPartSo.StatusSetter.StatusesValues)
+                {
+                    SaveService.SetStatusValue(statusesValue.status, statusesValue.value);
+                }
+            }
+                
+            _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
+            _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow);
+                
+            _blockClick = true;
         }
 
         private void ChooseNextScene()
