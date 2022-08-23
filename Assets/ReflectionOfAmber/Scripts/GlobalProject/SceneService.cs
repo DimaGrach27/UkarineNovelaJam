@@ -23,7 +23,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
         public void LoadEndGame()
         {
-            if (_loadCoroutine != null) return;
+            if (_loadCoroutine != null) _coroutineHelper.StopCoroutine(_loadCoroutine);
 
             SaveService.ResetAllSaves();
 
@@ -32,13 +32,13 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
         public void LoadGameScene()
         {
-            if (_loadCoroutine != null) return;
+            if (_loadCoroutine != null) _coroutineHelper.StopCoroutine(_loadCoroutine);
             _loadCoroutine = _coroutineHelper.StartCoroutine(LoadRoutine(Scenes.MainScene));
         }
         
         public void LoadMainMenuScene()
         {
-            if (_loadCoroutine != null) return;
+            if (_loadCoroutine != null) _coroutineHelper.StopCoroutine(_loadCoroutine);
             _loadCoroutine = _coroutineHelper.StartCoroutine(LoadRoutine(Scenes.MainMenuScene));
         }
         
