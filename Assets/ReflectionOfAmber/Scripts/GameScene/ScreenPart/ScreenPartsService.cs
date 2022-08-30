@@ -23,7 +23,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         public ScreenPartsService(BgService bgService,
             CharacterService characterService,
             ScreenTextService screenTextService,
-            UiClickHandler uiClickHandler,
             ChooseWindowService chooseWindowService,
             CameraActionService cameraActionService,
             ActionScreenService actionScreenService,
@@ -32,7 +31,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             SceneService sceneService,
             AudioSystemService audioSystemService,
             FadeService fadeService,
-            DebugHelperService debugHelperService
+            DebugHelperService debugHelperService,
+            ScreenPartNextDialogButton screenPartNextDialogButton
         )
         {
             _bgService = bgService;
@@ -51,7 +51,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
             cameraActionService.OnTakePhoto += TakePhoto;
-            uiClickHandler.OnClick += ShowNextPart;
+            screenPartNextDialogButton.OnClickButton += ShowNextPart;
             screenPartsService.OnPlayNextPart += ForceShowNextPart;
             screenPartsService.OnPlayNextScene += ShowNextScene;
         }

@@ -15,17 +15,21 @@ namespace ReflectionOfAmber.Scripts.Settings
         [SerializeField] private SettingElementSlider speedText;
         [SerializeField] private SettingElementSlider musicVolume;
         [SerializeField] private SettingElementSlider soundVolume;
+        [SerializeField] private SettingElementSlider brightnessValue;
 
         [SerializeField] private Button button;
 
         private AudioSystemService _audioSystemService;
+        private GlobalBrightnessService _globalBrightnessService;
+        
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
 
         [Inject]
-        public void Construct(AudioSystemService audioSystemService)
+        public void Construct(AudioSystemService audioSystemService, GlobalBrightnessService globalBrightnessService)
         {
             _audioSystemService = audioSystemService;
+            _globalBrightnessService = globalBrightnessService;
         }
         
         private void Start()
@@ -35,6 +39,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             speedText.OnChangeValue += ChangeSpeedText;
             musicVolume.OnChangeValue += ChangeMusicVolume;
             soundVolume.OnChangeValue += ChangeSoundVolume;
+            brightnessValue.OnChangeValue += ChangeBrightnessValue;
             
             float valueTyping = 1.0f - SaveService.GetTypingSpeed() / 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
@@ -43,6 +48,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             speedText.SetValue(SaveService.GetTypingSpeed() * 10);
             musicVolume.SetValue(SaveService.GetMusicVolume() * 10);
             soundVolume.SetValue(SaveService.GetAudioVolume() * 10);
+            brightnessValue.SetValue(SaveService.GetBrightnessValue() * 10);
             
             button.onClick.AddListener(Close);
             
@@ -82,6 +88,12 @@ namespace ReflectionOfAmber.Scripts.Settings
             SaveService.SaveAudioVolume(value / 10);
         }
 
+        private void ChangeBrightnessValue(float value)
+        {
+            _globalBrightnessService.BrightnessValue = (value / 10);
+            SaveService.SaveBrightnessValue(value / 10);
+        }
+        
         private void Close()
         {
             if(_routine != null)

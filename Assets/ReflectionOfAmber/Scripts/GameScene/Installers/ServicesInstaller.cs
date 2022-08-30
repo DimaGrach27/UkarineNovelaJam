@@ -23,6 +23,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         [SerializeField] private UiClickHandler uiClickHandler;
         [SerializeField] private GlobalVolumeService globalVolumeService;
         [SerializeField] private OpenEyeAnimation openEyeAnimation;
+        [SerializeField] private ScreenPartNextDialogButton screenPartNextDialogButton;
         
         public override void InstallBindings()
         {
@@ -35,6 +36,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         private void GamePlayCanvasInstallers()
         {
             Container.Bind<GamePlayCanvas>().FromInstance(gamePlayCanvas).AsSingle().NonLazy();
+            Container.Bind<ScreenPartNextDialogButton>().FromInstance(screenPartNextDialogButton).AsSingle().NonLazy();
             Container.Bind<UiClickHandler>().FromInstance(uiClickHandler).AsSingle().NonLazy();
         }
         

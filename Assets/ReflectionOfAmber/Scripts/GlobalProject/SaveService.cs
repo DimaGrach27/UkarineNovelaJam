@@ -285,10 +285,17 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              SettingFile.soundVolume = volume;
              SaveJson(SETTINGS_KEY);
          }
+         
+         public static void SaveBrightnessValue(float value)
+         {
+             SettingFile.brightnessValue = value;
+             SaveJson(SETTINGS_KEY);
+         }
 
          public static float GetAudioVolume() => SettingFile.soundVolume;
          public static float GetMusicVolume() => SettingFile.musicVolume;
          public static float GetTypingSpeed() => SettingFile.typingSpeed;
+         public static float GetBrightnessValue() => SettingFile.brightnessValue;
      }
 
      [Serializable]
@@ -306,6 +313,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          public float musicVolume = 1.0f;
          public float soundVolume = 1.0f;
          public float typingSpeed = 0.5f;
+         public float brightnessValue = 0.5f;
      }
 
      [Serializable]

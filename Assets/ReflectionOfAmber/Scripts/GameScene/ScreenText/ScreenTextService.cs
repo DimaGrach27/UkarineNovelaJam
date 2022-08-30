@@ -2,6 +2,7 @@
 using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
@@ -16,11 +17,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         [Inject]
         public ScreenTextService(GamePlayCanvas gamePlayCanvas, 
             UiClickHandler uiClickHandler, 
+            ScreenPartNextDialogButton screenPartNextDialogButton, 
             CoroutineHelper coroutineHelper)
         {
             _coroutineHelper = coroutineHelper;
             _screenTextUiView = gamePlayCanvas.GetComponentInChildren<ScreenTextUiView>();
             uiClickHandler.OnClick += EndTyping;
+            screenPartNextDialogButton.OnClickButton += EndTyping;
         }
      
         private readonly ScreenTextUiView _screenTextUiView;
