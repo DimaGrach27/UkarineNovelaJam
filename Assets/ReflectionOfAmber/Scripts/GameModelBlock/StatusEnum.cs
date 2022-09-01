@@ -30,6 +30,7 @@
         ZAHARES_HAVE_SHOW = 25,
         OLEKSII_HAVE_SHOW = 26,
         CHOOSE_WAS_PICK = 27,
+        meetWatchDog = 28,
 
         BOTTLE = 100
     }
