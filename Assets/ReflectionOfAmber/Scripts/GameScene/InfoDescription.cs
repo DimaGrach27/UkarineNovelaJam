@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using TMPro;
 using UnityEngine;
 
@@ -10,11 +11,14 @@ namespace ReflectionOfAmber.Scripts.GameScene
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private ClickHelper clickHelper;
         
+        public ScreenPartsServiceFacade ScreenPartsServiceFacade { get; set; }
+        
         private List<string> _texts;
         private Coroutine _delayWait;
         
         private bool _isReadyToClick;
         private bool _isTyping;
+        
         private void Awake()
         {
             clickHelper.OnClick += OnPointerClick;
@@ -61,6 +65,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
                 return;
             }
             
+            ScreenPartsServiceFacade.PlatNextPart();
             Destroy(gameObject);
         }
         

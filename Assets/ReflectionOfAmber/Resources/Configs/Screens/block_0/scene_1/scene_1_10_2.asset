@@ -27,9 +27,12 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
-      enable: 0
-      statusesValues: []
+      enable: 1
+      statusesValues:
+      - value: 1
+        status: 22
     screenPosition: 0
     characterImage: 1
     nameCharacter: 1
@@ -40,6 +43,7 @@ MonoBehaviour:
       \u0441\u0435\u0431\u0435 ******!!!"
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -60,6 +64,7 @@ MonoBehaviour:
       \u0431\u0437\u0437\u0442-- \u041A\u0456\u043D\u0435\u0446\u044C \u0437\u0432\u2019\u044F\u0437\u043A\u0443\xBB."
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -77,6 +82,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

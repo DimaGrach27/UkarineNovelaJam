@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ReflectionOfAmber.Scripts.GameScene;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
@@ -13,11 +12,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
     {
         [SerializeField, TextArea(1, 5)] private List<string> texts;
         [SerializeField] private InfoDescription infoDescription;
-        
+
         public override bool Check()
         {
             InfoDescription infoDesc = Instantiate(infoDescription);
             infoDesc.SetInfoDescription(texts);
+            infoDesc.ScreenPartsServiceFacade = ServiceFacade;
             
             return true;
         }
