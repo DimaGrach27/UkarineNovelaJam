@@ -429,6 +429,19 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 {
                     isRemove |= choosesList.chooseStatus[count];
                 }
+                
+                if (nextScene.findDependent.enable)
+                {
+                    bool result = true;
+                    
+                    foreach (var statusValue in nextScene.findDependent.statusesValues)
+                    {
+                        bool status = SaveService.GetStatusValue(statusValue.status);
+                        result &= status == statusValue.value;
+                    }
+
+                    isRemove |= result;
+                }
 
                 if (isRemove) nextScenes.Remove(nextScene);
 
@@ -448,23 +461,23 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 SaveService.SetChoose(_currentSceneSo.SceneKey, chooseScene.Scene.SceneKey);
             }
 
-            if (chooseScene.findDependent.enable)
-            {
-                bool result = true;
-                    
-                foreach (var statusValue in chooseScene.findDependent.statusesValues)
-                {
-                    bool status = SaveService.GetStatusValue(statusValue.status);
-                    result &= status == statusValue.value;
-                }
-                
-                if(result)
-                {
-                    Choose();
-                    _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
-                    return;
-                }
-            }
+            // if (chooseScene.findDependent.enable)
+            // {
+            //     bool result = true;
+            //         
+            //     foreach (var statusValue in chooseScene.findDependent.statusesValues)
+            //     {
+            //         bool status = SaveService.GetStatusValue(statusValue.status);
+            //         result &= status == statusValue.value;
+            //     }
+            //     
+            //     if(result)
+            //     {
+            //         Choose();
+            //         _actionScreenService.Action(ActionType.ALL_ITEM_WAS_FOUND);
+            //         return;
+            //     }
+            // }
 
             if (chooseScene.specialDependent.enable)
             {

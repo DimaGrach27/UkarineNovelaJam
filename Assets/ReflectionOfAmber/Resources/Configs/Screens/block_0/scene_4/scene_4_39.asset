@@ -270,10 +270,10 @@ MonoBehaviour:
       - value: 1
         status: 2
     cameraDependent:
-      enable: 0
+      enable: 1
       isPrepAction: 0
       visibleOnPhoto: 0
-      visibleOutPhoto: 0
+      visibleOutPhoto: 1
     exclusionDependent:
       enable: 0
     findDependent:
