@@ -66,7 +66,7 @@ MonoBehaviour:
     actionsTypeEnd: 
   nextScenes:
   - scene: {fileID: 11400000, guid: 63ba61d04abd46046af65f5256fb4e1f, type: 2}
-    chooseText: "\u0421\u0445\u043E\u0432\u0430\u0442\u0438 \u0442\u0435\u043B\u0435\u0444\u043E\u043D."
+    chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
