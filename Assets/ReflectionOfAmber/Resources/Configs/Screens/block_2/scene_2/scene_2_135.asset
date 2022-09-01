@@ -18,10 +18,8 @@ MonoBehaviour:
     enable: 1
     bgEnum: 2
   statusSetter:
-    enable: 1
-    statusesValues:
-    - value: 1
-      status: 24
+    enable: 0
+    statusesValues: []
   countSetter:
     enable: 0
     count: 1

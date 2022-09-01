@@ -71,7 +71,7 @@ MonoBehaviour:
       enable: 1
       statusesValues:
       - value: 1
-        status: 8
+        status: 6
     cameraDependent:
       enable: 1
       isPrepAction: 1
