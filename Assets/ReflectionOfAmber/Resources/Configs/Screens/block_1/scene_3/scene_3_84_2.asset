@@ -27,7 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: 70326b505e64715458a9e1031eb92543, type: 2}
+  - scene: {fileID: 11400000, guid: b07063c8c9cd49248aaa3263a9025b13, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
@@ -43,6 +43,5 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     specialDependent:
-      enable: 1
-      special:
-      - {fileID: 11400000, guid: c97035f3f4bc4314a88416c8ec5ede04, type: 2}
+      enable: 0
+      special: []

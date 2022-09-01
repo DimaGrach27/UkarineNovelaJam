@@ -92,7 +92,7 @@ MonoBehaviour:
       \u0433\u0440\u0456\u0445\u0438, \u044F\u043A\u0456 \u0447\u0438\u043D\u0438\u0448."
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 03f146ef67b0346478b8112220f7f629, type: 2}
+  - scene: {fileID: 11400000, guid: 70326b505e64715458a9e1031eb92543, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
