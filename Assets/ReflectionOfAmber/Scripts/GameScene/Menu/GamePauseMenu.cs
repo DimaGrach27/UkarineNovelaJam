@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
-using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
-using ReflectionOfAmber.Scripts.MainMenu;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -17,7 +13,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         [SerializeField] private Button continueButton;
         [SerializeField] private Button exitToMenuButton;
         
-        private FadeService _fadeService;
         private ConfirmScreen _confirmScreen;
         private SceneService _sceneService;
         
@@ -29,12 +24,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         [Inject]
         public void Construct(
             ConfirmScreen confirmScreen,
-            FadeService fadeService,
             SceneService sceneService
             )
         {
             _confirmScreen = confirmScreen;
-            _fadeService = fadeService;
             _sceneService = sceneService;
         }
         
@@ -54,32 +47,47 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
 
         private void Close()
         {
-            if(_routine != null)
-                StopCoroutine(_routine);
-
-            _routine = StartCoroutine(FadeOutWindow());
+            FadeOut();
         }
         
         private void Open(CallKeyType type)
         {
             if(type != CallKeyType.GAME_PAUSE_MENU) return;
-            
-            if(_routine != null)
-                StopCoroutine(_routine);
-            
-            _routine = StartCoroutine(FadeInWindow());
+            FadeIn();
         }
         
         private void ClickExit()
         {
+            FadeOut();
             _confirmScreen.Check(ConfirmExit, "Ви точно бажаєте вийти?");
         }
         
         private void ConfirmExit(bool isExit)
         {
-            if(!isExit) return;
+            if(!isExit)
+            {
+                FadeIn();
+                return;
+            }
+            
             GameModel.IsGamePlaying = false;
             _sceneService.LoadMainMenuScene();
+        }
+
+        private void FadeOut()
+        {
+            if(_routine != null)
+                StopCoroutine(_routine);
+
+            _routine = StartCoroutine(FadeOutWindow());
+        }
+
+        private void FadeIn()
+        {
+            if(_routine != null)
+                StopCoroutine(_routine);
+
+            _routine = StartCoroutine(FadeInWindow());
         }
 
         private IEnumerator FadeInWindow()
