@@ -38,7 +38,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             
             if(_coroutine != null) StopCoroutine(_coroutine);
             
-            if (_chooseScene.cameraDependent.isPrepAction)
+            if (_chooseScene.cameraDependent.isPrepAction || _chooseScene.cameraDependent.visibleOnPhoto)
             {
                 _coroutine = StartCoroutine(ChooseBlinkRoutine());
             }
