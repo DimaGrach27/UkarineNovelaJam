@@ -106,6 +106,29 @@ MonoBehaviour:
       statusesValues:
       - value: 1
         status: 21
+      - value: 0
+        status: 29
+    cameraDependent:
+      enable: 0
+      isPrepAction: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  - scene: {fileID: 11400000, guid: b5da128c3ffd46a44aea1db8c8f42314, type: 2}
+    chooseText: "\u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0438\u0442\u0438 \u0441\u0442\u0430\u043D
+      \u043C\u0430\u0448\u0438\u043D\u0438."
+    statusDependent:
+      enable: 1
+      statusesValues:
+      - value: 1
+        status: 29
     cameraDependent:
       enable: 0
       isPrepAction: 0

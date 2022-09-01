@@ -120,3 +120,24 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
+  - scene: {fileID: 11400000, guid: aa2e8e576376fc9448fb7205ec5fe466, type: 2}
+    chooseText: "\u0420\u043E\u0437\u043F\u043E\u0432\u0456\u0441\u0442\u0438, \u0449\u043E
+      \u0437\u043D\u0430\u0439\u0448\u043B\u0430 \u0441\u0445\u043E\u0436\u0438\u0439
+      \u043C\u0435\u0434\u0430\u043B\u044C\u0439\u043E\u043D \u043D\u0430 \u0431\u0435\u0440\u0435\u0437\u0456
+      \u043E\u0437\u0435\u0440\u0430."
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      isPrepAction: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []

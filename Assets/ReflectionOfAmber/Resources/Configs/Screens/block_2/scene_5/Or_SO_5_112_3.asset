@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c27256331f4f19bc160f3695b739d0, type: 3}
+  m_Name: Or_SO_5_112_3
+  m_EditorClassIdentifier: 
+  nextScene:
+    scene: {fileID: 0}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      isPrepAction: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  statusEnum: 23
+  blockTrue:
+    scene: {fileID: 11400000, guid: bc173f4d4557377439fc6fca690fc9eb, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      isPrepAction: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  blockFalse:
+    scene: {fileID: 11400000, guid: 1943370e0bcd85141889b762d5a9cd34, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      isPrepAction: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []

@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
-  m_Name: scene_3_95_3
+  m_Name: scene_5_208
   m_EditorClassIdentifier: 
-  sceneKey: scene_3_95_3
+  sceneKey: scene_5_208
   isActiveCamera: 0
   changeBackGround:
     enable: 0
-    bgEnum: 1
+    bgEnum: 5
   statusSetter:
     enable: 0
     statusesValues: []
   countSetter:
     enable: 0
     count: 1
-    type: 3
+    type: 0
   actionsType: 
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: a7a94aa17561e354eba187d69592a5a6, type: 2}
+  - scene: {fileID: 11400000, guid: b0af212e0d49c3442877326b2a4e9638, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
@@ -45,4 +45,4 @@ MonoBehaviour:
     specialDependent:
       enable: 1
       special:
-      - {fileID: 11400000, guid: 2ab031ff8bb45fe4d9b6ee6e54ab82e9, type: 2}
+      - {fileID: 11400000, guid: 18552dc83c78ae54fb30d1a93d36fc0b, type: 2}

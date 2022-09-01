@@ -9,25 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b5a246d6dc4e51b5ce8b79a9c302fa, type: 3}
-  m_Name: scene_3_95_3
+  m_Script: {fileID: 11500000, guid: e4e05bb086f342ada5204d0e2b0c0700, type: 3}
+  m_Name: Thoughts_SO_3_95_3
   m_EditorClassIdentifier: 
-  sceneKey: scene_3_95_3
-  isActiveCamera: 0
-  changeBackGround:
-    enable: 0
-    bgEnum: 1
-  statusSetter:
-    enable: 0
-    statusesValues: []
-  countSetter:
-    enable: 0
-    count: 1
-    type: 3
-  actionsType: 
-  screenParts: []
-  nextScenes:
-  - scene: {fileID: 11400000, guid: a7a94aa17561e354eba187d69592a5a6, type: 2}
+  nextScene:
+    scene: {fileID: 11400000, guid: 90f205aacb4e7524a9279d32971b42cb, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
@@ -43,6 +29,7 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     specialDependent:
-      enable: 1
-      special:
-      - {fileID: 11400000, guid: 2ab031ff8bb45fe4d9b6ee6e54ab82e9, type: 2}
+      enable: 0
+      special: []
+  status: 6
+  valueStatus: 0
