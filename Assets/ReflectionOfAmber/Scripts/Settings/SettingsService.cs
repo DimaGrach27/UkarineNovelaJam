@@ -41,14 +41,14 @@ namespace ReflectionOfAmber.Scripts.Settings
             soundVolume.OnChangeValue += ChangeSoundVolume;
             brightnessValue.OnChangeValue += ChangeBrightnessValue;
             
-            float valueTyping = 1.0f - SaveService.GetTypingSpeed() / 10;
+            float valueTyping = 1.0f - SaveService.TypingSpeed / 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
             GameModel.TYPING_SPEED = valueTyping;
             
-            speedText.SetValue(SaveService.GetTypingSpeed() * 10);
-            musicVolume.SetValue(SaveService.GetMusicVolume() * 10);
-            soundVolume.SetValue(SaveService.GetAudioVolume() * 10);
-            brightnessValue.SetValue(SaveService.GetBrightnessValue() * 10);
+            speedText.SetValue(SaveService.TypingSpeed * 10);
+            musicVolume.SetValue(SaveService.MusicVolume * 10);
+            soundVolume.SetValue(SaveService.AudioVolume * 10);
+            brightnessValue.SetValue(SaveService.BrightnessValue * 10);
             
             button.onClick.AddListener(Close);
             
@@ -72,26 +72,26 @@ namespace ReflectionOfAmber.Scripts.Settings
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
             GameModel.TYPING_SPEED = valueTyping;
             
-            SaveService.SaveTypingSpeed(value / 10);
+            SaveService.TypingSpeed = value / 10;
         }
         
         private void ChangeMusicVolume(float value)
         {
             _audioSystemService.ChangeMusic(value / 10);
-            SaveService.SaveMusicVolume(value / 10);
+            SaveService.MusicVolume = value / 10;
         }
         
                 
         private void ChangeSoundVolume(float value)
         {
             _audioSystemService.ChangeAudio(value / 10);
-            SaveService.SaveAudioVolume(value / 10);
+            SaveService.AudioVolume = value / 10;
         }
 
         private void ChangeBrightnessValue(float value)
         {
             _globalBrightnessService.BrightnessValue = (value / 10);
-            SaveService.SaveBrightnessValue(value / 10);
+            SaveService.BrightnessValue = value / 10;
         }
         
         private void Close()

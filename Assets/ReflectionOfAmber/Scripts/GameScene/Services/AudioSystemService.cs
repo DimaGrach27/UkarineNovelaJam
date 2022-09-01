@@ -26,9 +26,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
 
         private void Awake()
         {
-            musicAudioSource.volume = SaveService.GetMusicVolume();
-            soundAudioSource.volume = SaveService.GetAudioVolume();
-            soundAudioLooperSource.volume = SaveService.GetAudioVolume();
+            musicAudioSource.volume = SaveService.MusicVolume;
+            soundAudioSource.volume = SaveService.AudioVolume;
+            soundAudioLooperSource.volume = SaveService.AudioVolume;
 
             foreach (var musicSo in Resources.LoadAll<MusicSo>("Configs/Music"))
             {

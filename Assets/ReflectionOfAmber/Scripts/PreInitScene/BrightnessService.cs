@@ -9,8 +9,6 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
 {
     public class BrightnessService : MonoBehaviour
     {
-        private const string KEY_FIRST_LOAD = "first_load";
-        
         [SerializeField] private SettingElementSlider settingElementSlider;
         [SerializeField] private Button loadButton;
         
@@ -24,7 +22,7 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         
         private void Awake()
         {
-            bool isWasLoad = PlayerPrefs.GetInt(KEY_FIRST_LOAD, 0) == 1;
+            bool isWasLoad = SaveService.BrightnessStatus;
 
             if (isWasLoad)
             {
@@ -33,19 +31,19 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
             }
             
             settingElementSlider.OnChangeValue += OnChangeValue;
-            settingElementSlider.SetValue(SaveService.GetBrightnessValue() * 10);
+            settingElementSlider.SetValue(SaveService.BrightnessValue * 10);
             loadButton.onClick.AddListener(LoadMineMenu);
         }
 
         private void OnChangeValue(float value)
         {
             _globalBrightnessService.BrightnessValue = (value / 10);
-            SaveService.SaveBrightnessValue(value / 10);
+            SaveService.BrightnessValue = value / 10;
         }
 
         private void LoadMineMenu()
         {
-            PlayerPrefs.SetInt(KEY_FIRST_LOAD, 1);
+            SaveService.BrightnessStatus = true;
             SceneManager.LoadScene("MainMenu");
         }
     }

@@ -18,7 +18,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 
             ActionScreenService.AudioSystemService.SoundAudioLooperSource.DOFade(0.0f, duration);
             yield return new WaitForSeconds(duration);
-            ActionScreenService.AudioSystemService.ChangeAudio(SaveService.GetMusicVolume());
+            ActionScreenService.AudioSystemService.ChangeAudio(SaveService.MusicVolume);
             ActionScreenService.AudioSystemService.StopSoundMusic();
         }
         
@@ -31,7 +31,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
         {
             float duration = 1.5f;
             ActionScreenService.AudioSystemService.SoundAudioLooperSource.volume = 0.0f;
-            ActionScreenService.AudioSystemService.SoundAudioLooperSource.DOFade(SaveService.GetMusicVolume(), duration);
+            ActionScreenService.AudioSystemService.SoundAudioLooperSource.DOFade(SaveService.MusicVolume, duration);
         }
 
         public override ActionType ActionType => ActionType.FADE_IN_MUSIC_ON_LOPPER;

@@ -267,35 +267,56 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              SaveJson(CHAPTER_NOTES_KEY);
              SaveJson(PROGRESS_KEY);
          }
-
-         public static void SaveTypingSpeed(float speed)
+         
+         public static float MusicVolume
          {
-             SettingFile.typingSpeed = speed;
-             SaveJson(SETTINGS_KEY);
-         }
-
-         public static void SaveMusicVolume(float volume)
-         {
-             SettingFile.musicVolume = volume;
-             SaveJson(SETTINGS_KEY);
-         }
-
-         public static void SaveAudioVolume(float volume)
-         {
-             SettingFile.soundVolume = volume;
-             SaveJson(SETTINGS_KEY);
+             get => SettingFile.musicVolume;
+             set
+             {
+                 SettingFile.musicVolume = value;
+                 SaveJson(SETTINGS_KEY);
+             }
          }
          
-         public static void SaveBrightnessValue(float value)
+         public static float AudioVolume
          {
-             SettingFile.brightnessValue = value;
-             SaveJson(SETTINGS_KEY);
+             get => SettingFile.soundVolume;
+             set
+             {
+                 SettingFile.soundVolume = value;
+                 SaveJson(SETTINGS_KEY);
+             }
          }
-
-         public static float GetAudioVolume() => SettingFile.soundVolume;
-         public static float GetMusicVolume() => SettingFile.musicVolume;
-         public static float GetTypingSpeed() => SettingFile.typingSpeed;
-         public static float GetBrightnessValue() => SettingFile.brightnessValue;
+         
+         public static float TypingSpeed
+         {
+             get => SettingFile.typingSpeed;
+             set
+             {
+                 SettingFile.typingSpeed = value;
+                 SaveJson(SETTINGS_KEY);
+             }
+         }
+         
+         public static float BrightnessValue
+         {
+             get => SettingFile.brightnessValue;
+             set
+             {
+                 SettingFile.brightnessValue = value;
+                 SaveJson(SETTINGS_KEY);
+             }
+         }
+         
+         public static bool BrightnessStatus
+         {
+             get => SettingFile.isBrightnessWasChange;
+             set
+             {
+                 SettingFile.isBrightnessWasChange = value;
+                 SaveJson(SETTINGS_KEY);
+             }
+         }
      }
 
      [Serializable]
@@ -314,6 +335,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          public float soundVolume = 1.0f;
          public float typingSpeed = 0.5f;
          public float brightnessValue = 0.5f;
+         public bool isBrightnessWasChange = false;
      }
 
      [Serializable]
