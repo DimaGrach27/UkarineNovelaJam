@@ -31,13 +31,38 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         
         private bool _isTextEnable = true;
         private bool _isTyping;
+        private bool _isEndOfText = true;
 
         private string _endText;
+        private string _prevText;
 
         private Coroutine _typingCoroutine;
         private Coroutine _dissolveCoroutine;
+        
+        public void SetText(string name, string text, bool endOfText)
+        {
+            _endText = "";
+            _isEndOfText = endOfText;
+            
+            if (string.IsNullOrEmpty(text))
+            {
+                HideText();
+                return;
+            }
+            
+            _screenTextUiView.Name = name;
 
-        public void ShowText()
+            _endText = _prevText + text;
+
+            if(_typingCoroutine != null)
+                _coroutineHelper.StopCoroutine(_typingCoroutine);
+            
+            _typingCoroutine = _coroutineHelper.StartCoroutine(TypingRoutine(text));
+            
+            ShowText();
+        }
+        
+        private void ShowText()
         {
             if(_isTextEnable) return;
             
@@ -47,25 +72,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _isTextEnable = true;
             _screenTextUiView.Visible = true;
             DissolveIn();
-        }
-        
-        public void SetText(string name, string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                HideText();
-                return;
-            }
-
-            _screenTextUiView.Name = name;
-            _endText = text;
-            
-            if(_typingCoroutine != null)
-                _coroutineHelper.StopCoroutine(_typingCoroutine);
-            
-            _typingCoroutine = _coroutineHelper.StartCoroutine(TypingRoutine(text));
-            
-            ShowText();
         }
         
         public void HideText()
@@ -84,7 +90,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         {
             _screenTextUiView.CanvasGroup.blocksRaycasts = false;
             _isTyping = true;
-            string resultText = "";
+            string resultText = _prevText;
 
             foreach (char symbol in text)
             {
@@ -125,6 +131,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _screenTextUiView.CanvasGroup.blocksRaycasts = true;
             if(_endText != null) _screenTextUiView.Text = _endText;
             
+            _prevText = _isEndOfText ? "" : _endText;
             _endText = null;
         }
     }

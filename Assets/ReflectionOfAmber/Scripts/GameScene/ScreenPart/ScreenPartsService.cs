@@ -296,7 +296,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             }
                 
             _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
-            _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow);
+            _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
                 
             _blockClick = true;
         }

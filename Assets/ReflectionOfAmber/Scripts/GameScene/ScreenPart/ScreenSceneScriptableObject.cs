@@ -57,6 +57,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         [SerializeField, EnumPaging] private CharacterName nameCharacter;
         
         [SerializeField, TextArea(1, 6)] private string textShow;
+        [SerializeField] private bool endOfText = true;
         [SerializeField] private ActionType[] actionsTypeEnd;
         
         public string CharacterName => GameModel.GetName(nameCharacter);
@@ -70,6 +71,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         public ActionType[] ActionsType => actionsType;
         public ActionType[] ActionsTypeEnd => actionsTypeEnd;
         public MusicType MusicTypeOnStart => musicTypeOnStart;
+        public bool EndOfText => endOfText;
     }
     
     [Serializable]
