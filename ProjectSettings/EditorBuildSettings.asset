@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/ReflectionOfAmber/Scenes/PreInitScene.unity
     guid: f5e881e26c0f97547a32d4ad0b9417f1
-  - enabled: 1
+  - enabled: 0
     path: Assets/ReflectionOfAmber/Scenes/MainMenu.unity
     guid: 493b791b572e0e54d950edee42c6b25e
-  - enabled: 1
+  - enabled: 0
     path: Assets/ReflectionOfAmber/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
     guid: e0f4631cce1b6c848b7e23bd0ec7ffc5
+  - enabled: 1
+    path: Assets/ReflectionOfAmber/Scenes/Test_scene.unity
+    guid: 12ae6005eba4fdb4991022fbf9a543dd
   m_configObjects: {}
