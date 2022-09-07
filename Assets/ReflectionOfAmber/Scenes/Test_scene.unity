@@ -123,6 +123,87 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &62642597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 62642599}
+  - component: {fileID: 62642598}
+  - component: {fileID: 62642600}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &62642598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62642597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 62642600}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &62642599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62642597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &62642600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62642597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7166d4272ff14b28a5e4c0f5fa05421f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noteWindowScreen: {fileID: 3859158217489147899}
+  noteWindowInvestigationScreen: {fileID: 3859158217947292733}
+  noteWindowSaveScreen: {fileID: 3859158217740280191}
+  noteWindowSettingsScreenView: {fileID: 3859158218147014423}
 --- !u!1 &265844879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,6 +2076,7 @@ GameObject:
   - component: {fileID: 3859158217238321860}
   - component: {fileID: 3859158217238321850}
   - component: {fileID: 3859158217238321851}
+  - component: {fileID: 3859158217238321862}
   m_Layer: 5
   m_Name: Bg Note
   m_TagString: Untagged
@@ -2002,6 +2084,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3859158217238321862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158217238321861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849e63681daa45faa8f70352ddc1ab1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgScreen: {fileID: 3859158217238321851}
+  firstPage: {fileID: 21300000, guid: 7cad57ee49e71c34890ac9ab893dc9eb, type: 3}
+  middlePage: {fileID: 21300000, guid: f5b0d98f4d22c20439b0b52e68a25151, type: 3}
 --- !u!224 &3859158217376283265
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2279,28 +2376,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1053cb3501e6f4848b3a069b956a6fd0, type: 3}
---- !u!114 &3859158217489147896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3859158217489147898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd778b75ee94487ab0481741af5d9f51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noteWindows:
-  - noteWindowScreensEnum: 3
-    gameObject: {fileID: 3859158217947292732}
-  - noteWindowScreensEnum: 4
-    gameObject: {fileID: 3859158217740280190}
-  - noteWindowScreensEnum: 5
-    gameObject: {fileID: 3859158218147014422}
-  bgScreen: {fileID: 3859158217238321851}
-  firstPage: {fileID: 21300000, guid: 7cad57ee49e71c34890ac9ab893dc9eb, type: 3}
-  middlePage: {fileID: 21300000, guid: f5b0d98f4d22c20439b0b52e68a25151, type: 3}
 --- !u!224 &3859158217489147897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2335,7 +2410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3859158217489147897}
-  - component: {fileID: 3859158217489147896}
+  - component: {fileID: 3859158217489147899}
   m_Layer: 5
   m_Name: Note Popup
   m_TagString: Untagged
@@ -2343,6 +2418,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3859158217489147899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158217489147898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de8905f2dcb4a75a3adee43ab020a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noteWindowScreenBgView: {fileID: 3859158217238321862}
 --- !u!1 &3859158217557711364
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,13 +2851,26 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3859158217740280189}
+  - component: {fileID: 3859158217740280191}
   m_Layer: 5
   m_Name: Save Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
+--- !u!114 &3859158217740280191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158217740280190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc38cf61e2804d49bcafe39876e57a64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3859158217947292723
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2803,6 +2904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3859158217947292723}
+  - component: {fileID: 3859158217947292733}
   m_Layer: 5
   m_Name: Investigation Screen
   m_TagString: Untagged
@@ -2810,6 +2912,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &3859158217947292733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158217947292732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847f951361a04f8795a2ebf122b58755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3859158218147014421
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2840,6 +2954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3859158218147014421}
+  - component: {fileID: 3859158218147014423}
   m_Layer: 5
   m_Name: Settings Screen
   m_TagString: Untagged
@@ -2847,6 +2962,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &3859158218147014423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158218147014422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291d52c998f34ac1bcfb22f0a7796173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3859158218273363929
 PrefabInstance:
   m_ObjectHideFlags: 0
