@@ -9,15 +9,38 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
  {
      public static class SaveService
      {
-         private const string CAMERA_FILM_LEFT_KEY = "camera_film_left";
-         private const string HEALTH_COUNT_KEY = "health_count";
-         private const string CURRENT_BG_KEY = "current_bg";
-
          private const string PROGRESS_KEY = "progress";
          private const string CHAPTER_NOTES_KEY = "chapter_notes";
          private const string SETTINGS_KEY = "settings";
+         private const string STATUSES_KEY = "statuses";
 
+         private static StatusFlagFile _statusFlagFile;
+         private static StatusFlagFile StatusFlagFile
+         {
+             get
+             {
+                 if (_saveFile != null) return _statusFlagFile;
 
+                 if (!ExistFile(PROGRESS_KEY))
+                 {
+                     _statusFlagFile = new StatusFlagFile
+                     {
+                         statuses = new int[Enum.GetNames(typeof(StatusEnum)).Length],
+                         killersValue = new int[Enum.GetNames(typeof(KillerName)).Length],
+                         countValue = new int[Enum.GetNames(typeof(CountType)).Length]
+                     };
+
+                     File.WriteAllText(Path(STATUSES_KEY), JsonUtility.ToJson(_statusFlagFile));
+                 }
+                 else
+                 {
+                     _statusFlagFile = JsonUtility.FromJson<StatusFlagFile>(File.ReadAllText(Path(STATUSES_KEY)));
+                 }
+
+                 return _statusFlagFile;
+             }
+         }
+         
          private static SaveFile _saveFile;
          private static SaveFile SaveFile
          {
@@ -126,21 +149,28 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              SaveFile.currentScene = sceneKey;
              SaveJson(PROGRESS_KEY);
          }
-
-
+         
          public static string GetScene => SaveFile.currentScene;
          public static int GetPart => SaveFile.currentPart;
 
          public static int CameraFilmLeft
          {
-             get => PlayerPrefs.GetInt(CAMERA_FILM_LEFT_KEY, 10);
-             set => PlayerPrefs.SetInt(CAMERA_FILM_LEFT_KEY, value);
+             get => SaveFile.filmCount;
+             set
+             {
+                 SaveFile.filmCount = value;
+                 SaveJson(PROGRESS_KEY);
+             }
          }
 
          public static int HealthCount
          {
-             get => PlayerPrefs.GetInt(HEALTH_COUNT_KEY, GlobalConstant.MAX_HEALTH);
-             set => PlayerPrefs.SetInt(HEALTH_COUNT_KEY, value);
+             get => SaveFile.healthCount;
+             set
+             {
+                 SaveFile.healthCount = value;
+                 SaveJson(PROGRESS_KEY);
+             }
          }
 
          public static void SetChoose(string key, string choose)
@@ -163,16 +193,15 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
          public static BgEnum GetCurrentBg()
          {
-             int bg = PlayerPrefs.GetInt(CURRENT_BG_KEY, -1);
-
-             return (BgEnum)bg;
+             return (BgEnum)SaveFile.currentBg;
          }
 
          public static void SetCurrentBg(BgEnum bgEnum)
          {
              int bg = (int)bgEnum;
-
-             PlayerPrefs.SetInt(CURRENT_BG_KEY, bg);
+             SaveFile.currentBg = bg;
+             
+             SaveJson(PROGRESS_KEY);
          }
 
          public static void SetChoosesList(string key, ChoosesList choosesList)
@@ -224,37 +253,36 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
          public static bool GetStatusValue(StatusEnum statusEnum)
          {
-             int flag = PlayerPrefs.GetInt(statusEnum.ToString(), 0);
-
-             return flag != 0;
+             int flag = StatusFlagFile.statuses[(int)statusEnum];
+             return flag == 1;
          }
 
          public static void SetStatusValue(StatusEnum statusEnum, bool status)
          {
-             int flag = status ? 1 : 0;
-
-             PlayerPrefs.SetInt(statusEnum.ToString(), flag);
+             StatusFlagFile.statuses[(int)statusEnum] = status ? 1 : 0;
+             SaveJson(STATUSES_KEY);
          }
 
          public static int GetIntValue(CountType countType)
          {
-             return PlayerPrefs.GetInt(countType.ToString(), 0);
+             return StatusFlagFile.countValue[(int)countType];
          }
-
-
+         
          public static void SetIntValue(CountType countType, int value)
          {
-             PlayerPrefs.SetInt(countType.ToString(), value);
+             StatusFlagFile.countValue[(int)countType] = value;
+             SaveJson(STATUSES_KEY);
          }
 
          public static int GetIntValue(KillerName countType)
          {
-             return PlayerPrefs.GetInt(countType.ToString(), 0);
+             return StatusFlagFile.killersValue[(int)countType];
          }
 
          public static void SetIntValue(KillerName countType, int value)
          {
-             PlayerPrefs.SetInt(countType.ToString(), value);
+             StatusFlagFile.killersValue[(int)countType] = value;
+             SaveJson(STATUSES_KEY);
          }
 
          public static void ResetAllSaves()
@@ -317,11 +345,35 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
                  SaveJson(SETTINGS_KEY);
              }
          }
+
+         public static void SaveGame(int index)
+         {
+             string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
+             string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+             
+             File.WriteAllText(pathProgress, JsonUtility.ToJson(SaveFile));
+             File.WriteAllText(pathStatuses, JsonUtility.ToJson(StatusFlagFile));
+         }
+
+         public static void GetSaveGame(int index)
+         {
+             string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
+             string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+             
+             _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
+             _statusFlagFile = JsonUtility.FromJson<StatusFlagFile>(File.ReadAllText(pathStatuses));
+             
+             SaveJson(PROGRESS_KEY);
+             SaveJson(STATUSES_KEY);
+         }
      }
 
      [Serializable]
      public class SaveFile
      {
+         public int filmCount = 10;
+         public int healthCount = GlobalConstant.MAX_HEALTH;
+         public int currentBg = -1;
          public int currentPart = 0;
          public string currentScene = "scene_0_0";
 
@@ -358,5 +410,13 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
      {
          public string name;
          public string text;
+     }
+
+     [Serializable]
+     public class StatusFlagFile
+     {
+         public int[] statuses;
+         public int[] killersValue;
+         public int[] countValue;
      }
  }
