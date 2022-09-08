@@ -78,6 +78,18 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
         {
             _bgUiView.Visible = false;
         }
+
+        public Sprite GetBg(BgEnum bgEnum)
+        {
+            Sprite sprite = null;
+
+            if (_bgMap.ContainsKey(bgEnum))
+            {
+                sprite = _bgMap[bgEnum].Image;
+            }
+
+            return sprite;
+        }
         
         private IEnumerator ChangeBgRoutine(Action onDoneAnima)
         {

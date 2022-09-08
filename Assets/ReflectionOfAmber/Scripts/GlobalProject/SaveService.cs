@@ -295,9 +295,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
              _saveFile = new SaveFile();
              _chapterNotesFile = new ChapterNotesFile();
+             _statusFlagFile = new StatusFlagFile();
 
              SaveJson(CHAPTER_NOTES_KEY);
              SaveJson(PROGRESS_KEY);
+             SaveJson(STATUSES_KEY);
          }
          
          public static float MusicVolume
@@ -359,16 +361,23 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              File.WriteAllText(pathStatuses, JsonUtility.ToJson(StatusFlagFile));
          }
 
-         public static void GetSaveGame(int index)
+         public static bool TryGetSaveGame(int index, out SaveFile saveFile)
          {
+             saveFile = null;
+             
              string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
              string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+
+             if (!ExistFile(pathProgress) || !ExistFile(pathStatuses)) return false;
              
              _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
+             saveFile = _saveFile;
              _statusFlagFile = JsonUtility.FromJson<StatusFlagFile>(File.ReadAllText(pathStatuses));
              
              SaveJson(PROGRESS_KEY);
              SaveJson(STATUSES_KEY);
+
+             return true;
          }
      }
 
