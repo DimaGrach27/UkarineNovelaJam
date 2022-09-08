@@ -2852,6 +2852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3859158217740280189}
   - component: {fileID: 3859158217740280191}
+  - component: {fileID: 3859158217740280192}
   m_Layer: 5
   m_Name: Save Screen
   m_TagString: Untagged
@@ -2871,6 +2872,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc38cf61e2804d49bcafe39876e57a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &3859158217740280192
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158217740280190}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &3859158217947292723
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2905,6 +2918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3859158217947292723}
   - component: {fileID: 3859158217947292733}
+  - component: {fileID: 3859158217947292734}
   m_Layer: 5
   m_Name: Investigation Screen
   m_TagString: Untagged
@@ -2924,6 +2938,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847f951361a04f8795a2ebf122b58755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonPrefab:
+  - {fileID: 7356073138738435806}
+  - {fileID: 7356073138865300395}
+  - {fileID: 7356073138748656842}
+--- !u!225 &3859158217947292734
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158217947292732}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &3859158218147014421
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2955,6 +2985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3859158218147014421}
   - component: {fileID: 3859158218147014423}
+  - component: {fileID: 3859158218147014424}
   m_Layer: 5
   m_Name: Settings Screen
   m_TagString: Untagged
@@ -2974,6 +3005,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291d52c998f34ac1bcfb22f0a7796173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &3859158218147014424
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859158218147014422}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &3859158218273363929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3505,7 +3548,7 @@ GameObject:
   - component: {fileID: 7356073138263158794}
   - component: {fileID: 7356073138263158795}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Text (TMP) count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3640,7 +3683,7 @@ GameObject:
   - component: {fileID: 7356073138269980018}
   - component: {fileID: 7356073138269980019}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Text (TMP) count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3852,7 +3895,7 @@ GameObject:
   - component: {fileID: 7356073138276540265}
   - component: {fileID: 7356073138276540264}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Text (TMP) count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3888,6 +3931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7356073138738435805}
   - component: {fileID: 7186846281174335562}
+  - component: {fileID: 7356073138738435806}
   m_Layer: 5
   m_Name: Killer (2)
   m_TagString: Untagged
@@ -3919,6 +3963,19 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: -235}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7356073138738435806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356073138738435794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971411b81a6842d789d78949229fc9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCount: {fileID: 7356073138269980019}
 --- !u!224 &7356073138748656838
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3953,6 +4010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7356073138748656838}
   - component: {fileID: 7186846281164118609}
+  - component: {fileID: 7356073138748656842}
   m_Layer: 5
   m_Name: Killer
   m_TagString: Untagged
@@ -3960,6 +4018,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7356073138748656842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356073138748656841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971411b81a6842d789d78949229fc9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCount: {fileID: 7356073138276540264}
 --- !u!224 &7356073138865300389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3994,6 +4065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7356073138865300389}
   - component: {fileID: 7186846281148151090}
+  - component: {fileID: 7356073138865300395}
   m_Layer: 5
   m_Name: Killer (1)
   m_TagString: Untagged
@@ -4001,6 +4073,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7356073138865300395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356073138865300394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971411b81a6842d789d78949229fc9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCount: {fileID: 7356073138263158795}
 --- !u!114 &7356073139026905356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4110,7 +4195,7 @@ GameObject:
   - component: {fileID: 7356073139026905357}
   - component: {fileID: 7356073139026905356}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP) name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4168,7 +4253,7 @@ GameObject:
   - component: {fileID: 7356073139032937238}
   - component: {fileID: 7356073139032937239}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP) name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4303,7 +4388,7 @@ GameObject:
   - component: {fileID: 7356073139107669614}
   - component: {fileID: 7356073139107669615}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP) name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6553,7 +6638,7 @@ GameObject:
   - component: {fileID: 4038666169331480286}
   - component: {fileID: 3553059390126794494}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Text (TMP) count name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6571,7 +6656,7 @@ GameObject:
   - component: {fileID: 4038666169338031301}
   - component: {fileID: 3553059390137023717}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Text (TMP) count name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6589,7 +6674,7 @@ GameObject:
   - component: {fileID: 4038666169279846845}
   - component: {fileID: 3553059390043736477}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Text (TMP) count name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
