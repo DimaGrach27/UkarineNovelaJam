@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 5809790566435352729}
   - component: {fileID: 374671059527505450}
   m_Layer: 5
-  m_Name: Element  (3)
+  m_Name: Element Brightness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2939,9 +2939,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPrefab:
-  - {fileID: 7356073138738435806}
-  - {fileID: 7356073138865300395}
   - {fileID: 7356073138748656842}
+  - {fileID: 7356073138865300395}
+  - {fileID: 7356073138738435806}
 --- !u!225 &3859158217947292734
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3005,6 +3005,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291d52c998f34ac1bcfb22f0a7796173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedText: {fileID: 7840135318483191390}
+  musicVolume: {fileID: 7840135320435777156}
+  soundVolume: {fileID: 7840135320183039598}
+  brightnessValue: {fileID: 374671059527505450}
 --- !u!225 &3859158218147014424
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4510,7 +4514,7 @@ GameObject:
   - component: {fileID: 7840135318483191391}
   - component: {fileID: 7840135318483191390}
   m_Layer: 5
-  m_Name: 'Element '
+  m_Name: Element Typing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6292,7 +6296,7 @@ GameObject:
   - component: {fileID: 7840135320183039599}
   - component: {fileID: 7840135320183039598}
   m_Layer: 5
-  m_Name: Element  (2)
+  m_Name: Element Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6591,7 +6595,7 @@ GameObject:
   - component: {fileID: 7840135320435777157}
   - component: {fileID: 7840135320435777156}
   m_Layer: 5
-  m_Name: Element  (1)
+  m_Name: Element Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
