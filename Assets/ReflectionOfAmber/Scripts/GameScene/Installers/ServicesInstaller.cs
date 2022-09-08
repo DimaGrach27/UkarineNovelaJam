@@ -54,7 +54,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
             Container.Bind<BgService>().AsSingle().NonLazy();
             Container.Bind<ChooseWindowService>().AsSingle().NonLazy();
             Container.Bind<CameraActionService>().AsSingle().NonLazy();
-            Container.Bind<NoteService>().AsSingle().NonLazy();
+            // Container.Bind<NoteService>().AsSingle().NonLazy();
             Container.Bind<HealthService>().AsSingle().NonLazy();
             
             Container.Bind<ActionScreenService>().AsSingle().NonLazy();

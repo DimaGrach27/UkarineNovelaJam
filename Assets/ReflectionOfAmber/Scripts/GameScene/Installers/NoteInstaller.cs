@@ -33,6 +33,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
             Container.BindInterfacesAndSelfTo<NoteWindowSettingsScreenView>()
                 .FromInstance(noteWindowSettingsScreenView).AsSingle().NonLazy();
             
+            Container.BindInterfacesAndSelfTo<NoteWindowContinueScreen>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<NoteWindowExitScreen>().AsSingle().NonLazy();
+            
             Container.Bind<NoteWindowSettingsScreenService>().AsSingle().NonLazy();
             Container.Bind<NoteWindowInvestigationScreenService>().AsSingle().NonLazy();
             Container.Bind<NoteWindowSaveScreenService>().AsSingle().NonLazy();

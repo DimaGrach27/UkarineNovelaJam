@@ -368,7 +368,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
              string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
 
-             if (!ExistFile(pathProgress) || !ExistFile(pathStatuses)) return false;
+             if (!File.Exists(pathProgress) || !File.Exists(pathStatuses)) return false;
              
              _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
              saveFile = _saveFile;
