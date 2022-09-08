@@ -19,9 +19,9 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              get
              {
-                 if (_saveFile != null) return _statusFlagFile;
+                 if (_statusFlagFile != null) return _statusFlagFile;
 
-                 if (!ExistFile(PROGRESS_KEY))
+                 if (!ExistFile(STATUSES_KEY))
                  {
                      _statusFlagFile = new StatusFlagFile
                      {
@@ -132,6 +132,10 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
                  
                  case CHAPTER_NOTES_KEY:
                      json = ChapterNotesFile;
+                     break;
+                 
+                 case STATUSES_KEY:
+                     json = StatusFlagFile;
                      break;
              }
 
