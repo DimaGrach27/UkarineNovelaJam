@@ -8,33 +8,45 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
     public class ChapterNotesService
     {
         [Inject]
-        public ChapterNotesService(
-            ScreenPartsService screenPartsService,
-            ChapterNotesSaveService chapterNotesSaveService
-            )
+        public ChapterNotesService(ScreenPartsService screenPartsService, 
+            ChapterNotesView chapterNotesView)
         {
-            _screenPartsService = screenPartsService;
-            _chapterNotesSaveService = chapterNotesSaveService;
+            _chapterNotesView = chapterNotesView;
 
             screenPartsService.OnOpenPart += OnChangePartHandler;
-            screenPartsService.OnOpenScene += OnChangeSceneHandler;
+            GlobalEvent.OnCallType += OnOpenNotesHandler;
+        }
+
+        private readonly ChapterNotesView _chapterNotesView;
+
+        private void OnOpenNotesHandler(CallKeyType callKeyType)
+        {
+            if(callKeyType != CallKeyType.OPEN_CHAPTERS) return;
+            
+            ChapterNotesFile chapterNotesFile = SaveService.ChapterNotesFile;
+            _chapterNotesView.Open(chapterNotesFile.chapters);
         }
         
-        private readonly ScreenPartsService _screenPartsService;
-        private readonly ChapterNotesSaveService _chapterNotesSaveService;
-
         private void OnChangePartHandler(int part)
         {
             string currentScene = SaveService.GetScene;
             ScreenSceneScriptableObject sceneSo = GameModel.GetScene(currentScene);
             ScreenPart.ScreenPart screenPart = sceneSo.ScreenParts[part];
             
-            _chapterNotesSaveService.SetDialogPart(screenPart.CharacterName, screenPart.TextShow);
+            SetDialogPart(screenPart.CharacterName, screenPart.TextShow);
         }
-
-        private void OnChangeSceneHandler(string key)
+        
+        private void SetDialogPart(string name, string text)
         {
+            ChapterNotesFile chapterNotesFile = SaveService.ChapterNotesFile;
+            NoteChapterPart noteChapterPart = new NoteChapterPart
+            {
+                name = name,
+                text = text
+            };
             
+            chapterNotesFile.chapters.Add(noteChapterPart);
+            SaveService.SaveChapterNotesJson();
         }
     }
 }

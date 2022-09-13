@@ -6,7 +6,6 @@ using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using ReflectionOfAmber.Scripts.GameScene.GlobalVolume;
 using ReflectionOfAmber.Scripts.GameScene.Health;
-using ReflectionOfAmber.Scripts.GameScene.NoteWindow;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
@@ -24,6 +23,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         [SerializeField] private GlobalVolumeService globalVolumeService;
         [SerializeField] private OpenEyeAnimation openEyeAnimation;
         [SerializeField] private ScreenPartNextDialogButton screenPartNextDialogButton;
+        [SerializeField] private ChapterNotesView chapterNotesView;
         
         public override void InstallBindings()
         {
@@ -61,7 +61,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
             
             Container.BindInterfacesAndSelfTo<ScreenPartsService>().AsSingle().NonLazy();
 
-            Container.Bind<ChapterNotesSaveService>().AsSingle().NonLazy();
+            Container.Bind<ChapterNotesView>().FromInstance(chapterNotesView).AsSingle().NonLazy();
             Container.Bind<ChapterNotesService>().AsSingle().NonLazy();
         }
     }

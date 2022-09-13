@@ -356,9 +356,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
              string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+             string pathChapter = Path($"{CHAPTER_NOTES_KEY}_{index}_save");
              
              File.WriteAllText(pathProgress, JsonUtility.ToJson(SaveFile));
              File.WriteAllText(pathStatuses, JsonUtility.ToJson(StatusFlagFile));
+             File.WriteAllText(pathChapter, JsonUtility.ToJson(ChapterNotesFile));
          }
 
          public static bool TryGetSaveGame(int index, out SaveFile saveFile)
@@ -367,8 +369,12 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              
              string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
              string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+             string pathChapter = Path($"{CHAPTER_NOTES_KEY}_{index}_save");
 
-             if (!File.Exists(pathProgress) || !File.Exists(pathStatuses)) return false;
+             if (!File.Exists(pathProgress) || 
+                 !File.Exists(pathStatuses) || 
+                 !File.Exists(pathChapter))
+                 return false;
              
              saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
 
@@ -379,14 +385,20 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
              string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+             string pathChapter = Path($"{CHAPTER_NOTES_KEY}_{index}_save");
 
-             if (!File.Exists(pathProgress) || !File.Exists(pathStatuses)) return;
+             if (!File.Exists(pathProgress) || 
+                 !File.Exists(pathStatuses) || 
+                 !File.Exists(pathChapter))
+                 return;
              
              _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
              _statusFlagFile = JsonUtility.FromJson<StatusFlagFile>(File.ReadAllText(pathStatuses));
+             _chapterNotesFile = JsonUtility.FromJson<ChapterNotesFile>(File.ReadAllText(pathChapter));
              
              SaveJson(PROGRESS_KEY);
              SaveJson(STATUSES_KEY);
+             SaveJson(CHAPTER_NOTES_KEY);
          }
      }
 

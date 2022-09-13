@@ -45,7 +45,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         public void Open()
         {
             FadeInWindow();
-            
+            GlobalEvent.HideCanvas();
             if (_buttonsNoteMap == null)
             {
                 _buttonsNoteMap = new();
@@ -61,6 +61,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         
         public void Close()
         {
+            GlobalEvent.ShowCanvas();
             FadeOutWindow();
         }
         
