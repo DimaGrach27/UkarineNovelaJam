@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
@@ -38,6 +39,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
                 _countParts++;
             }
 
+            StartCoroutine(DelayOpen());
+        }
+
+        private IEnumerator DelayOpen()
+        {
+            yield return null;
+            yield return null;
+            yield return null;
             container.verticalScrollbar.value = 0.0f;
         }
 

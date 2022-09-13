@@ -39,6 +39,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
         private void SetDialogPart(string name, string text)
         {
             ChapterNotesFile chapterNotesFile = SaveService.ChapterNotesFile;
+            NoteChapterPart lastNoteChapterPart = chapterNotesFile.chapters[^1];
+            if(lastNoteChapterPart.name == name && lastNoteChapterPart.text == text) return;
+            
             NoteChapterPart noteChapterPart = new NoteChapterPart
             {
                 name = name,
