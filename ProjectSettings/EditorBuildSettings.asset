@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
     guid: e0f4631cce1b6c848b7e23bd0ec7ffc5
-  - enabled: 1
+  - enabled: 0
     path: Assets/ReflectionOfAmber/Scenes/Test_scene.unity
     guid: 12ae6005eba4fdb4991022fbf9a543dd
   m_configObjects: {}
