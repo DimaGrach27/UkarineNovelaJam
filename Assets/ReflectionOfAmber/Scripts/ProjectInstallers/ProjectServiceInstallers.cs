@@ -15,6 +15,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         [SerializeField] private AudioSystemService audioSystemService;
         [SerializeField] private ConfirmScreen confirmScreen;
         [SerializeField] private GlobalBrightnessService globalBrightnessService;
+        [SerializeField] private SettingsService settingsService;
         
         public override void InstallBindings()
         {
@@ -27,6 +28,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         {
             Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
             
+            Container.Bind<SettingsService>().FromInstance(settingsService).AsSingle().NonLazy();
             Container.Bind<CoroutineHelper>().FromInstance(coroutineHelper).AsSingle().NonLazy();
             Container.Bind<AudioSystemService>().FromInstance(audioSystemService).AsSingle().NonLazy();
             Container.Bind<ConfirmScreen>().FromInstance(confirmScreen).AsSingle().NonLazy();

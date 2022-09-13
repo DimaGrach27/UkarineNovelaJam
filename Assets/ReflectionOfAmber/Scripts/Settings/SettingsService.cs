@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
-using ReflectionOfAmber.Scripts.GameScene;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
@@ -12,6 +12,8 @@ namespace ReflectionOfAmber.Scripts.Settings
 {
     public class SettingsService : MonoBehaviour
     {
+        public event Action OnCloseButtonClick;
+        
         [SerializeField] private SettingElementSlider speedText;
         [SerializeField] private SettingElementSlider musicVolume;
         [SerializeField] private SettingElementSlider soundVolume;
@@ -51,19 +53,12 @@ namespace ReflectionOfAmber.Scripts.Settings
             brightnessValue.SetValue(SaveService.BrightnessValue * 10);
             
             button.onClick.AddListener(Close);
-            
-            GlobalEvent.OnCallType += Open;
-            
+
             _canvasGroup.interactable = false;
             _canvasGroup.alpha = 0;
             _canvasGroup.blocksRaycasts = false;
         }
-
-        private void Open(CallKeyType type)
-        {
-            if(type != CallKeyType.OPEN_SETTINGS) return;
-            Open();
-        }
+        
 
         private void ChangeSpeedText(float value)
         {
@@ -100,9 +95,10 @@ namespace ReflectionOfAmber.Scripts.Settings
                 StopCoroutine(_routine);
 
             _routine = StartCoroutine(FadeOutWindow());
+            OnCloseButtonClick?.Invoke();
         }
 
-        private void Open()
+        public void Open()
         {
             if(_routine != null)
                 StopCoroutine(_routine);

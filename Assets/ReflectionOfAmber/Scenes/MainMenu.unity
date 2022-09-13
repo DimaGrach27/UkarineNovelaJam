@@ -501,7 +501,6 @@ GameObject:
   m_Component:
   - component: {fileID: 302905349}
   - component: {fileID: 302905350}
-  - component: {fileID: 302905351}
   m_Layer: 5
   m_Name: Button_Settings
   m_TagString: Untagged
@@ -574,19 +573,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &302905351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302905348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03307a79c5604639be1d9cb30cb712d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyType: 1
 --- !u!1 &308154414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,6 +2228,7 @@ MonoBehaviour:
   continueButton: {fileID: 1589946057}
   startButton: {fileID: 1966735245}
   loadButton: {fileID: 440824589}
+  settingButton: {fileID: 302905350}
   exitButton: {fileID: 1216422155}
   buttonGroup: {fileID: 2102761447}
 --- !u!4 &1397079862

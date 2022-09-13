@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using DG.Tweening;
+﻿using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.LoadScreen;
+using ReflectionOfAmber.Scripts.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -15,6 +15,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         [SerializeField] private Button continueButton;
         [SerializeField] private Button startButton;
         [SerializeField] private Button loadButton;
+        [SerializeField] private Button settingButton;
         [SerializeField] private Button exitButton;
 
         [SerializeField] private CanvasGroup buttonGroup;
@@ -35,13 +36,15 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         private FadeService _fadeService;
         private SceneService _sceneService;
         private LoadScreenService _loadScreenService;
+        private SettingsService _settingsService;
         
         [Inject]
         public void Construct(ConfirmScreen confirmScreen, 
             AudioSystemService audioSystemService,
             FadeService fadeService,
             SceneService sceneService,
-            LoadScreenService loadScreenService
+            LoadScreenService loadScreenService,
+            SettingsService settingsService
             )
         {
             _audioSystemService = audioSystemService;
@@ -49,8 +52,10 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             _sceneService = sceneService;
             _fadeService = fadeService;
             _loadScreenService = loadScreenService;
+            _settingsService = settingsService;
 
-            _loadScreenService.OnCloseClick += CloseLoadScreen;
+            _loadScreenService.OnCloseClick += EnableButtonFade;
+            _settingsService.OnCloseButtonClick += EnableButtonFade;
         }
 
         private Tween _fadeTween;
@@ -64,6 +69,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
             loadButton.onClick.AddListener(OpenLoadScreen);
+            settingButton.onClick.AddListener(OpenSettingHandler);
             exitButton.onClick.AddListener(Exit);
             
             continueButton.targetGraphic.enabled = IsGameWasStarted;
@@ -128,7 +134,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             FadeOutWindow(0.3f);
         }
 
-        private void CloseLoadScreen()
+        private void EnableButtonFade()
         {
             FadeInWindow(0.5f);
         }
@@ -149,6 +155,13 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             buttonGroup.interactable = false;
             buttonGroup.blocksRaycasts = false;
             _fadeTween = buttonGroup.DOFade(0.0f, duration);
+        }
+
+        private void OpenSettingHandler()
+        {
+            buttonGroup.enabled = true;
+            _settingsService.Open();
+            FadeOutWindow(0.3f);
         }
     }
 }
