@@ -370,14 +370,23 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
              if (!File.Exists(pathProgress) || !File.Exists(pathStatuses)) return false;
              
+             saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
+
+             return true;
+         }
+
+         public static void SetLoadGame(int index)
+         {
+             string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
+             string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
+
+             if (!File.Exists(pathProgress) || !File.Exists(pathStatuses)) return;
+             
              _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(pathProgress));
-             saveFile = _saveFile;
              _statusFlagFile = JsonUtility.FromJson<StatusFlagFile>(File.ReadAllText(pathStatuses));
              
              SaveJson(PROGRESS_KEY);
              SaveJson(STATUSES_KEY);
-
-             return true;
          }
      }
 

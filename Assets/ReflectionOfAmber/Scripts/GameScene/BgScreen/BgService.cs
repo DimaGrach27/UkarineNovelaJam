@@ -19,8 +19,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
         private readonly BgUiView _bgUiView;
         private readonly FadeService _fadeService;
         
-        private readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
-        
         private AnimationBg _currentAnimation;
         private Coroutine _changeBgRoutine;
         
@@ -32,14 +30,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
             _bgUiView = gamePlayCanvas.GetComponentInChildren<BgUiView>();
             _coroutineHelper = coroutineHelper;
             _fadeService = fadeService;
-            
-            BgScriptableObject[] bgScriptableObjects =
-                Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
-            
-            foreach (var bgScriptable in bgScriptableObjects)
-            {
-                _bgMap.Add(bgScriptable.Bg, bgScriptable);
-            }
         }
 
         public void Show(BgEnum bgEnum, Action onDoneAnimation)
@@ -55,12 +45,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
                 if(_currentAnimation != null) 
                     Object.Destroy(_currentAnimation.gameObject);
 
-                if (_bgMap[bgEnum].AnimationScreen.enable)
+                AnimationScreen animationScreen = GameModel.GetAnimationScreen(bgEnum);
+                
+                if (animationScreen.enable)
                 {
-                    _currentAnimation = Object.Instantiate(_bgMap[bgEnum].AnimationScreen.animationBg, _bgUiView.transform);
+                    _currentAnimation = Object.Instantiate(animationScreen.animationBg, _bgUiView.transform);
                 }
             
-                _bgUiView.Sprite = _bgMap[bgEnum].Image;
+                _bgUiView.Sprite = GameModel.GetBg(bgEnum);
                 _bgUiView.Visible = true;
                 _currentBg = bgEnum;
                 SaveService.SetCurrentBg(bgEnum);
@@ -78,18 +70,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
         {
             _bgUiView.Visible = false;
         }
-
-        public Sprite GetBg(BgEnum bgEnum)
-        {
-            Sprite sprite = null;
-
-            if (_bgMap.ContainsKey(bgEnum))
-            {
-                sprite = _bgMap[bgEnum].Image;
-            }
-
-            return sprite;
-        }
+        
         
         private IEnumerator ChangeBgRoutine(Action onDoneAnima)
         {
@@ -107,12 +88,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
                 if(_currentAnimation != null) 
                     Object.Destroy(_currentAnimation.gameObject);
 
-                if (_bgMap[bgEnum].AnimationScreen.enable)
+                AnimationScreen animationScreen = GameModel.GetAnimationScreen(bgEnum);
+                
+                if (animationScreen.enable)
                 {
-                    _currentAnimation = Object.Instantiate(_bgMap[bgEnum].AnimationScreen.animationBg, _bgUiView.transform);
+                    _currentAnimation = Object.Instantiate(animationScreen.animationBg, _bgUiView.transform);
                 }
             
-                _bgUiView.Sprite = _bgMap[bgEnum].Image;
+                _bgUiView.Sprite = GameModel.GetBg(bgEnum);
                 _bgUiView.Visible = true;
                 _currentBg = bgEnum;
                 SaveService.SetCurrentBg(bgEnum);

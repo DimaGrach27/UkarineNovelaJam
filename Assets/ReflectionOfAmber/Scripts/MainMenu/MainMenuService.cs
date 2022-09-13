@@ -1,7 +1,9 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
+using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.LoadScreen;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,6 +14,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
     {
         [SerializeField] private Button continueButton;
         [SerializeField] private Button startButton;
+        [SerializeField] private Button loadButton;
         [SerializeField] private Button exitButton;
 
         [SerializeField] private CanvasGroup buttonGroup;
@@ -31,19 +34,26 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         private ConfirmScreen _confirmScreen;
         private FadeService _fadeService;
         private SceneService _sceneService;
+        private LoadScreenService _loadScreenService;
         
         [Inject]
         public void Construct(ConfirmScreen confirmScreen, 
             AudioSystemService audioSystemService,
             FadeService fadeService,
-            SceneService sceneService
+            SceneService sceneService,
+            LoadScreenService loadScreenService
             )
         {
             _audioSystemService = audioSystemService;
             _confirmScreen = confirmScreen;
             _sceneService = sceneService;
             _fadeService = fadeService;
+            _loadScreenService = loadScreenService;
+
+            _loadScreenService.OnCloseClick += CloseLoadScreen;
         }
+
+        private Tween _fadeTween;
         
         private void Start()
         {
@@ -53,6 +63,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
+            loadButton.onClick.AddListener(OpenLoadScreen);
             exitButton.onClick.AddListener(Exit);
             
             continueButton.targetGraphic.enabled = IsGameWasStarted;
@@ -65,7 +76,9 @@ namespace ReflectionOfAmber.Scripts.MainMenu
                 string areYouSure = "Попередній прогрес буде втрачений.\nПродовжити далі?";
                 _confirmScreen.Check(ConfirmStart, areYouSure);
                 buttonGroup.enabled = true;
-                buttonGroup.DOFade(0.0f, 0.3f);
+                if (_fadeTween != null) DOTween.Kill(_fadeTween);
+                
+                FadeOutWindow(0.3f);
                 return;
             }
 
@@ -81,7 +94,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             }
             else
             {
-                buttonGroup.DOFade(1.0f, 0.5f);
+                FadeInWindow(0.5f);
             }
             
         }
@@ -97,7 +110,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             string areYouSure = "Ви точно плануєте вийти?";
             _confirmScreen.Check(ConfirmExit, areYouSure);
             buttonGroup.enabled = true;
-            buttonGroup.DOFade(0.0f, 0.3f);
+            FadeOutWindow(0.3f);
         }
 
         private void ConfirmExit(bool isConfirm)
@@ -105,7 +118,37 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             if(isConfirm)
                 Application.Quit();
             else
-                buttonGroup.DOFade(1.0f, 0.5f);
+                FadeInWindow(0.5f);
+        }
+
+        private void OpenLoadScreen()
+        {
+            buttonGroup.enabled = true;
+            _loadScreenService.Open();
+            FadeOutWindow(0.3f);
+        }
+
+        private void CloseLoadScreen()
+        {
+            FadeInWindow(0.5f);
+        }
+        
+        private void FadeInWindow(float duration)
+        {
+            if (_fadeTween != null) DOTween.Kill(_fadeTween);
+            
+            buttonGroup.interactable = true;
+            buttonGroup.blocksRaycasts = true;
+            _fadeTween = buttonGroup.DOFade(1.0f, duration);
+        }
+        
+        private void FadeOutWindow(float duration)
+        {
+            if (_fadeTween != null) DOTween.Kill(_fadeTween);
+            
+            buttonGroup.interactable = false;
+            buttonGroup.blocksRaycasts = false;
+            _fadeTween = buttonGroup.DOFade(0.0f, duration);
         }
     }
 }

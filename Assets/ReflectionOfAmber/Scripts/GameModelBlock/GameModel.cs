@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         
         private static readonly Dictionary<string, ScreenSceneScriptableObject> ScreenScenesMap = new();
         private static readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
+        private static readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
 
         public static void Init()
         {
@@ -20,6 +22,9 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
             CharacterNameScriptableObject[] listNames =
                 Resources.LoadAll<CharacterNameScriptableObject>("Configs/CharacterNames");
             
+            BgScriptableObject[] bgScriptableObjects =
+                Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
+            
             foreach (var screenScene in list)
             {
                 ScreenScenesMap.Add(screenScene.SceneKey, screenScene);
@@ -28,6 +33,11 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
             foreach (var characterName in listNames)
             {
                 CharacterNameMap.Add(characterName.characterNameType, characterName);
+            }
+            
+            foreach (var bgScriptable in bgScriptableObjects)
+            {
+                _bgMap.Add(bgScriptable.Bg, bgScriptable);
             }
         }
 
@@ -47,6 +57,30 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 
             result = CharacterNameMap[characterName].characterName;
             return result;
+        }
+        
+        public static Sprite GetBg(BgEnum bgEnum)
+        {
+            Sprite sprite = null;
+
+            if (_bgMap.ContainsKey(bgEnum))
+            {
+                sprite = _bgMap[bgEnum].Image;
+            }
+
+            return sprite;
+        }
+        
+        public static AnimationScreen GetAnimationScreen(BgEnum bgEnum)
+        {
+            AnimationScreen animationScreen = null;
+
+            if (_bgMap.ContainsKey(bgEnum))
+            {
+                animationScreen = _bgMap[bgEnum].AnimationScreen;
+            }
+
+            return animationScreen;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.GameScene.BgScreen;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
@@ -10,12 +11,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
     {
         [Inject]
         public NoteWindowSaveScreenService(NoteWindowSaveScreen noteWindowSaveScreen,
-            BgService bgService,
             ConfirmScreen confirmScreen)
         {
             _noteWindowSaveScreen = noteWindowSaveScreen;
             _confirmScreen = confirmScreen;
-            _bgService = bgService;
 
             _noteWindowSaveScreen.OnOpen += OnOpenHandler;
             _noteWindowSaveScreen.OnCLickButton += OnClickButtonHandler;
@@ -23,7 +22,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         private readonly NoteWindowSaveScreen _noteWindowSaveScreen;
         private readonly ConfirmScreen _confirmScreen;
-        private readonly BgService _bgService;
 
         private int _confirmIndex = -1;
 
@@ -34,7 +32,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
                 if (SaveService.TryGetSaveGame(i, out SaveFile saveFile))
                 {
                     BgEnum bgEnum = (BgEnum)saveFile.currentBg;
-                    Sprite spriteBg = _bgService.GetBg(bgEnum);
+                    Sprite spriteBg = GameModel.GetBg(bgEnum);
                     _noteWindowSaveScreen.UpdateElement(i, spriteBg, true, $"Save {i}");
                 }
                 else
@@ -49,7 +47,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             if (!SaveService.TryGetSaveGame(index, out SaveFile saveFile))
             {
                 BgEnum bgEnum = SaveService.GetCurrentBg();
-                Sprite spriteBg = _bgService.GetBg(bgEnum);
+                Sprite spriteBg = GameModel.GetBg(bgEnum);
                 _noteWindowSaveScreen.UpdateElement(index, spriteBg, true, $"Save {index}");
                 SaveService.SaveGame(index);
             }
@@ -66,7 +64,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             if(_confirmIndex < 0) return;
             
             BgEnum bgEnum = SaveService.GetCurrentBg();
-            Sprite spriteBg = _bgService.GetBg(bgEnum);
+            Sprite spriteBg = GameModel.GetBg(bgEnum);
             _noteWindowSaveScreen.UpdateElement(_confirmIndex, spriteBg, true, $"Save {_confirmIndex}");
             SaveService.SaveGame(_confirmIndex);
 
