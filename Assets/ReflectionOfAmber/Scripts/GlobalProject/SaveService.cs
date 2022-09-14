@@ -449,8 +449,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
      [Serializable]
      public class StatusFlagFile
      {
-         public int[] statuses;
-         public int[] killersValue;
-         public int[] countValue;
+         public int[] statuses = new int[Enum.GetNames(typeof(StatusEnum)).Length];
+         public int[] killersValue = new int[Enum.GetNames(typeof(KillerName)).Length];
+         public int[] countValue = new int[Enum.GetNames(typeof(CountType)).Length];
      }
  }

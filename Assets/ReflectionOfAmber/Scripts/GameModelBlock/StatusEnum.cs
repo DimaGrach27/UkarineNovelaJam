@@ -32,7 +32,5 @@
         CHOOSE_WAS_PICK = 27,
         meetWatchDog = 28,
         knowNothingAboutIllona = 29,
-
-        BOTTLE = 100
     }
 }
