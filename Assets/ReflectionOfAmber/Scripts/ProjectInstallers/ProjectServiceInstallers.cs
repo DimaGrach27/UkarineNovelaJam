@@ -3,6 +3,7 @@ using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using ReflectionOfAmber.Scripts.Settings;
 using UnityEngine;
 using Zenject;
@@ -35,6 +36,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.Bind<GlobalBrightnessService>().FromInstance(globalBrightnessService).AsSingle().NonLazy();
             Container.Bind<SceneService>().AsSingle().NonLazy();
             Container.Bind<FadeService>().AsSingle().NonLazy();
+            Container.Bind<TranslatorParser>().AsSingle().NonLazy();
         }
     }
 }

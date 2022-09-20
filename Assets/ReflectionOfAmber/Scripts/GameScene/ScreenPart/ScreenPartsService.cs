@@ -12,6 +12,7 @@ using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using Zenject;
 
@@ -31,8 +32,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             SceneService sceneService,
             AudioSystemService audioSystemService,
             FadeService fadeService,
-            DebugHelperService debugHelperService,
-            ScreenPartNextDialogButton screenPartNextDialogButton
+            ScreenPartNextDialogButton screenPartNextDialogButton,
+            TranslatorParser translatorParser,
+            
+            DebugHelperService debugHelperService
         )
         {
             _bgService = bgService;
@@ -43,10 +46,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _actionScreenService = actionScreenService;
             _coroutineHelper = coroutineHelper;
             _sceneService = sceneService;
-            _debugHelperService = debugHelperService;
             _audioSystemService = audioSystemService;
             _screenPartsServiceFacade = screenPartsService;
             _fadeService = fadeService;
+            _translatorParser = translatorParser;
+            
+            _debugHelperService = debugHelperService;
             
             screenTextService.OnEndTyping += OnEndTyping;
             chooseWindowService.OnChoose += OnChooseClick;
@@ -93,6 +98,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly AudioSystemService _audioSystemService;
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly FadeService _fadeService;
+        private readonly TranslatorParser _translatorParser;
         
         private readonly DebugHelperService _debugHelperService;
 
@@ -296,7 +302,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             }
                 
             _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
-            _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
+
+            string key = $"{_currentScene}_part_{CurrentPart + 1}";
+            string showText = _translatorParser.GetText(key, "ENG");
+            _screenTextService.SetText(_currentPartSo.CharacterName, showText, _currentPartSo.EndOfText);
+            // _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
                 
             _blockClick = true;
         }

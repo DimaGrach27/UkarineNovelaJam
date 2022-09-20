@@ -11,5 +11,11 @@ namespace ReflectionOfAmber.Scripts
         public const float CAMERA_ACTION_FLASH_DURATION = 0.5f;
 
         public static readonly Color ColorWitheClear = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        
+        public const char Koma = ',';
+        public const char DubbleComa = '"';
+        public const char SymbolR = '\r';
+        public const char SymbolN = '\n';
+        public static string StringComa => $"{DubbleComa}{DubbleComa}";
     }
 }
