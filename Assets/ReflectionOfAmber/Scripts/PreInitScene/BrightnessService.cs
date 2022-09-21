@@ -22,14 +22,6 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         
         private void Awake()
         {
-            bool isWasLoad = SaveService.BrightnessStatus;
-
-            if (isWasLoad)
-            {
-                LoadMineMenu();
-                return;
-            }
-            
             settingElementSlider.OnChangeValue += OnChangeValue;
             settingElementSlider.SetValue(SaveService.BrightnessValue * 10);
             loadButton.onClick.AddListener(LoadMineMenu);

@@ -304,7 +304,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
 
             string key = $"{_currentScene}_part_{CurrentPart + 1}";
-            string showText = _translatorParser.GetText(key, "ENG");
+            string showText = TranslatorParser.GetText(key, "ENG");
             _screenTextService.SetText(_currentPartSo.CharacterName, showText, _currentPartSo.EndOfText);
             // _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
                 

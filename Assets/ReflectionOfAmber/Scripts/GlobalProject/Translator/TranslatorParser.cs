@@ -1,34 +1,44 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using UnityEngine;
 using UnityEngine.Networking;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 {
-    public class TranslatorParser : IInitializable
+    public class TranslatorParser : IInit
     {
-        private const string ScenarioURL = "https://docs.google.com/spreadsheets/d/1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc/export?format=csv";
+        private const string Id = "1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc";
+        private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/export?format=csv";
+        private static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/export?format=csv&id={Id}&gid=208247162";
         
         private readonly CoroutineHelper _coroutineHelper;
         
-        private readonly Dictionary<string, TranslatorData> _scenarioTexts = new();
+        private static readonly Dictionary<string, TranslatorData> TranslatorDatas = new();
         
+        public event Action OnReady;
+
+        private readonly List<IEnumerator> _loadList = new ();
+
         [Inject]
         public TranslatorParser(CoroutineHelper coroutineHelper)
         {
             _coroutineHelper = coroutineHelper;
         }
-        
-        public void Initialize()
+
+        public void Init()
         {
-            _coroutineHelper.StartCoroutine(LoadText());
+            _loadList.Add(LoadText(ScenarioURL));
+            _loadList.Add(LoadText(OtherTextURL));
+
+            _coroutineHelper.StartCoroutine(_loadList[0]);
         }
 
-        private IEnumerator LoadText()
+        private IEnumerator LoadText(string urlLoad)
         {
-            UnityWebRequest unityWebRequest = UnityWebRequest.Get(ScenarioURL);
+            UnityWebRequest unityWebRequest = UnityWebRequest.Get(urlLoad);
             
             yield return unityWebRequest.SendWebRequest();
 
@@ -83,16 +93,31 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
                 text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
                 text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
                 
-                _scenarioTexts.Add(text, translatorData);
+                TranslatorDatas.Add(text, translatorData);
             }
+
+            InitReady();
         }
 
-        public string GetText(string key, string lang)
+        private void InitReady()
+        {
+            _loadList.RemoveAt(0);
+
+            if (_loadList.Count > 0)
+            {
+                _coroutineHelper.StartCoroutine(_loadList[0]);
+                return;
+            }
+
+            OnReady?.Invoke();
+        }
+
+        public static string GetText(string key, string lang)
         {
             string text = null;
 
-            if (_scenarioTexts.ContainsKey(key))
-                text = _scenarioTexts[key].GetText(lang);
+            if (TranslatorDatas.ContainsKey(key))
+                text = TranslatorDatas[key].GetText(lang);
 
             return text;
         }
