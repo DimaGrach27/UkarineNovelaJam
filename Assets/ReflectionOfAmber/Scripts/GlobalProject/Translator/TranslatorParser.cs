@@ -1,19 +1,45 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 {
-    public class TranslatorParser
+    public class TranslatorParser : IInitializable
     {
+        private const string ScenarioURL = "https://docs.google.com/spreadsheets/d/1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc/export?format=csv";
+        
+        private readonly CoroutineHelper _coroutineHelper;
+        
+        private readonly Dictionary<string, TranslatorData> _scenarioTexts = new();
+        
         [Inject]
-        public TranslatorParser()
+        public TranslatorParser(CoroutineHelper coroutineHelper)
         {
-            string scenarioFile = Resources.Load<TextAsset>("Scenario").text;
+            _coroutineHelper = coroutineHelper;
+        }
+        
+        public void Initialize()
+        {
+            _coroutineHelper.StartCoroutine(LoadText());
+        }
 
-            _scenarioTexts = new();
+        private IEnumerator LoadText()
+        {
+            UnityWebRequest unityWebRequest = UnityWebRequest.Get(ScenarioURL);
             
+            yield return unityWebRequest.SendWebRequest();
+
+            if (unityWebRequest.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(unityWebRequest.error);
+                yield break;
+            }
+            
+            string scenarioFile = unityWebRequest.downloadHandler.text;
+
             string oneSep = $"{GlobalConstant.Koma}{GlobalConstant.DubbleComa}";
             string twoSep = $"{GlobalConstant.DubbleComa}{GlobalConstant.Koma}{GlobalConstant.DubbleComa}";
 
@@ -60,8 +86,6 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
                 _scenarioTexts.Add(text, translatorData);
             }
         }
-
-        private readonly Dictionary<string, TranslatorData> _scenarioTexts;
 
         public string GetText(string key, string lang)
         {
