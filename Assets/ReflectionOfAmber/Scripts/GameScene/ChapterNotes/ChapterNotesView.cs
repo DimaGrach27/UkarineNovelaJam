@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,8 +36,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             while (_countParts < chapters.Count)
             {
                 ChapterNotesPartView chapterNotesPart = Instantiate(chapterPartPrefab, container.content);
-                chapterNotesPart.Name = chapters[_countParts].name;
-                chapterNotesPart.Dialog = chapters[_countParts].text;
+                chapterNotesPart.Name = TranslatorParser.GetText(chapters[_countParts].name, GameModel.CurrentLanguage);
+                chapterNotesPart.Dialog = TranslatorParser.GetText(chapters[_countParts].text, GameModel.CurrentLanguage);
                 _countParts++;
             }
 

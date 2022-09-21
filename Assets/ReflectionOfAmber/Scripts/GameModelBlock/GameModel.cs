@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameModelBlock
@@ -13,6 +14,8 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         private static readonly Dictionary<string, ScreenSceneScriptableObject> ScreenScenesMap = new();
         private static readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
         private static readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
+
+        public static TranslatorLanguages CurrentLanguage = TranslatorLanguages.ENG;
 
         public static void Init()
         {

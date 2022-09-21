@@ -6,6 +6,7 @@ using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -60,7 +61,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         [SerializeField] private bool endOfText = true;
         [SerializeField] private ActionType[] actionsTypeEnd;
         
-        public string CharacterName => GameModel.GetName(nameCharacter);
+        public string CharacterName => TranslatorParser.GetText(nameCharacter.ToString(), GameModel.CurrentLanguage);
         public string TextShow => textShow;
         
         public Sprite Image => CharactersService.GetSprite(characterImage);

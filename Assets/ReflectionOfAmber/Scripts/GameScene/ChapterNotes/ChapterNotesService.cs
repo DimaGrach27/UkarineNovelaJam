@@ -32,8 +32,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             string currentScene = SaveService.GetScene;
             ScreenSceneScriptableObject sceneSo = GameModel.GetScene(currentScene);
             ScreenPart.ScreenPart screenPart = sceneSo.ScreenParts[part];
+
+            string textKey = $"{sceneSo.SceneKey}_part_{part + 1}";
             
-            SetDialogPart(screenPart.CharacterName, screenPart.TextShow);
+            SetDialogPart(screenPart.CharacterName, textKey);
         }
         
         private void SetDialogPart(string name, string text)
