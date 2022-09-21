@@ -5328,6 +5328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8507631546241468644}
     m_Modifications:
+    - target: {fileID: 118546595195192470, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
+      propertyPath: translatorKey
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
       value: 6
@@ -5445,6 +5449,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8507631546241468644}
     m_Modifications:
+    - target: {fileID: 118546595195192470, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
+      propertyPath: translatorKey
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
       value: 5
@@ -5824,6 +5832,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8507631546241468644}
     m_Modifications:
+    - target: {fileID: 118546595195192470, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
+      propertyPath: translatorKey
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
       value: 7
@@ -5945,6 +5957,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8507631546241468644}
     m_Modifications:
+    - target: {fileID: 118546595195192470, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
+      propertyPath: translatorKey
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
       value: 4
@@ -6066,6 +6082,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8507631546241468644}
     m_Modifications:
+    - target: {fileID: 118546595195192470, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
+      propertyPath: translatorKey
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
       value: 2
