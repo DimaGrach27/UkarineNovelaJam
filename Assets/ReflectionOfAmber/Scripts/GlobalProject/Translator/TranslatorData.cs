@@ -11,15 +11,6 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             for (int i = 0; i < lang.Length; i++)
             {
                 string text = texts[i];
-                text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
-                text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
-                text = text.Replace(GlobalConstant.StringComa, GlobalConstant.DubbleComa.ToString());
-
-                if (text[^1] == '"')
-                {
-                    text = text.Remove(text.Length - 1);
-                }
-                
                 _dictionary.Add(lang[i], text);
             }
         }

@@ -11,8 +11,9 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
     public class TranslatorParser : IInit
     {
         private const string Id = "1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc";
-        private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/export?format=csv";
-        private static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/export?format=csv&id={Id}&gid=208247162";
+        private const string ExportFormat = "export?format=tsv";
+        private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}";
+        private static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid=208247162";
         
         private readonly CoroutineHelper _coroutineHelper;
         
@@ -50,13 +51,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             
             string scenarioFile = unityWebRequest.downloadHandler.text;
 
-            string oneSep = $"{GlobalConstant.Koma}{GlobalConstant.DubbleComa}";
-            string twoSep = $"{GlobalConstant.DubbleComa}{GlobalConstant.Koma}{GlobalConstant.DubbleComa}";
-
-            string[] separators = { oneSep, twoSep };
-            string[] rows = scenarioFile.Split('\n');
-  
-            string[] firstLine = rows[0].Split(',');
+            string[] rows = scenarioFile.Split($"{'\r'}{'\n'}");
+            string[] firstLine = rows[0].Split('\t');
             
             int lineLength = firstLine.Length;
 
@@ -65,21 +61,13 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             for (int i = 1; i < firstLine.Length; i++)
             {
                 string text = firstLine[i];
-                text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
-                text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
-                
+
                 languages[i - 1] = text;
             }
             
             for (int i = 1; i < rows.Length; i++)
             {
-                string[] lineArray = rows[i].Split(',');
-
-                if (lineArray.Length > 3)
-                {
-                    lineArray = rows[i].Split(separators, StringSplitOptions.None);
-                }
-                
+                string[] lineArray = rows[i].Split('\t');
                 string[] texts = new string[lineLength - 1];
                 
                 for (int j = 1; j < lineLength; j++)
@@ -90,9 +78,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
                 TranslatorData translatorData = new TranslatorData(languages, texts);
                 
                 string text = lineArray[0];
-                text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
-                text = text.Replace(GlobalConstant.SymbolR.ToString(), "");
-                
+
                 TranslatorDatas.Add(text, translatorData);
             }
 
@@ -112,12 +98,12 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             OnReady?.Invoke();
         }
 
-        public static string GetText(string key, string lang)
+        public static string GetText(string key, TranslatorLanguages lang)
         {
             string text = null;
 
             if (TranslatorDatas.ContainsKey(key))
-                text = TranslatorDatas[key].GetText(lang);
+                text = TranslatorDatas[key].GetText(lang.ToString());
 
             return text;
         }

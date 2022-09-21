@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         public void InitButton(NextScene chooseScene, bool isCameraAction)
         {
-            textMeshProUGUI.text = chooseScene.ChooseText;
+            string showText = TranslatorParser.GetText(chooseScene.Scene.SceneKey, TranslatorLanguages.ENG);
+            
+            textMeshProUGUI.text = showText;
+            // textMeshProUGUI.text = chooseScene.ChooseText;
             _chooseScene = chooseScene;
 
             ColorBlock colorBlock = Button.colors;

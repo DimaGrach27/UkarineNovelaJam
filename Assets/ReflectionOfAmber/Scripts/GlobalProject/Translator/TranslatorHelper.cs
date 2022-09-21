@@ -11,7 +11,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private void Start()
         {
             GetComponent<TextMeshProUGUI>().text =
-                TranslatorParser.GetText(translatorKey.ToString(), TranslatorLanguages.ENG.ToString());
+                TranslatorParser.GetText(translatorKey.ToString(), TranslatorLanguages.ENG);
         }
     }
 }

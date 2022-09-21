@@ -16,6 +16,7 @@ namespace ReflectionOfAmber.Scripts
         public const char DubbleComa = '"';
         public const char SymbolR = '\r';
         public const char SymbolN = '\n';
+        public const char SymbolT = '\t';
         public static string StringComa => $"{DubbleComa}{DubbleComa}";
     }
 }
