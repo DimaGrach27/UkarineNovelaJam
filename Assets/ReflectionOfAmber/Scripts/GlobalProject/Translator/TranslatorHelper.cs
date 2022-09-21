@@ -28,6 +28,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private void UpdateText()
         {
             _translatorParser.OnReady -= UpdateText;
+            _translatorParser = null;
             
             GetComponent<TextMeshProUGUI>().text =
                 TranslatorParser.GetText(translatorKey.ToString(), GameModel.CurrentLanguage);

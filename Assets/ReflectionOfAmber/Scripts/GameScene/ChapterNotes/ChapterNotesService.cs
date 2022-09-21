@@ -35,7 +35,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 
             string textKey = $"{sceneSo.SceneKey}_part_{part + 1}";
             
-            SetDialogPart(screenPart.CharacterName, textKey);
+            SetDialogPart(screenPart.CharacterNameType, textKey);
         }
         
         private void SetDialogPart(string name, string text)
