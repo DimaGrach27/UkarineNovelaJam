@@ -18,6 +18,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             _noteWindowScreenPopup = noteWindowScreenPopup;
             _noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
             GlobalEvent.OnCallType += OnOpenHandler;
+            GlobalEvent.OnCallType += OnOpenWithoutCanCloseHandler;
         }
 
         private void OnOpenHandler(CallKeyType callKeyType)
