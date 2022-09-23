@@ -20,14 +20,26 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
       padding: 8
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 0
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
@@ -44,7 +56,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d03405c0a5691eb409e5c4f2720087c0, type: 3}
   - {fileID: 21300000, guid: e769c7e0ee2abc346a9bb6944afad210, type: 3}
   - {fileID: 21300000, guid: d892f371129ce72488e4edc5841e47da, type: 3}
-  - {fileID: 21300000, guid: ce8bf2815dc358a42a27ee933ad6f7b6, type: 3}
   - {fileID: 21300000, guid: 9f2831916d97820418c97a1792eda389, type: 3}
   - {fileID: 21300000, guid: dcbe75024a5d63c47a0c0fc4d80a10ab, type: 3}
   - {fileID: 21300000, guid: aa5a9f342417e854c952fdc6f6e7c412, type: 3}
@@ -55,9 +66,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2a06b82c069f4454ab1c88d5aa422559, type: 3}
   - {fileID: 21300000, guid: 46769fbe95d22c4478d8d2e9dbd97dcd, type: 3}
   - {fileID: 21300000, guid: 3a8455ceaab863d4e96d79e09bc73c6d, type: 3}
-  - {fileID: 21300000, guid: 7cad57ee49e71c34890ac9ab893dc9eb, type: 3}
   - {fileID: 21300000, guid: 90a87d3f0f047934090ba9848ec600da, type: 3}
-  - {fileID: 21300000, guid: f5b0d98f4d22c20439b0b52e68a25151, type: 3}
   m_PackedSpriteNamesToIndex:
   - palaroid_photo
   - note_back
@@ -65,7 +74,6 @@ SpriteAtlas:
   - Rectangle 1
   - right-arrow 1
   - Menu
-  - Group 7
   - Wings
   - "\u0414\u0438\u0437\u0430\u0439\u043D \u0431\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
     (1) 2"
@@ -77,9 +85,7 @@ SpriteAtlas:
   - Component 1
   - button_in_note
   - pngfind 2
-  - note_first_page
   - Rectangle 25
-  - note_center_page
   m_RenderDataMap: {}
   m_Tag: UI_sprite_atlas
   m_IsVariant: 0
