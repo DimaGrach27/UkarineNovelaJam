@@ -15,5 +15,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         }
 
         private void OnClickButtonHandler() => OnClickButton?.Invoke();
+
+        public bool Visible
+        {
+            set => gameObject.SetActive(value);
+        }
     }
 }

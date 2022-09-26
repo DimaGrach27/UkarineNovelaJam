@@ -50,6 +50,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _screenPartsServiceFacade = screenPartsService;
             _fadeService = fadeService;
             _translatorParser = translatorParser;
+            _screenPartNextDialogButton = screenPartNextDialogButton;
             
             _debugHelperService = debugHelperService;
             
@@ -98,6 +99,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly AudioSystemService _audioSystemService;
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly FadeService _fadeService;
+        private readonly ScreenPartNextDialogButton _screenPartNextDialogButton;
         private readonly TranslatorParser _translatorParser;
         
         private readonly DebugHelperService _debugHelperService;
@@ -305,6 +307,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
             string key = $"{_currentScene}_part_{CurrentPart + 1}";
             string showText = TranslatorParser.GetText(key, GameModel.CurrentLanguage);
+            _screenPartNextDialogButton.Visible = true;
             _screenTextService.SetText(_currentPartSo.CharacterName, showText, _currentPartSo.EndOfText);
             // _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
                 
@@ -355,6 +358,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             string key = $"{_currentScene}_part_{CurrentPart}";
             string showText = TranslatorParser.GetText(key, GameModel.CurrentLanguage);
+
+            _screenPartNextDialogButton.Visible = false;
             
             _chooseWindowService.SetChooses(
                 PrepareList(false, out bool isCameraAfter), 
