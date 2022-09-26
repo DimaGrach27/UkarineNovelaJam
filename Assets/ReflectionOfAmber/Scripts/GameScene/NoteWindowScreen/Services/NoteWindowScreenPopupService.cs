@@ -18,6 +18,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             _noteWindowScreenPopup = noteWindowScreenPopup;
             _noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
             GlobalEvent.OnCallType += OnOpenHandler;
+            GlobalEvent.OnCallType += OnOpenWithoutCanCloseHandler;
         }
 
         private void OnOpenHandler(CallKeyType callKeyType)
@@ -26,6 +27,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             
             _noteWindowScreenPopup.Open();
             OnOpenNote?.Invoke();
+        }
+
+        private void OnOpenWithoutCanCloseHandler(CallKeyType callKeyType)
+        {
+            if(callKeyType != CallKeyType.NOTE_BOOKE_WITHOUT_EXIT) return;
+            _noteWindowScreenPopup.OpenWithoutCanClose();
         }
         
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)

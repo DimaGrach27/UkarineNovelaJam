@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
@@ -55,8 +57,26 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                     button.OnClickButton += OnSelectWindowHandler;
                 }
             }
+
+            if (SaveService.GetStatusValue(StatusEnum.CHOOSE_WAS_PICK))
+            {
+                _buttonsNoteMap[NoteWindowScreensEnum.INVESTIGATION_SCREEN].gameObject.SetActive(false);
+            }
             
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
+        }
+
+        public void OpenWithoutCanClose()
+        {
+            FadeInWindow();
+            GlobalEvent.HideCanvas();
+
+            foreach (var button in buttons)
+            {
+                button.gameObject.SetActive(false);
+            }
+
+            OnSelectWindowHandler(NoteWindowScreensEnum.INVESTIGATION_SCREEN);
         }
         
         public void Close()
