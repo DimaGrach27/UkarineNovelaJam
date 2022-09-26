@@ -2,6 +2,7 @@
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -59,7 +60,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
         private void ClickExit()
         {
             FadeOut();
-            _confirmScreen.Check(ConfirmExit, "Ви точно бажаєте вийти?");
+            _confirmScreen.Check(ConfirmExit, TranslatorKeys.CONFIRM_EXIT);
         }
         
         private void ConfirmExit(bool isExit)

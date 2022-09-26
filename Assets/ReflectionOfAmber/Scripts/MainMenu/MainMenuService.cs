@@ -2,6 +2,7 @@
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using ReflectionOfAmber.Scripts.LoadScreen;
 using ReflectionOfAmber.Scripts.Settings;
 using UnityEngine;
@@ -79,8 +80,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         {
             if (IsGameWasStarted)
             {
-                string areYouSure = "Попередній прогрес буде втрачений.\nПродовжити далі?";
-                _confirmScreen.Check(ConfirmStart, areYouSure);
+                _confirmScreen.Check(ConfirmStart, TranslatorKeys.CONFIRM_NEW_GAME);
                 buttonGroup.enabled = true;
                 if (_fadeTween != null) DOTween.Kill(_fadeTween);
                 
@@ -113,8 +113,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
 
         private void Exit()
         {
-            string areYouSure = "Ви точно плануєте вийти?";
-            _confirmScreen.Check(ConfirmExit, areYouSure);
+            _confirmScreen.Check(ConfirmExit, TranslatorKeys.CONFIRM_EXIT);
             buttonGroup.enabled = true;
             FadeOutWindow(0.3f);
         }

@@ -2,6 +2,7 @@
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
@@ -35,10 +36,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         private void OnChooseClick(int index)
         {
             _selectIndex = index;
-            string description = "Ви впевнені, що саме цей підозрюваний являється злодієм?\n" +
-                                 "Помилка призведе до необачних дій...";
-            
-            _confirmScreen.Check(ConfirmAction, description);
+            _confirmScreen.Check(ConfirmAction, TranslatorKeys.CONFIRM_CHOOSE);
         }
 
         private void ConfirmAction(bool isConfirm)

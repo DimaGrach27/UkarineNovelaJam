@@ -2,6 +2,7 @@
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using Zenject;
 
@@ -37,7 +38,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
                 }
                 else
                 {
-                    _noteWindowSaveScreen.UpdateElement(i, null, false, $"Пусто");
+                    _noteWindowSaveScreen.UpdateElement(i, null, false, TranslatorParser.GetText(TranslatorKeys.EMPTY));
                 }
             }
         }
@@ -54,7 +55,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             else
             {
                 _confirmIndex = index;
-                _confirmScreen.Check(OnConfirmHandler, "Ви точно бажаєте переписати збереження?");
+                _confirmScreen.Check(OnConfirmHandler, TranslatorKeys.CONFIRM_RESAVE);
             }
         }
 

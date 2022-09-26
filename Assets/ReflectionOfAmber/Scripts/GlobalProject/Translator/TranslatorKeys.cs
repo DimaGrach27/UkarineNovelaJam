@@ -20,5 +20,14 @@
         TEXT_INFO_NOTE_PART_1 = 15,
         TEXT_INFO_NOTE_PART_2 = 16,
         TEXT_INFO_NOTE_PART_3 = 17,
+        EMPTY = 18,
+        TYPING_SPEED = 19,
+        MUSIC = 20,
+        AUDIO = 21,
+        BRIGHTNESS = 22,
+        CONFIRM_NEW_GAME = 23,
+        CONFIRM_EXIT = 24,
+        CONFIRM_RESAVE = 25,
+        CONFIRM_CHOOSE = 26,
     }
 }

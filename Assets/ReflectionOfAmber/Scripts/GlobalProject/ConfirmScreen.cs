@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void Check(Action<bool> onSelectAction, string description)
+        public void Check(Action<bool> onSelectAction, TranslatorKeys translatorKey)
         {
             if (_tween != null)
                 DOTween.Kill(_tween);
@@ -34,7 +35,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             _canvasGroup.blocksRaycasts = true;
             _tween = _canvasGroup.DOFade(1.0f, 0.5f);
             
-            textDescription.text = description;
+            textDescription.text = TranslatorParser.GetText(translatorKey);
             
             _currentAction = onSelectAction;
         }

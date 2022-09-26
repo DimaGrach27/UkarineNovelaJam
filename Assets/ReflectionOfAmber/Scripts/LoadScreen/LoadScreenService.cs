@@ -2,6 +2,7 @@
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using Zenject;
 
@@ -49,7 +50,7 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
                 else
                 {
                     _hasSaveArray[i] = false;
-                    _loadScreenView.UpdateElement(i, null, false, $"Пусто");
+                    _loadScreenView.UpdateElement(i, null, false, TranslatorParser.GetText(TranslatorKeys.EMPTY));
                 }
             }
         }
@@ -58,7 +59,7 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
         {
             if(!_hasSaveArray[index]) return;
             _confirmIndex = index;
-            _confirmScreen.Check(ConfirmLoad, "Поточний прогресс буде втрачений.\nПродовжити дію?");
+            _confirmScreen.Check(ConfirmLoad, TranslatorKeys.CONFIRM_NEW_GAME);
         }
 
         private void ConfirmLoad(bool isConfirm)

@@ -1,6 +1,7 @@
 ﻿using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
@@ -20,7 +21,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         
         public void Open()
         {
-            _confirmScreen.Check(ConfirmHandler, "Ви точно бажаєте вийти?");
+            _confirmScreen.Check(ConfirmHandler, TranslatorKeys.CONFIRM_EXIT);
         }
 
         public void Close()
