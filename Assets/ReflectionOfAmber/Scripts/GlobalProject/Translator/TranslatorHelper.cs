@@ -1,5 +1,4 @@
-﻿using ReflectionOfAmber.Scripts.GameModelBlock;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -22,7 +21,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private void Start()
         {
             GetComponent<TextMeshProUGUI>().text =
-                TranslatorParser.GetText(translatorKey.ToString(), GameModel.CurrentLanguage);
+                TranslatorParser.GetText(translatorKey);
         }
 
         private void UpdateText()
@@ -31,7 +30,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             _translatorParser = null;
             
             GetComponent<TextMeshProUGUI>().text =
-                TranslatorParser.GetText(translatorKey.ToString(), GameModel.CurrentLanguage);
+                TranslatorParser.GetText(translatorKey);
         }
     }
 }

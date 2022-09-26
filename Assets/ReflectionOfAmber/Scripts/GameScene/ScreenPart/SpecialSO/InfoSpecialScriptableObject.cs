@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
@@ -10,7 +10,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
     
     public class InfoSpecialScriptableObject : SpecialScriptableObjectBase
     {
-        [SerializeField, TextArea(1, 5)] private List<string> texts;
+        [SerializeField] private TranslatorKeys[] texts;
         [SerializeField] private InfoDescription infoDescription;
 
         public override bool Check()

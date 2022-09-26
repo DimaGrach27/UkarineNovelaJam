@@ -306,7 +306,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
 
             string key = $"{_currentScene}_part_{CurrentPart + 1}";
-            string showText = TranslatorParser.GetText(key, GameModel.CurrentLanguage);
+            string showText = TranslatorParser.GetText(key);
             _screenPartNextDialogButton.Visible = true;
             _screenTextService.SetText(_currentPartSo.CharacterName, showText, _currentPartSo.EndOfText);
             // _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
@@ -357,7 +357,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
             
             string key = $"{_currentScene}_part_{CurrentPart}";
-            string showText = TranslatorParser.GetText(key, GameModel.CurrentLanguage);
+            string showText = TranslatorParser.GetText(key);
 
             _screenPartNextDialogButton.Visible = false;
             

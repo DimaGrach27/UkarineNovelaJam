@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -119,18 +120,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
 
             if (!IsTutorWasShow)
             {
-                List<string> texts = new()
+                TranslatorKeys[] texts = 
                 {
-                    "Перед тобою записник Вільшанки, з яким вона не розстається з того моменту, " +
-                    "як вступила на службу до поліції. Він зберігає багато спогадів, розкритих і не розкритих справ.",
-                    
-                    "Цього разу вона теж використовуватиме його за призначенням. " +
-                    "Вільшанка буде заносити сюди підозрюваних та кількість зачіпок на кожну людину, " +
-                    "які вона змогла знайти. Врешті решт ви зможете самі обрати, кого Вільшанка заарештує. " +
-                    "Проте робіть цей вибір тільки коли будете упевнені. " +
-                    "Будьте уважні, щоб іще один злочинець не залишився на волі через необачність поліції.",
-                    
-                    "Тому, коли будете упевнені хто злодій, натисніть на ім'я у списку."
+                    TranslatorKeys.TEXT_INFO_NOTE_PART_1,
+                    TranslatorKeys.TEXT_INFO_NOTE_PART_2,
+                    TranslatorKeys.TEXT_INFO_NOTE_PART_3,
                 };
                 
                 InfoDescription infoDesc = Instantiate(infoDescription);

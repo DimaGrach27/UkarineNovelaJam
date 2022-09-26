@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using TMPro;
 using UnityEngine;
 
@@ -24,12 +25,13 @@ namespace ReflectionOfAmber.Scripts.GameScene
             clickHelper.OnClick += OnPointerClick;
         }
 
-        public void SetInfoDescription(List<string> textsShow)
+        public void SetInfoDescription(TranslatorKeys[] textsShow)
         {
             _texts = new List<string>();
             
-            foreach (var textShow in textsShow)
+            foreach (var textShowKey in textsShow)
             {
+                string textShow = TranslatorParser.GetText(textShowKey.ToString());
                 _texts.Add(textShow);
             }
             

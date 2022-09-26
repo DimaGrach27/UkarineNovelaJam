@@ -61,7 +61,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         [SerializeField] private bool endOfText = true;
         [SerializeField] private ActionType[] actionsTypeEnd;
         
-        public string CharacterName => TranslatorParser.GetText(nameCharacter.ToString(), GameModel.CurrentLanguage);
+        public string CharacterName => TranslatorParser.GetText(nameCharacter.ToString());
         public string CharacterNameType => nameCharacter.ToString();
         public string TextShow => textShow;
         
