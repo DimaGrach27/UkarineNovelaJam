@@ -28,7 +28,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
 
         private void OnOpenNoteHandler()
         {
+            CloseAllWindow();
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
+        }
+        
+        private void CloseAllWindow()
+        {
+            foreach (var iNoteWindow in _noteWindowScreensMap.Values)
+            {
+                iNoteWindow.Close();
+            }
         }
 
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)

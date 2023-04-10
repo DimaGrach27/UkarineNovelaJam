@@ -15,7 +15,7 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         private static readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
         private static readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
 
-        public static TranslatorLanguages CurrentLanguage = TranslatorLanguages.ENG;
+        public static TranslatorLanguages CurrentLanguage = TranslatorLanguages.UKR;
 
         public static void Init()
         {
