@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a944c102e466493da4992d89e308f318, type: 3}
+  m_Name: Test_scene
+  m_EditorClassIdentifier: 
+  SceneData:
+  - GUID: 54b862af-c479-4157-a235-a6c4750ea1b0
+    Text: Scene node
+    Position: {x: 275.5, y: 188.5}
+  - GUID: 478a0828-197b-41b3-8089-8c8fadc8628e
+    Text: Scene node
+    Position: {x: 519, y: 123}
+  - GUID: cd511247-dcec-4c87-aa94-e9f90f5f1067
+    Text: Scene node
+    Position: {x: 511, y: 261.5}
+  NodeLinkData:
+  - BaseNodeGUID: 7eb301fe-7c6e-4453-b32d-35ba1340dd54
+    PortName: Next
+    TargetNodeGUID: 54b862af-c479-4157-a235-a6c4750ea1b0
+  - BaseNodeGUID: 54b862af-c479-4157-a235-a6c4750ea1b0
+    PortName: One
+    TargetNodeGUID: 478a0828-197b-41b3-8089-8c8fadc8628e
+  - BaseNodeGUID: 54b862af-c479-4157-a235-a6c4750ea1b0
+    PortName: two
+    TargetNodeGUID: cd511247-dcec-4c87-aa94-e9f90f5f1067
