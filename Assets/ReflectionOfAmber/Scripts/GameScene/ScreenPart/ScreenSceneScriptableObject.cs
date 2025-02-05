@@ -7,7 +7,6 @@ using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
@@ -23,9 +22,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         
         [SerializeField] private bool isActiveCamera = false;
         
-        [SerializeField, Toggle("enable")] private ChangeBackGround changeBackGround;
-        [SerializeField, Toggle("enable")] private StatusSetter statusSetter;
-        [SerializeField, Toggle("enable")] private CountSetter countSetter;
+        [SerializeField] private ChangeBackGround changeBackGround;
+        [SerializeField] private StatusSetter statusSetter;
+        [SerializeField] private CountSetter countSetter;
         
         [SerializeField] private ActionType[] actionsType;
 
@@ -51,11 +50,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     {
         [SerializeField] private ActionType[] actionsType;
         [SerializeField] private MusicType musicTypeOnStart = MusicType.NONE;
-        [SerializeField, Toggle("enable")] private StatusSetter statusSetter;
+        [SerializeField] private StatusSetter statusSetter;
         
-        [SerializeField, EnumPaging] private CharacterScreenPositionEnum screenPosition;
-        [SerializeField, EnumPaging] private CharacterSprite characterImage;
-        [SerializeField, EnumPaging] private CharacterName nameCharacter;
+        [SerializeField] private CharacterScreenPositionEnum screenPosition;
+        [SerializeField] private CharacterSprite characterImage;
+        [SerializeField] private CharacterName nameCharacter;
         
         [SerializeField, TextArea(1, 6)] private string textShow;
         [SerializeField] private bool endOfText = true;
@@ -82,11 +81,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         [SerializeField] private ScreenSceneScriptableObject scene;
         [SerializeField, TextArea(1, 4)] private string chooseText;
 
-        [Toggle("enable")] public StatusDependent statusDependent;
-        [Toggle("enable")] public CameraDependent cameraDependent;
-        [Toggle("enable")] public ExclusionDependent exclusionDependent;
-        [Toggle("enable")] public FindDependent findDependent;
-        [Toggle("enable")] public SpecialDependent specialDependent;
+        public StatusDependent statusDependent;
+        public CameraDependent cameraDependent;
+        public ExclusionDependent exclusionDependent;
+        public FindDependent findDependent;
+        public SpecialDependent specialDependent;
 
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;

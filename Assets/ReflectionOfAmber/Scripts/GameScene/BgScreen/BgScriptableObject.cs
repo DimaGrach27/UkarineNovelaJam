@@ -1,5 +1,4 @@
 ﻿using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
@@ -10,7 +9,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
     {
         [SerializeField] private Sprite image;
         [SerializeField] private BgEnum bgEnum;
-        [SerializeField, Toggle("enable")] private AnimationScreen animationScreen;
+        [SerializeField] private AnimationScreen animationScreen;
         
         public AnimationScreen AnimationScreen => animationScreen;
         public Sprite Image => image;
