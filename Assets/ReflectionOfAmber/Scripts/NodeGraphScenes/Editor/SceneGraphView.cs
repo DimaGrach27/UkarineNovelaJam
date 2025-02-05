@@ -12,8 +12,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
         public Vector2 NodeSize { get; private set; }= new Vector2(100, 200);
         public SceneGraphView()
         {
-            // var styleSheet = Resources.Load<StyleSheet>("SceneGraph_node");
-            styleSheets.Add(Resources.Load<StyleSheet>("SceneGraph_node"));
+            styleSheets.Add(Resources.Load<StyleSheet>("Grid"));
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             
             this.AddManipulator(new ContentDragger());
