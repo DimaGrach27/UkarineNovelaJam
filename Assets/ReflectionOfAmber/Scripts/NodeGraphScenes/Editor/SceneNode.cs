@@ -1,3 +1,4 @@
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using UnityEditor.Experimental.GraphView;
 
 namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
@@ -6,7 +7,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
     {
         public string GUID;
 
-        public string SceneName;
+        public string Key;
+        public ScreenSceneScriptableObject Scene;
         
         public bool EntryPoint = false;
     }

@@ -1,4 +1,5 @@
 using System;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime
@@ -9,7 +10,9 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime
     {
         public string GUID;
 
-        public string Text;
+        public string Key;
         public Vector2 Position;
+
+        public ScreenSceneScriptableObject Scene;
     }
 }

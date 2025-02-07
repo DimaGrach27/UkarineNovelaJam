@@ -18,18 +18,18 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     
     public class ScreenSceneScriptableObject : ScriptableObject
     {
-        [SerializeField] private string sceneKey;
+        public string sceneKey;
         
-        [SerializeField] private bool isActiveCamera = false;
+        public bool isActiveCamera = false;
         
-        [SerializeField] private ChangeBackGround changeBackGround;
-        [SerializeField] private StatusSetter statusSetter;
-        [SerializeField] private CountSetter countSetter;
+        public ChangeBackGround changeBackGround;
+        public StatusSetter statusSetter;
+        public CountSetter countSetter;
         
-        [SerializeField] private ActionType[] actionsType;
+        public ActionType[] actionsType;
 
-        [SerializeField] private ScreenPart[] screenParts;
-        [SerializeField] private NextScene[] nextScenes;
+        public ScreenPart[] screenParts;
+        public NextScene[] nextScenes;
         
         public ChangeBackGround ChangeBackGround => changeBackGround;
         public ActionType[] ActionsType => actionsType;
@@ -48,17 +48,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     [Serializable]
     public class ScreenPart
     {
-        [SerializeField] private ActionType[] actionsType;
-        [SerializeField] private MusicType musicTypeOnStart = MusicType.NONE;
-        [SerializeField] private StatusSetter statusSetter;
+        public ActionType[] actionsType;
+        public MusicType musicTypeOnStart = MusicType.NONE;
+        public StatusSetter statusSetter;
         
-        [SerializeField] private CharacterScreenPositionEnum screenPosition;
-        [SerializeField] private CharacterSprite characterImage;
-        [SerializeField] private CharacterName nameCharacter;
+        public CharacterScreenPositionEnum screenPosition;
+        public CharacterSprite characterImage;
+        public CharacterName nameCharacter;
         
-        [SerializeField, TextArea(1, 6)] private string textShow;
-        [SerializeField] private bool endOfText = true;
-        [SerializeField] private ActionType[] actionsTypeEnd;
+        [TextArea(1, 6)] public string textShow;
+        public bool endOfText = true;
+        public ActionType[] actionsTypeEnd;
         
         public string CharacterName => TranslatorParser.GetText(nameCharacter.ToString());
         public string CharacterNameType => nameCharacter.ToString();
@@ -78,8 +78,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     [Serializable]
     public class NextScene
     {
-        [SerializeField] private ScreenSceneScriptableObject scene;
-        [SerializeField, TextArea(1, 4)] private string chooseText;
+        public ScreenSceneScriptableObject scene;
+        [TextArea(1, 4)] public string chooseText;
 
         public StatusDependent statusDependent;
         public CameraDependent cameraDependent;
@@ -144,8 +144,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     [Serializable]
     public class StatusSetter
     {
-        [SerializeField] private bool enable = false;
-        [SerializeField] private StatusesValue[] statusesValues;
+        public bool enable = false;
+        public StatusesValue[] statusesValues;
 
         public bool Enable => enable;
         public StatusesValue[] StatusesValues => statusesValues;
@@ -154,9 +154,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     [Serializable]
     public class CountSetter
     {
-        [SerializeField] public bool enable = false;
-        [SerializeField] public int count = 1;
-        [SerializeField] public CountType type = CountType.NONE;
+        public bool enable = false;
+        public int count = 1;
+        public CountType type = CountType.NONE;
 
         public bool Enable => enable;
         public int Count => count;
