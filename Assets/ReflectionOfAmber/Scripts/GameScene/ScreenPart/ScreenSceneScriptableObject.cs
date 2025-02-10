@@ -78,14 +78,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     [Serializable]
     public class NextScene
     {
-        public ScreenSceneScriptableObject scene;
-        [TextArea(1, 4)] public string chooseText;
+        public ScreenSceneScriptableObject scene = new();
+        [TextArea(1, 4)] public string chooseText = String.Empty;
 
-        public StatusDependent statusDependent;
-        public CameraDependent cameraDependent;
-        public ExclusionDependent exclusionDependent;
-        public FindDependent findDependent;
-        public SpecialDependent specialDependent;
+        public StatusDependent statusDependent = new();
+        public CameraDependent cameraDependent = new();
+        public ExclusionDependent exclusionDependent = new();
+        public FindDependent findDependent = new();
+        public SpecialDependent specialDependent = new();
 
         public string ChooseText => chooseText;
         public ScreenSceneScriptableObject Scene => scene;
@@ -102,7 +102,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     public class StatusDependent
     {
         public bool enable = false;
-        public StatusesValue[] statusesValues;
+        public StatusesValue[] statusesValues = Array.Empty<StatusesValue>();
     }
 
     [Serializable]
@@ -131,21 +131,21 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     public class FindDependent
     {
         public bool enable;
-        public StatusesValue[] statusesValues;
+        public StatusesValue[] statusesValues = Array.Empty<StatusesValue>();
     }
     
     [Serializable]
     public class SpecialDependent
     {
         public bool enable;
-        public SpecialScriptableObjectBase[] special;
+        public SpecialScriptableObjectBase[] special = Array.Empty<SpecialScriptableObjectBase>();
     }
     
     [Serializable]
     public class StatusSetter
     {
         public bool enable = false;
-        public StatusesValue[] statusesValues;
+        public StatusesValue[] statusesValues = Array.Empty<StatusesValue>();
 
         public bool Enable => enable;
         public StatusesValue[] StatusesValues => statusesValues;

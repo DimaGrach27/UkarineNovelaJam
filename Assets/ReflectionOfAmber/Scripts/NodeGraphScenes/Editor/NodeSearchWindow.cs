@@ -38,6 +38,10 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 {
                     level = 1,
                     userData = new Group()
+                },
+                new SearchTreeEntry(new GUIContent("Test node 1", _indentationIcon))
+                {
+                    level = 1, userData = new CameraDependentNode()
                 }
             };
 
@@ -54,6 +58,9 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             {
                 case SceneNode sceneNode:
                     _graphView.CreateNewSceneNode("scene_",graphMousePosition);
+                    return true;
+                case CameraDependentNode sceneNode:
+                    _graphView.CreateTestNode(graphMousePosition);
                     return true;
                 case Group group:
                     var rect = new Rect(graphMousePosition, _graphView.DefaultCommentBlockSize);
