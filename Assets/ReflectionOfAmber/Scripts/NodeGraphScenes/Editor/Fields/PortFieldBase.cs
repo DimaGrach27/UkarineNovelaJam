@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
@@ -15,6 +17,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
             LocalContainer = new VisualElement();
         }
 
+        protected virtual int BaseSize { get; } = 20;
         protected virtual int BlockSize { get; } = 60;
         protected virtual int ArrayElementSize { get; } = 40;
         protected virtual int TitleMargin { get; } = 4;
@@ -47,17 +50,35 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
             }, false);
 
             titleToggle.style.marginLeft = TitleMargin;
-            titleToggle.style.height = 20;
+            titleToggle.style.height = BaseSize;
             
             LocalContainer.Add(titleToggle);
             // LocalContainer.style.borderBottomWidth = BottomSpace;
 
             Container.contentContainer.Add(LocalContainer);
+            
+            IncreaseSize(BaseSize);
         }
         
         protected virtual void OnEnable(){ }
         protected virtual void OnDisable(){ }
 
+        protected void ReduceSize(float value)
+        {
+            float portHeight = CachedPort.resolvedStyle.height;
+
+            portHeight -= value;
+            CachedPort.style.height = portHeight;
+        }
+        
+        protected void IncreaseSize(float value)
+        {
+            float portHeight = CachedPort.resolvedStyle.height;
+
+            portHeight += value;
+            CachedPort.style.height = portHeight;
+        }
+        
         protected Toggle CreateToggleField(string label, Action<bool> onChanged, bool initialValue)
         {
             var toggle = new Toggle(label)
@@ -100,23 +121,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
 
             return foldout;
         }
-
-        protected void ReduceSize(float value)
-        {
-            float portHeight = CachedPort.resolvedStyle.height;
-
-            portHeight -= value;
-            CachedPort.style.height = portHeight;
-        }
         
-        protected void IncreaseSize(float value)
-        {
-            float portHeight = CachedPort.resolvedStyle.height;
-
-            portHeight += value;
-            CachedPort.style.height = portHeight;
-        }
-
         private void RefreshArrayFields(List<StatusesValue> array, VisualElement container, Action onArrayChanged)
         {
             container.Clear();
@@ -183,6 +188,125 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
                 };
                 
                 mainContainer.Add(elementContainer);
+                mainContainer.Add(removeButton);
+                
+                container.Add(mainContainer);
+            }
+
+            container.style.height = ArrayElementSize * array.Count;
+        }
+        
+        protected VisualElement CreateSpecialArrayField(
+            string label, List<SpecialScriptableObjectBase> array, 
+            Action onArrayChanged)
+        {
+            var foldout = new Foldout
+            {
+                text = label,
+                value = false
+            };
+            
+            var elementsContainer = new VisualElement();
+            elementsContainer.style.flexDirection = FlexDirection.Column;
+            foldout.Add(elementsContainer);
+            
+            var addButton = new Button(() =>
+            {
+                array.Add(null);
+                onArrayChanged?.Invoke();
+                RefreshArrayFields(array, elementsContainer, onArrayChanged);
+                
+                IncreaseSize(ArrayElementSize);
+            })
+            {
+                text = "Add"
+            };
+            foldout.Add(addButton);
+            
+            RefreshArrayFields(array, elementsContainer, onArrayChanged);
+            
+            return foldout;
+        }
+        
+        private void RefreshArrayFields(
+            List<SpecialScriptableObjectBase> array, 
+            VisualElement container, 
+            Action onArrayChanged)
+        {
+            container.Clear();
+
+            for (int i = 0; i < array.Count; i++)
+            {
+                int index = i;
+
+                var mainContainer = new VisualElement()
+                {
+                    style =
+                    {
+                        flexDirection = FlexDirection.Row
+                    }
+                };
+                
+                // var elementContainer = new VisualElement
+                // {
+                //     style =
+                //     {
+                //         flexDirection = FlexDirection.Column,
+                //         alignItems = Align.FlexStart,
+                //         height = ArrayElementSize,
+                //     }
+                // };
+                //
+                // var toggleField = new Toggle("Value")
+                // {
+                //     value = array[i].value,
+                // };
+                
+                // var toggleLabel = toggleField.Q<Label>();
+                // toggleLabel.style.marginRight = -92;
+                //
+                // toggleField.RegisterValueChangedCallback(evt =>
+                // {
+                //     array[index].value = evt.newValue;
+                //     onArrayChanged?.Invoke();
+                // });
+                // elementContainer.Add(toggleField);
+                //
+                // var enumField = new EnumField("Status", array[i].status);
+                // var enumLabel = enumField.Q<Label>();
+                // enumLabel.style.marginRight = -92;
+                
+                // enumField.Init(StatusEnum.NONE);
+                // enumField.RegisterValueChangedCallback(evt =>
+                // {
+                //     array[index].status = (StatusEnum)evt.newValue;
+                //     onArrayChanged?.Invoke();
+                // });
+                // elementContainer.Add(enumField);
+
+                var objectField = new ObjectField();
+                objectField.objectType = typeof(SpecialScriptableObjectBase);
+                objectField.RegisterValueChangedCallback(evt =>
+                {
+                    array[index] = evt.newValue as SpecialScriptableObjectBase;
+                    onArrayChanged?.Invoke();
+                });
+                
+                mainContainer.Add(objectField);
+
+                var removeButton = new Button(() =>
+                {
+                    array.RemoveAt(index);
+                    onArrayChanged?.Invoke();
+                    RefreshArrayFields(array, container, onArrayChanged);
+
+                    ReduceSize(ArrayElementSize);
+                })
+                {
+                    text = "X"
+                };
+                
+                // mainContainer.Add(elementContainer);
                 mainContainer.Add(removeButton);
                 
                 container.Add(mainContainer);

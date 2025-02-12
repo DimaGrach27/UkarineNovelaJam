@@ -4,6 +4,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields;
 using ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime;
 using UnityEditor;
@@ -138,13 +139,14 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             return node;
         }
 
-        public SceneNode CreateNode(string nodeName, Vector2 position)
+        public SceneNode CreateNode(string nodeName, Vector2 position, ScreenSceneScriptableObject obj = null)
         {
             var tempSceneNode = new SceneNode()
             {
                 title = nodeName,
                 Key = nodeName,
-                GUID = Guid.NewGuid().ToString()
+                GUID = Guid.NewGuid().ToString(),
+                Scene = obj
             };
             tempSceneNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
@@ -154,10 +156,12 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             tempSceneNode.RefreshPorts();
             tempSceneNode.SetPosition(new Rect(position,
                 DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
+
+            tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
             
             var sceneSo = new ObjectField
             {
-                objectType = typeof(ScreenSceneScriptableObject)
+                objectType = typeof(ScreenSceneScriptableObject),
             };
 
             sceneSo.RegisterValueChangedCallback(evt =>
@@ -169,6 +173,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 tempSceneNode.title = so.SceneKey;
                 tempSceneNode.Scene = so;
             });
+            sceneSo.SetValueWithoutNotify(obj);
 
             tempSceneNode.mainContainer.Add(sceneSo);
 
@@ -206,10 +211,36 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             }
             
             NextScene nextScene = new NextScene();
-            CameraDependedField cameraDependedField =
-                new CameraDependedField(nextScene.cameraDependent, customContainer);
+
+            var chooseText = new TextField("Choose: ");
+            chooseText.RegisterValueChangedCallback(evt =>
+            {
+                chooseText.value = evt.newValue;
+                nextScene.chooseText = evt.newValue;
+            });
+            customContainer.Add(chooseText);
+            
+            StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
+            statusDependedField.Build(generatedPort);
+            
+            CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
             cameraDependedField.Build(generatedPort);
 
+            var exclusionToggle = new Toggle("Exclusion dependent: ");
+            exclusionToggle.RegisterValueChangedCallback(evt =>
+            {
+                exclusionToggle.value = evt.newValue;
+                nextScene.exclusionDependent.enable = evt.newValue;
+            });
+            customContainer.Add(exclusionToggle);
+
+            FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
+            findDependentField.Build(generatedPort);
+
+            SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
+            specialDependentField.Build(generatedPort);
+                
+            customContainer.Add(new Label("========"));
             generatedPort.contentContainer.Add(customContainer);
 
             nextScenes[outputPortCount] = nextScene;
@@ -218,6 +249,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             {
                 text = "X"
             };
+            
             generatedPort.contentContainer.Add(deleteButton);
             generatedPort.portName = outputPortName;
             nodeCache.outputContainer.Add(generatedPort);
@@ -273,11 +305,15 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 
     public class CameraDependentNode : Node
     {
-        public CameraDependent cameraDependent = new CameraDependent();
-        private CameraDependedField cameraDependedField;
-        private StatusDependedField statusDependedField;
-
-        private List<StatusesValue> statusesValues;
+        // public CameraDependent cameraDependent = new CameraDependent();
+        // private CameraDependedField cameraDependedField;
+        // private StatusDependedField statusDependedField;
+        // private FindDependentField findDependentField;
+        // private SpecialDependentField specialDependentField;
+        //
+        // private Spe statusesValues;
+        // private List<StatusesValue> statusesFindValues;
+        // private List<SpecialScriptableObjectBase> specialArray;
         
         private Port m_outpu1;
         private Port m_outpu2;
@@ -336,12 +372,21 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             // Замінюємо вміст порта на кастомний контейнер
             // port.contentContainer.Clear();
 
-            cameraDependedField = new CameraDependedField(cameraDependent, portContainer);
+            CameraDependent cameraDependent = new();
+            CameraDependedField cameraDependedField = new CameraDependedField(cameraDependent, portContainer);
             cameraDependedField.Build(port);
 
-            statusesValues = new();
-            statusDependedField = new StatusDependedField(statusesValues, portContainer);
+            StatusDependent statusDependent = new();
+            StatusDependedField statusDependedField = new StatusDependedField(statusDependent, portContainer);
             statusDependedField.Build(port);
+
+            FindDependent findDependent = new();
+            FindDependentField findDependentField = new FindDependentField(findDependent, portContainer);
+            findDependentField.Build(port);
+
+            SpecialDependent specialDependent = new();
+            SpecialDependentField specialDependentField = new SpecialDependentField(specialDependent, portContainer);
+            specialDependentField.Build(port);
             
             port.contentContainer.Add(portContainer);
 

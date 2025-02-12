@@ -78,7 +78,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
     [Serializable]
     public class NextScene
     {
-        public ScreenSceneScriptableObject scene = new();
+        public ScreenSceneScriptableObject scene;
         [TextArea(1, 4)] public string chooseText = String.Empty;
 
         public StatusDependent statusDependent = new();

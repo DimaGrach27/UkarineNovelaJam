@@ -76,8 +76,9 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 
             foreach (var node in Nodes.Where(node => !node.EntryPoint))
             {
-                NextScene[] nextScenes = GetNextScenes(node.GUID);
-                node.Scene.nextScenes = nextScenes;
+                // NextScene[] nextScenes = GetNextScenes(node, node.GUID);
+                // node.Scene.nextScenes = nextScenes;
+                GetNextScenes(node, node.GUID);
                 narrativeContainer.DialogueNodeData.Add(new SceneNodeData()
                 {
                     GUID = node.GUID,
@@ -90,7 +91,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             return true;
         }
 
-        private NextScene[] GetNextScenes(string outputNodeGUID)
+        private void GetNextScenes(SceneNode sceneNode, string outputNodeGUID)
         {
             var connectedSockets = Edges.Where(x => x.input.node != null).ToArray();
 
@@ -107,8 +108,12 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                     });
                 }
             }
-            
-            return nextScenes.ToArray();
+
+            for (int i = 0; i < sceneNode.Scene.nextScenes.Length; i++)
+            {
+                sceneNode.Scene.nextScenes[i].scene = nextScenes[i].scene;
+            }
+            // return nextScenes.ToArray();
         }
 
         private void SaveExposedProperties(NarrativeContainer narrativeContainer)
@@ -171,9 +176,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
         {
             foreach (var perNode in m_narativeContainer.DialogueNodeData)
             {
-                var tempNode = m_graphView.CreateNode(perNode.Key, Vector2.zero);
+                var tempNode = m_graphView.CreateNode(perNode.Key, Vector2.zero, perNode.Scene);
                 tempNode.GUID = perNode.GUID;
-                tempNode.Scene = perNode.Scene;
                 
                 m_graphView.AddElement(tempNode);
 
