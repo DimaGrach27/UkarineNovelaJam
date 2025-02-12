@@ -12,7 +12,21 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
     public class GraphSaveUtility
     {
         private List<Edge> Edges => m_graphView.edges.ToList();
-        private List<SceneNode> Nodes => m_graphView.nodes.ToList().Cast<SceneNode>().ToList();
+
+        private List<SceneNode> Nodes
+        {
+            get
+            {
+                List<SceneNode> tempNodes = m_graphView.nodes.ToList().Cast<SceneNode>().ToList();
+                // List<SceneNode> nodes = new();
+                //
+                // for (int i = tempNodes.Count - 1; i >= 0; i--)
+                // {
+                //     nodes.Add(tempNodes[i]);
+                // }
+                return tempNodes;
+            }
+        }
 
         private List<Group> CommentBlocks =>
             m_graphView.graphElements.ToList().Where(x => x is Group).Cast<Group>().ToList();
@@ -78,7 +92,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             {
                 // NextScene[] nextScenes = GetNextScenes(node, node.GUID);
                 // node.Scene.nextScenes = nextScenes;
-                GetNextScenes(node, node.GUID);
+                
+                node.Scene.nextScenes = GetNextScenes(node, node.GUID);
                 narrativeContainer.DialogueNodeData.Add(new SceneNodeData()
                 {
                     GUID = node.GUID,
@@ -91,29 +106,38 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             return true;
         }
 
-        private void GetNextScenes(SceneNode sceneNode, string outputNodeGUID)
+        private NextScene[] GetNextScenes(SceneNode sceneNode, string outputNodeGUID)
         {
-            var connectedSockets = Edges.Where(x => x.input.node != null).ToArray();
+            var connectedSockets = Edges.Where(x => x.output.node != null).ToArray();
 
             List<NextScene> nextScenes = new List<NextScene>();
+            
 
             foreach (var edge in connectedSockets)
             {
                 var outputNode = edge.output.node as SceneNode;
+                var inputNode = edge.input.node as SceneNode;
                 if (outputNode.GUID == outputNodeGUID)
                 {
                     nextScenes.Add(new NextScene()
                     {
-                        scene = outputNode.Scene
+                        scene = inputNode.Scene
                     });
                 }
             }
 
+
             for (int i = 0; i < sceneNode.Scene.nextScenes.Length; i++)
             {
-                sceneNode.Scene.nextScenes[i].scene = nextScenes[i].scene;
+                if (nextScenes.Count > i)
+                {
+                    ScreenSceneScriptableObject sceneTemp = nextScenes[i].scene;
+                    nextScenes[i] = sceneNode.Scene.nextScenes[i];
+                    nextScenes[i].scene = sceneTemp;
+                }
             }
-            // return nextScenes.ToArray();
+
+            return nextScenes.ToArray();
         }
 
         private void SaveExposedProperties(NarrativeContainer narrativeContainer)
@@ -182,7 +206,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 m_graphView.AddElement(tempNode);
 
                 var nodePorts = m_narativeContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.GUID).ToList();
-                nodePorts.ForEach(x => m_graphView.AddChoicePort(tempNode, x.PortName));
+                nodePorts.ForEach(x => m_graphView.AddCachedChoicePort(tempNode, x.PortName));
             }
         }
 

@@ -31,7 +31,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
 
         protected Port CachedPort;
 
-        public virtual void Build(Port cachedPort)
+        public virtual void Build(Port cachedPort, bool initValue)
         {
             CachedPort = cachedPort;
             
@@ -47,7 +47,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
                     OnDisable();
                     ReduceSize(BlockSize);
                 }
-            }, false);
+            }, initValue);
 
             titleToggle.style.marginLeft = TitleMargin;
             titleToggle.style.height = BaseSize;
@@ -167,7 +167,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
                 // var enumLabel = enumField.Q<Label>();
                 // enumLabel.style.marginRight = -92;
                 
-                enumField.Init(StatusEnum.NONE);
+                enumField.Init(array[index].status);
                 enumField.RegisterValueChangedCallback(evt =>
                 {
                     array[index].status = (StatusEnum)evt.newValue;
@@ -246,46 +246,13 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
                         flexDirection = FlexDirection.Row
                     }
                 };
-                
-                // var elementContainer = new VisualElement
-                // {
-                //     style =
-                //     {
-                //         flexDirection = FlexDirection.Column,
-                //         alignItems = Align.FlexStart,
-                //         height = ArrayElementSize,
-                //     }
-                // };
-                //
-                // var toggleField = new Toggle("Value")
-                // {
-                //     value = array[i].value,
-                // };
-                
-                // var toggleLabel = toggleField.Q<Label>();
-                // toggleLabel.style.marginRight = -92;
-                //
-                // toggleField.RegisterValueChangedCallback(evt =>
-                // {
-                //     array[index].value = evt.newValue;
-                //     onArrayChanged?.Invoke();
-                // });
-                // elementContainer.Add(toggleField);
-                //
-                // var enumField = new EnumField("Status", array[i].status);
-                // var enumLabel = enumField.Q<Label>();
-                // enumLabel.style.marginRight = -92;
-                
-                // enumField.Init(StatusEnum.NONE);
-                // enumField.RegisterValueChangedCallback(evt =>
-                // {
-                //     array[index].status = (StatusEnum)evt.newValue;
-                //     onArrayChanged?.Invoke();
-                // });
-                // elementContainer.Add(enumField);
 
-                var objectField = new ObjectField();
-                objectField.objectType = typeof(SpecialScriptableObjectBase);
+                var objectField = new ObjectField
+                {
+                    objectType = typeof(SpecialScriptableObjectBase),
+                    value = array[index]
+                };
+                
                 objectField.RegisterValueChangedCallback(evt =>
                 {
                     array[index] = evt.newValue as SpecialScriptableObjectBase;

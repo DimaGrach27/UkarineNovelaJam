@@ -20,7 +20,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
         public SpecialDependentField(SpecialDependent specialDependent, VisualElement container) : base(container)
         {
             m_specialDependent = specialDependent;
-            m_array = new();
+            m_array = new(m_specialDependent.special);
             
             m_arrayElement = CreateSpecialArrayField(
                 "Specials",

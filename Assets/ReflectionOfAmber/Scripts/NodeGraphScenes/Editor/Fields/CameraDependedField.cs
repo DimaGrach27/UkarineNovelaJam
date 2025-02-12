@@ -18,17 +18,17 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
             m_prepToggle = CreateToggleField(
                 "IsPrepAction",
                 value => cameraDependent.isPrepAction = value,
-                false);
+                m_cameraDependent.isPrepAction);
             
             m_visibleToggle = CreateToggleField(
                 "VisibleOnPhoto",
                 value => cameraDependent.visibleOnPhoto = value,
-                false);
+                m_cameraDependent.visibleOnPhoto);
             
             m_outVisibleToggle = CreateToggleField(
                 "VisibleOutPhoto",
                 value => cameraDependent.visibleOutPhoto = value,
-                false);
+                m_cameraDependent.visibleOutPhoto);
 
         }
 

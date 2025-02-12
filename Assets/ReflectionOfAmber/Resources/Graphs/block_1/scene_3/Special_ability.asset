@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2969b38190c14d1c9ee5914cf9ede7fd, type: 3}
+  m_Name: Special_ability
+  m_EditorClassIdentifier: 
+  nextScene:
+    scene: {fileID: 0}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  beliefScene:
+    scene: {fileID: 11400000, guid: dce5c3df5e8e69c4886ba34642c849ea, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  escapeScene:
+    scene: {fileID: 11400000, guid: 00eb6393e9859bd41921a6c8f7aca1c2, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  wastedScene:
+    scene: {fileID: 11400000, guid: 0656595d5ee7d47409ca7b1f87927923, type: 2}
+    chooseText: 
+    statusDependent:
+      enable: 0
+      statusesValues: []
+    cameraDependent:
+      enable: 0
+      visibleOnPhoto: 0
+      visibleOutPhoto: 0
+    exclusionDependent:
+      enable: 0
+    findDependent:
+      enable: 0
+      statusesValues: []
+    specialDependent:
+      enable: 0
+      special: []
+  escape: 3
+  belief: 2

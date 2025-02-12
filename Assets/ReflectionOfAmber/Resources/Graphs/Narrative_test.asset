@@ -13,43 +13,126 @@ MonoBehaviour:
   m_Name: Narrative_test
   m_EditorClassIdentifier: 
   NodeLinks:
-  - BaseNodeGUID: c2cf6535-1bc0-4193-90ff-0d1ea2ebd107
+  - BaseNodeGUID: be0bd110-6ad6-4378-851a-aca7963468bf
     PortName: Next
-    TargetNodeGUID: e78310a1-648a-4340-ab60-b85c713faac2
-  - BaseNodeGUID: e78310a1-648a-4340-ab60-b85c713faac2
+    TargetNodeGUID: scene_0_0
+  - BaseNodeGUID: scene_0_0
     PortName: Option 1
-    TargetNodeGUID: 1fe6fa96-77d3-4260-9597-64fcf3a5b2d3
-  - BaseNodeGUID: 1fe6fa96-77d3-4260-9597-64fcf3a5b2d3
+    TargetNodeGUID: scene_0_0_1
+  - BaseNodeGUID: scene_0_0
     PortName: Option 2
-    TargetNodeGUID: 7e36a194-2362-4931-ae60-7268b7d506ba
-  - BaseNodeGUID: 1fe6fa96-77d3-4260-9597-64fcf3a5b2d3
+    TargetNodeGUID: scene_0_0_2
+  - BaseNodeGUID: scene_0_0
+    PortName: Option 3
+    TargetNodeGUID: scene_0_0_3
+  - BaseNodeGUID: scene_0_0_2
     PortName: Option 1
-    TargetNodeGUID: d9c69e63-1ee5-4658-b875-eb8cd19c97a2
-  - BaseNodeGUID: 7e36a194-2362-4931-ae60-7268b7d506ba
+    TargetNodeGUID: 11288a6b-36aa-4906-b4ce-425d4b5252fc
+  - BaseNodeGUID: scene_0_0_3
     PortName: Option 1
-    TargetNodeGUID: 79f56d14-55c3-4c7e-bedb-485472ff1421
-  - BaseNodeGUID: d9c69e63-1ee5-4658-b875-eb8cd19c97a2
+    TargetNodeGUID: b2de4958-90bc-434d-aaf4-26c920fcb9ef
+  - BaseNodeGUID: 11288a6b-36aa-4906-b4ce-425d4b5252fc
     PortName: Option 1
-    TargetNodeGUID: 79f56d14-55c3-4c7e-bedb-485472ff1421
+    TargetNodeGUID: b2de4958-90bc-434d-aaf4-26c920fcb9ef
+  - BaseNodeGUID: scene_0_0_1
+    PortName: Option 1
+    TargetNodeGUID: b2de4958-90bc-434d-aaf4-26c920fcb9ef
+  - BaseNodeGUID: b2de4958-90bc-434d-aaf4-26c920fcb9ef
+    PortName: Option 1
+    TargetNodeGUID: cbf770dd-b972-48f4-b6f9-100828dd3365
+  - BaseNodeGUID: cbf770dd-b972-48f4-b6f9-100828dd3365
+    PortName: Option 1
+    TargetNodeGUID: 6282450e-cdd7-49c8-9938-063bdd3a954c
+  - BaseNodeGUID: 6282450e-cdd7-49c8-9938-063bdd3a954c
+    PortName: Option 3
+    TargetNodeGUID: 8b705d25-a47b-4dbf-ae77-67962fc0828e
+  - BaseNodeGUID: 6282450e-cdd7-49c8-9938-063bdd3a954c
+    PortName: Option 2
+    TargetNodeGUID: bf7fa3fe-3fe7-489d-b36a-c1a4e36e5b57
+  - BaseNodeGUID: 6282450e-cdd7-49c8-9938-063bdd3a954c
+    PortName: Option 1
+    TargetNodeGUID: 177ad402-9ef1-44de-982c-b235694b0048
+  - BaseNodeGUID: 8b705d25-a47b-4dbf-ae77-67962fc0828e
+    PortName: Option 1
+    TargetNodeGUID: 79f8077f-238e-4fff-8a98-4393a428083d
+  - BaseNodeGUID: bf7fa3fe-3fe7-489d-b36a-c1a4e36e5b57
+    PortName: Option 1
+    TargetNodeGUID: d175348d-7285-4971-80eb-d8848ee88415
+  - BaseNodeGUID: 177ad402-9ef1-44de-982c-b235694b0048
+    PortName: Option 1
+    TargetNodeGUID: df636162-ce41-4e10-8c47-ce0196bbb20b
+  - BaseNodeGUID: df636162-ce41-4e10-8c47-ce0196bbb20b
+    PortName: Option 1
+    TargetNodeGUID: d175348d-7285-4971-80eb-d8848ee88415
+  - BaseNodeGUID: d175348d-7285-4971-80eb-d8848ee88415
+    PortName: Option 1
+    TargetNodeGUID: 2bf4479e-b2b2-41d0-a7c5-908398545130
+  - BaseNodeGUID: 15a60efc-1c21-4d0d-af83-30dd9d16d4fc
+    PortName: Option 1
+    TargetNodeGUID: 2bf4479e-b2b2-41d0-a7c5-908398545130
   DialogueNodeData:
-  - GUID: e78310a1-648a-4340-ab60-b85c713faac2
-    Key: test_0_0
-    Position: {x: 296, y: 186}
-    Scene: {fileID: 11400000, guid: 857467bc863a74639a26adbfc05408e5, type: 2}
-  - GUID: 1fe6fa96-77d3-4260-9597-64fcf3a5b2d3
-    Key: test_0_1
-    Position: {x: 686, y: 250}
-    Scene: {fileID: 11400000, guid: 295ff088ba0944d27937c0a7b829e83f, type: 2}
-  - GUID: d9c69e63-1ee5-4658-b875-eb8cd19c97a2
-    Key: test_0_1_1
-    Position: {x: 1325, y: 283}
-    Scene: {fileID: 11400000, guid: 63f1398b0b2324e01ae42466e5553fad, type: 2}
-  - GUID: 7e36a194-2362-4931-ae60-7268b7d506ba
-    Key: test_0_1_2
-    Position: {x: 1325, y: 516}
-    Scene: {fileID: 11400000, guid: 1fc275ab5d02f4ea1988f5e6082fe6a7, type: 2}
-  - GUID: 79f56d14-55c3-4c7e-bedb-485472ff1421
-    Key: test_0_2
-    Position: {x: 1818, y: 444}
-    Scene: {fileID: 11400000, guid: 28066a95251024454b605cac7e38a396, type: 2}
+  - GUID: scene_0_0
+    Key: scene_0_0
+    Position: {x: 413, y: 103}
+    Scene: {fileID: 11400000, guid: b8ebc0b6e01110c41b5a2848501e8ab2, type: 2}
+  - GUID: scene_0_0_2
+    Key: scene_0_0_2
+    Position: {x: 1083, y: 269}
+    Scene: {fileID: 11400000, guid: f628f27bf99ef3e4da7c8474ea2b56c3, type: 2}
+  - GUID: scene_0_0_1
+    Key: scene_0_0_1
+    Position: {x: 1083, y: 49}
+    Scene: {fileID: 11400000, guid: 7725420f824a31643801449b4d0c6376, type: 2}
+  - GUID: scene_0_0_3
+    Key: scene_0_0_3
+    Position: {x: 1083, y: 489}
+    Scene: {fileID: 11400000, guid: eb3bb7dba574b634f97825e72cfb0b34, type: 2}
+  - GUID: 11288a6b-36aa-4906-b4ce-425d4b5252fc
+    Key: scene_0_1
+    Position: {x: 1457, y: 315}
+    Scene: {fileID: 11400000, guid: 0af6d88f6a6dfcd4799855ab4d92d5de, type: 2}
+  - GUID: b2de4958-90bc-434d-aaf4-26c920fcb9ef
+    Key: scene_0_2
+    Position: {x: 1908, y: 362}
+    Scene: {fileID: 11400000, guid: 796e2871e13abce409c61e7045e34b03, type: 2}
+  - GUID: cbf770dd-b972-48f4-b6f9-100828dd3365
+    Key: scene_0_3
+    Position: {x: 2271, y: 362}
+    Scene: {fileID: 11400000, guid: 6d6555b991b2310459fa0ec2583b641d, type: 2}
+  - GUID: 6282450e-cdd7-49c8-9938-063bdd3a954c
+    Key: scene_0_4
+    Position: {x: 2721, y: 384}
+    Scene: {fileID: 11400000, guid: 136ab9a9ec1b7e3419f4f567ee1791c2, type: 2}
+  - GUID: 177ad402-9ef1-44de-982c-b235694b0048
+    Key: scene_0_4_1
+    Position: {x: 3503, y: 348}
+    Scene: {fileID: 11400000, guid: 61559fb5725d61548841bbd8ac4991d6, type: 2}
+  - GUID: bf7fa3fe-3fe7-489d-b36a-c1a4e36e5b57
+    Key: scene_0_4_2
+    Position: {x: 3503, y: 568}
+    Scene: {fileID: 11400000, guid: 1d164c3e501fed740a17b3010ebc44a8, type: 2}
+  - GUID: 8b705d25-a47b-4dbf-ae77-67962fc0828e
+    Key: scene_0_4_3
+    Position: {x: 3503, y: 788}
+    Scene: {fileID: 11400000, guid: c4233f70bdbbba34a9fe913471e074e2, type: 2}
+  - GUID: 79f8077f-238e-4fff-8a98-4393a428083d
+    Key: scene_0_7
+    Position: {x: 3903, y: 895}
+    Scene: {fileID: 11400000, guid: ad515d626a3a0784d89dd36e2f3d1bc7, type: 2}
+  - GUID: df636162-ce41-4e10-8c47-ce0196bbb20b
+    Key: scene_0_5
+    Position: {x: 3903, y: 380}
+    Scene: {fileID: 11400000, guid: 02e3ed6603d10f8489b7790490b4d6c9, type: 2}
+  - GUID: d175348d-7285-4971-80eb-d8848ee88415
+    Key: scene_0_6
+    Position: {x: 4384, y: 630}
+    Scene: {fileID: 11400000, guid: 4d19c9b274516524ca142c08f1bfd064, type: 2}
+  - GUID: 2bf4479e-b2b2-41d0-a7c5-908398545130
+    Key: scene_0_8
+    Position: {x: 4833, y: 704}
+    Scene: {fileID: 11400000, guid: aae5f61499d2c264d9085a5c3916ddba, type: 2}
+  - GUID: 15a60efc-1c21-4d0d-af83-30dd9d16d4fc
+    Key: scene_0_6_1
+    Position: {x: 4384, y: 882}
+    Scene: {fileID: 11400000, guid: 95f5b181306c70d4090aac0a523b752d, type: 2}
   CommentBlockData: []

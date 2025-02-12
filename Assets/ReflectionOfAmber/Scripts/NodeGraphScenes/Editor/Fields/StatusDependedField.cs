@@ -19,7 +19,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
         public StatusDependedField(StatusDependent statusDependent, VisualElement container) : base(container)
         {
             m_statusDependent = statusDependent;
-            m_statuses = new List<StatusesValue>();
+            m_statuses = new List<StatusesValue>(m_statusDependent.statusesValues);
 
             m_arrayElement = CreateStatusesValueArrayField(
                 "Statuses",

@@ -139,7 +139,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             return node;
         }
 
-        public SceneNode CreateNode(string nodeName, Vector2 position, ScreenSceneScriptableObject obj = null)
+        public SceneNode CreateNode(string nodeName, Vector2 position, ScreenSceneScriptableObject obj)
         {
             var tempSceneNode = new SceneNode()
             {
@@ -172,12 +172,62 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 tempSceneNode.Key = so.SceneKey;
                 tempSceneNode.title = so.SceneKey;
                 tempSceneNode.Scene = so;
+
+                RefreshPorts(tempSceneNode);
             });
             sceneSo.SetValueWithoutNotify(obj);
 
             tempSceneNode.mainContainer.Add(sceneSo);
 
-            var button = new Button(() => { AddChoicePort(tempSceneNode); })
+            var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
+            {
+                text = "Add Next Scene"
+            };
+            tempSceneNode.titleButtonContainer.Add(button);
+            return tempSceneNode;
+        }
+        
+        public SceneNode CreateNode(string nodeName, Vector2 position)
+        {
+            var tempSceneNode = new SceneNode()
+            {
+                title = nodeName,
+                Key = nodeName,
+                GUID = Guid.NewGuid().ToString(),
+                // Scene = obj
+            };
+            tempSceneNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+            var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
+            inputPort.portName = "Input";
+            tempSceneNode.inputContainer.Add(inputPort);
+            tempSceneNode.RefreshExpandedState();
+            tempSceneNode.RefreshPorts();
+            tempSceneNode.SetPosition(new Rect(position,
+                DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
+
+            tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
+            
+            var sceneSo = new ObjectField
+            {
+                objectType = typeof(ScreenSceneScriptableObject),
+            };
+
+            sceneSo.RegisterValueChangedCallback(evt =>
+            {
+                sceneSo.value = evt.newValue;
+                ScreenSceneScriptableObject so = (ScreenSceneScriptableObject)sceneSo.value;
+
+                tempSceneNode.Key = so.SceneKey;
+                tempSceneNode.title = so.SceneKey;
+                tempSceneNode.Scene = so;
+                
+                RefreshPorts(tempSceneNode);
+            });
+            // sceneSo.SetValueWithoutNotify(obj);
+
+            tempSceneNode.mainContainer.Add(sceneSo);
+
+            var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
             {
                 text = "Add Next Scene"
             };
@@ -204,13 +254,17 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 
             if (nodeCache.Scene != null && nodeCache.Scene.nextScenes != null)
             {
-                for (int i = 0; i < nodeCache.Scene.nextScenes.Length; i++)
+                for (int i = 0; i < nextScenes.Length; i++)
                 {
-                    nextScenes[i] = nodeCache.Scene.nextScenes[i];
+                    if (nodeCache.Scene.nextScenes.Length > i)
+                    {
+                        nextScenes[i] = nodeCache.Scene.nextScenes[i];
+                    }
                 }
             }
             
-            NextScene nextScene = new NextScene();
+            NextScene nextScene = nextScenes[outputPortCount];
+            nextScene.optionLabel = outputPortName;
 
             var chooseText = new TextField("Choose: ");
             chooseText.RegisterValueChangedCallback(evt =>
@@ -221,10 +275,10 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             customContainer.Add(chooseText);
             
             StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
-            statusDependedField.Build(generatedPort);
+            statusDependedField.Build(generatedPort, nextScene.statusDependent.enable);
             
             CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
-            cameraDependedField.Build(generatedPort);
+            cameraDependedField.Build(generatedPort, nextScene.cameraDependent.enable);
 
             var exclusionToggle = new Toggle("Exclusion dependent: ");
             exclusionToggle.RegisterValueChangedCallback(evt =>
@@ -235,17 +289,21 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             customContainer.Add(exclusionToggle);
 
             FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
-            findDependentField.Build(generatedPort);
+            findDependentField.Build(generatedPort, nextScene.findDependent.enable);
 
             SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
-            specialDependentField.Build(generatedPort);
+            specialDependentField.Build(generatedPort, nextScene.specialDependent.enable);
                 
             customContainer.Add(new Label("========"));
             generatedPort.contentContainer.Add(customContainer);
 
-            nextScenes[outputPortCount] = nextScene;
+            if(nodeCache.Scene != null)
+            {
+                nextScenes[outputPortCount] = nextScene;
+                nodeCache.Scene.nextScenes = nextScenes;
+            }
 
-            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort))
+            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort, outputPortCount))
             {
                 text = "X"
             };
@@ -257,8 +315,121 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             nodeCache.RefreshPorts();
         }
 
-        private void RemovePort(Node node, Port socket)
+        private void RefreshPorts(SceneNode nodeCache)
         {
+            nodeCache.outputContainer.Clear();
+            foreach (var nextScene in nodeCache.Scene.nextScenes)
+            {
+                AddCachedChoicePort(nodeCache);
+            }
+        }
+        
+        public void AddCachedChoicePort(SceneNode nodeCache, string overriddenPortName = "")
+        {
+            var generatedPort = GetPortInstance(nodeCache, Direction.Output);
+            var portLabel = generatedPort.contentContainer.Q<Label>("type");
+            generatedPort.contentContainer.Remove(portLabel);
+        
+            var outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count();
+            var outputPortName = string.IsNullOrEmpty(overriddenPortName)
+                ? $"Option {outputPortCount + 1}"
+                : overriddenPortName;
+        
+            generatedPort.contentContainer.Add(new Label(outputPortName));
+            
+            var customContainer = new VisualElement();
+
+            NextScene[] nextScenes;
+        
+            if (nodeCache.Scene != null && nodeCache.Scene.nextScenes != null)
+            {
+                nextScenes = nodeCache.Scene.nextScenes;
+            }
+            else
+            {
+                nextScenes = new NextScene[outputPortCount + 1];
+            }
+            
+
+            NextScene nextScene;
+            
+            if (nextScenes.Length > outputPortCount)
+            {
+                nextScene = nextScenes[outputPortCount];
+            }
+            else
+            {
+                NextScene[] tempNextScenes = new NextScene[outputPortCount + 1];
+                for (int i = 0; i < nextScenes.Length; i++)
+                {
+                    tempNextScenes[i] = nextScenes[i];
+                }
+                
+                nextScene = new NextScene();
+                tempNextScenes[outputPortCount] = nextScene;
+
+                nextScenes = tempNextScenes;
+            }
+
+            nextScene.optionLabel = outputPortName;
+        
+            var chooseText = new TextField("Choose: ");
+            chooseText.RegisterValueChangedCallback(evt =>
+            {
+                chooseText.value = evt.newValue;
+                nextScene.chooseText = evt.newValue;
+            });
+            chooseText.SetValueWithoutNotify(nextScene.chooseText);
+            customContainer.Add(chooseText);
+            
+            StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
+            statusDependedField.Build(generatedPort, nextScene.statusDependent.enable);
+            
+            CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
+            cameraDependedField.Build(generatedPort, nextScene.cameraDependent.enable);
+        
+            var exclusionToggle = new Toggle("Exclusion dependent: ");
+            exclusionToggle.RegisterValueChangedCallback(evt =>
+            {
+                exclusionToggle.value = evt.newValue;
+                nextScene.exclusionDependent.enable = evt.newValue;
+            });
+            exclusionToggle.SetValueWithoutNotify(nextScene.exclusionDependent.enable);
+            customContainer.Add(exclusionToggle);
+        
+            FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
+            findDependentField.Build(generatedPort, nextScene.findDependent.enable);
+        
+            SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
+            specialDependentField.Build(generatedPort, nextScene.specialDependent.enable);
+                
+            customContainer.Add(new Label("========"));
+            generatedPort.contentContainer.Add(customContainer);
+            
+            if(nodeCache.Scene != null)
+            {
+                nextScenes[outputPortCount] = nextScene;
+                nodeCache.Scene.nextScenes = nextScenes;
+            }
+            
+            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort, outputPortCount))
+            {
+                text = "X"
+            };
+            
+            generatedPort.contentContainer.Add(deleteButton);
+            generatedPort.portName = outputPortName;
+            nodeCache.outputContainer.Add(generatedPort);
+            nodeCache.RefreshExpandedState();
+            nodeCache.RefreshPorts();
+        }
+
+        private void RemovePort(SceneNode node, Port socket, int portIndex)
+        {
+            List<NextScene> nextScenes = node.Scene.nextScenes.ToList();
+            nextScenes.RemoveAt(portIndex);
+            node.Scene.nextScenes = nextScenes.ToArray();
+            
             var targetEdge = edges.ToList()
                 .Where(x => x.output.portName == socket.portName && x.output.node == socket.node);
             if (targetEdge.Any())
@@ -267,7 +438,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 edge.input.Disconnect(edge);
                 RemoveElement(targetEdge.First());
             }
-
+            
             node.outputContainer.Remove(socket);
             node.RefreshPorts();
             node.RefreshExpandedState();
@@ -374,19 +545,19 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 
             CameraDependent cameraDependent = new();
             CameraDependedField cameraDependedField = new CameraDependedField(cameraDependent, portContainer);
-            cameraDependedField.Build(port);
+            cameraDependedField.Build(port, false);
 
             StatusDependent statusDependent = new();
             StatusDependedField statusDependedField = new StatusDependedField(statusDependent, portContainer);
-            statusDependedField.Build(port);
+            statusDependedField.Build(port, false);
 
             FindDependent findDependent = new();
             FindDependentField findDependentField = new FindDependentField(findDependent, portContainer);
-            findDependentField.Build(port);
+            findDependentField.Build(port, false);
 
             SpecialDependent specialDependent = new();
             SpecialDependentField specialDependentField = new SpecialDependentField(specialDependent, portContainer);
-            specialDependentField.Build(port);
+            specialDependentField.Build(port, false);
             
             port.contentContainer.Add(portContainer);
 

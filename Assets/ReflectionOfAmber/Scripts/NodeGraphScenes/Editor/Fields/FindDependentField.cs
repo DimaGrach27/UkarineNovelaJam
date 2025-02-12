@@ -19,7 +19,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
         public FindDependentField(FindDependent findDependent, VisualElement container) : base(container)
         {
             m_findDependent = findDependent;
-            m_statuses = new List<StatusesValue>();
+            m_statuses = new List<StatusesValue>(m_findDependent.statusesValues);
             
             m_arrayElement = CreateStatusesValueArrayField(
                 "Statuses",
