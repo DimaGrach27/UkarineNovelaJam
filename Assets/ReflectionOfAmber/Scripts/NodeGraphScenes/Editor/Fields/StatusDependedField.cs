@@ -36,6 +36,11 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
         {
             ReduceSize(ArrayElementSize * m_elementsCount);
             LocalContainer.contentContainer.Remove(m_arrayElement);
+
+            // float height = LocalContainer.resolvedStyle.height;
+            // height -= ArrayElementSize * m_elementsCount;
+            //
+            // LocalContainer.style.height = height;
         }
 
         protected override string Title => "Status depended: ";

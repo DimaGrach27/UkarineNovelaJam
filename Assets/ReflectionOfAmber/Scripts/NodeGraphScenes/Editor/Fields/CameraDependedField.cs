@@ -30,6 +30,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
 
         protected override void OnEnable()
         {
+            // LocalContainer.style.borderBottomWidth = 0;
+
             m_prepToggle.style.marginLeft = ElementMargin;
             m_visibleToggle.style.marginLeft = ElementMargin;
             m_outVisibleToggle.style.marginLeft = ElementMargin;
@@ -37,6 +39,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
             LocalContainer.contentContainer.Add(m_prepToggle);
             LocalContainer.contentContainer.Add(m_visibleToggle);
             LocalContainer.contentContainer.Add(m_outVisibleToggle);
+            
+            // LocalContainer.style.borderBottomWidth = BottomSpace;
         }
 
         protected override void OnDisable()

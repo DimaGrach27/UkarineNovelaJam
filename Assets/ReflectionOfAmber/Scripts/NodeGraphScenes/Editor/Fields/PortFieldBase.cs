@@ -16,9 +16,10 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
         }
 
         protected virtual int BlockSize { get; } = 60;
-        protected virtual int ArrayElementSize { get; } = 20;
+        protected virtual int ArrayElementSize { get; } = 40;
         protected virtual int TitleMargin { get; } = 4;
         protected virtual int ElementMargin { get; } = 12;
+        protected virtual int BottomSpace { get; } = 18;
 
         private VisualElement Container { get;  }
         protected VisualElement LocalContainer { get;  }
@@ -49,6 +50,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
             titleToggle.style.height = 20;
             
             LocalContainer.Add(titleToggle);
+            // LocalContainer.style.borderBottomWidth = BottomSpace;
 
             Container.contentContainer.Add(LocalContainer);
         }
@@ -122,18 +124,33 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
             for (int i = 0; i < array.Count; i++)
             {
                 int index = i;
+
+                var mainContainer = new VisualElement()
+                {
+                    style =
+                    {
+                        flexDirection = FlexDirection.Row
+                    }
+                };
                 
-                var elementContainer = new VisualElement();
-                elementContainer.style.flexDirection = FlexDirection.Row;
-                elementContainer.style.alignItems = Align.Center;
-                elementContainer.style.marginRight = 2;
-                elementContainer.style.left = 0;
-                elementContainer.style.right = 0;
-                
+                var elementContainer = new VisualElement
+                {
+                    style =
+                    {
+                        flexDirection = FlexDirection.Column,
+                        alignItems = Align.FlexStart,
+                        height = ArrayElementSize,
+                    }
+                };
+
                 var toggleField = new Toggle("Value")
                 {
-                    value = array[i].value
+                    value = array[i].value,
                 };
+                
+                var toggleLabel = toggleField.Q<Label>();
+                toggleLabel.style.marginRight = -92;
+                
                 toggleField.RegisterValueChangedCallback(evt =>
                 {
                     array[index].value = evt.newValue;
@@ -142,6 +159,9 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
                 elementContainer.Add(toggleField);
                 
                 var enumField = new EnumField("Status", array[i].status);
+                // var enumLabel = enumField.Q<Label>();
+                // enumLabel.style.marginRight = -92;
+                
                 enumField.Init(StatusEnum.NONE);
                 enumField.RegisterValueChangedCallback(evt =>
                 {
@@ -161,9 +181,11 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields
                 {
                     text = "X"
                 };
-                elementContainer.Add(removeButton);
                 
-                container.Add(elementContainer);
+                mainContainer.Add(elementContainer);
+                mainContainer.Add(removeButton);
+                
+                container.Add(mainContainer);
             }
 
             container.style.height = ArrayElementSize * array.Count;
