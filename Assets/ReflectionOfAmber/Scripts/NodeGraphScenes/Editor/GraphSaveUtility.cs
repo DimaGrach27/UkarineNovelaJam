@@ -93,13 +93,18 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 // NextScene[] nextScenes = GetNextScenes(node, node.GUID);
                 // node.Scene.nextScenes = nextScenes;
                 
-                node.Scene.nextScenes = GetNextScenes(node, node.GUID);
+                if(!node.ReturnNode)
+                {
+                    node.Scene.nextScenes = GetNextScenes(node, node.GUID);
+                }
+                
                 narrativeContainer.DialogueNodeData.Add(new SceneNodeData()
                 {
                     GUID = node.GUID,
                     Key = node.Key,
                     Position = node.GetPosition().position,
                     Scene = node.Scene,
+                    ReturnNode = node.ReturnNode
                 });
             }
 
@@ -200,13 +205,13 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
         {
             foreach (var perNode in m_narativeContainer.DialogueNodeData)
             {
-                var tempNode = m_graphView.CreateNode(perNode.Key, Vector2.zero, perNode.Scene);
+                var tempNode = m_graphView.CreateNode(perNode.Key, Vector2.zero, perNode.Scene, perNode.ReturnNode);
                 tempNode.GUID = perNode.GUID;
                 
                 m_graphView.AddElement(tempNode);
 
-                var nodePorts = m_narativeContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.GUID).ToList();
-                nodePorts.ForEach(x => m_graphView.AddCachedChoicePort(tempNode, x.PortName));
+                // var nodePorts = m_narativeContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.GUID).ToList();
+                // nodePorts.ForEach(x => m_graphView.AddCachedChoicePort(tempNode, x.PortName));
             }
         }
 

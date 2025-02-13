@@ -33,6 +33,16 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 new SearchTreeEntry(new GUIContent("Scene Node", _indentationIcon))
                 {
                     level = 1, userData = new SceneNode()
+                    {
+                        ReturnNode = false
+                    }
+                },
+                new SearchTreeEntry(new GUIContent("Scene Return Node", _indentationIcon))
+                {
+                    level = 1, userData = new SceneNode()
+                    {
+                        ReturnNode = true
+                    }
                 },
                 new SearchTreeEntry(new GUIContent("Comment Block",_indentationIcon))
                 {
@@ -57,7 +67,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             switch (searchTreeEntry.userData)
             {
                 case SceneNode sceneNode:
-                    _graphView.CreateNewSceneNode("scene_",graphMousePosition);
+                    _graphView.CreateNewSceneNode("scene_",graphMousePosition, sceneNode.ReturnNode);
                     return true;
                 case CameraDependentNode sceneNode:
                     _graphView.CreateTestNode(graphMousePosition);

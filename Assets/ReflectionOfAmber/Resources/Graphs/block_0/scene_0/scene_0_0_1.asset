@@ -47,7 +47,7 @@ MonoBehaviour:
     endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - optionLabel: Option 1
+  - optionLabel: 
     scene: {fileID: 11400000, guid: 796e2871e13abce409c61e7045e34b03, type: 2}
     chooseText: 
     statusDependent:

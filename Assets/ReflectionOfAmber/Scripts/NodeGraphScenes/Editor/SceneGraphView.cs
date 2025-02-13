@@ -124,9 +124,9 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             return compatiblePorts;
         }
 
-        public void CreateNewSceneNode(string nodeName, Vector2 position)
+        public void CreateNewSceneNode(string nodeName, Vector2 position, bool isReturnNode)
         {
-            AddElement(CreateNode(nodeName, position));
+            AddElement(CreateNode(nodeName, position, isReturnNode));
         }
 
         public CameraDependentNode CreateTestNode(Vector2 position)
@@ -139,15 +139,27 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             return node;
         }
 
-        public SceneNode CreateNode(string nodeName, Vector2 position, ScreenSceneScriptableObject obj)
+        public SceneNode CreateNode(string nodeName, Vector2 position, ScreenSceneScriptableObject obj,
+            bool isReturnNode)
         {
             var tempSceneNode = new SceneNode()
             {
                 title = nodeName,
                 Key = nodeName,
                 GUID = Guid.NewGuid().ToString(),
+                ReturnNode = isReturnNode,
                 Scene = obj
             };
+
+            var tempNode = CreateNode(tempSceneNode, position);
+
+            if(!isReturnNode)
+            {
+                RefreshPorts(tempNode);
+            }
+
+            return tempNode;
+
             tempSceneNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
             var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
             inputPort.portName = "Input";
@@ -158,7 +170,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
 
             tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
-            
+
             var sceneSo = new ObjectField
             {
                 objectType = typeof(ScreenSceneScriptableObject),
@@ -186,19 +198,26 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             tempSceneNode.titleButtonContainer.Add(button);
             return tempSceneNode;
         }
-        
-        public SceneNode CreateNode(string nodeName, Vector2 position)
+
+        public SceneNode CreateNode(string nodeName, Vector2 position, bool isReturnNode)
         {
             var tempSceneNode = new SceneNode()
             {
                 title = nodeName,
                 Key = nodeName,
                 GUID = Guid.NewGuid().ToString(),
+                ReturnNode = isReturnNode
                 // Scene = obj
             };
-            tempSceneNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
+
+            return CreateNode(tempSceneNode, position);
+            
+            tempSceneNode.styleSheets.Add(isReturnNode
+                ? Resources.Load<StyleSheet>("Node_return")
+                : Resources.Load<StyleSheet>("Node"));
+            
             var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
-            inputPort.portName = "Input";
+            inputPort.portName = !isReturnNode ? "Input" : "Input return";
             tempSceneNode.inputContainer.Add(inputPort);
             tempSceneNode.RefreshExpandedState();
             tempSceneNode.RefreshPorts();
@@ -221,12 +240,72 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 tempSceneNode.title = so.SceneKey;
                 tempSceneNode.Scene = so;
                 
-                RefreshPorts(tempSceneNode);
+                if(!isReturnNode)
+                {
+                    RefreshPorts(tempSceneNode);
+                }
             });
-            // sceneSo.SetValueWithoutNotify(obj);
+            sceneSo.SetValueWithoutNotify(tempSceneNode.Scene);
 
             tempSceneNode.mainContainer.Add(sceneSo);
 
+            if (isReturnNode)
+            {
+                return tempSceneNode;
+            }
+            
+            var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
+            {
+                text = "Add Next Scene"
+            };
+            tempSceneNode.titleButtonContainer.Add(button);
+            return tempSceneNode;
+        }
+
+        private SceneNode CreateNode(SceneNode tempSceneNode, Vector2 position)
+        {
+            tempSceneNode.styleSheets.Add(tempSceneNode.ReturnNode
+                ? Resources.Load<StyleSheet>("Node_return")
+                : Resources.Load<StyleSheet>("Node"));
+            
+            var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
+            inputPort.portName = !tempSceneNode.ReturnNode ? "Input" : "Input return";
+            tempSceneNode.inputContainer.Add(inputPort);
+            tempSceneNode.RefreshExpandedState();
+            tempSceneNode.RefreshPorts();
+            tempSceneNode.SetPosition(new Rect(position,
+                DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
+
+            tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
+            
+            var sceneSo = new ObjectField
+            {
+                objectType = typeof(ScreenSceneScriptableObject),
+            };
+
+            sceneSo.RegisterValueChangedCallback(evt =>
+            {
+                sceneSo.value = evt.newValue;
+                ScreenSceneScriptableObject so = (ScreenSceneScriptableObject)sceneSo.value;
+
+                tempSceneNode.Key = so.SceneKey;
+                tempSceneNode.title = so.SceneKey;
+                tempSceneNode.Scene = so;
+                
+                if(!tempSceneNode.ReturnNode)
+                {
+                    RefreshPorts(tempSceneNode);
+                }
+            });
+            sceneSo.SetValueWithoutNotify(tempSceneNode.Scene);
+
+            tempSceneNode.mainContainer.Add(sceneSo);
+
+            if (tempSceneNode.ReturnNode)
+            {
+                return tempSceneNode;
+            }
+            
             var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
             {
                 text = "Add Next Scene"
@@ -320,8 +399,31 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             nodeCache.outputContainer.Clear();
             foreach (var nextScene in nodeCache.Scene.nextScenes)
             {
-                AddCachedChoicePort(nodeCache);
+                if(nextScene.Scene != null)
+                {
+                    AddCachedChoicePort(nodeCache);
+                }
             }
+
+            // int count = 0;
+            // for (int i = 0; i < nodeCache.Scene.nextScenes.Length; i++)
+            // {
+            //     if (nodeCache.Scene.nextScenes[i].Scene == null)
+            //     {
+            //         count = i;
+            //         
+            //         break;
+            //     }
+            // }
+            //
+            // NextScene[] nextScenes = new NextScene[count];
+            //
+            // for (int i = 0; i < nextScenes.Length; i++)
+            // {
+            //     nextScenes[i] = nodeCache.Scene.nextScenes[i];
+            // }
+            //
+            // nodeCache.Scene.nextScenes = nextScenes;
         }
         
         public void AddCachedChoicePort(SceneNode nodeCache, string overriddenPortName = "")

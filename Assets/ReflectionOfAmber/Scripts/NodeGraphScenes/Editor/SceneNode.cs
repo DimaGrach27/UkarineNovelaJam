@@ -11,5 +11,6 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
         public ScreenSceneScriptableObject Scene;
         
         public bool EntryPoint = false;
+        public bool ReturnNode = false;
     }
 }

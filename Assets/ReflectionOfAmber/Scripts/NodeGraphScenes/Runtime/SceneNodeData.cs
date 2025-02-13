@@ -14,5 +14,6 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime
         public Vector2 Position;
 
         public ScreenSceneScriptableObject Scene;
+        public bool ReturnNode;
     }
 }

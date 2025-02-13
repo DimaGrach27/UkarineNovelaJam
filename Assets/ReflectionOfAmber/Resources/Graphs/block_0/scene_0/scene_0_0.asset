@@ -195,9 +195,9 @@ MonoBehaviour:
     endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: f3bd8ca750bd5b3429e9ec92a9038607, type: 2}
-    chooseText: "\u041F\u043E\u0447\u0430\u043B\u0430 \u0440\u043E\u0437\u0434\u0438\u0432\u043B\u044F\u0442\u0438\u0441\u044F
-      \u043B\u0456\u0441 \u043D\u0430\u0432\u043A\u0440\u0443\u0433\u0438."
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 7725420f824a31643801449b4d0c6376, type: 2}
+    chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
@@ -213,11 +213,10 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special:
-      - {fileID: 0}
-  - scene: {fileID: 11400000, guid: b630609e35433cd46b4951554c6cb7e0, type: 2}
-    chooseText: "\u041F\u0435\u0440\u0435\u043C\u043A\u043D\u0443\u043B\u0430 \u0440\u0430\u0434\u0456\u043E
-      \u043D\u0430 \u0456\u043D\u0448\u0443 \u0445\u0432\u0438\u043B\u044E."
+      special: []
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: f628f27bf99ef3e4da7c8474ea2b56c3, type: 2}
+    chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
@@ -233,12 +232,10 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special:
-      - {fileID: 0}
-  - scene: {fileID: 11400000, guid: 915491421543aa94a97d6187feb5e349, type: 2}
-    chooseText: "\u0417\u0430\u043F\u0430\u043B\u0438\u043B\u0430 \u0441\u0456\u043C\u043D\u0430\u0434\u0446\u044F\u0442\u0443
-      \u0446\u0438\u0433\u0430\u0440\u043A\u0443 \xAB\u0411\u043E\u043B\u044C\u043C\u0430\u0440\xBB
-      \u0437\u0430 \u0434\u0435\u043D\u044C."
+      special: []
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: eb3bb7dba574b634f97825e72cfb0b34, type: 2}
+    chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
@@ -254,5 +251,4 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special:
-      - {fileID: 0}
+      special: []
