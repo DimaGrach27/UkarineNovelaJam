@@ -1,0 +1,568 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a944c102e466493da4992d89e308f318, type: 3}
+  m_Name: Narrative_end_game
+  m_EditorClassIdentifier: 
+  NodeLinks:
+  - BaseNodeGUID: e20b65d1-51e3-40f6-8af9-dc5a22138234
+    PortName: Option 1
+    TargetNodeGUID: ad73a0e5-2591-4490-b944-f771cfdc4fc2
+  - BaseNodeGUID: 227b9cfa-4ff9-4f56-b01b-58b0b30d3633
+    PortName: Option 1
+    TargetNodeGUID: 9c56829c-85d3-475b-a396-d94f48032747
+  - BaseNodeGUID: 43eb87fa-51a3-46cf-b0dd-a341c8b0247e
+    PortName: Option 1
+    TargetNodeGUID: be791c39-f638-45d7-abc6-660dc6cd6470
+  - BaseNodeGUID: 9c56829c-85d3-475b-a396-d94f48032747
+    PortName: Option 1
+    TargetNodeGUID: 59e28a8f-3e1a-432d-a427-f947b76c7eb9
+  - BaseNodeGUID: ad73a0e5-2591-4490-b944-f771cfdc4fc2
+    PortName: Option 1
+    TargetNodeGUID: 59e28a8f-3e1a-432d-a427-f947b76c7eb9
+  - BaseNodeGUID: be791c39-f638-45d7-abc6-660dc6cd6470
+    PortName: Option 1
+    TargetNodeGUID: a942f55a-25a2-48d1-b9f2-4448622e01e1
+  - BaseNodeGUID: a942f55a-25a2-48d1-b9f2-4448622e01e1
+    PortName: Option 1
+    TargetNodeGUID: 81c49f57-cbc5-4755-a306-014bd11ba66c
+  - BaseNodeGUID: 81c49f57-cbc5-4755-a306-014bd11ba66c
+    PortName: Option 1
+    TargetNodeGUID: 294ecc58-0c3d-4c15-991f-5c23e0400109
+  - BaseNodeGUID: 81c49f57-cbc5-4755-a306-014bd11ba66c
+    PortName: Option 2
+    TargetNodeGUID: 9eb87714-aa95-48d2-bf7c-78909a60ed7a
+  - BaseNodeGUID: 294ecc58-0c3d-4c15-991f-5c23e0400109
+    PortName: Option 1
+    TargetNodeGUID: de099ceb-be78-4b08-814f-e01e64c96f18
+  - BaseNodeGUID: 9eb87714-aa95-48d2-bf7c-78909a60ed7a
+    PortName: Option 1
+    TargetNodeGUID: de099ceb-be78-4b08-814f-e01e64c96f18
+  - BaseNodeGUID: de099ceb-be78-4b08-814f-e01e64c96f18
+    PortName: Option 1
+    TargetNodeGUID: be10b4c1-ae8c-4a3e-96e1-257bc611d907
+  - BaseNodeGUID: de099ceb-be78-4b08-814f-e01e64c96f18
+    PortName: Option 2
+    TargetNodeGUID: e815a6f8-ea32-4d9f-9ea3-98213949df51
+  - BaseNodeGUID: be10b4c1-ae8c-4a3e-96e1-257bc611d907
+    PortName: Option 1
+    TargetNodeGUID: f5bb9b4e-50a6-4149-bbe8-116e1ecbb635
+  - BaseNodeGUID: e815a6f8-ea32-4d9f-9ea3-98213949df51
+    PortName: Option 1
+    TargetNodeGUID: f5bb9b4e-50a6-4149-bbe8-116e1ecbb635
+  - BaseNodeGUID: f5bb9b4e-50a6-4149-bbe8-116e1ecbb635
+    PortName: Option 1
+    TargetNodeGUID: 1b7ee12f-8284-41bd-a8bb-0c2c384d6ae9
+  - BaseNodeGUID: f5bb9b4e-50a6-4149-bbe8-116e1ecbb635
+    PortName: Option 2
+    TargetNodeGUID: fdeb9b7d-165e-41fb-8684-ae868b81b8f9
+  - BaseNodeGUID: 1b7ee12f-8284-41bd-a8bb-0c2c384d6ae9
+    PortName: Option 1
+    TargetNodeGUID: 7c1aebc5-0f9e-4f2a-b7bc-27b89927f272
+  - BaseNodeGUID: fdeb9b7d-165e-41fb-8684-ae868b81b8f9
+    PortName: Option 1
+    TargetNodeGUID: 7c1aebc5-0f9e-4f2a-b7bc-27b89927f272
+  - BaseNodeGUID: 7c1aebc5-0f9e-4f2a-b7bc-27b89927f272
+    PortName: Option 1
+    TargetNodeGUID: 4a64cf14-07d8-4575-8908-497bf2ccc63f
+  - BaseNodeGUID: 7c1aebc5-0f9e-4f2a-b7bc-27b89927f272
+    PortName: Option 2
+    TargetNodeGUID: 4b99c261-78ab-4fef-9bff-593e731a968f
+  - BaseNodeGUID: 7c1aebc5-0f9e-4f2a-b7bc-27b89927f272
+    PortName: Option 3
+    TargetNodeGUID: 29489467-7583-4761-8925-0b5e1dca1ee7
+  - BaseNodeGUID: 4b99c261-78ab-4fef-9bff-593e731a968f
+    PortName: Option 1
+    TargetNodeGUID: 7ecfd8c8-0af6-473a-8e2b-48fb1a9abb0e
+  - BaseNodeGUID: 4a64cf14-07d8-4575-8908-497bf2ccc63f
+    PortName: Option 1
+    TargetNodeGUID: 7ecfd8c8-0af6-473a-8e2b-48fb1a9abb0e
+  - BaseNodeGUID: 29489467-7583-4761-8925-0b5e1dca1ee7
+    PortName: Option 1
+    TargetNodeGUID: 233978d1-0a85-4781-86bc-20426d3dd008
+  - BaseNodeGUID: 7ecfd8c8-0af6-473a-8e2b-48fb1a9abb0e
+    PortName: Option 1
+    TargetNodeGUID: 403675d0-63a5-4e05-8ec3-cd7a94edddd4
+  - BaseNodeGUID: 233978d1-0a85-4781-86bc-20426d3dd008
+    PortName: Option 1
+    TargetNodeGUID: 403675d0-63a5-4e05-8ec3-cd7a94edddd4
+  - BaseNodeGUID: 403675d0-63a5-4e05-8ec3-cd7a94edddd4
+    PortName: Option 1
+    TargetNodeGUID: 2ef4b7a1-de34-4935-88f3-28e66876f749
+  - BaseNodeGUID: 403675d0-63a5-4e05-8ec3-cd7a94edddd4
+    PortName: Option 2
+    TargetNodeGUID: 8a47a64d-c9f9-44d7-922a-fe8021d7ba4a
+  - BaseNodeGUID: 403675d0-63a5-4e05-8ec3-cd7a94edddd4
+    PortName: Option 3
+    TargetNodeGUID: 36ea5df1-fb5e-459f-9b81-46ded4112783
+  - BaseNodeGUID: 2ef4b7a1-de34-4935-88f3-28e66876f749
+    PortName: Option 1
+    TargetNodeGUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+  - BaseNodeGUID: 8a47a64d-c9f9-44d7-922a-fe8021d7ba4a
+    PortName: Option 1
+    TargetNodeGUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+  - BaseNodeGUID: 36ea5df1-fb5e-459f-9b81-46ded4112783
+    PortName: Option 1
+    TargetNodeGUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+  - BaseNodeGUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+    PortName: Option 1
+    TargetNodeGUID: d29d1c5c-2fdf-46de-965c-9bc816e0c1a1
+  - BaseNodeGUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+    PortName: Option 2
+    TargetNodeGUID: 4da15444-6101-4e57-a93b-84ece7f1120a
+  - BaseNodeGUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+    PortName: Option 3
+    TargetNodeGUID: 52fdb101-b6ad-4dd3-98ef-f06f9ed97ab5
+  - BaseNodeGUID: d29d1c5c-2fdf-46de-965c-9bc816e0c1a1
+    PortName: Option 1
+    TargetNodeGUID: 4a775ab0-5ec7-4160-954c-852374d99697
+  - BaseNodeGUID: 52fdb101-b6ad-4dd3-98ef-f06f9ed97ab5
+    PortName: Option 1
+    TargetNodeGUID: be10c2c0-35af-4613-8534-f0e2823c55de
+  - BaseNodeGUID: 4da15444-6101-4e57-a93b-84ece7f1120a
+    PortName: Option 1
+    TargetNodeGUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+  - BaseNodeGUID: 4a775ab0-5ec7-4160-954c-852374d99697
+    PortName: Option 1
+    TargetNodeGUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+  - BaseNodeGUID: be10c2c0-35af-4613-8534-f0e2823c55de
+    PortName: Option 1
+    TargetNodeGUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+  - BaseNodeGUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+    PortName: Option 1
+    TargetNodeGUID: 1ec65e87-8c50-43f4-88f9-5a0246f882b2
+  - BaseNodeGUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+    PortName: Option 2
+    TargetNodeGUID: ea164267-e1f3-4d3a-a6a3-2bb85f920079
+  - BaseNodeGUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+    PortName: Option 3
+    TargetNodeGUID: 8908414b-ccf9-4fbc-93cb-a7639fd8e49f
+  - BaseNodeGUID: 1ec65e87-8c50-43f4-88f9-5a0246f882b2
+    PortName: Option 1
+    TargetNodeGUID: e7925224-1e4e-4f9a-bae4-87646e4b945d
+  - BaseNodeGUID: ea164267-e1f3-4d3a-a6a3-2bb85f920079
+    PortName: Option 1
+    TargetNodeGUID: 355d9804-deb5-4426-8c38-d5053ec0499d
+  - BaseNodeGUID: 8908414b-ccf9-4fbc-93cb-a7639fd8e49f
+    PortName: Option 1
+    TargetNodeGUID: 587223b6-1a3c-4ca3-bb40-cd559d76406e
+  - BaseNodeGUID: 587223b6-1a3c-4ca3-bb40-cd559d76406e
+    PortName: Option 1
+    TargetNodeGUID: ec281f10-70ea-4a62-8e31-30433630eab2
+  - BaseNodeGUID: 587223b6-1a3c-4ca3-bb40-cd559d76406e
+    PortName: Option 2
+    TargetNodeGUID: 43d3d05c-d149-44d3-85ec-20b3638c1017
+  - BaseNodeGUID: 43d3d05c-d149-44d3-85ec-20b3638c1017
+    PortName: Option 1
+    TargetNodeGUID: ebd565be-89c7-478b-89f1-57c52c23b8d3
+  - BaseNodeGUID: ec281f10-70ea-4a62-8e31-30433630eab2
+    PortName: Option 1
+    TargetNodeGUID: 053f0fb5-7a4c-45b2-a3cd-d2df1f4384e7
+  - BaseNodeGUID: 053f0fb5-7a4c-45b2-a3cd-d2df1f4384e7
+    PortName: Option 1
+    TargetNodeGUID: f175eacb-5100-4c20-a3a9-3d3568798ace
+  - BaseNodeGUID: ebd565be-89c7-478b-89f1-57c52c23b8d3
+    PortName: Option 1
+    TargetNodeGUID: e7925224-1e4e-4f9a-bae4-87646e4b945d
+  - BaseNodeGUID: e7925224-1e4e-4f9a-bae4-87646e4b945d
+    PortName: Option 1
+    TargetNodeGUID: f175eacb-5100-4c20-a3a9-3d3568798ace
+  - BaseNodeGUID: f175eacb-5100-4c20-a3a9-3d3568798ace
+    PortName: Option 1
+    TargetNodeGUID: 7aaf6ab9-2d6d-4a87-a244-6e9147db6f82
+  - BaseNodeGUID: f175eacb-5100-4c20-a3a9-3d3568798ace
+    PortName: Option 2
+    TargetNodeGUID: 35dfafd6-9ba7-49c4-8abf-53f27d62154b
+  - BaseNodeGUID: 355d9804-deb5-4426-8c38-d5053ec0499d
+    PortName: Option 1
+    TargetNodeGUID: f175eacb-5100-4c20-a3a9-3d3568798ace
+  - BaseNodeGUID: 35dfafd6-9ba7-49c4-8abf-53f27d62154b
+    PortName: Option 1
+    TargetNodeGUID: a632f631-c3af-4c48-9a35-8ae0a0a438a6
+  - BaseNodeGUID: 7aaf6ab9-2d6d-4a87-a244-6e9147db6f82
+    PortName: Option 1
+    TargetNodeGUID: 5452b3fb-de0d-4b73-8331-aecf433782d4
+  - BaseNodeGUID: a632f631-c3af-4c48-9a35-8ae0a0a438a6
+    PortName: Option 1
+    TargetNodeGUID: 935bf21b-ffd6-4d26-9c5e-0add1805ce88
+  - BaseNodeGUID: a632f631-c3af-4c48-9a35-8ae0a0a438a6
+    PortName: Option 2
+    TargetNodeGUID: 1ba60902-1422-4208-af4f-e882cc058172
+  - BaseNodeGUID: 1ba60902-1422-4208-af4f-e882cc058172
+    PortName: Option 1
+    TargetNodeGUID: f0db5660-809e-421e-b3ba-73d74da6307b
+  - BaseNodeGUID: 935bf21b-ffd6-4d26-9c5e-0add1805ce88
+    PortName: Option 1
+    TargetNodeGUID: 67a8ed8f-0ec0-4e8b-b36a-5148ba942545
+  - BaseNodeGUID: f0db5660-809e-421e-b3ba-73d74da6307b
+    PortName: Option 1
+    TargetNodeGUID: 77a6dda4-13c6-490f-a411-aa366101286b
+  - BaseNodeGUID: 67a8ed8f-0ec0-4e8b-b36a-5148ba942545
+    PortName: Option 1
+    TargetNodeGUID: 9f6ad7e5-d6d9-474e-ad26-c17969d7eb90
+  - BaseNodeGUID: 67a8ed8f-0ec0-4e8b-b36a-5148ba942545
+    PortName: Option 2
+    TargetNodeGUID: a72a0c8c-78cb-4629-8f14-a31c6e53db60
+  - BaseNodeGUID: 9f6ad7e5-d6d9-474e-ad26-c17969d7eb90
+    PortName: Option 1
+    TargetNodeGUID: a712b1cf-1e25-46d4-a75e-6b558ccc4f76
+  - BaseNodeGUID: a72a0c8c-78cb-4629-8f14-a31c6e53db60
+    PortName: Option 1
+    TargetNodeGUID: 4df3b48a-b591-4cc1-961f-8cb710bca27c
+  - BaseNodeGUID: a712b1cf-1e25-46d4-a75e-6b558ccc4f76
+    PortName: Option 1
+    TargetNodeGUID: f7c726ec-a333-43b9-85bc-f6fd05522bea
+  - BaseNodeGUID: 4df3b48a-b591-4cc1-961f-8cb710bca27c
+    PortName: Option 1
+    TargetNodeGUID: c9b73c7c-5f53-4111-9aa0-8435f4f4fe8e
+  - BaseNodeGUID: f7c726ec-a333-43b9-85bc-f6fd05522bea
+    PortName: Option 1
+    TargetNodeGUID: fb922bac-2f78-4f1b-aa2f-3edabd9a12e5
+  - BaseNodeGUID: 77a6dda4-13c6-490f-a411-aa366101286b
+    PortName: Option 1
+    TargetNodeGUID: d8e700a3-8b38-4437-abab-efc01ee8302f
+  - BaseNodeGUID: 6b929a11-9e9a-43f6-9185-14a1ef504283
+    PortName: Option 1
+    TargetNodeGUID: 5452b3fb-de0d-4b73-8331-aecf433782d4
+  - BaseNodeGUID: d8e700a3-8b38-4437-abab-efc01ee8302f
+    PortName: Option 1
+    TargetNodeGUID: fb922bac-2f78-4f1b-aa2f-3edabd9a12e5
+  - BaseNodeGUID: 5452b3fb-de0d-4b73-8331-aecf433782d4
+    PortName: Option 1
+    TargetNodeGUID: fb922bac-2f78-4f1b-aa2f-3edabd9a12e5
+  - BaseNodeGUID: fb922bac-2f78-4f1b-aa2f-3edabd9a12e5
+    PortName: Option 1
+    TargetNodeGUID: 9c382647-b419-4277-91d7-6f1b04f208c7
+  - BaseNodeGUID: be0bd110-6ad6-4378-851a-aca7963468bf
+    PortName: Next
+    TargetNodeGUID: 227b9cfa-4ff9-4f56-b01b-58b0b30d3633
+  DialogueNodeData:
+  - GUID: e20b65d1-51e3-40f6-8af9-dc5a22138234
+    Key: scene_3_164_1
+    Position: {x: 263, y: 54}
+    Scene: {fileID: 11400000, guid: 1a9258bbd329f9244abd274850e8ed38, type: 2}
+    ReturnNode: 0
+  - GUID: 227b9cfa-4ff9-4f56-b01b-58b0b30d3633
+    Key: scene_3_164_2
+    Position: {x: 263, y: 165}
+    Scene: {fileID: 11400000, guid: 748ff7d3b34990345acd07d4be80cce6, type: 2}
+    ReturnNode: 0
+  - GUID: 43eb87fa-51a3-46cf-b0dd-a341c8b0247e
+    Key: scene_3_164_3
+    Position: {x: 263, y: 277}
+    Scene: {fileID: 11400000, guid: 2d88b5c8dd38c564391e41905d2d5f3b, type: 2}
+    ReturnNode: 0
+  - GUID: 9c56829c-85d3-475b-a396-d94f48032747
+    Key: scene_0_166
+    Position: {x: 595, y: 165}
+    Scene: {fileID: 11400000, guid: c181a27ec4c862440ae63ee7661bde96, type: 2}
+    ReturnNode: 0
+  - GUID: ad73a0e5-2591-4490-b944-f771cfdc4fc2
+    Key: scene_0_165
+    Position: {x: 595, y: 54}
+    Scene: {fileID: 11400000, guid: bf9e578c8ba37f541bb738076c53d9e7, type: 2}
+    ReturnNode: 0
+  - GUID: be791c39-f638-45d7-abc6-660dc6cd6470
+    Key: scene_1_168
+    Position: {x: 597, y: 277}
+    Scene: {fileID: 11400000, guid: c301f78de3fb7094aa9da3faa37df8e7, type: 2}
+    ReturnNode: 0
+  - GUID: a942f55a-25a2-48d1-b9f2-4448622e01e1
+    Key: scene_7_169
+    Position: {x: 922, y: 277}
+    Scene: {fileID: 11400000, guid: fdb0427d7cea67442a4e71e7398c0a07, type: 2}
+    ReturnNode: 0
+  - GUID: 81c49f57-cbc5-4755-a306-014bd11ba66c
+    Key: scene_7_170
+    Position: {x: 1233, y: 277}
+    Scene: {fileID: 11400000, guid: 504d7fb9610098049b73d297de5a8b00, type: 2}
+    ReturnNode: 0
+  - GUID: 59e28a8f-3e1a-432d-a427-f947b76c7eb9
+    Key: scene_0_167
+    Position: {x: 921, y: 103}
+    Scene: {fileID: 11400000, guid: c290a27c229abb84fabcbb1779c062a3, type: 2}
+    ReturnNode: 0
+  - GUID: 294ecc58-0c3d-4c15-991f-5c23e0400109
+    Key: scene_7_170_1
+    Position: {x: 1561, y: 277}
+    Scene: {fileID: 11400000, guid: 0d25698c514eb5849b31c2666845a4cd, type: 2}
+    ReturnNode: 0
+  - GUID: 9eb87714-aa95-48d2-bf7c-78909a60ed7a
+    Key: scene_7_170_2
+    Position: {x: 1561, y: 374}
+    Scene: {fileID: 11400000, guid: d129466c37e185a49abf7d0e595bf480, type: 2}
+    ReturnNode: 0
+  - GUID: de099ceb-be78-4b08-814f-e01e64c96f18
+    Key: scene_7_171
+    Position: {x: 1907, y: 314}
+    Scene: {fileID: 11400000, guid: a997498458c73af40af1f44e2efaeb6d, type: 2}
+    ReturnNode: 0
+  - GUID: be10b4c1-ae8c-4a3e-96e1-257bc611d907
+    Key: scene_7_171_1
+    Position: {x: 2258, y: 314}
+    Scene: {fileID: 11400000, guid: f523e1f3b07522e4aa407b36ca6659d8, type: 2}
+    ReturnNode: 0
+  - GUID: e815a6f8-ea32-4d9f-9ea3-98213949df51
+    Key: scene_7_171_2
+    Position: {x: 2258, y: 411}
+    Scene: {fileID: 11400000, guid: a99dc48a03f04a44dbfee49b1fc0e92c, type: 2}
+    ReturnNode: 0
+  - GUID: f5bb9b4e-50a6-4149-bbe8-116e1ecbb635
+    Key: scene_7_172
+    Position: {x: 2591, y: 360}
+    Scene: {fileID: 11400000, guid: 66d1a14e6a1bdff4f85fd98476976d51, type: 2}
+    ReturnNode: 0
+  - GUID: 1b7ee12f-8284-41bd-a8bb-0c2c384d6ae9
+    Key: scene_7_172_1
+    Position: {x: 2958, y: 360}
+    Scene: {fileID: 11400000, guid: 1951aab03f7a5084ab0019af64e5b482, type: 2}
+    ReturnNode: 0
+  - GUID: fdeb9b7d-165e-41fb-8684-ae868b81b8f9
+    Key: scene_7_172_2
+    Position: {x: 2958, y: 460}
+    Scene: {fileID: 11400000, guid: e264ab620b6735c459850c7c4f270f4e, type: 2}
+    ReturnNode: 0
+  - GUID: 7c1aebc5-0f9e-4f2a-b7bc-27b89927f272
+    Key: scene_1_173
+    Position: {x: 3286, y: 388}
+    Scene: {fileID: 11400000, guid: 7808c896933bbe649b8e4fbbccca3298, type: 2}
+    ReturnNode: 0
+  - GUID: 4b99c261-78ab-4fef-9bff-593e731a968f
+    Key: scene_1_173_2
+    Position: {x: 3614, y: 485}
+    Scene: {fileID: 11400000, guid: 1af84de1da3da5749b2ac68a3542e945, type: 2}
+    ReturnNode: 0
+  - GUID: 4a64cf14-07d8-4575-8908-497bf2ccc63f
+    Key: scene_1_173_1
+    Position: {x: 3614, y: 388}
+    Scene: {fileID: 11400000, guid: 99217bc293b01304e98fde5e4e46edd3, type: 2}
+    ReturnNode: 0
+  - GUID: 29489467-7583-4761-8925-0b5e1dca1ee7
+    Key: scene_1_173_3
+    Position: {x: 3614, y: 582}
+    Scene: {fileID: 11400000, guid: 3f5dadb541f7b1f45969cecf99d4fbe4, type: 2}
+    ReturnNode: 0
+  - GUID: 7ecfd8c8-0af6-473a-8e2b-48fb1a9abb0e
+    Key: scene_1_174
+    Position: {x: 3969, y: 436}
+    Scene: {fileID: 11400000, guid: 597d7cf257d3f6741b18d7c3890ab10f, type: 2}
+    ReturnNode: 0
+  - GUID: 233978d1-0a85-4781-86bc-20426d3dd008
+    Key: scene_1_175
+    Position: {x: 3969, y: 573}
+    Scene: {fileID: 11400000, guid: eabb46e7a3e77e44f9f882ce1cb7e892, type: 2}
+    ReturnNode: 0
+  - GUID: 403675d0-63a5-4e05-8ec3-cd7a94edddd4
+    Key: scene_1_176
+    Position: {x: 4301, y: 501}
+    Scene: {fileID: 11400000, guid: 713f1718aca9ce1468de55150575fce7, type: 2}
+    ReturnNode: 0
+  - GUID: 2ef4b7a1-de34-4935-88f3-28e66876f749
+    Key: scene_1_176_1
+    Position: {x: 4659, y: 452}
+    Scene: {fileID: 11400000, guid: 8064faa06d968084a8832ce028da4cf7, type: 2}
+    ReturnNode: 0
+  - GUID: 8a47a64d-c9f9-44d7-922a-fe8021d7ba4a
+    Key: scene_1_176_2
+    Position: {x: 4659, y: 549}
+    Scene: {fileID: 11400000, guid: f417f2cc52ffe1649bb968408b99b2d1, type: 2}
+    ReturnNode: 0
+  - GUID: 36ea5df1-fb5e-459f-9b81-46ded4112783
+    Key: scene_1_176_3
+    Position: {x: 4659, y: 645}
+    Scene: {fileID: 11400000, guid: 806eb89c22a207b4b9dfc3c2635e2878, type: 2}
+    ReturnNode: 0
+  - GUID: 8c1bdc4d-4aa8-4579-a0fc-65df22c46205
+    Key: scene_1_177
+    Position: {x: 5017, y: 549}
+    Scene: {fileID: 11400000, guid: 3b87ffe61138b5c45b187b9e06915332, type: 2}
+    ReturnNode: 0
+  - GUID: d29d1c5c-2fdf-46de-965c-9bc816e0c1a1
+    Key: scene_1_177_1
+    Position: {x: 5350, y: 483}
+    Scene: {fileID: 11400000, guid: c88d79a1e4137114cb716a06c14487ca, type: 2}
+    ReturnNode: 0
+  - GUID: 52fdb101-b6ad-4dd3-98ef-f06f9ed97ab5
+    Key: scene_1_177_3
+    Position: {x: 5350, y: 677}
+    Scene: {fileID: 11400000, guid: 5749572a559dac54b9e28287ea108419, type: 2}
+    ReturnNode: 0
+  - GUID: 4da15444-6101-4e57-a93b-84ece7f1120a
+    Key: scene_1_177_2
+    Position: {x: 5350, y: 580}
+    Scene: {fileID: 11400000, guid: ee8ef16daa71c4949b4ca5de56c3b1f4, type: 2}
+    ReturnNode: 0
+  - GUID: 4a775ab0-5ec7-4160-954c-852374d99697
+    Key: scene_1_178
+    Position: {x: 5675, y: 483}
+    Scene: {fileID: 11400000, guid: 0386c43bd33d3ef48863b390734cd802, type: 2}
+    ReturnNode: 0
+  - GUID: be10c2c0-35af-4613-8534-f0e2823c55de
+    Key: scene_1_179
+    Position: {x: 5675, y: 677}
+    Scene: {fileID: 11400000, guid: 07784d0506834a94c984b039577c6344, type: 2}
+    ReturnNode: 0
+  - GUID: a0994fe2-efbe-42a7-9390-b0cff8a0682e
+    Key: scene_1_180
+    Position: {x: 5997, y: 580}
+    Scene: {fileID: 11400000, guid: 93320ba030ea71c4ea769cf4bfa88d2e, type: 2}
+    ReturnNode: 0
+  - GUID: 1ec65e87-8c50-43f4-88f9-5a0246f882b2
+    Key: scene_1_180_2
+    Position: {x: 6311, y: 615}
+    Scene: {fileID: 11400000, guid: aed56a2aa39fdd447b93cc8d64fbd3bf, type: 2}
+    ReturnNode: 0
+  - GUID: ea164267-e1f3-4d3a-a6a3-2bb85f920079
+    Key: scene_1_180_3
+    Position: {x: 6311, y: 712}
+    Scene: {fileID: 11400000, guid: f9775186fac73b541a060bddd8b4a288, type: 2}
+    ReturnNode: 0
+  - GUID: 8908414b-ccf9-4fbc-93cb-a7639fd8e49f
+    Key: scene_1_180_1
+    Position: {x: 6311, y: 518}
+    Scene: {fileID: 11400000, guid: c857e047475dadb40a91eba199589116, type: 2}
+    ReturnNode: 0
+  - GUID: 587223b6-1a3c-4ca3-bb40-cd559d76406e
+    Key: scene_1_181
+    Position: {x: 6668, y: 481}
+    Scene: {fileID: 11400000, guid: 613f58bdff6cf3b438a224d860374bcb, type: 2}
+    ReturnNode: 0
+  - GUID: 43d3d05c-d149-44d3-85ec-20b3638c1017
+    Key: scene_1_181_2
+    Position: {x: 7023, y: 541}
+    Scene: {fileID: 11400000, guid: 817121759946b45408e903a45afb02d3, type: 2}
+    ReturnNode: 0
+  - GUID: ec281f10-70ea-4a62-8e31-30433630eab2
+    Key: scene_1_181_1
+    Position: {x: 7026, y: 444}
+    Scene: {fileID: 11400000, guid: 66180af6db97d7849a4545a305ed3b4b, type: 2}
+    ReturnNode: 0
+  - GUID: 053f0fb5-7a4c-45b2-a3cd-d2df1f4384e7
+    Key: scene_1_182
+    Position: {x: 7371, y: 444}
+    Scene: {fileID: 11400000, guid: be8e01982c821cd4e8b54ffd493b6fb4, type: 2}
+    ReturnNode: 0
+  - GUID: ebd565be-89c7-478b-89f1-57c52c23b8d3
+    Key: scene_1_183
+    Position: {x: 7371, y: 554}
+    Scene: {fileID: 11400000, guid: c2f79a78d96a20447bd3b526420bccd3, type: 2}
+    ReturnNode: 0
+  - GUID: e7925224-1e4e-4f9a-bae4-87646e4b945d
+    Key: scene_1_184
+    Position: {x: 7741, y: 629}
+    Scene: {fileID: 11400000, guid: f8f6145da8f51934aa0418fb14aec5a3, type: 2}
+    ReturnNode: 0
+  - GUID: f175eacb-5100-4c20-a3a9-3d3568798ace
+    Key: scene_1_186
+    Position: {x: 8083, y: 444}
+    Scene: {fileID: 11400000, guid: 3484cca5021fcc949a47a295e044eb1e, type: 2}
+    ReturnNode: 0
+  - GUID: 355d9804-deb5-4426-8c38-d5053ec0499d
+    Key: scene_1_185
+    Position: {x: 7741, y: 726}
+    Scene: {fileID: 11400000, guid: fe1d62109609abd48b67139e55c51a4b, type: 2}
+    ReturnNode: 0
+  - GUID: 35dfafd6-9ba7-49c4-8abf-53f27d62154b
+    Key: scene_1_186_2
+    Position: {x: 8419, y: 506}
+    Scene: {fileID: 11400000, guid: b35d36f09e9e9e0409af791b27def140, type: 2}
+    ReturnNode: 0
+  - GUID: 7aaf6ab9-2d6d-4a87-a244-6e9147db6f82
+    Key: scene_1_186_1
+    Position: {x: 8419, y: 396}
+    Scene: {fileID: 11400000, guid: 7d2f5e0f8a8242d428d2e8bb4846167e, type: 2}
+    ReturnNode: 0
+  - GUID: a632f631-c3af-4c48-9a35-8ae0a0a438a6
+    Key: scene_1_187
+    Position: {x: 8774, y: 506}
+    Scene: {fileID: 11400000, guid: 7fece26733f2aad448a0fea54cade09a, type: 2}
+    ReturnNode: 0
+  - GUID: 1ba60902-1422-4208-af4f-e882cc058172
+    Key: scene_1_187_2
+    Position: {x: 9110, y: 603}
+    Scene: {fileID: 11400000, guid: 64095bfa46f8ac04d91371318ddc5eae, type: 2}
+    ReturnNode: 0
+  - GUID: 935bf21b-ffd6-4d26-9c5e-0add1805ce88
+    Key: scene_1_187_1
+    Position: {x: 9110, y: 506}
+    Scene: {fileID: 11400000, guid: 3e9b650e10b40934aaea097db5338836, type: 2}
+    ReturnNode: 0
+  - GUID: f0db5660-809e-421e-b3ba-73d74da6307b
+    Key: scene_1_191
+    Position: {x: 9439, y: 603}
+    Scene: {fileID: 11400000, guid: 3e670bee6912b324dab8dec240b5f95f, type: 2}
+    ReturnNode: 0
+  - GUID: 67a8ed8f-0ec0-4e8b-b36a-5148ba942545
+    Key: scene_1_188
+    Position: {x: 9439, y: 482}
+    Scene: {fileID: 11400000, guid: 3ee1aad0cb53377419ecd5ea4d0d604a, type: 2}
+    ReturnNode: 0
+  - GUID: 9f6ad7e5-d6d9-474e-ad26-c17969d7eb90
+    Key: scene_1_188_1
+    Position: {x: 9767, y: 409}
+    Scene: {fileID: 11400000, guid: ef8d59d7b4edac24697e741ffbb9a8fe, type: 2}
+    ReturnNode: 0
+  - GUID: a72a0c8c-78cb-4629-8f14-a31c6e53db60
+    Key: scene_1_188_2
+    Position: {x: 9767, y: 506}
+    Scene: {fileID: 11400000, guid: 2ab226d789b89104fba97d983e1513ee, type: 2}
+    ReturnNode: 0
+  - GUID: a712b1cf-1e25-46d4-a75e-6b558ccc4f76
+    Key: scene_1_189
+    Position: {x: 10084, y: 409}
+    Scene: {fileID: 11400000, guid: 76f1bca56a63c22468c4b643c248301d, type: 2}
+    ReturnNode: 0
+  - GUID: 4df3b48a-b591-4cc1-961f-8cb710bca27c
+    Key: scene_1_190
+    Position: {x: 10084, y: 506}
+    Scene: {fileID: 11400000, guid: be73e05684685bb4c9a086b32b919d23, type: 2}
+    ReturnNode: 0
+  - GUID: f7c726ec-a333-43b9-85bc-f6fd05522bea
+    Key: scene_6_199
+    Position: {x: 10397, y: 409}
+    Scene: {fileID: 11400000, guid: 36ae692289198fb4485d78a28f8ea229, type: 2}
+    ReturnNode: 0
+  - GUID: c9b73c7c-5f53-4111-9aa0-8435f4f4fe8e
+    Key: scene_9_198
+    Position: {x: 10397, y: 506}
+    Scene: {fileID: 11400000, guid: 759c02bf6595b7f44b9a1b5fa6f16ae2, type: 2}
+    ReturnNode: 0
+  - GUID: 77a6dda4-13c6-490f-a411-aa366101286b
+    Key: scene_1_193
+    Position: {x: 9767, y: 603}
+    Scene: {fileID: 11400000, guid: 511543c1780e886408e996fc23c872a5, type: 2}
+    ReturnNode: 0
+  - GUID: 6b929a11-9e9a-43f6-9185-14a1ef504283
+    Key: scene_1_192
+    Position: {x: 9767, y: 288}
+    Scene: {fileID: 11400000, guid: b51a7f81eeebf75408ae69fd8deed022, type: 2}
+    ReturnNode: 0
+  - GUID: d8e700a3-8b38-4437-abab-efc01ee8302f
+    Key: scene_1_200
+    Position: {x: 10081, y: 603}
+    Scene: {fileID: 11400000, guid: f83bb203c415ff34b9806e5cff3c1a83, type: 2}
+    ReturnNode: 0
+  - GUID: 5452b3fb-de0d-4b73-8331-aecf433782d4
+    Key: scene_8_197
+    Position: {x: 10229, y: 167}
+    Scene: {fileID: 11400000, guid: d98aca6fffddf0b4a9665bfeefa0f0d0, type: 2}
+    ReturnNode: 0
+  - GUID: fb922bac-2f78-4f1b-aa2f-3edabd9a12e5
+    Key: scene_8_201
+    Position: {x: 10987, y: 506}
+    Scene: {fileID: 11400000, guid: be7d3a8aa361de34eb0e60e66875da92, type: 2}
+    ReturnNode: 0
+  - GUID: 9c382647-b419-4277-91d7-6f1b04f208c7
+    Key: scene_8_202
+    Position: {x: 11302, y: 506}
+    Scene: {fileID: 11400000, guid: a36755c326979cb46acd1847e2fa55b6, type: 2}
+    ReturnNode: 0
+  CommentBlockData: []

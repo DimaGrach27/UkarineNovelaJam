@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime;
 using UnityEditor;
@@ -168,6 +169,7 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
         }
 
         public void LoadGraph(string fileName)
+        // public async void LoadGraph(string fileName)
         {
             m_narativeContainer = Resources.Load<NarrativeContainer>(fileName);
             if (m_narativeContainer == null)
@@ -177,6 +179,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             }
 
             ClearGraph();
+            // await GenerateSceneNodes();
+            // await ConnectSceneNodes();
             GenerateSceneNodes();
             ConnectSceneNodes();
             AddExposedProperties();
@@ -202,10 +206,11 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
         /// Create All serialized nodes and assign their guid and dialogue text to them
         /// </summary>
         private void GenerateSceneNodes()
+        // private Task GenerateSceneNodes()
         {
             foreach (var perNode in m_narativeContainer.DialogueNodeData)
             {
-                var tempNode = m_graphView.CreateNode(perNode.Key, Vector2.zero, perNode.Scene, perNode.ReturnNode);
+                var tempNode = m_graphView.CreateNode(perNode.Key, perNode.Position, perNode.Scene, perNode.ReturnNode);
                 tempNode.GUID = perNode.GUID;
                 
                 m_graphView.AddElement(tempNode);
@@ -213,8 +218,11 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                 // var nodePorts = m_narativeContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.GUID).ToList();
                 // nodePorts.ForEach(x => m_graphView.AddCachedChoicePort(tempNode, x.PortName));
             }
+            
+            // return Task.CompletedTask;
         }
 
+        // private Task ConnectSceneNodes()
         private void ConnectSceneNodes()
         {
             for (var i = 0; i < Nodes.Count; i++)
@@ -232,6 +240,8 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
                         m_graphView.DefaultNodeSize));
                 }
             }
+            
+            // return Task.CompletedTask;
         }
 
         private void LinkNodesTogether(Port outputSocket, Port inputSocket)
