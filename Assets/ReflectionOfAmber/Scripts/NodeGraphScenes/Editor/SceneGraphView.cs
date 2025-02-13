@@ -334,10 +334,12 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             var outputPortName = string.IsNullOrEmpty(overriddenPortName)
                 ? $"Option {outputPortCount + 1}"
                 : overriddenPortName;
-        
+
+            // generatedPort.contentContainer.style.alignItems = Align.FlexStart;
+            generatedPort.contentContainer.style.marginLeft = 112;
             generatedPort.contentContainer.Add(new Label(outputPortName));
             
-            var customContainer = new VisualElement();
+            // var customContainer = new VisualElement();
 
             NextScene[] nextScenes;
         
@@ -373,38 +375,38 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 
             nextScene.optionLabel = outputPortName;
         
-            var chooseText = new TextField("Choose: ");
-            chooseText.RegisterValueChangedCallback(evt =>
-            {
-                chooseText.value = evt.newValue;
-                nextScene.chooseText = evt.newValue;
-            });
-            chooseText.SetValueWithoutNotify(nextScene.chooseText);
-            customContainer.Add(chooseText);
-            
-            StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
-            statusDependedField.Build(generatedPort, nextScene.statusDependent.enable);
-            
-            CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
-            cameraDependedField.Build(generatedPort, nextScene.cameraDependent.enable);
-        
-            var exclusionToggle = new Toggle("Exclusion dependent: ");
-            exclusionToggle.RegisterValueChangedCallback(evt =>
-            {
-                exclusionToggle.value = evt.newValue;
-                nextScene.exclusionDependent.enable = evt.newValue;
-            });
-            exclusionToggle.SetValueWithoutNotify(nextScene.exclusionDependent.enable);
-            customContainer.Add(exclusionToggle);
-        
-            FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
-            findDependentField.Build(generatedPort, nextScene.findDependent.enable);
-        
-            SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
-            specialDependentField.Build(generatedPort, nextScene.specialDependent.enable);
-                
-            customContainer.Add(new Label("========"));
-            generatedPort.contentContainer.Add(customContainer);
+            // var chooseText = new TextField("Choose: ");
+            // chooseText.RegisterValueChangedCallback(evt =>
+            // {
+            //     chooseText.value = evt.newValue;
+            //     nextScene.chooseText = evt.newValue;
+            // });
+            // chooseText.SetValueWithoutNotify(nextScene.chooseText);
+            // customContainer.Add(chooseText);
+            //
+            // StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
+            // statusDependedField.Build(generatedPort, nextScene.statusDependent.enable);
+            //
+            // CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
+            // cameraDependedField.Build(generatedPort, nextScene.cameraDependent.enable);
+            //
+            // var exclusionToggle = new Toggle("Exclusion dependent: ");
+            // exclusionToggle.RegisterValueChangedCallback(evt =>
+            // {
+            //     exclusionToggle.value = evt.newValue;
+            //     nextScene.exclusionDependent.enable = evt.newValue;
+            // });
+            // exclusionToggle.SetValueWithoutNotify(nextScene.exclusionDependent.enable);
+            // customContainer.Add(exclusionToggle);
+            //
+            // FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
+            // findDependentField.Build(generatedPort, nextScene.findDependent.enable);
+            //
+            // SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
+            // specialDependentField.Build(generatedPort, nextScene.specialDependent.enable);
+            //     
+            // customContainer.Add(new Label("========"));
+            // generatedPort.contentContainer.Add(customContainer);
             
             if(nodeCache.Scene != null)
             {

@@ -29,10 +29,10 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
             var tree = new List<SearchTreeEntry>
             {
                 new SearchTreeGroupEntry(new GUIContent("Create Node"), 0),
-                new SearchTreeGroupEntry(new GUIContent("Scene"), 1),
+                // new SearchTreeGroupEntry(new GUIContent("Scene"), 1),
                 new SearchTreeEntry(new GUIContent("Scene Node", _indentationIcon))
                 {
-                    level = 2, userData = new SceneNode()
+                    level = 1, userData = new SceneNode()
                 },
                 new SearchTreeEntry(new GUIContent("Comment Block",_indentationIcon))
                 {
