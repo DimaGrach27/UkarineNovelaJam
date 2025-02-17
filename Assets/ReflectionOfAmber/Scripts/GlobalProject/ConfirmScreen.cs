@@ -1,13 +1,15 @@
 ﻿using System;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.Input;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GlobalProject
 {
-    public class ConfirmScreen : MonoBehaviour
+    public class ConfirmScreen : MonoBehaviour, IInputListener
     {
         [SerializeField] private TextMeshProUGUI textDescription;
         
@@ -18,6 +20,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
         private Action<bool> _currentAction;
 
         private Tween _tween;
+        private InputService m_inputService;
 
         private void Awake()
         {
@@ -25,6 +28,12 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             notConfirm.onClick.AddListener(NotConfirm);
             
             _canvasGroup = GetComponent<CanvasGroup>();
+        }
+
+        [Inject]
+        public void Construct(InputService inputService)
+        {
+            m_inputService = inputService;
         }
 
         public void Check(Action<bool> onSelectAction, TranslatorKeys translatorKey)
@@ -38,6 +47,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             textDescription.text = TranslatorParser.GetText(translatorKey);
             
             _currentAction = onSelectAction;
+            
+            m_inputService.ForceRedirectInput(this);
         }
 
         private void Confirm()
@@ -61,6 +72,16 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             _tween = _canvasGroup.DOFade(0.0f, 0.5f);
             
             _currentAction = null;
+            
+            m_inputService.RemoveForceRedirected(this);
+        }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if (inputAction == InputAction.PAUSE)
+            {
+                NotConfirm();
+            }
         }
     }
 }

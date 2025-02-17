@@ -8,7 +8,7 @@ namespace ReflectionOfAmber.Scripts.Input
     {
         private List<IInputListener> m_listeners = new();
 
-        private IInputListener m_forceRedirected;
+        private Stack<IInputListener> m_forceRedirected = new();
 
         private bool m_isInputBlocked;
         
@@ -29,18 +29,18 @@ namespace ReflectionOfAmber.Scripts.Input
 
         public void ForceRedirectInput(IInputListener inputListener)
         {
-            m_forceRedirected = inputListener;
+            m_forceRedirected.Push(inputListener);
         }
 
         public void RemoveForceRedirected(IInputListener inputListener)
         {
-            if (m_forceRedirected != inputListener)
+            if (m_forceRedirected.Peek() != inputListener)
             {
                 Debug.LogError($"Wrong redirected listener: {inputListener.GetType()}, current is {m_forceRedirected.GetType()}");
                 return;
             }
 
-            m_forceRedirected = null;
+            m_forceRedirected.Pop();
         }
 
         private void SetAction(InputAction inputAction)
@@ -50,9 +50,9 @@ namespace ReflectionOfAmber.Scripts.Input
                 return;
             }
             
-            if (m_forceRedirected != null)
+            if (m_forceRedirected.Count > 0)
             {
-                m_forceRedirected.OnInputAction(inputAction);
+                m_forceRedirected.Peek().OnInputAction(inputAction);
                 return;
             }
 

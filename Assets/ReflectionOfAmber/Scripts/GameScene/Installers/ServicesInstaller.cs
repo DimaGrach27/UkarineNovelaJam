@@ -18,7 +18,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
 {
     public class ServicesInstaller : MonoInstaller<ServicesInstaller>
     {
-        [SerializeField] private DebugHelperService debugHelperService;
+        // [SerializeField] private DebugHelperService debugHelperService;
         [SerializeField] private GamePlayCanvas gamePlayCanvas;
         [SerializeField] private UiClickHandler uiClickHandler;
         [SerializeField] private GlobalVolumeService globalVolumeService;
@@ -29,7 +29,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         public override void InstallBindings()
         {
             GamePlayCanvasInstallers();
-            DebugInstallers();
+            // DebugInstallers();
             
             ServicesInstallers();
         }
@@ -41,15 +41,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
             Container.Bind<UiClickHandler>().FromInstance(uiClickHandler).AsSingle().NonLazy();
         }
         
-        private void DebugInstallers()
-        {
-            Container.Bind<DebugHelperService>().FromInstance(debugHelperService).AsSingle().NonLazy();
-        }
+        // private void DebugInstallers()
+        // {
+        //     Container.Bind<DebugHelperService>().FromInstance(debugHelperService).AsSingle().NonLazy();
+        // }
         
         private void ServicesInstallers()
         {
-            Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
-
             Container.Bind<GlobalVolumeService>().FromInstance(globalVolumeService).AsSingle().NonLazy();
             Container.Bind<OpenEyeAnimation>().FromInstance(openEyeAnimation).AsSingle().NonLazy();
             Container.Bind<CharacterService>().AsSingle().NonLazy();
