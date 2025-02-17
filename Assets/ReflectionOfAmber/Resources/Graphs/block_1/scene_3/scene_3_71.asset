@@ -34,22 +34,13 @@ MonoBehaviour:
     screenPosition: 0
     characterImage: 4
     nameCharacter: 4
-    textShow: "\u0413\u0430?"
-    actionsTypeEnd: 
-  - actionsType: 
-    musicTypeOnStart: 0
-    statusSetter:
-      enable: 0
-      statusesValues: []
-    screenPosition: 0
-    characterImage: 4
-    nameCharacter: 4
     textShow: "\u0413\u043E\u0432\u043E\u0440\u0438\u0448, \u043D\u0456\u0431\u0438
       \u0442\u0438 \u044F\u043A\u0430\u0441\u044C \u0445\u0443\u0434\u043E\u0436\u043D\u0438\u0446\u044F,
       \u0430 \u043D\u0435 \u043C\u0443\u0441\u043E\u0440\u043A\u0430. \u0414\u0438\u0432\u043D\u043E,
       \u0449\u043E \u0442\u0430\u043A\u0430 \u043B\u044E\u0434\u0438\u043D\u0430
       \u043C\u0430\u0454 \u043F\u0440\u0438\u0441\u0442\u0440\u0430\u0441\u0442\u0456
       \u0434\u043E \u0432\u0431\u0438\u0432\u0441\u0442\u0432\u0430."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -64,9 +55,11 @@ MonoBehaviour:
       \u0441\u0443\u0441\u0442\u043D\u0456\u0442\u044C \u0440\u0435\u0447\u0435\u0439
       \u0442\u0438 \u043F\u043E\u0431\u0430\u0447\u0438\u043B\u0430 \u0431 \u0443
       \u043D\u0438\u0445?"
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 534bb82654491674da159b4e47c450b1, type: 2}
+  - optionLabel: Option 1
+    scene: {fileID: 11400000, guid: 89f7b003833cb83468d787cfb998147a, type: 2}
     chooseText: "\u0422\u0438 \u043A\u043E\u0437\u043B\u044F\u0440\u0430 \u0442\u0430
       \u0437\u043B\u043E\u0434\u0456\u0439. \u0422\u0443\u0442 \u0434\u043E\u0432\u0433\u043E
       \u0433\u0430\u0434\u0430\u0442\u0438 \u043D\u0435 \u0442\u0440\u0435\u0431\u0430."
@@ -87,7 +80,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: 8b7bb9d0fe6c01c4984bf0337fe1440f, type: 2}
+  - optionLabel: Option 2
+    scene: {fileID: 11400000, guid: b5e0a99573ef11e4a81dd0b671b8e392, type: 2}
     chooseText: "\u0422\u0438 \u043D\u0430\u0434\u043B\u0430\u043C\u0430\u043D\u0430
       \u043B\u044E\u0434\u0438\u043D\u0430, \u043F\u0440\u043E\u0442\u0435 \u0433\u043B\u0438\u0431\u043E\u043A\u043E
       \u0432 \u0441\u0435\u0440\u0446\u0456 \u043C\u0430\u0454\u0448 \u043F\u043E\u0440\u0430\u043D\u0435\u043D\u0435
