@@ -13,12 +13,13 @@ using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.Input;
 using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 {
-    public class ScreenPartsService : IInitializable
+    public class ScreenPartsService : IInitializable, IInputListener
     {
         [Inject]
         public ScreenPartsService(BgService bgService,
@@ -34,6 +35,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             FadeService fadeService,
             ScreenPartNextDialogButton screenPartNextDialogButton,
             TranslatorParser translatorParser,
+            InputService inputService,
             
             DebugHelperService debugHelperService
         )
@@ -60,6 +62,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             screenPartNextDialogButton.OnClickButton += ShowNextPart;
             screenPartsService.OnPlayNextPart += ForceShowNextPart;
             screenPartsService.OnPlayNextScene += ShowNextScene;
+            
+            inputService.AddListener(this);
         }
         
         private int _currentPart;
@@ -515,6 +519,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private void OnEndTyping()
         {
             _blockClick = false;
+        }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if (inputAction == InputAction.SPACE)
+            {
+                ShowNextPart();
+            }
         }
     }
 }

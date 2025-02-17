@@ -1,23 +1,29 @@
 ﻿using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.Input;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 {
-    public class ChapterNotesService
+    public class ChapterNotesService : IInputListener
     {
         [Inject]
-        public ChapterNotesService(ScreenPartsService screenPartsService, 
-            ChapterNotesView chapterNotesView)
+        public ChapterNotesService(
+            ScreenPartsService screenPartsService, 
+            ChapterNotesView chapterNotesView,
+            InputService inputService
+            )
         {
             _chapterNotesView = chapterNotesView;
+            m_inputService = inputService;
 
             screenPartsService.OnOpenPart += OnChangePartHandler;
             GlobalEvent.OnCallType += OnOpenNotesHandler;
         }
 
         private readonly ChapterNotesView _chapterNotesView;
+        private readonly InputService m_inputService;
 
         private void OnOpenNotesHandler(CallKeyType callKeyType)
         {
@@ -25,6 +31,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             
             ChapterNotesFile chapterNotesFile = SaveService.ChapterNotesFile;
             _chapterNotesView.Open(chapterNotesFile.chapters);
+            _chapterNotesView.OnCloseButtonClick += CloseNotesHandler;
+            m_inputService.ForceRedirectInput(this);
         }
         
         private void OnChangePartHandler(int part)
@@ -55,6 +63,21 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             
             chapterNotesFile.chapters.Add(noteChapterPart);
             SaveService.SaveChapterNotesJson();
+        }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if (inputAction == InputAction.PAUSE)
+            {
+                CloseNotesHandler();
+                m_inputService.RemoveForceRedirected(this);
+            }
+        }
+
+        private void CloseNotesHandler()
+        {
+            _chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
+            _chapterNotesView.Close();
         }
     }
 }

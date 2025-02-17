@@ -16,7 +16,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         
         public void Open()
         {
-            _noteWindowScreenPopup.Close();
+            _noteWindowScreenPopup.Hide();
         }
 
         public void Close()

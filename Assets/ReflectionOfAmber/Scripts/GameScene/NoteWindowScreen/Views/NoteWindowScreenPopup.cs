@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 {
-    [RequireComponent(typeof(CanvasGroup))]
-    public class NoteWindowScreenPopup : MonoBehaviour
+    public class NoteWindowScreenPopup : UIScreenBase
     {
         public event Action<NoteWindowScreensEnum> OnSelectWindowClick;
         
@@ -18,18 +16,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         [SerializeField] private NoteWindowScreenBgView noteWindowScreenBgView;
         
         private Dictionary<NoteWindowScreensEnum, NoteWindowScreenButton> _buttonsNoteMap;
-        
-        private CanvasGroup CanvasGroup
-        {
-            get
-            {
-                if (_canvasGroup == null)
-                    _canvasGroup = GetComponent<CanvasGroup>();
-                return _canvasGroup;
-            }
-        }
-        private CanvasGroup _canvasGroup;
-        private Tween _fade;
+
+        public event Action OnClose;
         
         private void Awake()
         {
@@ -44,10 +32,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             }
         }
 
-        public void Open()
+        protected override void PreOpen()
         {
-            FadeInWindow();
-            GlobalEvent.HideCanvas();
+            gameObject.SetActive(true);
+        }
+
+        public void OpenWithClose()
+        {
+            Open();
             if (_buttonsNoteMap == null)
             {
                 _buttonsNoteMap = new();
@@ -65,10 +57,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
         }
-
+        
         public void OpenWithoutCanClose()
         {
-            FadeInWindow();
+            Open();
             GlobalEvent.HideCanvas();
 
             foreach (var button in buttons)
@@ -79,10 +71,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             OnSelectWindowHandler(NoteWindowScreensEnum.INVESTIGATION_SCREEN);
         }
         
-        public void Close()
+        public void Hide()
         {
-            GlobalEvent.ShowCanvas();
-            FadeOutWindow();
+            OnClose?.Invoke();
         }
         
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)
@@ -94,31 +85,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             _buttonsNoteMap[noteWindowScreensEnum].transform.SetAsLastSibling();
             
             OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
-        }
-        
-        private void FadeInWindow()
-        {
-            if (_fade != null) DOTween.Kill(_fade);
-            gameObject.SetActive(true);
-            CanvasGroup.interactable = true;
-            CanvasGroup.blocksRaycasts = true;
-            CanvasGroup.alpha = 0.0f;
-            float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
-            _fade = CanvasGroup.DOFade(1.0f, duration);
-        }
-        
-        private async void FadeOutWindow()
-        {
-            if (_fade != null) DOTween.Kill(_fade);
-
-            CanvasGroup.interactable = false;
-            CanvasGroup.blocksRaycasts = false;
-            CanvasGroup.alpha = 1.0f;
-            float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
-            _fade = CanvasGroup.DOFade(0.0f, duration);
-
-            await Task.Delay((int)(duration * 1000));
-            gameObject.SetActive(false);
         }
     }
 }

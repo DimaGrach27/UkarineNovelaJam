@@ -1,26 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 {
-    [RequireComponent(typeof(CanvasGroup))]
-    public class ChapterNotesView : MonoBehaviour
+    public class ChapterNotesView : UIScreenBase
     {
         [SerializeField] private ChapterNotesPartView chapterPartPrefab;
         [SerializeField] private ScrollRect container;
         [SerializeField] private Button closeButton;
 
         private int _countParts;
-        
-        private CanvasGroup CanvasGroup => _canvasGroup ??= GetComponent<CanvasGroup>();
-        private CanvasGroup _canvasGroup;
 
-        private Tween _fade;
+        public event Action OnCloseButtonClick;
 
         private void Awake()
         {
@@ -29,8 +26,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 
         public void Open(List<NoteChapterPart> chapters)
         {
-            FadeInWindow();
-            GlobalEvent.HideCanvas();
+            Open();
             
             while (_countParts < chapters.Count)
             {
@@ -53,28 +49,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 
         private void OnClickButtonCloseHandler()
         {
-            GlobalEvent.ShowCanvas();
-            FadeOutWindow();
-        }
-        
-        private void FadeInWindow()
-        {
-            if (_fade != null) DOTween.Kill(_fade);
-            
-            CanvasGroup.interactable = true;
-            CanvasGroup.blocksRaycasts = true;
-            float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
-            _fade = CanvasGroup.DOFade(1.0f, duration);
-        }
-        
-        private void FadeOutWindow()
-        {
-            if (_fade != null) DOTween.Kill(_fade);
-            
-            CanvasGroup.interactable = false;
-            CanvasGroup.blocksRaycasts = false;
-            float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
-            _fade = CanvasGroup.DOFade(0.0f, duration);
+            OnCloseButtonClick?.Invoke();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
     public class ChooseButtonUiView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+
+        [SerializeField] private Color m_highlightColor = new Color(0.74f, 0.37f, 0.05f);
         
         public event Action<NextScene> OnChoose; 
         
@@ -56,11 +58,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             {
                 ColorBlock colorBlock = Button.colors;
                 Color colorButton;
-                Color amber = new Color(0.74f, 0.37f, 0.05f);
                 
                 for (float i = 0; i <= 1.0f; i += Time.deltaTime * 1.5f)
                 {
-                    colorButton = Color.Lerp(Color.black, amber, i);
+                    colorButton = Color.Lerp(Color.black, m_highlightColor, i);
                     colorBlock.normalColor = colorButton;
                     Button.colors = colorBlock;
                     yield return null;
@@ -68,7 +69,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
                 
                 for (float i = 1.0f; i >= 0.0f; i -= Time.deltaTime * 1.5f)
                 {
-                    colorButton = Color.Lerp(Color.black, amber, i);
+                    colorButton = Color.Lerp(Color.black, m_highlightColor, i);
                     colorBlock.normalColor = colorButton;
                     Button.colors = colorBlock;
                     yield return null;

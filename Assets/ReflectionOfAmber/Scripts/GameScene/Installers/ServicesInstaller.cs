@@ -10,6 +10,7 @@ using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.Input;
 using UnityEngine;
 using Zenject;
 
@@ -47,6 +48,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         
         private void ServicesInstallers()
         {
+            Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
+
             Container.Bind<GlobalVolumeService>().FromInstance(globalVolumeService).AsSingle().NonLazy();
             Container.Bind<OpenEyeAnimation>().FromInstance(openEyeAnimation).AsSingle().NonLazy();
             Container.Bind<CharacterService>().AsSingle().NonLazy();
