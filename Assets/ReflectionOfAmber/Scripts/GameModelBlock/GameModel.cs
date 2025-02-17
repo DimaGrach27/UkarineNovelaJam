@@ -19,14 +19,12 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 
         public static void Init()
         {
-            ScreenSceneScriptableObject[] list =
-                Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
+            ScreenSceneScriptableObject[] list = Resources.LoadAll<ScreenSceneScriptableObject>("Graphs");
+            // ScreenSceneScriptableObject[] list = Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
 
-            CharacterNameScriptableObject[] listNames =
-                Resources.LoadAll<CharacterNameScriptableObject>("Configs/CharacterNames");
+            CharacterNameScriptableObject[] listNames = Resources.LoadAll<CharacterNameScriptableObject>("Configs/CharacterNames");
             
-            BgScriptableObject[] bgScriptableObjects =
-                Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
+            BgScriptableObject[] bgScriptableObjects = Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
             
             foreach (var screenScene in list)
             {

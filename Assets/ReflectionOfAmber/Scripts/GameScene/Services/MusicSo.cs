@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Services
 {
@@ -11,5 +12,19 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
     {
         public MusicType type;
         public AudioClip clip;
+        public OverridenSettings overridenSettings;
+    }
+    
+    public struct MusicSetting
+    {
+        public AudioClip clip;
+        public OverridenSettings overridenSettings;
+    }
+    
+    [Serializable]
+    public struct OverridenSettings
+    {
+        public bool enable;
+        public float volume;
     }
 }

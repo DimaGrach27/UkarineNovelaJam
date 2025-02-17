@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: scene_0_0
   m_EditorClassIdentifier: 
   sceneKey: scene_0_0
-  isActiveCamera: 0
+  isActiveCamera: 1
   changeBackGround:
     enable: 0
     bgEnum: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
     endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - optionLabel: 
+  - optionLabel: Option 1
     scene: {fileID: 11400000, guid: 7725420f824a31643801449b4d0c6376, type: 2}
     chooseText: 
     statusDependent:
@@ -236,7 +236,7 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  - optionLabel: 
+  - optionLabel: Option 2
     scene: {fileID: 11400000, guid: f628f27bf99ef3e4da7c8474ea2b56c3, type: 2}
     chooseText: 
     statusDependent:
@@ -255,7 +255,7 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  - optionLabel: 
+  - optionLabel: Option 3
     scene: {fileID: 11400000, guid: eb3bb7dba574b634f97825e72cfb0b34, type: 2}
     chooseText: 
     statusDependent:

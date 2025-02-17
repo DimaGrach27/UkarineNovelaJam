@@ -12,12 +12,15 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
     {
         private const string Id = "1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc";
         private const string ExportFormat = "export?format=tsv";
-        private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}";
-        private static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid=208247162";
+        private const string GidScenario = "327397956"; // 0 - is old scenario, 327397956 - new scenario (parsed)
+        private const string GidOtherText = "208247162";
+        // private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}";
+        private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid={GidScenario}";
+        private static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid={GidOtherText}";
         
         private readonly CoroutineHelper _coroutineHelper;
         
-        private static readonly Dictionary<string, TranslatorData> TranslatorDatas = new();
+        private static readonly Dictionary<string, TranslatorData> TranslatorData = new();
         
         public event Action OnReady;
 
@@ -79,7 +82,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
                 
                 string text = lineArray[0];
 
-                TranslatorDatas.Add(text, translatorData);
+                TranslatorData.Add(text, translatorData);
             }
 
             InitReady();
@@ -102,8 +105,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         {
             string text = null;
 
-            if (TranslatorDatas.ContainsKey(key))
-                text = TranslatorDatas[key].GetText(GameModel.CurrentLanguage.ToString());
+            if (TranslatorData.ContainsKey(key))
+                text = TranslatorData[key].GetText(GameModel.CurrentLanguage.ToString());
 
             return text;
         }
@@ -113,8 +116,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             string text = null;
             string keyStr = key.ToString();
             
-            if (TranslatorDatas.ContainsKey(keyStr))
-                text = TranslatorDatas[keyStr].GetText(GameModel.CurrentLanguage.ToString());
+            if (TranslatorData.ContainsKey(keyStr))
+                text = TranslatorData[keyStr].GetText(GameModel.CurrentLanguage.ToString());
 
             return text;
         }
