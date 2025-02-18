@@ -32,5 +32,7 @@
         CHOOSE_WAS_PICK = 27,
         meetWatchDog = 28,
         knowNothingAboutIllona = 29,
+        wasVisitTower = 30,
+        wasVisitIlona = 31,
     }
 }

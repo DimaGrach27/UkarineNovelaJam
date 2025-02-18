@@ -193,8 +193,10 @@ MonoBehaviour:
   - actionsType: 
     musicTypeOnStart: 0
     statusSetter:
-      enable: 0
-      statusesValues: []
+      enable: 1
+      statusesValues:
+      - value: 1
+        status: 30
     screenPosition: 0
     characterImage: 0
     nameCharacter: 0

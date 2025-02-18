@@ -27,6 +27,7 @@ MonoBehaviour:
   actionsType: 
   screenParts:
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -49,8 +50,10 @@ MonoBehaviour:
       \u0447\u043E\u043B\u043E\u0432\u0456\u043A\u0443, \u0442\u043E\u0436 \u043D\u0435
       \u043C\u043E\u0433\u043B\u0430 \u0434\u043E\u0437\u0432\u043E\u043B\u0438\u0442\u0438
       \u0441\u043E\u0431\u0456 \u0437\u0456\u0440\u0432\u0430\u0442\u0438\u0441\u044F."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -69,8 +72,10 @@ MonoBehaviour:
       \u0434\u043E \u0441\u0432\u0456\u0442\u0430\u043D\u043A\u0443. \u0427\u0443\u0432,
       \u041E\u0440\u0435\u0441\u0442? \u042F \u0440\u043E\u0437\u0440\u0430\u0445\u043E\u0432\u0443\u044E
       \u043D\u0430 \u0442\u0435\u0431\u0435."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
+    musicTypeOnStart: 0
     statusSetter:
       enable: 0
       statusesValues: []
@@ -87,15 +92,18 @@ MonoBehaviour:
       \u0432\u0456\u0434\u0441\u0442\u0430\u043D\u0456, \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0443\u0439
       \u0443 \u0431\u0443\u0434\u044C-\u044F\u043A\u0438\u0439 \u0431\u0437\u0437\u0442--
       \u0411\u0443\u0432\u0430\u0439!\xBB"
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: b0c47b3ee611e984b989c53d3d7b0d60, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 6592b0bdb4f4efc4d86d17b4f157418c, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

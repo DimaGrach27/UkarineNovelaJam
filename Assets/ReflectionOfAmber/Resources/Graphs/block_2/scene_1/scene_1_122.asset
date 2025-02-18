@@ -22,6 +22,8 @@ MonoBehaviour:
     statusesValues:
     - value: 1
       status: 24
+    - value: 1
+      status: 31
   countSetter:
     enable: 0
     count: 1

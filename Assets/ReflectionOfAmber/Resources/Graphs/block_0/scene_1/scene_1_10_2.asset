@@ -41,6 +41,7 @@ MonoBehaviour:
       **** *****! \u0417\u0430\u0441\u0443\u043D\u044C \u0441\u043E\u0431\u0456 \u0441\u0432\u0456\u0439
       \u0442\u0435\u043B\u0435\u0444\u043E\u043D \u0432 ******** **** \u0456 *****
       \u0441\u0435\u0431\u0435 ******!!!"
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -62,6 +63,7 @@ MonoBehaviour:
       \u043C\u043E\u0436\u043B\u0438\u0432\u0456 \u043B\u0430\u0439\u043A\u0438.
       \u0429\u043E \u0436\u2026 \u0412\u0430\u0441 \u0437\u0440\u043E\u0437\u0443\u043C\u0456\u0432.
       \u0431\u0437\u0437\u0442-- \u041A\u0456\u043D\u0435\u0446\u044C \u0437\u0432\u2019\u044F\u0437\u043A\u0443\xBB."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -73,9 +75,11 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u041A\u043E\u043D\u0447\u0435\u043D\u0438\u0439 ********, \u0430
       \u043D\u0435 \u043D\u0430\u043F\u0430\u0440\u043D\u0438\u043A\u2026 "
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: b0c47b3ee611e984b989c53d3d7b0d60, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 6592b0bdb4f4efc4d86d17b4f157418c, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
