@@ -27,13 +27,15 @@ MonoBehaviour:
   actionsType: 
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: 88c0ad17a6a97e6498c220e7d202e765, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 88febb0466aa241448cd4f4f427ae015, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -44,13 +46,15 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  - scene: {fileID: 11400000, guid: ffe76bb35b30c6049affd7b2b9f425d8, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: d032a90850ce56940b275cbf8fc6eb53, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

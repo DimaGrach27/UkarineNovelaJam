@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Info SO
   m_EditorClassIdentifier: 
   nextScene:
-    scene: {fileID: 11400000, guid: 7d07f14474715604b9332070d545114e, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 95f5b181306c70d4090aac0a523b752d, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

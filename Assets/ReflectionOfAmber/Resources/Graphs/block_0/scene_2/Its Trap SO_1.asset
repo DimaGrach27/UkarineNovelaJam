@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Its Trap SO_1
   m_EditorClassIdentifier: 
   nextScene:
-    scene: {fileID: 11400000, guid: 79b15689f5ff12d4cbcb2c36644220e1, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: c8f09917c51bd4d439f58c987c49a16e, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

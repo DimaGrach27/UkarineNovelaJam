@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DubleOrSO_3_155_1_1
   m_EditorClassIdentifier: 
   nextScene:
+    optionLabel: 
     scene: {fileID: 0}
     chooseText: 
     statusDependent:
@@ -20,6 +21,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -38,13 +40,15 @@ MonoBehaviour:
     - value: 1
       status: 1
   blockTrue:
-    scene: {fileID: 11400000, guid: 57d85e1012f0b8042880289d85a31043, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 680624d0602c1c5468d665381176c70b, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -56,13 +60,15 @@ MonoBehaviour:
       enable: 0
       special: []
   blockFalse:
-    scene: {fileID: 11400000, guid: 58e3b099d79e51a41b47039d7521f14d, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: afc783de5cb85ac4586c43d1a7128e05, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

@@ -27,13 +27,15 @@ MonoBehaviour:
   actionsType: 
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: 08ca643d3b7f86b429bb6a47df6b2c8a, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 5881c2e92f43f094d9e9aaddac64991f, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

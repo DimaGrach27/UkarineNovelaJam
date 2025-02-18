@@ -36,9 +36,11 @@ MonoBehaviour:
     nameCharacter: 5
     textShow: "\u0425\u0435\u0445\u2026 \u0412\u043F\u0456\u0437\u043D\u0430\u044E
       \u0432 \u0446\u0438\u0445 \u0441\u043B\u043E\u0432\u0430\u0445 \u0441\u0435\u0431\u0435."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 5fad3183036d25046bfbd35ec4caa486, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 93320ba030ea71c4ea769cf4bfa88d2e, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

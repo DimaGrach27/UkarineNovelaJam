@@ -27,7 +27,8 @@ MonoBehaviour:
   actionsType: 
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: 6d51f1a26b6fdd540af2284281d8124e, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 21ea57b9aa684d44995726242dc3c422, type: 2}
     chooseText: "\u0412\u0445\u043E\u043F\u0438\u0442\u0438\u0441\u044F \u0437\u0430
       \u043A\u0430\u043C\u0456\u043D\u044C."
     statusDependent:
@@ -47,7 +48,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: 89660b692df3b874e96904e5e71cfe98, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 100f49f676f3e394b8b7aa0ad89fddb5, type: 2}
     chooseText: "\u0412\u0445\u043E\u043F\u0438\u0442\u0438\u0441\u044F \u0437\u0430
       \u0441\u0443\u0445\u0443 \u0440\u043E\u0441\u043B\u0438\u043D\u0443, \u044F\u043A\u0430
       \u0441\u0442\u0438\u0440\u0447\u0438\u0442\u044C \u0456\u0437 \u0437\u0435\u043C\u043B\u0456."

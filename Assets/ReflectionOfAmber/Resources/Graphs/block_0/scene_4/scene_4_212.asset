@@ -27,7 +27,8 @@ MonoBehaviour:
   actionsType: 0200000002000000
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: 4e905ca661aa1c3459f89ef942b02afb, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 9edef24eb3b2e0e42ae480a74963ef3f, type: 2}
     chooseText: "\u0422\u0443\u0442 \u0440\u0456\u043B\u0456 \u0443\u0440\u043E\u043D
       \u043D\u0430 2 \u0445\u043F"
     statusDependent:

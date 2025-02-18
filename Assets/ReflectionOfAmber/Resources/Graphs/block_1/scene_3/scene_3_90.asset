@@ -45,6 +45,7 @@ MonoBehaviour:
       \u043C\u0456\u0441\u0446\u044F \u0434\u043B\u044F \u0443\u0434\u0430\u0440\u0456\u0432
       \u2013 \u043D\u0430\u0439\u0432\u0440\u0430\u0437\u043B\u0438\u0432\u0456\u0448\u0456
       \u0442\u0430 \u043D\u0430\u0439\u0431\u043E\u043B\u044E\u0447\u0456\u0448\u0456."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -58,6 +59,7 @@ MonoBehaviour:
       \u041D\u0430\u0441\u0438\u043B\u043B\u044F \u2014 \u0446\u0435 \u043F\u0438\u0442\u0430\u043D\u043D\u044F,
       \u0430 \u043C\u043E\u044F \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u044C
       \xAB\u0442\u0430\u043A\xBB."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -79,6 +81,7 @@ MonoBehaviour:
       \u0425\u0430\u043E\u0442\u0438\u0447\u043D\u043E \u0432\u0456\u0434\u043C\u0430\u0445\u0443\u044E\u0447\u0438\u0441\u044C
       \u0440\u0443\u043A\u0430\u043C\u0438, \u0432\u0456\u043D \u0437\u0430\u0440\u0438\u0447\u0430\u0432
       \u0456 \u0441\u0443\u043D\u0443\u0432\u0441\u044F \u043D\u0430 \u043C\u0435\u043D\u0435."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -100,6 +103,7 @@ MonoBehaviour:
       \u0441\u0442\u0456\u043D\u0443 \u043F\u0456\u0434\u0432\u0430\u043B\u0443.
       \u0422\u0456\u043A\u0430\u0442\u0438 \u0432\u0436\u0435 \u0431\u0443\u043B\u043E
       \u043D\u0456\u043A\u0443\u0434\u0438."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 020000001a000000
     musicTypeOnStart: 0
@@ -118,6 +122,7 @@ MonoBehaviour:
       \u0437\u0430\u043B\u0438\u0448\u0430\u043B\u043E\u0441\u044F \u0434\u0435\u0434\u0430\u043B\u0456
       \u043C\u0435\u043D\u0448\u0435. \u042F \u0440\u0438\u0437\u0438\u043A\u0443\u0432\u0430\u043B\u0430
       \u0437\u0430\u043A\u0456\u043D\u0447\u0438\u0442\u0438 \u044F\u043A \u041A\u043E\u0440\u043D\u0456\u0439."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -134,6 +139,7 @@ MonoBehaviour:
       \u0441\u043F\u043E\u0434\u0456\u0432\u0430\u044E\u0447\u0438\u0441\u044C \u043D\u0430\u0442\u0440\u0430\u043F\u0438\u0442\u0438
       \u0445\u043E\u0447 \u043D\u0430 \u044F\u043A\u0438\u0439\u0441\u044C \u0448\u0430\u043D\u0441
       \u043F\u043E\u0440\u044F\u0442\u0443\u043D\u043A\u0443. "
+    endOfText: 1
     actionsTypeEnd: 12000000
   - actionsType: 
     musicTypeOnStart: 0
@@ -150,6 +156,7 @@ MonoBehaviour:
       \u0431\u0443\u043B\u0430 \u043F\u0440\u0438\u0432\u2019\u044F\u0437\u0430\u043D\u0430
       \u0456 \u044F\u043A\u0438\u0439 \u0432 \u0445\u043E\u0434\u0456 \u0431\u0456\u0439\u043A\u0438
       \u0432\u0456\u0434\u043B\u0435\u0442\u0456\u0432 \u0434\u043E \u0441\u0442\u0456\u043D\u0438. "
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 01000000
     musicTypeOnStart: 13
@@ -166,6 +173,7 @@ MonoBehaviour:
       \u0425\u043B\u0438\u043F\u043A\u0438\u0439 \u0434\u0435\u0440\u0435\u0432'\u044F\u043D\u0438\u0439
       \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u0440\u043E\u0437\u043B\u0435\u0442\u0456\u0432\u0441\u044F
       \u043D\u0430 \u0442\u0440\u0456\u0441\u043A\u0438."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -179,6 +187,7 @@ MonoBehaviour:
       \u0433\u0443\u0447\u043D\u043E \u0441\u0442\u0443\u043A\u043D\u0443\u043B\u043E\u0441\u044F
       \u043E\u0431 \u043F\u0456\u0434\u043B\u043E\u0433\u0443. \u041E\u043B\u0435\u043A\u0441\u0456\u0439
       \u0431\u0443\u0432 \u0431\u0435\u0437 \u0441\u0432\u0456\u0434\u043E\u043C\u043E\u0441\u0442\u0456."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -189,9 +198,11 @@ MonoBehaviour:
     characterImage: 0
     nameCharacter: 0
     textShow: "\u041C\u0430\u0442\u0447-\u0440\u0435\u0432\u0430\u043D\u0448 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u043E."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: a7a94aa17561e354eba187d69592a5a6, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 99683e330920e99429db53b7e3b9519a, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

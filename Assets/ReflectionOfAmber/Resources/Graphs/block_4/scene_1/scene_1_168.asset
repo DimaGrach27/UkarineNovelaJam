@@ -295,7 +295,7 @@ MonoBehaviour:
     actionsTypeEnd: 
   nextScenes:
   - optionLabel: 
-    scene: {fileID: 11400000, guid: 9b05c7a37bbc9444896ffde69fc5c1e7, type: 2}
+    scene: {fileID: 11400000, guid: fdb0427d7cea67442a4e71e7398c0a07, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

@@ -44,6 +44,7 @@ MonoBehaviour:
       \u0442\u0430 \u0441\u043F\u043E\u0447\u0430\u0442\u043A\u0443 \u0445\u043E\u0447\u0443
       \u0437\u043D\u0430\u0442\u0438 \u0437\u0430 \u0449\u043E \u0442\u0438 \u0442\u0430\u043A
       \u043E\u0431\u0456\u0439\u0448\u043B\u0430\u0441\u044F \u0437 \u041A\u043E\u0440\u043D\u0456\u0454\u043C!!"
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -63,6 +64,7 @@ MonoBehaviour:
       \u0441\u0435\u043A\u0443\u043D\u0434\u0438 \u041E\u043B\u0435\u043A\u0441\u0456\u0439
       \u043F\u0440\u0438\u0439\u043D\u044F\u0432 \u0441\u0442\u0440\u0438\u043C\u0430\u043D\u0456\u0448\u0443
       \u043F\u043E\u0437\u0443."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -80,9 +82,11 @@ MonoBehaviour:
       \u0434\u0430\u043B\u0456 \u043C\u0438 \u043E\u0431\u0438\u0434\u0432\u0430
       \u0437\u043C\u043E\u0436\u0435\u043C\u043E \u0441\u043B\u0456\u0434\u043A\u0443\u0432\u0430\u0442\u0438
       \u0437\u0430 \u043C\u0430\u043D\u0435\u0440\u0430\u043C\u0438."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: fc6ee60362f49d04b8afd2f08b96a67c, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 0b912239b566c164a8ee292bdf74658e, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

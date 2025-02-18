@@ -27,7 +27,8 @@ MonoBehaviour:
   actionsType: 
   screenParts: []
   nextScenes:
-  - scene: {fileID: 11400000, guid: 2eafdacf880ff1742b6f352146330c6c, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 2841ae24d21cae4439b5728181c0cfec, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

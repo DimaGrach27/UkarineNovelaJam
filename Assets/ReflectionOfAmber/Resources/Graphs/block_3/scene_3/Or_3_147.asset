@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Or_3_147
   m_EditorClassIdentifier: 
   nextScene:
+    optionLabel: 
     scene: {fileID: 0}
     chooseText: 
     statusDependent:
@@ -20,6 +21,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -32,13 +34,15 @@ MonoBehaviour:
       special: []
   statusEnum: 7
   blockTrue:
-    scene: {fileID: 11400000, guid: 5e7535d98dd99c5409ea363f1a89357c, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 3ed53f6135ca2b04694e71b0715fcc8e, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -50,13 +54,15 @@ MonoBehaviour:
       enable: 0
       special: []
   blockFalse:
-    scene: {fileID: 11400000, guid: 3fe5047cecd11044590ceb2c7ffa3db0, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: f346b7c44ab8a464a92e78339f03424f, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

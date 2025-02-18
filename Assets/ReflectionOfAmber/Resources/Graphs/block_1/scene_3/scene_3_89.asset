@@ -40,6 +40,7 @@ MonoBehaviour:
       \u0445\u0456\u0440\u0442\u0443\u0430\u043D\u0441\u044C\u043A\u0438\u0439 \u0444\u0456\u043B\u044C\u043C
       \u0437 \u043A\u0443\u043F\u043E\u044E \u0430\u043A\u0440\u043E\u0431\u0430\u0442\u0438\u0447\u043D\u0438\u0445
       \u0442\u0440\u044E\u043A\u0456\u0432."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -55,6 +56,7 @@ MonoBehaviour:
       \u0432\u0456\u0434 \u043F\u0456\u0434\u043B\u043E\u0433\u0438, \u0456 \u0437\u0430\u043A\u0440\u0443\u0442\u0438\u043B\u0430\u0441\u044F
       \u0432 \u0440\u0443\u0441\u0456 \u0441\u0430\u043B\u044C\u0442\u043E, \u0432\u0438\u0442\u044F\u0433\u0430\u044E\u0447\u0438
       \u0432\u043F\u0435\u0440\u0435\u0434 \u043E\u0431\u0438\u0434\u0432\u0456 \u043D\u043E\u0433\u0438. "
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 01000000
     musicTypeOnStart: 13
@@ -74,6 +76,7 @@ MonoBehaviour:
       \u0437\u043D\u0430\u043B\u0430, \u0449\u043E \u0457\u0445 \u0431\u0443\u043B\u043E
       \u0432\u0430\u0440\u0442\u043E \u043D\u0430\u0434\u044F\u0433\u0442\u0438 \u043D\u0430
       \u0437\u0430\u0432\u0434\u0430\u043D\u043D\u044F \u0443 \u0441\u0435\u043B\u0456)."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -87,6 +90,7 @@ MonoBehaviour:
       \u041E\u043B\u0435\u043A\u0441\u0456\u0439 \u0432\u0436\u0435 \u043B\u0435\u0436\u0430\u0432
       \u043D\u0430 \u043F\u0456\u0434\u043B\u043E\u0437\u0456 \u0431\u0435\u0437
       \u0442\u044F\u043C\u0438. "
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -99,9 +103,11 @@ MonoBehaviour:
     textShow: "\u0425\u0442\u043E \u043C\u0456\u0433 \u0437\u043D\u0430\u0442\u0438,
       \u0449\u043E \u0446\u0435\u0439 \u043F\u0440\u0438\u0439\u043E\u043C \u0432\u0438\u044F\u0432\u0438\u0442\u044C\u0441\u044F
       \u0442\u0430\u043A\u0438\u043C \u0435\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u0438\u043C?"
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: a7a94aa17561e354eba187d69592a5a6, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 99683e330920e99429db53b7e3b9519a, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Special_ability
   m_EditorClassIdentifier: 
   nextScene:
+    optionLabel: 
     scene: {fileID: 0}
     chooseText: 
     statusDependent:
@@ -20,6 +21,7 @@ MonoBehaviour:
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -31,13 +33,15 @@ MonoBehaviour:
       enable: 0
       special: []
   beliefScene:
-    scene: {fileID: 11400000, guid: dce5c3df5e8e69c4886ba34642c849ea, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 562897c26f79f3b4aa220be68386eaeb, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -49,13 +53,15 @@ MonoBehaviour:
       enable: 0
       special: []
   escapeScene:
-    scene: {fileID: 11400000, guid: 00eb6393e9859bd41921a6c8f7aca1c2, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: f3b9ed119ebdc9e429e8857eeb6a2c20, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -67,13 +73,15 @@ MonoBehaviour:
       enable: 0
       special: []
   wastedScene:
-    scene: {fileID: 11400000, guid: 0656595d5ee7d47409ca7b1f87927923, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 8459c2b45f14c384ba136aeb4fd18659, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:

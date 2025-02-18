@@ -37,6 +37,7 @@ MonoBehaviour:
     characterImage: 2
     nameCharacter: 2
     textShow: "\u042F \u0431 \u0446\u044C\u043E\u0433\u043E \u043D\u0435 \u0432\u043E\u043B\u0456\u043B\u0430."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -50,9 +51,11 @@ MonoBehaviour:
       \u042F \u043D\u0435 \u043C\u0430\u044E \u043E\u0440\u0434\u0435\u0440\u0443,
       \u0430 \u0442\u043E\u043C\u0443 \u0456 \u043F\u0440\u0430\u0432\u0430 \u0442\u0435\u0431\u0435
       \u0434\u043E \u0447\u043E\u0433\u043E\u0441\u044C \u0441\u043F\u043E\u043D\u0443\u043A\u0430\u0442\u0438."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 0dbe9741c747fbf49a2d4a0e6e7f7471, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 5c628eedd02daba4a9394b7c324fcbf9, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

@@ -37,6 +37,7 @@ MonoBehaviour:
     textShow: "\u042F \u043F\u0456\u0434\u0441\u0456\u043B\u0430 \u0434\u043E \u0441\u0442\u043E\u043B\u0443
       \u0442\u0430 \u043D\u0430\u0442\u0438\u0441\u043D\u0443\u043B\u0430 \u043C\u0430\u0441\u043D\u0443
       \u043A\u043D\u043E\u043F\u043A\u0443 \xAB\u0412\u043A\u043B\xBB."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -51,6 +52,7 @@ MonoBehaviour:
       \u043D\u0430 \u043E\u0441\u0442\u0430\u043D\u043D\u044C\u043E\u043C\u0443 \u043F\u043E\u0434\u0438\u0445\u0443.
       \u041D\u0430 \u043C\u043E\u043D\u0456\u0442\u043E\u0440\u0456 \u043F\u043E\u0432\u0456\u043B\u044C\u043D\u043E
       \u0437'\u044F\u0432\u0438\u043B\u043E\u0441\u044F \u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u043D\u044F."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -61,6 +63,7 @@ MonoBehaviour:
     characterImage: 1
     nameCharacter: 1
     textShow: "\u041E\u0442 \u0432\u0438\u043B\u0443\u043F\u043E\u043A!"
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -72,6 +75,7 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u0410\u043A\u043A\u0430\u0443\u043D\u0442 \xAB\u041B\u044C\u043E\u0445\u0430\xBB
       \u0431\u0443\u043B\u043E \u0437\u0430\u043F\u0430\u0440\u043E\u043B\u0435\u043D\u043E. "
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -87,9 +91,11 @@ MonoBehaviour:
       \u0441\u043F\u0438\u0441\u043A\u0443 \u0442\u0430\u043B\u0430\u043D\u0442\u0456\u0432.
       \u042F \u043C\u043E\u0433\u043B\u0430 \u0440\u043E\u0437\u0440\u0430\u0445\u043E\u0432\u0443\u0432\u0430\u0442\u0438
       \u0445\u0456\u0431\u0430 \u0449\u043E \u043D\u0430 \u0443\u0434\u0430\u0447\u0443."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 2e897c7c1420fb7418048647613370d5, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 93e430c68c2a3c14ab1a2ef42dda9252, type: 2}
     chooseText: "\u0421\u043F\u0440\u043E\u0431\u0443\u0432\u0430\u0442\u0438 \u043F\u0430\u0440\u043E\u043B\u044C
       \"1111\""
     statusDependent:
@@ -109,7 +115,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: ee79e9fa4d3f6c5419e744272f452bec, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 6f3a0695639bf58409fd0af624af7945, type: 2}
     chooseText: "\u041E\u0431\u043B\u0438\u0448\u0438\u0442\u0438 \u043C\u0430\u0440\u043D\u0443
       \u0441\u043F\u0440\u0430\u0432\u0443."
     statusDependent:
@@ -128,7 +135,8 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  - scene: {fileID: 11400000, guid: 5dd2e9e08ac088448872fbe51aa17a9f, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 7767acca09b5be6419e78430521849ae, type: 2}
     chooseText: "\u0421\u043F\u0440\u043E\u0431\u0443\u0432\u0430\u0442\u0438 \u043F\u0430\u0440\u043E\u043B\u044C
       \"krasav4ik\"."
     statusDependent:

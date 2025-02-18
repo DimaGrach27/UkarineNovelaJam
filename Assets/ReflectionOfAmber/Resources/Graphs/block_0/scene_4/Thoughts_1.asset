@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Thoughts_1
   m_EditorClassIdentifier: 
   nextScene:
-    scene: {fileID: 11400000, guid: d0db8b832061a5041b0854a011059886, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 673a8f2b2dd909b4d9f6648f06a682e3, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
       statusesValues: []
     cameraDependent:
       enable: 0
+      isPrepAction: 0
       visibleOnPhoto: 0
       visibleOutPhoto: 0
     exclusionDependent:
@@ -29,6 +31,7 @@ MonoBehaviour:
       statusesValues: []
     specialDependent:
       enable: 0
-      special: {fileID: 0}
+      special:
+      - {fileID: 0}
   status: 14
   valueStatus: 0

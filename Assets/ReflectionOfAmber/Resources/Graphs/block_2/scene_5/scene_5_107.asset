@@ -42,9 +42,11 @@ MonoBehaviour:
       \u0432\u0441\u0442\u0438\u0433\u043D\u0435 \u043E\u0433\u043B\u044F\u043D\u0443\u0442\u0438
       \u0431\u0430\u0433\u0430\u0442\u043E, \u0430\u043B\u0435 \u0441\u043F\u0440\u043E\u0431\u0443\u0454
       \u0445\u043E\u0447 \u0449\u043E\u0441\u044C."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: d59c2931653d4f344b5966ec7c403f6d, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: b965b2f5f64d2df44a90797388244532, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

@@ -36,6 +36,7 @@ MonoBehaviour:
     nameCharacter: 0
     textShow: "\u041F\u0440\u043E\u043B\u0443\u043D\u0430\u0432 \u0449\u0435 \u043E\u0434\u0438\u043D
       \u043F\u043E\u0441\u0442\u0440\u0456\u043B."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
       \u0432\u0431\u0438\u0442\u0438 \u0441\u0430\u043C\u0443 \u0441\u0435\u0431\u0435,
       \u0456 \u0446\u044F \u043F\u043E\u043C\u0438\u043B\u043A\u0430 \u0437\u0431\u0438\u043B\u0430
       \u0457\u0457 \u043F\u0440\u0438\u0446\u0456\u043B."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -68,6 +70,7 @@ MonoBehaviour:
       \u0457\u0457 \u0440\u0443\u043A, \u0456 \u043F\u0456\u0441\u0442\u043E\u043B\u0435\u0442
       \u0437\u0430\u0432\u0435\u0440\u0442\u0456\u0432\u0441\u044F \u0443 \u043F\u043E\u0432\u0456\u0442\u0440\u0456
       \u043D\u0430\u0447\u0435 \u0444\u0440\u0438\u0437\u0431\u0456."
+    endOfText: 1
     actionsTypeEnd: 
   - actionsType: 
     musicTypeOnStart: 0
@@ -83,9 +86,11 @@ MonoBehaviour:
       \u0437\u043D\u0435\u043D\u0430\u0446\u044C\u043A\u0430, \u0442\u043E\u043C\u0443
       \u0434\u0456\u044F\u0442\u0438 \u0434\u0430\u043B\u0456 \u0442\u0440\u0435\u0431\u0430
       \u0431\u0443\u043B\u043E \u043D\u0435\u0433\u0430\u0439\u043D\u043E."
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 4bf642d1a97d0dc4796b6d6bee388232, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 3e9b650e10b40934aaea097db5338836, type: 2}
     chooseText: "\u041D\u0430\u043D\u0435\u0441\u0442\u0438 \u0443\u0434\u0430\u0440
       \u043D\u043E\u0433\u043E\u044E."
     statusDependent:
@@ -104,7 +109,8 @@ MonoBehaviour:
     specialDependent:
       enable: 0
       special: []
-  - scene: {fileID: 11400000, guid: a00aa10e375dcda478310a858691e341, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 64095bfa46f8ac04d91371318ddc5eae, type: 2}
     chooseText: "\u041A\u0438\u043D\u0443\u0442\u0438\u0441\u044C \u0437\u0430 \u043F\u0456\u0441\u0442\u043E\u043B\u0435\u0442\u043E\u043C."
     statusDependent:
       enable: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Or_so_3_92_3
   m_EditorClassIdentifier: 
   nextScene:
+    optionLabel: 
     scene: {fileID: 0}
     chooseText: 
     statusDependent:
@@ -33,7 +34,8 @@ MonoBehaviour:
       special: []
   statusEnum: 28
   blockTrue:
-    scene: {fileID: 11400000, guid: 739dc81811f0a844f948edfaae415fbd, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: 06e5229bbe6a3f543a35806f6720eb82, type: 2}
     chooseText: 
     statusDependent:
       enable: 0
@@ -52,7 +54,8 @@ MonoBehaviour:
       enable: 0
       special: []
   blockFalse:
-    scene: {fileID: 11400000, guid: 751d357e2b21c93439a6f0e252dd5d8d, type: 2}
+    optionLabel: 
+    scene: {fileID: 11400000, guid: ad1896b5b8da3234bbd035d578ed4e68, type: 2}
     chooseText: 
     statusDependent:
       enable: 0

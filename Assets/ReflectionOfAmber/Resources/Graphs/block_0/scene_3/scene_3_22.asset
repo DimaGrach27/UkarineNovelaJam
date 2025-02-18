@@ -35,9 +35,11 @@ MonoBehaviour:
     characterImage: 0
     nameCharacter: 0
     textShow: "\u041D\u0430\u0441\u0442\u0443\u043F\u043D\u0438\u043C \u044F \u0432\u0438\u0440\u0456\u0448\u0438\u043B\u0430\u2026"
+    endOfText: 1
     actionsTypeEnd: 
   nextScenes:
-  - scene: {fileID: 11400000, guid: 68fa68bf8f5d01145b3b7eb68a5a0277, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: dc19cfbe7519f4b4bbcfe3158989f3ad, type: 2}
     chooseText: "\u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0438\u0442\u0438 \u0437\u0430\u043B\u0438\u0448\u043A\u0438
       \u043F\u0456\u0434 \u043D\u0456\u0433\u0442\u044F\u043C\u0438."
     statusDependent:
@@ -57,7 +59,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: f7bc7a98c1414b041b6d4e734850b84a, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 1799e6e839797cb4a8a1325d23ea1494, type: 2}
     chooseText: "\u041E\u0433\u043B\u044F\u043D\u0443\u0442\u0438 \u043E\u0434\u044F\u0433."
     statusDependent:
       enable: 0
@@ -76,7 +79,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: ca4d893253dc9ea46863c070f93ed748, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 17b6148dbc7391a498656a6a46b0a25c, type: 2}
     chooseText: "\u0420\u043E\u0437\u0434\u0438\u0432\u0438\u0442\u0438\u0441\u044F
       \u0441\u0442\u0430\u043D \u0448\u043A\u0456\u0440\u0438."
     statusDependent:
@@ -96,7 +100,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: b42c55ae805452b4fa8e8f142cee8065, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 7b5d918d3678d1d4f8414de4099d61ed, type: 2}
     chooseText: "\u0417\u0430\u043F\u0438\u0442\u0430\u0442\u0438 \u043F\u0440\u043E
       \u0440\u0435\u0447\u0456 \u043F\u043E\u043C\u0435\u0440\u043B\u043E\u0433\u043E."
     statusDependent:
@@ -116,7 +121,8 @@ MonoBehaviour:
       enable: 0
       special:
       - {fileID: 0}
-  - scene: {fileID: 11400000, guid: 50421e4f209da2346bc8eecd512278c6, type: 2}
+  - optionLabel: 
+    scene: {fileID: 11400000, guid: 864ce0382cead2747859e14d8d13233a, type: 2}
     chooseText: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0438 \u043E\u0433\u043B\u044F\u0434
       \u0442\u0430 \u043F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u0438\u0441\u044C."
     statusDependent:
