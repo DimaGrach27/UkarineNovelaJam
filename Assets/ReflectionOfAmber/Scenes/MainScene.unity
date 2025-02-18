@@ -383,6 +383,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &124787077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 723786639659663431, guid: 9d2e1f44a7c51614184ddaa885ef1221, type: 3}
+  m_PrefabInstance: {fileID: 838393471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b4d5f73fbf490391d236d272b78f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &145129530
 GameObject:
   m_ObjectHideFlags: 0
@@ -7041,6 +7052,7 @@ MonoBehaviour:
   noteWindowInvestigationScreen: {fileID: 838393475}
   noteWindowSaveScreen: {fileID: 838393474}
   noteWindowSettingsScreenView: {fileID: 838393473}
+  noteWindowMainScreenView: {fileID: 124787077}
 --- !u!1 &1942576156
 GameObject:
   m_ObjectHideFlags: 0

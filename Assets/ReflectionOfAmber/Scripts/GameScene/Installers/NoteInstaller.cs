@@ -14,6 +14,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         [SerializeField] private NoteWindowInvestigationScreen noteWindowInvestigationScreen;
         [SerializeField] private NoteWindowSaveScreen noteWindowSaveScreen;
         [SerializeField] private NoteWindowSettingsScreenView noteWindowSettingsScreenView;
+        [SerializeField] private NoteWindowMainScreenView noteWindowMainScreenView;
         
         public override void InstallBindings()
         {
@@ -32,6 +33,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
                 .FromInstance(noteWindowSaveScreen).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<NoteWindowSettingsScreenView>()
                 .FromInstance(noteWindowSettingsScreenView).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<NoteWindowMainScreenView>()
+                .FromInstance(noteWindowMainScreenView).AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<NoteWindowContinueScreen>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<NoteWindowExitScreen>().AsSingle().NonLazy();
