@@ -79,10 +79,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)
         {
             bool isFirstPage = noteWindowScreensEnum == NoteWindowScreensEnum.MAIN_SCREEN;
-            
+
+            foreach (var keyValue in _buttonsNoteMap)
+            {
+                keyValue.Value.IsActive(keyValue.Key == noteWindowScreensEnum);
+            }
             noteWindowScreenBgView.FirstPage = isFirstPage;
-            noteWindowScreenBgView.SetLastElement();
-            _buttonsNoteMap[noteWindowScreensEnum].transform.SetAsLastSibling();
+            // noteWindowScreenBgView.SetLastElement();
+            // _buttonsNoteMap[noteWindowScreensEnum].transform.SetAsLastSibling();
             
             OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
         }

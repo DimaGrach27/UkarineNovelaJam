@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -7,7 +8,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Characters
 {
-    public class CharacterService 
+    public class CharacterService  : IDisposable
     {
         [Inject]
         public CharacterService(GamePlayCanvas gamePlayCanvas, CoroutineHelper coroutineHelper)
@@ -128,6 +129,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.Characters
             _characterUiViewMap[screenPosition].Visible = false;
             _enabledMap[screenPosition] = false;
             _characterUiViewMap[screenPosition].Image.sprite = null;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

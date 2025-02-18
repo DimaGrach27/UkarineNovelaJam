@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+﻿using System;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -8,10 +9,11 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 {
-    public class NoteWindowSaveScreenService
+    public class NoteWindowSaveScreenService : IDisposable
     {
         [Inject]
-        public NoteWindowSaveScreenService(NoteWindowSaveScreen noteWindowSaveScreen,
+        public NoteWindowSaveScreenService(
+            NoteWindowSaveScreen noteWindowSaveScreen,
             ConfirmScreen confirmScreen)
         {
             _noteWindowSaveScreen = noteWindowSaveScreen;
@@ -70,6 +72,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             SaveService.SaveGame(_confirmIndex);
 
             _confirmIndex = -1;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

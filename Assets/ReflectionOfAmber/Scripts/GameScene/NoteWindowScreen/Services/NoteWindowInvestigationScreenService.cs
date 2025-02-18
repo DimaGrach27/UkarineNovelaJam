@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+﻿using System;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -7,7 +8,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 {
-    public class NoteWindowInvestigationScreenService
+    public class NoteWindowInvestigationScreenService : IDisposable
     {
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly ConfirmScreen _confirmScreen;
@@ -16,7 +17,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         private int _selectIndex = -1;
 
         [Inject]
-        public NoteWindowInvestigationScreenService(NoteWindowInvestigationScreen noteWindowInvestigationScreen, 
+        public NoteWindowInvestigationScreenService(
+            NoteWindowInvestigationScreen noteWindowInvestigationScreen, 
             ScreenPartsServiceFacade screenPartsServiceFacade,
             ConfirmScreen confirmScreen)
         {
@@ -48,6 +50,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             }
 
             _selectIndex = -1;
-        } 
+        }
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

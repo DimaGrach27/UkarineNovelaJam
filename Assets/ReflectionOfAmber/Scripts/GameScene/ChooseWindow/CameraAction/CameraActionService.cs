@@ -1,12 +1,11 @@
 ﻿using System;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
 {
-    public class CameraActionService
+    public class CameraActionService : IDisposable
     {
         public event Action OnTakePhoto;
         
@@ -44,6 +43,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
         {
             _cameraActionFlash.CallFlash();
             _cameraActionUiView.FilmLeft = SaveService.CameraFilmLeft;
+        }
+
+        public void Dispose()
+        {
+            Debug.Log("CameraActionService Disposing");
         }
     }
 }

@@ -24,24 +24,22 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         private void NoteInstallers()
         {
             Container.Bind<NoteWindowScreenPopup>().FromInstance(noteWindowScreen).AsSingle().NonLazy();
-            Container.Bind<NoteWindowScreenPopupService>().AsSingle().NonLazy();
-            Container.Bind<NoteWindowScreenChangeHandler>().AsSingle().NonLazy();
             
-            Container.BindInterfacesAndSelfTo<NoteWindowInvestigationScreen>()
+            Container.BindInterfacesAndSelfTo<NoteWindowScreenPopupService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<NoteWindowScreenChangeHandler>().AsSingle().NonLazy();
+            
+            Container.Bind<NoteWindowInvestigationScreen>()
                 .FromInstance(noteWindowInvestigationScreen).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<NoteWindowSaveScreen>()
+            Container.Bind<NoteWindowSaveScreen>()
                 .FromInstance(noteWindowSaveScreen).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<NoteWindowSettingsScreenView>()
+            Container.Bind<NoteWindowSettingsScreenView>()
                 .FromInstance(noteWindowSettingsScreenView).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<NoteWindowMainScreenView>()
+            Container.Bind<NoteWindowMainScreenView>()
                 .FromInstance(noteWindowMainScreenView).AsSingle().NonLazy();
             
-            Container.BindInterfacesAndSelfTo<NoteWindowContinueScreen>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<NoteWindowExitScreen>().AsSingle().NonLazy();
-            
-            Container.Bind<NoteWindowSettingsScreenService>().AsSingle().NonLazy();
-            Container.Bind<NoteWindowInvestigationScreenService>().AsSingle().NonLazy();
-            Container.Bind<NoteWindowSaveScreenService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<NoteWindowSettingsScreenService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<NoteWindowInvestigationScreenService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<NoteWindowSaveScreenService>().AsSingle().NonLazy();
         }
     }
 }

@@ -2,11 +2,12 @@
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
 using ReflectionOfAmber.Scripts.Input;
+using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 {
-    public class NoteWindowScreenPopupService : IInputListener
+    public class NoteWindowScreenPopupService : IInputListener, IDisposable
     {
         public event Action<NoteWindowScreensEnum> OnSelectWindowClick;
         public event Action OnOpenNote;
@@ -22,6 +23,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             InputService inputService
             )
         {
+            Debug.Log($"NoteWindowScreenPopupService new {noteWindowScreenPopup}");
             _noteWindowScreenPopup = noteWindowScreenPopup;
             m_inputService = inputService;
             _noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
@@ -79,6 +81,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
                     OnOpenHandler(CallKeyType.NOTE_BOOKE);
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            Debug.Log("NoteWindowScreenPopupService.Dispose");
+            m_inputService.RemoveForceRedirected(this);
+            m_inputService.ForceBlockInput(false);
+            m_inputService.RemoveListener(this);
         }
     }
 }

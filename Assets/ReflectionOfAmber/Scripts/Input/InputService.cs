@@ -34,6 +34,11 @@ namespace ReflectionOfAmber.Scripts.Input
 
         public void RemoveForceRedirected(IInputListener inputListener)
         {
+            if (m_forceRedirected.Count == 0)
+            {
+                return;
+            }
+            
             if (m_forceRedirected.Peek() != inputListener)
             {
                 Debug.LogError($"Wrong redirected listener: {inputListener.GetType()}, current is {m_forceRedirected.GetType()}");

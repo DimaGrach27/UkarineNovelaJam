@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
@@ -11,7 +12,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
 {
-    public class ActionScreenService
+    public class ActionScreenService : IDisposable
     {
         private readonly Dictionary<ActionType, ActionBase> _actionMap = new();
 
@@ -104,6 +105,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
             if(!_actionMap.ContainsKey(actionType)) return;
             
             _actionMap[actionType].Action();
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

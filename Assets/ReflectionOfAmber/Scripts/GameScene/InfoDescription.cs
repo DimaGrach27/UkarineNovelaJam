@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.Input;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene
 {
-    public class InfoDescription : MonoBehaviour
+    public class InfoDescription : MonoBehaviour, IInputListener
     {
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private ClickHelper clickHelper;
@@ -19,6 +21,14 @@ namespace ReflectionOfAmber.Scripts.GameScene
         
         private bool _isReadyToClick;
         private bool _isTyping;
+
+        private InputService m_inputService;
+        
+        [Inject]
+        public void Construct(InputService inputService)
+        {
+            m_inputService = inputService;
+        }
         
         private void Awake()
         {
@@ -27,6 +37,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
 
         public void SetInfoDescription(TranslatorKeys[] textsShow)
         {
+            m_inputService.ForceRedirectInput(this);
             _texts = new List<string>();
             
             foreach (var textShowKey in textsShow)
@@ -67,6 +78,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
                 return;
             }
             
+            m_inputService.RemoveForceRedirected(this);
             ScreenPartsServiceFacade.PlatNextPart();
             Destroy(gameObject);
         }
@@ -90,6 +102,14 @@ namespace ReflectionOfAmber.Scripts.GameScene
             _texts.RemoveAt(0);
             _isReadyToClick = true;
             _isTyping = false;
+        }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if (inputAction == InputAction.SPACE)
+            {
+                OnPointerClick();
+            }
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using ReflectionOfAmber.Scripts.GlobalProject;
+﻿using System;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Health
 {
-    public class HealthService
+    public class HealthService : IDisposable
     {
         private readonly HealthUiView _healthUiView;
         private readonly SceneService _sceneService;
@@ -45,6 +46,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.Health
 
                 SaveService.HealthCount = health;
             }
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

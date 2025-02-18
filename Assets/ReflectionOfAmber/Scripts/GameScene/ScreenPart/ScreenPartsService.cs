@@ -19,7 +19,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 {
-    public class ScreenPartsService : IInitializable, IInputListener
+    public class ScreenPartsService : IInitializable, IInputListener, IDisposable
     {
         [Inject]
         public ScreenPartsService(BgService bgService,
@@ -53,6 +53,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _fadeService = fadeService;
             _translatorParser = translatorParser;
             _screenPartNextDialogButton = screenPartNextDialogButton;
+            m_inputService = inputService;
             
             _debugHelperService = debugHelperService;
             
@@ -63,7 +64,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             screenPartsService.OnPlayNextPart += ForceShowNextPart;
             screenPartsService.OnPlayNextScene += ShowNextScene;
             
-            inputService.AddListener(this);
+            m_inputService.AddListener(this);
         }
         
         private int _currentPart;
@@ -105,6 +106,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly FadeService _fadeService;
         private readonly ScreenPartNextDialogButton _screenPartNextDialogButton;
         private readonly TranslatorParser _translatorParser;
+        private readonly InputService m_inputService;
         
         private readonly DebugHelperService _debugHelperService;
 
@@ -122,7 +124,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             _characterService.HideAllCharactersInstant();
             _screenTextService.HideText();
-            _chooseWindowService.ChangeVisible(false);
+            _chooseWindowService.SetActive(false);
             _cameraActionService.ChangeVisible(false);
             
             _bgService.Show(SaveService.GetCurrentBg(), null);
@@ -175,7 +177,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
-            _chooseWindowService.ChangeVisible(false);
+            _chooseWindowService.SetActive(false);
             _cameraActionService.ChangeVisible(false);
 
             ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(CurrentScene);
@@ -223,7 +225,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private void ShowNextPart()
         {
-            if(_blockClick || !GameModel.IsGamePlaying) return;
+            if(_blockClick || !GameModel.IsGamePlaying || _chooseWindowService.IsActive || _currentPartSo == null)
+            {
+                return;
+            }
             
             if(_currentPartSo.ActionsTypeEnd != null)
             {
@@ -527,6 +532,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             {
                 ShowNextPart();
             }
+        }
+
+        public void Dispose()
+        {
+            m_inputService.RemoveListener(this);
         }
     }
 }

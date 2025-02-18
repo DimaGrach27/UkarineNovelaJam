@@ -50,20 +50,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         {
             Container.Bind<GlobalVolumeService>().FromInstance(globalVolumeService).AsSingle().NonLazy();
             Container.Bind<OpenEyeAnimation>().FromInstance(openEyeAnimation).AsSingle().NonLazy();
-            Container.Bind<CharacterService>().AsSingle().NonLazy();
-            Container.Bind<ScreenTextService>().AsSingle().NonLazy();
-            Container.Bind<BgService>().AsSingle().NonLazy();
-            Container.Bind<ChooseWindowService>().AsSingle().NonLazy();
-            Container.Bind<CameraActionService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CharacterService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ScreenTextService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BgService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ChooseWindowService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CameraActionService>().AsSingle().NonLazy();
             // Container.Bind<NoteService>().AsSingle().NonLazy();
-            Container.Bind<HealthService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<HealthService>().AsSingle().NonLazy();
             
-            Container.Bind<ActionScreenService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ActionScreenService>().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<ScreenPartsService>().AsSingle().NonLazy();
 
             Container.Bind<ChapterNotesView>().FromInstance(chapterNotesView).AsSingle().NonLazy();
-            Container.Bind<ChapterNotesService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ChapterNotesService>().AsSingle().NonLazy();
         }
     }
 }

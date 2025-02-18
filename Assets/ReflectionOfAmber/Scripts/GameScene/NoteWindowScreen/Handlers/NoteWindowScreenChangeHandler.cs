@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
 {
-    public class NoteWindowScreenChangeHandler
+    public class NoteWindowScreenChangeHandler : IDisposable
     {
         private readonly Dictionary<NoteWindowScreensEnum, INoteWindowScreen> _noteWindowScreensMap;
 
         private INoteWindowScreen _noteWindowScreen;
         
         [Inject]
-        public NoteWindowScreenChangeHandler(List<INoteWindowScreen> noteWindowScreens,
+        public NoteWindowScreenChangeHandler(
+            List<INoteWindowScreen> noteWindowScreens,
             NoteWindowScreenPopupService noteWindowScreenPopupService)
         {
             _noteWindowScreensMap = new();
@@ -48,6 +50,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
                 _noteWindowScreen = _noteWindowScreensMap[noteWindowScreensEnum];
                 _noteWindowScreen.Open();
             }
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+﻿using System;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.Input;
@@ -6,7 +7,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 {
-    public class ChapterNotesService : IInputListener
+    public class ChapterNotesService : IInputListener, IDisposable
     {
         [Inject]
         public ChapterNotesService(
@@ -78,6 +79,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
         {
             _chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
             _chapterNotesView.Close();
+        }
+
+        public void Dispose()
+        {
+            m_inputService.RemoveForceRedirected(this);
         }
     }
 }

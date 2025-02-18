@@ -5,12 +5,13 @@ using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.Input;
 using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
 {
-    public class ScreenTextService
+    public class ScreenTextService : IInputListener, IDisposable
     {
         public event Action OnEndTyping;
         
@@ -18,16 +19,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         public ScreenTextService(GamePlayCanvas gamePlayCanvas, 
             UiClickHandler uiClickHandler, 
             ScreenPartNextDialogButton screenPartNextDialogButton, 
-            CoroutineHelper coroutineHelper)
+            CoroutineHelper coroutineHelper,
+            InputService inputService)
         {
             _coroutineHelper = coroutineHelper;
             _screenTextUiView = gamePlayCanvas.GetComponentInChildren<ScreenTextUiView>();
+            m_inputService = inputService;
             uiClickHandler.OnClick += EndTyping;
             screenPartNextDialogButton.OnClickButton += EndTyping;
+            m_inputService.AddListener(this);
         }
      
         private readonly ScreenTextUiView _screenTextUiView;
         private readonly CoroutineHelper _coroutineHelper;
+        private readonly InputService m_inputService;
         
         private bool _isTextEnable = true;
         private bool _isTyping;
@@ -133,6 +138,29 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             
             _prevText = _isEndOfText ? "" : _endText;
             _endText = null;
+        }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if (inputAction == InputAction.SPACE)
+            {
+                EndTyping();
+            }
+        }
+
+        public void Dispose()
+        {
+            if(_typingCoroutine != null && _coroutineHelper != null)
+            {
+                _coroutineHelper.StopCoroutine(_typingCoroutine);
+            }
+            
+            if(_dissolveCoroutine != null && _coroutineHelper != null)
+            {
+                _coroutineHelper.StopCoroutine(_dissolveCoroutine);
+            }
+            
+            m_inputService.RemoveListener(this);
         }
     }
 }

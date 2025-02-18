@@ -53,14 +53,16 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
         private void Confirm()
         {
-            _currentAction?.Invoke(true);
             Close();
+            _currentAction?.Invoke(true);
+            _currentAction = null;
         }
         
         private void NotConfirm()
         {
-            _currentAction?.Invoke(false);
             Close();
+            _currentAction?.Invoke(false);
+            _currentAction = null;
         }
 
         private void Close()
@@ -70,8 +72,6 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
             _canvasGroup.blocksRaycasts = false;
             _tween = _canvasGroup.DOFade(0.0f, 0.5f);
-            
-            _currentAction = null;
             
             m_inputService.RemoveForceRedirected(this);
         }

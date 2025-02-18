@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
-using ReflectionOfAmber.Scripts;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
@@ -9,7 +8,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 {
-    public class ChooseWindowService
+    public class ChooseWindowService : IDisposable
     {
         private readonly ChooseWindowUiView _chooseWindowUiView;
         private readonly CoroutineHelper _coroutineHelper;
@@ -17,6 +16,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         public event Action<NextScene> OnChoose;
 
         private Coroutine _coroutine;
+        
+        public bool IsActive { get; private set; }
 
         [Inject]
         public ChooseWindowService(GamePlayCanvas gamePlayCanvas, CoroutineHelper coroutineHelper)
@@ -36,7 +37,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             _chooseWindowUiView.SetChooseText(textChoose);
         }
 
-        public void ChangeVisible(bool isVisible) => _chooseWindowUiView.Visible = isVisible;
+        public void SetActive(bool isActive)
+        {
+            _chooseWindowUiView.Visible = isActive;
+            IsActive = isActive;
+        }
         
         private void OnChooseClick(NextScene chooseScene)
         {
@@ -48,7 +53,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         private IEnumerator FadeInWindow()
         {
-            _chooseWindowUiView.Visible = true;
+            SetActive(true);
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
             _chooseWindowUiView.CanvasGroup.DOFade(1.0f, duration);
             yield return null;
@@ -59,7 +64,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
             _chooseWindowUiView.CanvasGroup.DOFade(0.0f, duration);
             yield return new WaitForSeconds(duration);
-            _chooseWindowUiView.Visible = false;
+            SetActive(false);
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

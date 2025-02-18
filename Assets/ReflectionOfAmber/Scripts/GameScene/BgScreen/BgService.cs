@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
 {
-    public class BgService
+    public class BgService : IDisposable
     {
         private BgEnum _currentBg = BgEnum.NONE;
         
@@ -108,6 +108,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
             yield return new WaitForSeconds(duration / 2);
             
             onDoneAnima?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

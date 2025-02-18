@@ -29,5 +29,6 @@
         CONFIRM_EXIT = 24,
         CONFIRM_RESAVE = 25,
         CONFIRM_CHOOSE = 26,
+        INVESTIGATION = 27,
     }
 }

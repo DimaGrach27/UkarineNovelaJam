@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.GameModelBlock;
+﻿using System;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -8,7 +9,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 {
-    public class NoteWindowSettingsScreenService
+    public class NoteWindowSettingsScreenService : IDisposable
     {
         [Inject]
         public NoteWindowSettingsScreenService(AudioSystemService audioSystemService, 
@@ -54,6 +55,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         {
             _globalBrightnessService.BrightnessValue = (value / 10);
             SaveService.BrightnessValue = value / 10;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
