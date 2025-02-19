@@ -9,6 +9,7 @@ using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -66,6 +67,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             m_inputService.AddListener(this);
         }
+        
+        [Inject]
+        private DiContainer m_diContainer;
         
         private int _currentPart;
         private int CurrentPart
@@ -341,6 +345,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                     {
                         foreach (var scriptableObject in nextScene.specialDependent.special)
                         {
+                            m_diContainer.Inject(scriptableObject);
                             scriptableObject.SetService = _screenPartsServiceFacade;
                             if (scriptableObject.Check())
                             {

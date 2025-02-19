@@ -11,8 +11,14 @@ namespace ReflectionOfAmber.Scripts.GameScene
 {
     public class InfoDescription : MonoBehaviour, IInputListener
     {
-        [SerializeField] private TextMeshProUGUI text;
-        [SerializeField] private ClickHelper clickHelper;
+        [SerializeField] 
+        private TextMeshProUGUI text;
+        
+        [SerializeField] 
+        private ClickHelper clickHelper;
+        
+        [SerializeField] 
+        private GameObject m_cameraIcon;
         
         public ScreenPartsServiceFacade ScreenPartsServiceFacade { get; set; }
         
@@ -27,6 +33,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
         [Inject]
         public void Construct(InputService inputService)
         {
+            Debug.Log($"Construct: {gameObject.name}");
             m_inputService = inputService;
         }
         
@@ -35,8 +42,9 @@ namespace ReflectionOfAmber.Scripts.GameScene
             clickHelper.OnClick += OnPointerClick;
         }
 
-        public void SetInfoDescription(TranslatorKeys[] textsShow)
+        public void SetInfoDescription(TranslatorKeys[] textsShow, bool showCameraIcon)
         {
+            m_cameraIcon.SetActive(showCameraIcon);
             m_inputService.ForceRedirectInput(this);
             _texts = new List<string>();
             
@@ -111,5 +119,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
                 OnPointerClick();
             }
         }
+        
+        public class Factory : PlaceholderFactory<InfoDescription> { }
     }
 }

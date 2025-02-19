@@ -18,7 +18,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
         [Inject]
         public NoteService(GamePlayCanvas gamePlayCanvas, 
             ScreenPartsServiceFacade screenPartsServiceFacade,
-            ConfirmScreen confirmScreen)
+            ConfirmScreen confirmScreen,
+            DiContainer container)
         {
             _screenPartsServiceFacade = screenPartsServiceFacade;
             _confirmScreen = confirmScreen;
@@ -31,6 +32,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
             
             _noteWindowUIView = gamePlayCanvas.GetComponentInChildren<NoteWindowUIView>();
             _noteWindowUIView.OnChoose += OnChooseClick;
+
+            container.Inject(_noteWindowUIView);
 
             GlobalEvent.OnCallType += OpenNote;
             GlobalEvent.OnCallType += OpenNoteWithoutExit;

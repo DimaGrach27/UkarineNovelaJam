@@ -6988,6 +6988,7 @@ MonoBehaviour:
   openEyeAnimation: {fileID: 250535343}
   screenPartNextDialogButton: {fileID: 1143527422}
   chapterNotesView: {fileID: 226741445}
+  m_InfoDescriptionPrefab: {fileID: 323033400513750974, guid: 0eea68fb6c6e147818a00f40139df19c, type: 3}
 --- !u!114 &1867921975
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ChapterNotes;
 using ReflectionOfAmber.Scripts.GameScene.Characters;
@@ -10,7 +9,6 @@ using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
-using ReflectionOfAmber.Scripts.Input;
 using UnityEngine;
 using Zenject;
 
@@ -26,8 +24,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
         [SerializeField] private ScreenPartNextDialogButton screenPartNextDialogButton;
         [SerializeField] private ChapterNotesView chapterNotesView;
         
+        [Header("Prefabs for factory:")]
+        [SerializeField]
+        private InfoDescription m_InfoDescriptionPrefab;
+        
         public override void InstallBindings()
         {
+            FactoryInstallers();
             GamePlayCanvasInstallers();
             // DebugInstallers();
             
@@ -64,6 +67,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
 
             Container.Bind<ChapterNotesView>().FromInstance(chapterNotesView).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ChapterNotesService>().AsSingle().NonLazy();
+        }
+
+        private void FactoryInstallers()
+        {
+            Container.BindFactory<InfoDescription, InfoDescription.Factory>()
+                .FromComponentInNewPrefab(m_InfoDescriptionPrefab);
         }
     }
 }

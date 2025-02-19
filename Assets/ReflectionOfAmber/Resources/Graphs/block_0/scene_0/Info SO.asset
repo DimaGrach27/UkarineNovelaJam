@@ -34,3 +34,4 @@ MonoBehaviour:
       special: []
   texts: 0c0000000d0000000e000000
   infoDescription: {fileID: 323033400513750974, guid: ff3b300b6af95754a8c3937ada286672, type: 3}
+  m_showCameraIcon: 1

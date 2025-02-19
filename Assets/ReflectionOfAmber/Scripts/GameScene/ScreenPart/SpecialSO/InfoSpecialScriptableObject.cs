@@ -1,5 +1,6 @@
 ﻿using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
 {
@@ -11,12 +12,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
     public class InfoSpecialScriptableObject : SpecialScriptableObjectBase
     {
         [SerializeField] private TranslatorKeys[] texts;
-        [SerializeField] private InfoDescription infoDescription;
-
+        [SerializeField] private bool m_showCameraIcon;
+        
+        [Inject] 
+        private InfoDescription.Factory m_infoDescriptionFactory;
+        
         public override bool Check()
         {
-            InfoDescription infoDesc = Instantiate(infoDescription);
-            infoDesc.SetInfoDescription(texts);
+            InfoDescription infoDesc = m_infoDescriptionFactory.Create();
+            infoDesc.SetInfoDescription(texts, m_showCameraIcon);
             infoDesc.ScreenPartsServiceFacade = ServiceFacade;
             
             return true;
