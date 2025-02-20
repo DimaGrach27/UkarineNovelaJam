@@ -112,7 +112,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.BgScreen
 
         public void Dispose()
         {
-            
+            if(_changeBgRoutine != null && _coroutineHelper !=null)
+                _coroutineHelper.StopCoroutine(_changeBgRoutine);
         }
     }
 }

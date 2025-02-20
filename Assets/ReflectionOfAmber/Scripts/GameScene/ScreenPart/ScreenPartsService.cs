@@ -57,12 +57,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             _debugHelperService = debugHelperService;
             
-            screenTextService.OnEndTyping += OnEndTyping;
-            chooseWindowService.OnChoose += OnChooseClick;
-            cameraActionService.OnTakePhoto += TakePhoto;
-            screenPartNextDialogButton.OnClickButton += ShowNextPart;
-            screenPartsService.OnPlayNextPart += ForceShowNextPart;
-            screenPartsService.OnPlayNextScene += ShowNextScene;
+            _screenTextService.OnEndTyping += OnEndTyping;
+            _chooseWindowService.OnChoose += OnChooseClick;
+            _cameraActionService.OnTakePhoto += TakePhoto;
+            _screenPartNextDialogButton.OnClickButton += ShowNextPart;
+            _screenPartsServiceFacade.OnPlayNextPart += ForceShowNextPart;
+            _screenPartsServiceFacade.OnPlayNextScene += ShowNextScene;
             
             m_inputService.AddListener(this);
             ShouldReceiveInput = true;
@@ -551,6 +551,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         public void Dispose()
         {
             m_inputService.RemoveListener(this);
+            
+            _screenTextService.OnEndTyping -= OnEndTyping;
+            _chooseWindowService.OnChoose -= OnChooseClick;
+            _cameraActionService.OnTakePhoto -= TakePhoto;
+            _screenPartNextDialogButton.OnClickButton -= ShowNextPart;
+            _screenPartsServiceFacade.OnPlayNextPart -= ForceShowNextPart;
+            _screenPartsServiceFacade.OnPlayNextScene -= ShowNextScene;
         }
     }
 }

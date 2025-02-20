@@ -69,7 +69,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         public void Dispose()
         {
-            
+            _chooseWindowUiView.OnChoose -= OnChooseClick;
         }
     }
 }

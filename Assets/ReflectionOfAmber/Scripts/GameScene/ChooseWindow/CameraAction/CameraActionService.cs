@@ -47,7 +47,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction
 
         public void Dispose()
         {
-            Debug.Log("CameraActionService Disposing");
+            _cameraActionUiView.OnTakePhoto -= OnTakePhotoAction;
         }
     }
 }

@@ -16,15 +16,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             InputService inputService
             )
         {
+            m_screenPartsService = screenPartsService;
             _chapterNotesView = chapterNotesView;
             m_inputService = inputService;
 
-            screenPartsService.OnOpenPart += OnChangePartHandler;
+            m_screenPartsService.OnOpenPart += OnChangePartHandler;
             GlobalEvent.OnCallType += OnOpenNotesHandler;
         }
 
         private readonly ChapterNotesView _chapterNotesView;
         private readonly InputService m_inputService;
+        private readonly ScreenPartsService m_screenPartsService;
 
         private void OnOpenNotesHandler(CallKeyType callKeyType)
         {
@@ -84,6 +86,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
         public void Dispose()
         {
             m_inputService.RemoveForceRedirected(this);
+            GlobalEvent.OnCallType -= OnOpenNotesHandler;
+            _chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
+            m_screenPartsService.OnOpenPart -= OnChangePartHandler;
         }
         
         public bool ShouldReceiveInput { get; set; } = true;

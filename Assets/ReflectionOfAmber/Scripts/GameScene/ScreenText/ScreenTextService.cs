@@ -25,14 +25,19 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _coroutineHelper = coroutineHelper;
             _screenTextUiView = gamePlayCanvas.GetComponentInChildren<ScreenTextUiView>();
             m_inputService = inputService;
-            uiClickHandler.OnClick += EndTyping;
-            screenPartNextDialogButton.OnClickButton += EndTyping;
+            m_UiClickHandler = uiClickHandler;
+            m_ScreenPartNextDialogButton = screenPartNextDialogButton;
+            
+            m_UiClickHandler.OnClick += EndTyping;
+            m_ScreenPartNextDialogButton.OnClickButton += EndTyping;
             m_inputService.AddListener(this);
         }
      
         private readonly ScreenTextUiView _screenTextUiView;
         private readonly CoroutineHelper _coroutineHelper;
         private readonly InputService m_inputService;
+        private readonly UiClickHandler m_UiClickHandler;
+        private readonly ScreenPartNextDialogButton m_ScreenPartNextDialogButton;
         
         private bool _isTextEnable = true;
         private bool _isTyping;
@@ -163,6 +168,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             }
             
             m_inputService.RemoveListener(this);
+            
+            m_UiClickHandler.OnClick -= EndTyping;
+            m_ScreenPartNextDialogButton.OnClickButton -= EndTyping;
         }
     }
 }
