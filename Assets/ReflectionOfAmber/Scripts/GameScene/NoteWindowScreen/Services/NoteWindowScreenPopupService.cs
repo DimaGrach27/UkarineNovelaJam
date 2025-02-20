@@ -83,6 +83,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             }
         }
 
+        public bool ShouldReceiveInput { get; set; } = true;
+
         public void Dispose()
         {
             Debug.Log("NoteWindowScreenPopupService.Dispose");

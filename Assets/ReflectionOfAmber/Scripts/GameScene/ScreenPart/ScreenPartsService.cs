@@ -9,7 +9,6 @@ using ReflectionOfAmber.Scripts.GameScene.Characters;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ChooseWindow.CameraAction;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using ReflectionOfAmber.Scripts.GameScene.ScreenText;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -66,6 +65,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             screenPartsService.OnPlayNextScene += ShowNextScene;
             
             m_inputService.AddListener(this);
+            ShouldReceiveInput = true;
         }
         
         [Inject]
@@ -231,6 +231,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         {
             if(_blockClick || !GameModel.IsGamePlaying || _chooseWindowService.IsActive || _currentPartSo == null)
             {
+                Debug.Log("Return");
                 return;
             }
             
@@ -244,6 +245,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             Debug.Log($"SHOW next: {CurrentPart}");
             CurrentPart++;
+            _blockClick = true;
 
             if (CurrentPart >= _currentSceneSo.ScreenParts.Length )
             {
@@ -373,6 +375,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             string key = $"{_currentScene}_part_{CurrentPart}";
             string showText = TranslatorParser.GetText(key);
 
+            ShouldReceiveInput = false;
             _screenPartNextDialogButton.Visible = false;
             
             _chooseWindowService.SetChooses(
@@ -494,6 +497,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 SaveService.SetChoose(_currentSceneSo.SceneKey, chooseScene.Scene.SceneKey);
             }
 
+            ShouldReceiveInput = true;
+
             // if (chooseScene.findDependent.enable)
             // {
             //     bool result = true;
@@ -533,11 +538,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.SPACE)
+            if (inputAction == InputAction.SPACE && !_blockClick)
             {
+                Debug.Log("OnInputAction: ShowNextPart");
+                // ShouldReceiveInput = false;
                 ShowNextPart();
             }
         }
+
+        public bool ShouldReceiveInput { get; set; }
 
         public void Dispose()
         {

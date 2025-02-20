@@ -85,5 +85,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
         {
             m_inputService.RemoveForceRedirected(this);
         }
+        
+        public bool ShouldReceiveInput { get; set; } = true;
     }
 }

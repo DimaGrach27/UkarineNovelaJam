@@ -120,6 +120,8 @@ namespace ReflectionOfAmber.Scripts.GameScene
             }
         }
         
+        public bool ShouldReceiveInput { get; set; } = true;
+
         public class Factory : PlaceholderFactory<InfoDescription> { }
     }
 }

@@ -83,5 +83,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
                 NotConfirm();
             }
         }
+        
+        public bool ShouldReceiveInput { get; set; } = true;
     }
 }

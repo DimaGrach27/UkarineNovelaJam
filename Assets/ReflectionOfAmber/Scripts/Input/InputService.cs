@@ -63,7 +63,10 @@ namespace ReflectionOfAmber.Scripts.Input
 
             foreach (var inputListener in m_listeners)
             {
-                inputListener.OnInputAction(inputAction);
+                if(inputListener.ShouldReceiveInput)
+                {
+                    inputListener.OnInputAction(inputAction);
+                }
             }
         }
 

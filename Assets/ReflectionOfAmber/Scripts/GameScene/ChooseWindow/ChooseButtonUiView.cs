@@ -2,6 +2,7 @@
 using System.Collections;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         
         public event Action<NextScene> OnChoose; 
         
-        private Button _button;
-        private Button Button => _button ??= GetComponent<Button>();
+        private ButtonExt _button;
+        private ButtonExt Button => _button ??= GetComponent<ButtonExt>();
 
         private NextScene _chooseScene;
 
@@ -50,7 +51,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             }
         }
 
-        private void ClickButton() => OnChoose?.Invoke(_chooseScene);
+        private void ClickButton()
+        {
+            Debug.Log($"Choose scene choosed: {_chooseScene.Scene.SceneKey}");
+            OnChoose?.Invoke(_chooseScene);
+        }
 
         private IEnumerator ChooseBlinkRoutine()
         {

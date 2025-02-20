@@ -148,6 +148,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             }
         }
 
+        public bool ShouldReceiveInput { get; set; } = true;
+
         public void Dispose()
         {
             if(_typingCoroutine != null && _coroutineHelper != null)
