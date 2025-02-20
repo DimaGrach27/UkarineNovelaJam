@@ -72,7 +72,7 @@ MonoBehaviour:
       statusesValues: []
     screenPosition: 0
     characterImage: 0
-    nameCharacter: 1
+    nameCharacter: 0
     textShow: "\u0412 \u0442\u0456 \u0447\u0430\u0441\u0438 \u0432\u0441\u0456 \u0432\u0436\u0435
       \u0437\u0432\u0430\u043B\u0438 \u043C\u0435\u043D\u0435 \u0412\u0456\u043B\u044C\u0448\u0430\u043D\u043A\u043E\u044E.
       \u0426\u0435 \u0442\u0430\u043A\u0430 \u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0430
