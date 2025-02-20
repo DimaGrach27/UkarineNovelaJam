@@ -5,7 +5,6 @@ using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.EndScene
@@ -20,13 +19,17 @@ namespace ReflectionOfAmber.Scripts.EndScene
         private Coroutine _delayLoad;
         private AudioSystemService _audioSystemService;
         private FadeService _fadeService;
+        private SceneService m_SceneService;
 
         [Inject]
-        public void Construct(AudioSystemService audioSystemService,
-            FadeService fadeService)
+        public void Construct(
+            AudioSystemService audioSystemService,
+            FadeService fadeService,
+            SceneService sceneService)
         {
             _audioSystemService = audioSystemService;
             _fadeService = fadeService;
+            m_SceneService = sceneService;
         }
 
         private void Awake()
@@ -68,7 +71,7 @@ namespace ReflectionOfAmber.Scripts.EndScene
             _fadeService.FadeIn(duration);
             yield return new WaitForSeconds(duration);
             SaveService.ResetAllSaves();
-            SceneManager.LoadScene("MainMenu");
+            m_SceneService.LoadMainMenuScene();
         }
     }
 }
