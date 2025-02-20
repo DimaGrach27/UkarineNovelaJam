@@ -76,7 +76,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         public void Dispose()
         {
-            
+            _noteWindowSaveScreen.OnOpen -= OnOpenHandler;
+            _noteWindowSaveScreen.OnCLickButton -= OnClickButtonHandler;
         }
     }
 }

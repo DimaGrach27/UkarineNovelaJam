@@ -2,7 +2,6 @@
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
 using ReflectionOfAmber.Scripts.Input;
-using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
@@ -89,6 +88,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             m_inputService.RemoveForceRedirected(this);
             m_inputService.ForceBlockInput(false);
             m_inputService.RemoveListener(this);
+            
+            _noteWindowScreenPopup.OnSelectWindowClick -= OnSelectWindowHandler;
+            GlobalEvent.OnCallType -= OnOpenHandler;
+            GlobalEvent.OnCallType -= OnOpenWithoutCanCloseHandler;
         }
     }
 }

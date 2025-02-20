@@ -8,7 +8,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.LoadScreen
 {
-    public class LoadScreenService
+    public class LoadScreenService : IDisposable
     {
         private readonly LoadScreenView _loadScreenView;
         private readonly ConfirmScreen _confirmScreen;
@@ -25,8 +25,8 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
             _confirmScreen = confirmScreen;
             _sceneService = sceneService;
             
-            loadScreenView.OnCLickButton += OnClickToCardHandler;
-            loadScreenView.OnCloseClick += OnCloseClickHandler;
+            _loadScreenView.OnCLickButton += OnClickToCardHandler;
+            _loadScreenView.OnCloseClick += OnCloseClickHandler;
 
             _hasSaveArray = new bool[_loadScreenView.Count];
         }
@@ -74,5 +74,11 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
         }
 
         private void OnCloseClickHandler() => OnCloseClick?.Invoke();
+        
+        public void Dispose()
+        {
+            _loadScreenView.OnCLickButton -= OnClickToCardHandler;
+            _loadScreenView.OnCloseClick -= OnCloseClickHandler;
+        }
     }
 }

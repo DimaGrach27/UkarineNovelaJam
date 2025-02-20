@@ -19,12 +19,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             _audioSystemService = audioSystemService;
             _globalBrightnessService = globalBrightnessService;
             
-            noteWindowSettingsScreenView.OnChangeSpeedText += ChangeSpeedText;
-            noteWindowSettingsScreenView.OnChangeMusicVolume += ChangeMusicVolume;
-            noteWindowSettingsScreenView.OnChangeSoundVolume += ChangeSoundVolume;
-            noteWindowSettingsScreenView.OnChangeBrightnessValue += ChangeBrightnessValue;
+            m_noteWindowSettingsScreenView  = noteWindowSettingsScreenView;
+            
+            m_noteWindowSettingsScreenView.OnChangeSpeedText += ChangeSpeedText;
+            m_noteWindowSettingsScreenView.OnChangeMusicVolume += ChangeMusicVolume;
+            m_noteWindowSettingsScreenView.OnChangeSoundVolume += ChangeSoundVolume;
+            m_noteWindowSettingsScreenView.OnChangeBrightnessValue += ChangeBrightnessValue;
         }
-        
+
+        private readonly NoteWindowSettingsScreenView m_noteWindowSettingsScreenView;
         private readonly AudioSystemService _audioSystemService;
         private readonly GlobalBrightnessService _globalBrightnessService;
         
@@ -59,7 +62,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         public void Dispose()
         {
-            
+            m_noteWindowSettingsScreenView.OnChangeSpeedText -= ChangeSpeedText;
+            m_noteWindowSettingsScreenView.OnChangeMusicVolume -= ChangeMusicVolume;
+            m_noteWindowSettingsScreenView.OnChangeSoundVolume -= ChangeSoundVolume;
+            m_noteWindowSettingsScreenView.OnChangeBrightnessValue -= ChangeBrightnessValue;
         }
     }
 }

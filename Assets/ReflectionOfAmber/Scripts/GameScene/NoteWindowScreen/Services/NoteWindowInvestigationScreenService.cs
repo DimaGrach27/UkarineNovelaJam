@@ -10,6 +10,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 {
     public class NoteWindowInvestigationScreenService : IDisposable
     {
+        private readonly NoteWindowInvestigationScreen m_NoteWindowInvestigationScreen;
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly ConfirmScreen _confirmScreen;
         private readonly string[] _nextScenes;
@@ -24,6 +25,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         {
             _screenPartsServiceFacade = screenPartsServiceFacade;
             _confirmScreen = confirmScreen;
+            m_NoteWindowInvestigationScreen = noteWindowInvestigationScreen;
             
             _nextScenes = new string[3];
 
@@ -31,7 +33,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             _nextScenes[1] = "scene_3_164_1";
             _nextScenes[2] = "scene_3_164_2";
             
-            noteWindowInvestigationScreen.OnChoose += OnChooseClick;
+            m_NoteWindowInvestigationScreen.OnChoose += OnChooseClick;
         }
         
 
@@ -54,7 +56,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         public void Dispose()
         {
-            
+            m_NoteWindowInvestigationScreen.OnChoose -= OnChooseClick;
         }
     }
 }
