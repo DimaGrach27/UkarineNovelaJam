@@ -115,6 +115,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly DebugHelperService _debugHelperService;
 
         private bool _blockClick;
+        private bool m_LoadingNewBg;
         
         private ScreenSceneScriptableObject _currentSceneSo;
         private ScreenPart _currentPartSo;
@@ -148,6 +149,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         IEnumerator FirstInit()
         {
+            _screenPartNextDialogButton.Visible = false;
+
             _currentSceneSo = GameModel.GetScene(CurrentScene);
             _bgService.Show(_currentSceneSo.ChangeBackGround.bgEnum, null);
 
@@ -188,7 +191,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             if (currentSceneSo.ChangeBackGround.enable)
             {
-                _bgService.Show(currentSceneSo.ChangeBackGround.bgEnum, ShowScene);
+                _screenPartNextDialogButton.Visible = false;
+                m_LoadingNewBg = true;
+                _bgService.Show(currentSceneSo.ChangeBackGround.bgEnum, () =>
+                {
+                    m_LoadingNewBg = false;
+                    ShowScene();
+                });
                 return;
             }
             
@@ -229,7 +238,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private void ShowNextPart()
         {
-            if(_blockClick || !GameModel.IsGamePlaying || _chooseWindowService.IsActive || _currentPartSo == null)
+            if(_blockClick 
+               || !GameModel.IsGamePlaying 
+               || _chooseWindowService.IsActive 
+               || _currentPartSo == null 
+               || m_LoadingNewBg)
             {
                 Debug.Log("Return");
                 return;
@@ -540,8 +553,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         {
             if (inputAction == InputAction.SPACE && !_blockClick)
             {
-                Debug.Log("OnInputAction: ShowNextPart");
-                // ShouldReceiveInput = false;
                 ShowNextPart();
             }
         }

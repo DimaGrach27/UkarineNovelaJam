@@ -23,7 +23,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             InputService inputService
             )
         {
-            Debug.Log($"NoteWindowScreenPopupService new {noteWindowScreenPopup}");
             _noteWindowScreenPopup = noteWindowScreenPopup;
             m_inputService = inputService;
             _noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
@@ -87,7 +86,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         public void Dispose()
         {
-            Debug.Log("NoteWindowScreenPopupService.Dispose");
             m_inputService.RemoveForceRedirected(this);
             m_inputService.ForceBlockInput(false);
             m_inputService.RemoveListener(this);
