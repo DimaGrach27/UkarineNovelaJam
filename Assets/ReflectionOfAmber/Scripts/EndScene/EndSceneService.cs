@@ -15,8 +15,9 @@ namespace ReflectionOfAmber.Scripts.EndScene
         [SerializeField] private CanvasGroup groupImages;
 
         private bool _isReadyToTap;
+        private bool m_loadRunning;
 
-        private Coroutine _delayLoad;
+        // private Coroutine _delayLoad;
         private AudioSystemService _audioSystemService;
         private FadeService _fadeService;
         private SceneService m_SceneService;
@@ -60,16 +61,17 @@ namespace ReflectionOfAmber.Scripts.EndScene
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(!_isReadyToTap || _delayLoad != null) return;
+            if(!_isReadyToTap || m_loadRunning)
+            {
+                return;
+            }
+            float duration = 2.0f;
 
-            _delayLoad = StartCoroutine(DelayLoadMainMenu());
+            _fadeService.FadeIn(duration, LoadMainMenu);
         }
 
-        private IEnumerator DelayLoadMainMenu()
+        private void LoadMainMenu()
         {
-            float duration = 2.0f;
-            _fadeService.FadeIn(duration);
-            yield return new WaitForSeconds(duration);
             SaveService.ResetAllSaves();
             m_SceneService.LoadMainMenuScene();
         }
