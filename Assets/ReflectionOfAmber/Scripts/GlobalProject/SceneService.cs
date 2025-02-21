@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using ReflectionOfAmber.Scripts.FadeScreen;
+﻿using ReflectionOfAmber.Scripts.FadeScreen;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -9,44 +8,39 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
     public class SceneService
     {
         [Inject]
-        public SceneService(CoroutineHelper coroutineHelper,
+        public SceneService(
             FadeService fadeService)
         {
-            _coroutineHelper = coroutineHelper;
             _fadeService = fadeService;
         }
 
-        private readonly CoroutineHelper _coroutineHelper;
         private readonly FadeService _fadeService;
         
         private Coroutine _loadCoroutine;
 
         public void LoadEndGame()
         {
-            if (_loadCoroutine != null) _coroutineHelper.StopCoroutine(_loadCoroutine);
-
             SaveService.ResetAllSaves();
-
-            _loadCoroutine = _coroutineHelper.StartCoroutine(LoadRoutine(Scenes.EndScene));
+            LoadScene(Scenes.EndScene);
         }
 
         public void LoadGameScene()
         {
-            if (_loadCoroutine != null) _coroutineHelper.StopCoroutine(_loadCoroutine);
-            _loadCoroutine = _coroutineHelper.StartCoroutine(LoadRoutine(Scenes.MainScene));
+            LoadScene(Scenes.MainScene);
         }
         
         public void LoadMainMenuScene()
         {
-            if (_loadCoroutine != null) _coroutineHelper.StopCoroutine(_loadCoroutine);
-            _loadCoroutine = _coroutineHelper.StartCoroutine(LoadRoutine(Scenes.MainMenuScene));
+            LoadScene(Scenes.MainMenuScene);
         }
         
-        private IEnumerator LoadRoutine(string sceneName)
+        private void LoadScene(string sceneName)
         {
-            _fadeService.FadeIn();
-            yield return new WaitForSeconds(1.5f);
-            SceneManager.LoadScene(sceneName);
+            float duration = 1.5f;
+            _fadeService.FadeIn(duration, () =>
+            {
+                SceneManager.LoadScene(sceneName);
+            });
         }
     }
 

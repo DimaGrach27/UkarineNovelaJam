@@ -16,8 +16,7 @@ namespace ReflectionOfAmber.Scripts.EndScene
 
         private bool _isReadyToTap;
         private bool m_loadRunning;
-
-        // private Coroutine _delayLoad;
+        
         private AudioSystemService _audioSystemService;
         private FadeService _fadeService;
         private SceneService m_SceneService;
@@ -65,13 +64,13 @@ namespace ReflectionOfAmber.Scripts.EndScene
             {
                 return;
             }
-            float duration = 2.0f;
 
-            _fadeService.FadeIn(duration, LoadMainMenu);
+            LoadMainMenu();
         }
 
         private void LoadMainMenu()
         {
+            m_loadRunning = true;
             SaveService.ResetAllSaves();
             m_SceneService.LoadMainMenuScene();
         }

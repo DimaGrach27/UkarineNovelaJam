@@ -35,8 +35,6 @@ namespace ReflectionOfAmber.Scripts.FadeScreen
             {
                 onFadeDone?.Invoke();
             });
-            // await Task.Delay((int)(duration * 1000));
-            // onFadeDone?.Invoke();
         }
         
         public void FadeOut(float duration = GlobalConstant.DEFAULT_FADE_DURATION, Action onFadeDone = null)
@@ -50,11 +48,9 @@ namespace ReflectionOfAmber.Scripts.FadeScreen
             }
             _fadeTween = _fadeUiView.CanvasGroup.DOFade(0.0f, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
+                _fadeUiView.Visible = false;
                 onFadeDone?.Invoke();
             });
-            
-            // await Task.Delay((int)(duration * 1000));
-            // _fadeUiView.Visible = false;
         }
 
         public void VisibleFade(bool isVisible) => _fadeUiView.Visible = isVisible;
