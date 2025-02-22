@@ -73,7 +73,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             if (inputAction == InputAction.PAUSE)
             {
                 CloseNotesHandler();
-                m_inputService.RemoveForceRedirected(this);
             }
         }
 
@@ -81,6 +80,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
         {
             _chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
             _chapterNotesView.Close();
+            m_inputService.RemoveForceRedirected(this);
         }
 
         public void Dispose()
