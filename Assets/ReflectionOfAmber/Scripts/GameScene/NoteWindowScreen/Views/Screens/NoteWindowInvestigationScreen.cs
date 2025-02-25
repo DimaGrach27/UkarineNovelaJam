@@ -4,7 +4,9 @@ using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindow;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 {
@@ -17,7 +19,23 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         [SerializeField] private NoteButtonUiView[] buttonPrefab;
 
         private readonly Dictionary<KillerName, NoteButtonUiView> _killersMap = new();
+        
+        private const string KEY_TUTUOR_NOTE = "NOTE_TUTOR_KEY";
+        private InfoDescription.Factory m_infoDescriptionFactory;
+        
+        private bool IsTutorWasShow
+        {
+            get => PlayerPrefs.GetInt(KEY_TUTUOR_NOTE, 0) != 0;
 
+            set => PlayerPrefs.SetInt(KEY_TUTUOR_NOTE, value ? 1 :0);
+        }
+        
+        [Inject]
+        public void Construct(InfoDescription.Factory infoDescriptionFactory)
+        {
+            m_infoDescriptionFactory = infoDescriptionFactory;
+        }
+        
         private void Awake()
         {
             for (int i = 0; i < buttonPrefab.Length; i++)
@@ -36,6 +54,22 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         {
             base.Open();
             InitNote();
+            
+            if (!IsTutorWasShow)
+            {
+                TranslatorKeys[] texts = 
+                {
+                    TranslatorKeys.TEXT_INFO_NOTE_PART_1,
+                    TranslatorKeys.TEXT_INFO_NOTE_PART_2,
+                    TranslatorKeys.TEXT_INFO_NOTE_PART_3,
+                };
+
+                
+                InfoDescription infoDesc = m_infoDescriptionFactory.Create();
+                infoDesc.SetInfoDescription(texts, false);
+
+                IsTutorWasShow = true;
+            }
         }
 
         private void NoteButtonUiViewOnOnChoose(int index)

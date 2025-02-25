@@ -47,6 +47,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                 {
                     _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
                     button.OnClickButton += OnSelectWindowHandler;
+                    button.gameObject.SetActive(true);
                 }
             }
 
