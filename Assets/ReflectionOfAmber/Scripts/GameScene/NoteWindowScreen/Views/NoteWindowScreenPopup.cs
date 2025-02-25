@@ -51,10 +51,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                 }
             }
 
-            if (SaveService.GetStatusValue(StatusEnum.CHOOSE_WAS_PICK))
-            {
-                _buttonsNoteMap[NoteWindowScreensEnum.INVESTIGATION_SCREEN].gameObject.SetActive(false);
-            }
+            bool canOpenInvestigationScreen = !SaveService.GetStatusValue(StatusEnum.CHOOSE_WAS_PICK);
+            _buttonsNoteMap[NoteWindowScreensEnum.INVESTIGATION_SCREEN].gameObject.SetActive(canOpenInvestigationScreen);
             
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
         }

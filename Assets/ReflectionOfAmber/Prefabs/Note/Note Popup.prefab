@@ -3480,7 +3480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_fillOffAmount
-      value: 0.49
+      value: 0.569
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
@@ -3504,7 +3504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350885, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_FillAmount
-      value: 0.49
+      value: 0.626
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_Pivot.x
@@ -3564,11 +3564,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 740
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3621,7 +3621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_fillOffAmount
-      value: 0.432
+      value: 0.536
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
@@ -3641,7 +3641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350885, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_FillAmount
-      value: 0.432
+      value: 0.536
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_Pivot.x
@@ -3701,11 +3701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 740
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 216
+      value: -130
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4017,7 +4017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_fillOffAmount
-      value: 0.467
+      value: 0.585
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
@@ -4037,7 +4037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350885, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_FillAmount
-      value: 0.467
+      value: 0.585
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_Pivot.x
@@ -4097,11 +4097,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 740
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -131
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4154,7 +4154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_fillOffAmount
-      value: 0.542
+      value: 0.635
       objectReference: {fileID: 0}
     - target: {fileID: 345350549029974401, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: noteWindowScreensEnum
@@ -4174,7 +4174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350885, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_FillAmount
-      value: 0.542
+      value: 0.635
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_Pivot.x
@@ -4234,7 +4234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 740
       objectReference: {fileID: 0}
     - target: {fileID: 4574041232415350887, guid: 770d1fbde74eddc46816cab0ae142107, type: 3}
       propertyPath: m_AnchoredPosition.y
