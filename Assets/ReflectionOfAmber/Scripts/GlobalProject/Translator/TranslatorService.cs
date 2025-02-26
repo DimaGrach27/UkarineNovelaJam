@@ -8,7 +8,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 {
-    public class TranslatorParser : IInit
+    public class TranslatorService : IInit
     {
         private const string Id = "1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc";
         private const string ExportFormat = "export?format=tsv";
@@ -23,11 +23,12 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private static readonly Dictionary<string, TranslatorData> TranslatorData = new();
         
         public event Action OnReady;
+        public event Action OnLanguageChanged;
 
         private readonly List<IEnumerator> _loadList = new ();
 
         [Inject]
-        public TranslatorParser(CoroutineHelper coroutineHelper)
+        public TranslatorService(CoroutineHelper coroutineHelper)
         {
             _coroutineHelper = coroutineHelper;
         }
@@ -120,6 +121,18 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
                 text = TranslatorData[keyStr].GetText(GameModel.CurrentLanguage.ToString());
 
             return text;
+        }
+
+        public void ChangeLanguage(TranslatorLanguages translatorLanguages)
+        {
+            if (translatorLanguages != GameModel.CurrentLanguage)
+            {
+                SaveService.LanguageStatus = translatorLanguages;
+            }
+            
+            GameModel.CurrentLanguage = translatorLanguages;
+            
+            OnLanguageChanged?.Invoke();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.Bind<GlobalBrightnessService>().FromInstance(globalBrightnessService).AsSingle().NonLazy();
             Container.Bind<SceneService>().AsSingle().NonLazy();
             Container.Bind<FadeService>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<TranslatorParser>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<TranslatorService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
 
             DebugInstallers();

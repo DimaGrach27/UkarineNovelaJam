@@ -40,7 +40,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
                 }
                 else
                 {
-                    _noteWindowSaveScreen.UpdateElement(i, null, false, TranslatorParser.GetText(TranslatorKeys.EMPTY));
+                    _noteWindowSaveScreen.UpdateElement(i, null, false, TranslatorService.GetText(TranslatorKeys.EMPTY));
                 }
             }
         }

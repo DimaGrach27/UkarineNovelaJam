@@ -44,7 +44,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             _canvasGroup.blocksRaycasts = true;
             _tween = _canvasGroup.DOFade(1.0f, 0.5f);
             
-            textDescription.text = TranslatorParser.GetText(translatorKey);
+            textDescription.text = TranslatorService.GetText(translatorKey);
             
             _currentAction = onSelectAction;
             

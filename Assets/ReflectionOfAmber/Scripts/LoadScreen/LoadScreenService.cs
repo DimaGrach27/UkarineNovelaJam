@@ -50,7 +50,7 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
                 else
                 {
                     _hasSaveArray[i] = false;
-                    _loadScreenView.UpdateElement(i, null, false, TranslatorParser.GetText(TranslatorKeys.EMPTY));
+                    _loadScreenView.UpdateElement(i, null, false, TranslatorService.GetText(TranslatorKeys.EMPTY));
                 }
             }
         }

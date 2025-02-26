@@ -10,27 +10,33 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         [SerializeField] private TranslatorKeys translatorKey;
 
         [Inject]
-        public void Construct(TranslatorParser translatorParser)
+        public void Construct(TranslatorService translatorService)
         {
-            _translatorParser = translatorParser;
-            _translatorParser.OnReady += UpdateText;
+            m_translatorService = translatorService;
+            m_translatorService.OnReady += OnTranslatorReady;
+            m_translatorService.OnLanguageChanged += UpdateText;
         }
 
-        private TranslatorParser _translatorParser;
+        private TranslatorService m_translatorService;
 
         private void Start()
         {
             GetComponent<TextMeshProUGUI>().text =
-                TranslatorParser.GetText(translatorKey);
+                TranslatorService.GetText(translatorKey);
+        }
+
+        private void OnTranslatorReady()
+        {
+            m_translatorService.OnReady -= UpdateText;
+            
+            GetComponent<TextMeshProUGUI>().text =
+                TranslatorService.GetText(translatorKey);
         }
 
         private void UpdateText()
         {
-            _translatorParser.OnReady -= UpdateText;
-            _translatorParser = null;
-            
             GetComponent<TextMeshProUGUI>().text =
-                TranslatorParser.GetText(translatorKey);
+                TranslatorService.GetText(translatorKey);
         }
     }
 }
