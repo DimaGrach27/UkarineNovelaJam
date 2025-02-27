@@ -34,7 +34,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             AudioSystemService audioSystemService,
             FadeService fadeService,
             ScreenPartNextDialogButton screenPartNextDialogButton,
-            TranslatorService translatorService,
             InputService inputService,
             
             DebugHelperService debugHelperService
@@ -51,7 +50,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _audioSystemService = audioSystemService;
             _screenPartsServiceFacade = screenPartsService;
             _fadeService = fadeService;
-            translatorService = translatorService;
             _screenPartNextDialogButton = screenPartNextDialogButton;
             m_inputService = inputService;
             
