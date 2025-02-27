@@ -31,8 +31,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             while (_countParts < chapters.Count)
             {
                 ChapterNotesPartView chapterNotesPart = Instantiate(chapterPartPrefab, container.content);
-                chapterNotesPart.Name = TranslatorParser.GetText(chapters[_countParts].name);
-                chapterNotesPart.Dialog = TranslatorParser.GetText(chapters[_countParts].text);
+                chapterNotesPart.Name = TranslatorService.GetText(chapters[_countParts].name);
+                chapterNotesPart.Dialog = TranslatorService.GetText(chapters[_countParts].text);
                 _countParts++;
             }
 

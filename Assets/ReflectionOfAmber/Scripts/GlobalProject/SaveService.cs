@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GlobalProject
@@ -352,6 +353,17 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              }
          }
 
+         public static TranslatorLanguages LanguageStatus
+         {
+             get => SettingFile.currentLang;
+
+             set
+             {
+                 SettingFile.currentLang = value;
+                 SaveJson(SETTINGS_KEY);
+             }
+         }
+
          public static void SaveGame(int index)
          {
              string pathProgress = Path($"{PROGRESS_KEY}_{index}_save");
@@ -422,6 +434,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          public float typingSpeed = 0.5f;
          public float brightnessValue = 0.5f;
          public bool isBrightnessWasChange = false;
+         public TranslatorLanguages currentLang = TranslatorLanguages.UKR;
      }
 
      [Serializable]

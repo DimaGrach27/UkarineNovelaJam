@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -13,6 +16,8 @@ namespace ReflectionOfAmber.Scripts.Settings
     public class SettingsService : MonoBehaviour
     {
         public event Action OnCloseButtonClick;
+
+        [SerializeField] private TMP_Dropdown m_languageDropdown;
         
         [SerializeField] private SettingElementSlider speedText;
         [SerializeField] private SettingElementSlider musicVolume;
@@ -23,15 +28,21 @@ namespace ReflectionOfAmber.Scripts.Settings
 
         private AudioSystemService _audioSystemService;
         private GlobalBrightnessService _globalBrightnessService;
+        private TranslatorService m_TranslatorService;
         
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
 
         [Inject]
-        public void Construct(AudioSystemService audioSystemService, GlobalBrightnessService globalBrightnessService)
+        public void Construct(
+            AudioSystemService audioSystemService,
+            GlobalBrightnessService globalBrightnessService,
+            TranslatorService translatorService
+            )
         {
             _audioSystemService = audioSystemService;
             _globalBrightnessService = globalBrightnessService;
+            m_TranslatorService = translatorService;
         }
         
         private void Start()
@@ -57,8 +68,42 @@ namespace ReflectionOfAmber.Scripts.Settings
             _canvasGroup.interactable = false;
             _canvasGroup.alpha = 0;
             _canvasGroup.blocksRaycasts = false;
+
+            InitLanguage();
         }
-        
+
+        private void InitLanguage()
+        {
+            List<TMP_Dropdown.OptionData> options = new();
+            foreach (TranslatorLanguages langName in Enum.GetValues(typeof(TranslatorLanguages)))
+            {
+                string langNameTemp = string.Empty;
+
+                switch (langName)
+                {
+                    case TranslatorLanguages.UKR:
+                        langNameTemp = "Українська";
+                        break;
+                    case TranslatorLanguages.ENG:
+                        langNameTemp = "English";
+                        break;
+                }
+
+                options.Add(new()
+                {
+                    text = langNameTemp
+                });
+            }
+
+            m_languageDropdown.options = options;
+            m_languageDropdown.SetValueWithoutNotify((int)GameModel.CurrentLanguage);
+            m_languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
+        }
+
+        private void OnLanguageChanged(int langIndex)
+        {
+            m_TranslatorService.ChangeLanguage((TranslatorLanguages)langIndex);
+        }
 
         private void ChangeSpeedText(float value)
         {

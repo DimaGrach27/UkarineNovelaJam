@@ -34,7 +34,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             AudioSystemService audioSystemService,
             FadeService fadeService,
             ScreenPartNextDialogButton screenPartNextDialogButton,
-            TranslatorParser translatorParser,
+            TranslatorService translatorService,
             InputService inputService,
             
             DebugHelperService debugHelperService
@@ -51,7 +51,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _audioSystemService = audioSystemService;
             _screenPartsServiceFacade = screenPartsService;
             _fadeService = fadeService;
-            _translatorParser = translatorParser;
+            translatorService = translatorService;
             _screenPartNextDialogButton = screenPartNextDialogButton;
             m_inputService = inputService;
             
@@ -109,7 +109,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly ScreenPartsServiceFacade _screenPartsServiceFacade;
         private readonly FadeService _fadeService;
         private readonly ScreenPartNextDialogButton _screenPartNextDialogButton;
-        private readonly TranslatorParser _translatorParser;
         private readonly InputService m_inputService;
         
         private readonly DebugHelperService _debugHelperService;
@@ -334,7 +333,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _characterService.ShowCharacter(_currentPartSo.Position, _currentPartSo.Image);
 
             string key = $"{_currentScene}_part_{CurrentPart + 1}";
-            string showText = TranslatorParser.GetText(key);
+            string showText = TranslatorService.GetText(key);
             _screenPartNextDialogButton.Visible = true;
             _screenTextService.SetText(_currentPartSo.CharacterName, showText, _currentPartSo.EndOfText);
             // _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
@@ -386,7 +385,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
             
             string key = $"{_currentScene}_part_{CurrentPart}";
-            string showText = TranslatorParser.GetText(key);
+            string showText = TranslatorService.GetText(key);
 
             ShouldReceiveInput = false;
             _screenPartNextDialogButton.Visible = false;

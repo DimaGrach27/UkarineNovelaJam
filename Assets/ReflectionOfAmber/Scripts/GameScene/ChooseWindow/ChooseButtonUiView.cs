@@ -31,7 +31,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         public void InitButton(NextScene chooseScene, bool isCameraAction)
         {
-            string showText = TranslatorParser.GetText(chooseScene.Scene.SceneKey);
+            string showText = TranslatorService.GetText(chooseScene.Scene.SceneKey);
             
             textMeshProUGUI.text = showText;
             // textMeshProUGUI.text = chooseScene.ChooseText;

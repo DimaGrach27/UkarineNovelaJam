@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 
@@ -40,6 +41,8 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
             {
                 _bgMap.Add(bgScriptable.Bg, bgScriptable);
             }
+
+            CurrentLanguage = SaveService.LanguageStatus;
         }
 
         public static ScreenSceneScriptableObject GetScene(string key)

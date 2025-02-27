@@ -30,5 +30,6 @@
         CONFIRM_RESAVE = 25,
         CONFIRM_CHOOSE = 26,
         INVESTIGATION = 27,
+        LANGUAGE = 28,
     }
 }

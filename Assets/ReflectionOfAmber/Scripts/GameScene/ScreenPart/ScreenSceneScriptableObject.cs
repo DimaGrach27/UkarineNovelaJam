@@ -60,7 +60,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         public bool endOfText = true;
         public ActionType[] actionsTypeEnd;
         
-        public string CharacterName => TranslatorParser.GetText(nameCharacter.ToString());
+        public string CharacterName => TranslatorService.GetText(nameCharacter.ToString());
         public string CharacterNameType => nameCharacter.ToString();
         public string TextShow => textShow;
         
