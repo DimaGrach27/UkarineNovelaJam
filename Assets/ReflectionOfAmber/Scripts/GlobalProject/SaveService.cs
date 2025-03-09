@@ -4,6 +4,7 @@ using System.IO;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.Steam;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GlobalProject
@@ -14,6 +15,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          private const string CHAPTER_NOTES_KEY = "chapter_notes";
          private const string SETTINGS_KEY = "settings";
          private const string STATUSES_KEY = "statuses";
+
+         public static SteamService SteamService { get; set; }
 
          private static StatusFlagFile _statusFlagFile;
          private static StatusFlagFile StatusFlagFile
@@ -108,14 +111,27 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              }
          }
 
-         private static bool ExistFile(string key) => File.Exists(Path(key));
+         private static bool ExistFile(string key)
+         {
+             return File.Exists(Path(key));
+         }
 
-         private static string Path(string key) =>
-             Application.persistentDataPath + $"/{key}_{Application.productName}.json";
+         public static string Path(string key)
+         {
+             return Application.persistentDataPath + $"/{key}_{Application.productName}.json";
+         }
+         
+         private static void SaveJson(string key)
+         {
+             string jsonData = JsonUtility.ToJson(GetJson(key));
+             File.WriteAllText(Path(key), jsonData);
+             SteamService.SaveFileToCloud(jsonData, key);
+         }
 
-         private static void SaveJson(string key) => File.WriteAllText(Path(key), JsonUtility.ToJson(GetJson(key)));
-         public static void SaveChapterNotesJson() => File.WriteAllText(Path(CHAPTER_NOTES_KEY), 
-             JsonUtility.ToJson(GetJson(CHAPTER_NOTES_KEY)));
+         public static void SaveChapterNotesJson()
+         {
+             SaveJson(CHAPTER_NOTES_KEY);
+         }
 
          private static object GetJson(string key)
          {
@@ -370,9 +386,17 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              string pathStatuses = Path($"{STATUSES_KEY}_{index}_save");
              string pathChapter = Path($"{CHAPTER_NOTES_KEY}_{index}_save");
              
-             File.WriteAllText(pathProgress, JsonUtility.ToJson(SaveFile));
-             File.WriteAllText(pathStatuses, JsonUtility.ToJson(StatusFlagFile));
-             File.WriteAllText(pathChapter, JsonUtility.ToJson(ChapterNotesFile));
+             string saveFileJson = JsonUtility.ToJson(SaveFile);
+             string statusFlagFileJson = JsonUtility.ToJson(StatusFlagFile);
+             string chapterNotesFileJson = JsonUtility.ToJson(ChapterNotesFile);
+             
+             File.WriteAllText(pathProgress, saveFileJson);
+             File.WriteAllText(pathStatuses, statusFlagFileJson);
+             File.WriteAllText(pathChapter, chapterNotesFileJson);
+             
+             SteamService.SaveFileToCloud(saveFileJson, pathProgress);
+             SteamService.SaveFileToCloud(statusFlagFileJson, pathStatuses);
+             SteamService.SaveFileToCloud(chapterNotesFileJson, pathChapter);
          }
 
          public static bool TryGetSaveGame(int index, out SaveFile saveFile)

@@ -7,6 +7,7 @@ using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using ReflectionOfAmber.Scripts.Input;
 using ReflectionOfAmber.Scripts.Settings;
+using ReflectionOfAmber.Scripts.Steam;
 using UnityEngine;
 using Zenject;
 
@@ -35,9 +36,11 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         
         private void ServicesInstallers()
         {
+            Container.BindInterfacesAndSelfTo<SteamService>().AsSingle().NonLazy();
+
             Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
             
-            Container.Bind<SettingsService>().FromInstance(settingsService).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<SettingsService>().FromInstance(settingsService).AsSingle().NonLazy();
             Container.Bind<CoroutineHelper>().FromInstance(coroutineHelper).AsSingle().NonLazy();
             Container.Bind<AudioSystemService>().FromInstance(audioSystemService).AsSingle().NonLazy();
             Container.Bind<ConfirmScreen>().FromInstance(confirmScreen).AsSingle().NonLazy();
@@ -47,6 +50,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.BindInterfacesAndSelfTo<TranslatorService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
 
+            SaveService.SteamService = Container.Resolve<SteamService>();
             DebugInstallers();
         }
         

@@ -22,8 +22,10 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         
         private void Awake()
         {
-            settingElementSlider.OnChangeValue += OnChangeValue;
             settingElementSlider.SetValue(SaveService.BrightnessValue * 10);
+            _globalBrightnessService.BrightnessValue = SaveService.BrightnessValue;
+
+            settingElementSlider.OnChangeValue += OnChangeValue;
             loadButton.onClick.AddListener(LoadMineMenu);
         }
 

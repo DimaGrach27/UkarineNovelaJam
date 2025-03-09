@@ -13,9 +13,10 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.Settings
 {
-    public class SettingsService : MonoBehaviour
+    public class SettingsService : MonoBehaviour, IInit
     {
         public event Action OnCloseButtonClick;
+        public event Action OnReady;
 
         [SerializeField] private TMP_Dropdown m_languageDropdown;
         
@@ -32,7 +33,7 @@ namespace ReflectionOfAmber.Scripts.Settings
         
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
-
+        
         [Inject]
         public void Construct(
             AudioSystemService audioSystemService,
@@ -45,31 +46,37 @@ namespace ReflectionOfAmber.Scripts.Settings
             m_TranslatorService = translatorService;
         }
         
-        private void Start()
+        public void Init()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
-            
-            speedText.OnChangeValue += ChangeSpeedText;
-            musicVolume.OnChangeValue += ChangeMusicVolume;
-            soundVolume.OnChangeValue += ChangeSoundVolume;
-            brightnessValue.OnChangeValue += ChangeBrightnessValue;
-            
+
             float valueTyping = 1.0f - SaveService.TypingSpeed / 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
             GameModel.TYPING_SPEED = valueTyping;
-            
+
             speedText.SetValue(SaveService.TypingSpeed * 10);
             musicVolume.SetValue(SaveService.MusicVolume * 10);
             soundVolume.SetValue(SaveService.AudioVolume * 10);
             brightnessValue.SetValue(SaveService.BrightnessValue * 10);
+
+            _audioSystemService.ChangeMusic(SaveService.MusicVolume);
+            _audioSystemService.ChangeAudio(SaveService.AudioVolume);
+            _globalBrightnessService.BrightnessValue = SaveService.BrightnessValue;
             
             button.onClick.AddListener(Close);
+
+            speedText.OnChangeValue += ChangeSpeedText;
+            musicVolume.OnChangeValue += ChangeMusicVolume;
+            soundVolume.OnChangeValue += ChangeSoundVolume;
+            brightnessValue.OnChangeValue += ChangeBrightnessValue;
 
             _canvasGroup.interactable = false;
             _canvasGroup.alpha = 0;
             _canvasGroup.blocksRaycasts = false;
 
             InitLanguage();
+            
+            OnReady?.Invoke();
         }
 
         private void InitLanguage()
@@ -121,7 +128,6 @@ namespace ReflectionOfAmber.Scripts.Settings
             SaveService.MusicVolume = value / 10;
         }
         
-                
         private void ChangeSoundVolume(float value)
         {
             _audioSystemService.ChangeAudio(value / 10);

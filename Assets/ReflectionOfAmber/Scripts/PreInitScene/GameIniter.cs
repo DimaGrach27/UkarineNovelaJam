@@ -23,6 +23,7 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         {
             if (_inits.Count > 0)
             {
+                Debug.Log($"Init: {_inits[0].GetType().Name}");
                 _inits[0].OnReady += InitNext;
                 _inits[0].Init();
             }
@@ -35,12 +36,12 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
             
             if (_inits.Count > 0)
             {
+                Debug.Log($"Init: {_inits[0].GetType().Name}");
                 _inits[0].OnReady += InitNext;
                 _inits[0].Init();
                 return;
             }
             
-
             if (SaveService.BrightnessStatus)
             {
                 LoadMineMenu();

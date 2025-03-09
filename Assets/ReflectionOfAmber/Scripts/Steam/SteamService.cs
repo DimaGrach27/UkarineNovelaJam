@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using Steamworks;
 using Steamworks.Data;
 using UnityEngine;
@@ -22,21 +24,27 @@ namespace ReflectionOfAmber.Scripts.Steam
                 Debug.Log($"Steam name is = {steamName}"); 
                 Debug.Log($"Steam language is = {SteamApps.GameLanguage}");
                 
-                Debug.Log($"Files save in cloud: ");
-                foreach ( var file in SteamRemoteStorage.Files )
+                Debug.Log($"Files saved in cloud: ");
+                foreach (var file in SteamRemoteStorage.Files)
                 {
-                    Debug.Log( $"{file} ({SteamRemoteStorage.FileSize(file)} {SteamRemoteStorage.FileTime( file )})" );
+                    string jsonFile = LoadFileFromCloud(file);
+                    string filePath = SaveService.Path(file);
+                    
+                    File.WriteAllText(filePath, jsonFile);
+                    Debug.Log( $"{file} ({SteamRemoteStorage.FileSize(file)} {SteamRemoteStorage.FileTime(file)})" );
                 }
                 OnReady?.Invoke();
             }
-            catch ( Exception e )
+            catch (Exception e)
             {
+                Debug.LogException(e);
                 // Something went wrong - it's one of these:
                 //
                 //     Steam is closed?
                 //     Can't find steam_api dll?
                 //     Don't have permission to play app?
                 //
+                throw;
             }
         }
         
@@ -74,6 +82,11 @@ namespace ReflectionOfAmber.Scripts.Steam
             {
                 Debug.Log( $"{file} ({SteamRemoteStorage.FileSize(file)} {SteamRemoteStorage.FileTime( file )})" );
             }
+        }
+
+        public void DeleteFileFromCloud(string filename)
+        {
+            SteamRemoteStorage.FileDelete(filename);
         }
         
         public string LoadFileFromCloud(string filename)
