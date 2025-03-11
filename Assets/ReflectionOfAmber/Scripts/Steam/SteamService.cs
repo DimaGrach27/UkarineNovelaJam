@@ -11,7 +11,7 @@ namespace ReflectionOfAmber.Scripts.Steam
 {
     public class SteamService : IInit, ITickable, IDisposable
     {
-        private const int AppID = 3562420;
+        private const int APP_ID = 3562420;
         
         public event Action OnReady;
         
@@ -19,7 +19,7 @@ namespace ReflectionOfAmber.Scripts.Steam
         {
             try
             {
-                SteamClient.Init(AppID);
+                SteamClient.Init(APP_ID);
                 string steamName = SteamClient.Name;
                 Debug.Log($"Steam name is = {steamName}"); 
                 Debug.Log($"Steam language is = {SteamApps.GameLanguage}");
@@ -33,6 +33,7 @@ namespace ReflectionOfAmber.Scripts.Steam
                     File.WriteAllText(filePath, jsonFile);
                     Debug.Log( $"{file} ({SteamRemoteStorage.FileSize(file)} {SteamRemoteStorage.FileTime(file)})" );
                 }
+                
                 OnReady?.Invoke();
             }
             catch (Exception e)

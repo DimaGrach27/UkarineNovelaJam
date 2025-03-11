@@ -12,33 +12,33 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         [Inject]
         public GameIniter(List<IInit> inits, LoadingScreenView loadingScreenView)
         {
-            _inits = inits;
-            _loadingScreenView = loadingScreenView;
+            m_Inits = inits;
+            m_LoadingScreenView = loadingScreenView;
         }
 
-        private readonly List<IInit> _inits;
-        private readonly LoadingScreenView _loadingScreenView;
+        private readonly List<IInit> m_Inits;
+        private readonly LoadingScreenView m_LoadingScreenView;
         
         public void Initialize()
         {
-            if (_inits.Count > 0)
+            if (m_Inits.Count > 0)
             {
-                Debug.Log($"Init: {_inits[0].GetType().Name}");
-                _inits[0].OnReady += InitNext;
-                _inits[0].Init();
+                Debug.Log($"Init: {m_Inits[0].GetType().Name}");
+                m_Inits[0].OnReady += InitNext;
+                m_Inits[0].Init();
             }
         }
 
         private void InitNext()
         {
-            _inits[0].OnReady -= InitNext;
-            _inits.RemoveAt(0);
+            m_Inits[0].OnReady -= InitNext;
+            m_Inits.RemoveAt(0);
             
-            if (_inits.Count > 0)
+            if (m_Inits.Count > 0)
             {
-                Debug.Log($"Init: {_inits[0].GetType().Name}");
-                _inits[0].OnReady += InitNext;
-                _inits[0].Init();
+                Debug.Log($"Init: {m_Inits[0].GetType().Name}");
+                m_Inits[0].OnReady += InitNext;
+                m_Inits[0].Init();
                 return;
             }
             
@@ -48,7 +48,7 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
             }
             else
             {
-                Object.Destroy(_loadingScreenView.gameObject);
+                Object.Destroy(m_LoadingScreenView.gameObject);
             }
         }
         
