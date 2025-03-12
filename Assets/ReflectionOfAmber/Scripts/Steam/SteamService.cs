@@ -58,6 +58,8 @@ namespace ReflectionOfAmber.Scripts.Steam
         {
             var ach = new Achievement(SteamAchievementKeys.GetId(achieveKey));
             ach.Trigger();
+            
+            SteamUserStats.StoreStats();
         }
 
         public void ClearAchievement(AchievementKeys achieveKey)

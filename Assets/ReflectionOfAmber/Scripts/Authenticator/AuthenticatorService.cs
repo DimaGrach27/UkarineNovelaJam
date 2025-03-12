@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -54,6 +53,7 @@ namespace ReflectionOfAmber.Scripts.Authenticator
             {
                 Debug.Log($"SignIn is successful. ID: {AuthenticationService.Instance.PlayerId}");
                 OnReady?.Invoke();
+                return;
             }
 
             Application.Quit();

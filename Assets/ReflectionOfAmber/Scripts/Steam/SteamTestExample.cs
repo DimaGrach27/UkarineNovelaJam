@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.Analytic;
 using ReflectionOfAmber.Scripts.Authenticator;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -12,6 +13,7 @@ namespace ReflectionOfAmber.Scripts.Steam
         private UserUnityService m_UserUnityService;
         private SteamService m_SteamService;
         private AuthenticatorService m_AuthenticatorService;
+        private AnalyticService m_AnalyticService;
 
         private Queue<IInit> m_Inits;
 
@@ -25,11 +27,13 @@ namespace ReflectionOfAmber.Scripts.Steam
             m_UserUnityService = new ();
             m_SteamService = new ();
             m_AuthenticatorService = new ();
+            m_AnalyticService = new ();
 
             m_Inits = new Queue<IInit>();
             m_Inits.Enqueue(m_UserUnityService);
             m_Inits.Enqueue(m_SteamService);
             m_Inits.Enqueue(m_AuthenticatorService);
+            m_Inits.Enqueue(m_AnalyticService);
         }
 
         private void Start()
