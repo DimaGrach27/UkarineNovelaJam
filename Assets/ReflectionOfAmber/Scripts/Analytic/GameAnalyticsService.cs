@@ -17,11 +17,11 @@ namespace ReflectionOfAmber.Scripts.Analytic
             switch (analyticEvent)
             {
                 case StartSceneAnalyticEvent @event:
-                    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, @event.EventName, @event.Data);
+                    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,@event.Data["SceneID"].ToString());
                     break;
                 
                 case EndSceneAnalyticEvent @event:
-                    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, @event.EventName, @event.Data);
+                    GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, @event.Data["SceneID"].ToString());
                     break;
                 
                 default:

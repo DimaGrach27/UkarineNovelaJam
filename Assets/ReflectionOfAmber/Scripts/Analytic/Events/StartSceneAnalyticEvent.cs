@@ -11,7 +11,7 @@ namespace ReflectionOfAmber.Scripts.Analytic.Events
         {
             Data = new Dictionary<string, object>()
             {
-                { "SceneId", sceneId }
+                { "SceneID", sceneId }
             };
         }
     }

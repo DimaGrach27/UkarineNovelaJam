@@ -193,9 +193,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         
         private void ShowNextScene(string key, int part = 0)
         {
-#if ANALYTIC_ENABLED
-            m_AnalyticService.ReportEvent(new EndSceneAnalyticEvent(key));
-#endif
             CurrentScene = key;
             CurrentPart = part;
 #if ANALYTIC_ENABLED
@@ -286,6 +283,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             {
                 Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
 
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new EndSceneAnalyticEvent(_currentSceneSo.SceneKey));
+#endif
                 ChooseNextScene();
                 return;
             }
@@ -311,7 +311,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             if (CurrentPart >= _currentSceneSo.ScreenParts.Length )
             {
                 Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
-
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new EndSceneAnalyticEvent(_currentSceneSo.SceneKey));
+#endif
                 ChooseNextScene();
                 return;
             }
@@ -326,6 +328,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             if (_currentSceneSo.ScreenParts.Length == 0)
             {
                 Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new EndSceneAnalyticEvent(_currentSceneSo.SceneKey));
+#endif
                 ChooseNextScene();
                 return;
             }

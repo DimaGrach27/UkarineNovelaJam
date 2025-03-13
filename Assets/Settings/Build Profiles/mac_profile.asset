@@ -18,7 +18,7 @@ MonoBehaviour:
   m_PlatformId: 0d2129357eac403d8b359c2dcbf82502
   m_PlatformBuildProfile:
     rid: 5315298982151323669
-  m_OverrideGlobalSceneList: 0
+  m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/PreInitScene.unity
@@ -28,8 +28,6 @@ MonoBehaviour:
     m_path: Assets/ReflectionOfAmber/Scenes/MainScene.unity
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
-  - m_enabled: 0
-    m_path: Assets/ReflectionOfAmber/Scenes/Test_scene.unity
   m_ScriptingDefines:
   - ANALYTIC_ENABLED
   m_PlayerSettingsYaml:
