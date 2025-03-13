@@ -20,11 +20,15 @@ namespace ReflectionOfAmber.Scripts.Analytic
             {
                 {"SceneID", "TestScene"},
             });
+            
+            
             AnalyticsService.Instance.StartDataCollection();
             AnalyticsService.Instance.RecordEvent(new TestEvent()
             {
                 SceneID = "TestScene",
             });
+            
+            OnReady?.Invoke();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ReflectionOfAmber.Scripts.Authenticator;
+﻿using ReflectionOfAmber.Scripts.Analytic;
+using ReflectionOfAmber.Scripts.Authenticator;
 using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.FadeScreen;
@@ -40,6 +41,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.BindInterfacesAndSelfTo<UserUnityService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<SteamService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AuthenticatorService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<AnalyticService>().AsSingle().NonLazy();
 
             Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
             
