@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ModestTree;
+using ReflectionOfAmber.Scripts.Analytic;
+using ReflectionOfAmber.Scripts.Analytic.Events;
 using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameModelBlock;
@@ -35,8 +38,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             FadeService fadeService,
             ScreenPartNextDialogButton screenPartNextDialogButton,
             InputService inputService,
-            
+#if ANALYTIC_ENABLED
+            AnalyticService analyticService,
+#endif
+#if !GAME_FINAL
             DebugHelperService debugHelperService
+#endif
         )
         {
             _bgService = bgService;
@@ -52,9 +59,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _fadeService = fadeService;
             _screenPartNextDialogButton = screenPartNextDialogButton;
             m_inputService = inputService;
-            
+#if ANALYTIC_ENABLED
+            m_AnalyticService = analyticService;
+#endif
+#if !GAME_FINAL
             _debugHelperService = debugHelperService;
-            
+#endif
             _screenTextService.OnEndTyping += OnEndTyping;
             _chooseWindowService.OnChoose += OnChooseClick;
             _cameraActionService.OnTakePhoto += TakePhoto;
@@ -76,7 +86,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             set
             {
                 _currentPart = value;
+#if !GAME_FINAL
                 _debugHelperService.ShowPartCount(_currentPart);
+#endif
             }
         }
         
@@ -88,7 +100,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             {
                 _currentScene = value;
                 OnOpenScene?.Invoke(value);
+#if !GAME_FINAL
                 _debugHelperService.ShowSceneId(_currentScene);
+#endif
             }
         }
 
@@ -108,9 +122,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly FadeService _fadeService;
         private readonly ScreenPartNextDialogButton _screenPartNextDialogButton;
         private readonly InputService m_inputService;
-        
+#if ANALYTIC_ENABLED
+        private readonly AnalyticService m_AnalyticService;
+#endif
+#if !GAME_FINAL
         private readonly DebugHelperService _debugHelperService;
-
+#endif
         private bool _blockClick;
         private bool m_LoadingNewBg;
         
@@ -135,6 +152,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             if (CurrentScene == "scene_0_0" && CurrentPart == 0)
             {
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new StartSceneAnalyticEvent("scene_0_0"));
+#endif
                 _coroutineHelper.StartCoroutine(FirstInit());
                 return;
             }
@@ -173,9 +193,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         
         private void ShowNextScene(string key, int part = 0)
         {
+#if ANALYTIC_ENABLED
+            m_AnalyticService.ReportEvent(new EndSceneAnalyticEvent(key));
+#endif
             CurrentScene = key;
             CurrentPart = part;
-
+#if ANALYTIC_ENABLED
+            m_AnalyticService.ReportEvent(new StartSceneAnalyticEvent(key));
+#endif
             SaveService.SaveScene(CurrentScene);
             SaveService.SavePart(CurrentPart);
             
@@ -500,6 +525,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private void OnChooseClick(NextScene chooseScene)
         {
+#if ANALYTIC_ENABLED
+            int nextSceneIndex = _currentSceneSo.NextScenes.IndexOf(chooseScene);
+            m_AnalyticService.ReportEvent(new ChooseCompleteAnalyticEvent(CurrentScene, nextSceneIndex));
+#endif
             string nexSceneKey = chooseScene.Scene.SceneKey;
             
             if (chooseScene.exclusionDependent.enable)

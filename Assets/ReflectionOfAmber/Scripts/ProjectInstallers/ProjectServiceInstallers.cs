@@ -41,8 +41,9 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.BindInterfacesAndSelfTo<UserUnityService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<SteamService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AuthenticatorService>().AsSingle().NonLazy();
+#if ANALYTIC_ENABLED          
             Container.BindInterfacesAndSelfTo<AnalyticService>().AsSingle().NonLazy();
-
+#endif
             Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<SettingsService>().FromInstance(settingsService).AsSingle().NonLazy();
@@ -56,14 +57,15 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
 
             SaveService.SteamService = Container.Resolve<SteamService>();
-            DebugInstallers();
-        }
-        
-        private void DebugInstallers()
-        {
 #if !GAME_FINAL
-            Container.Bind<DebugHelperService>().FromInstance(debugHelperService).AsSingle().NonLazy();
+            DebugInstallers();
 #endif
         }
+#if !GAME_FINAL
+        private void DebugInstallers()
+        {
+            Container.Bind<DebugHelperService>().FromInstance(debugHelperService).AsSingle().NonLazy();
+        }
+#endif
     }
 }
