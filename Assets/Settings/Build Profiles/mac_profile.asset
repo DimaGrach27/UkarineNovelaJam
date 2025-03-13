@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: win_final
+  m_Name: mac_profile
   m_EditorClassIdentifier: 
   m_AssetVersion: 1
-  m_BuildTarget: 19
+  m_BuildTarget: 2
   m_Subtarget: 2
-  m_PlatformId: 4e3c793746204150860bf175a9a41a05
+  m_PlatformId: 0d2129357eac403d8b359c2dcbf82502
   m_PlatformBuildProfile:
-    rid: 3038054380288606372
-  m_OverrideGlobalSceneList: 1
+    rid: 5315298982151323669
+  m_OverrideGlobalSceneList: 0
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/PreInitScene.unity
@@ -28,16 +28,17 @@ MonoBehaviour:
     m_path: Assets/ReflectionOfAmber/Scenes/MainScene.unity
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
+  - m_enabled: 0
+    m_path: Assets/ReflectionOfAmber/Scenes/Test_scene.unity
   m_ScriptingDefines:
-  - GAME_FINAL
   - ANALYTIC_ENABLED
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
     version: 2
     RefIds:
-    - rid: 3038054380288606372
-      type: {class: WindowsPlatformSettings, ns: UnityEditor.WindowsStandalone, asm: UnityEditor.WindowsStandalone.Extensions}
+    - rid: 5315298982151323669
+      type: {class: OSXStandaloneBuildProfile, ns: UnityEditor.OSXStandalone, asm: UnityEditor.OSXStandalone.Extensions}
       data:
         m_Development: 0
         m_ConnectProfiler: 0
@@ -50,9 +51,6 @@ MonoBehaviour:
         m_ExplicitArrayBoundsChecks: 0
         m_CompressionType: 0
         m_InstallInBuildFolder: 0
-        m_WindowsBuildAndRunDeployTarget: 0
-        m_Architecture: 0
-        m_CreateSolution: 0
-        m_CopyPDBFiles: 0
-        m_WindowsDevicePortalAddress: 
-        m_WindowsDevicePortalUsername: 
+        m_MacOSXcodeBuildConfig: 1
+        m_Architecture: 2
+        m_CreateXcodeProject: 0
