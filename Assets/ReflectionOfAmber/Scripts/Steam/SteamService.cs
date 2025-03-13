@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using Steamworks;
 using Steamworks.Data;

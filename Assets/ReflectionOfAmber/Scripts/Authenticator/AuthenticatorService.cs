@@ -1,5 +1,5 @@
 using System;
-using ReflectionOfAmber.Scripts.GameModelBlock;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;

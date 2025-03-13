@@ -1,34 +1,35 @@
 using System;
-using System.Collections.Generic;
-using GameAnalyticsSDK;
 using ReflectionOfAmber.Scripts.Analytic.Events;
-using ReflectionOfAmber.Scripts.GameModelBlock;
-using Unity.Services.Analytics;
-using Unity.Services.Authentication;
+using ReflectionOfAmber.Scripts.GlobalProject;
 
 namespace ReflectionOfAmber.Scripts.Analytic
 {
     public class AnalyticService : IInit
     {
+        private IAnalyticService[] m_AnalyticsServices;
         public event Action OnReady;
         public void Init()
         {
-            GameAnalytics.SetCustomId(AuthenticationService.Instance.PlayerId);
-            GameAnalytics.Initialize();
-            
-            GameAnalytics.NewDesignEvent("Scenes:completed_scene", new Dictionary<string, object>()
+            m_AnalyticsServices = new IAnalyticService[]
             {
-                {"SceneID", "TestScene"},
-            });
+                new UnityAnalyticService(),
+                new GameAnalyticsService(),
+            };
             
-            
-            AnalyticsService.Instance.StartDataCollection();
-            AnalyticsService.Instance.RecordEvent(new TestEvent()
+            foreach (var analyticsService in m_AnalyticsServices)
             {
-                SceneID = "TestScene",
-            });
+                analyticsService.Initialize();
+            }
             
             OnReady?.Invoke();
+        }
+
+        public void ReportEvent(IAnalyticEvent analyticEvent)
+        {
+            foreach (var analyticsService in m_AnalyticsServices)
+            {
+                analyticsService.TrackEvent(analyticEvent);
+            }
         }
     }
 }

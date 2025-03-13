@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReflectionOfAmber.Scripts.GameModelBlock
+namespace ReflectionOfAmber.Scripts.GlobalProject
 {
     public interface IInit
     {
