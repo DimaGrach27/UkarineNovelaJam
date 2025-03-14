@@ -25,9 +25,21 @@ namespace ReflectionOfAmber.Scripts.Analytic
                     break;
                 
                 default:
-                    GameAnalytics.NewDesignEvent(analyticEvent.EventName, analyticEvent.Data);
+                    SendDesignEvent(analyticEvent);
                     break;
             }
+        }
+
+        private void SendDesignEvent(IAnalyticEvent analyticEvent)
+        {
+            string eventData = analyticEvent.EventName;
+
+            foreach (var data in analyticEvent.Data.Values)
+            {
+                eventData += $":{data}";
+            }
+            
+            GameAnalytics.NewDesignEvent(eventData);
         }
     }
 }
