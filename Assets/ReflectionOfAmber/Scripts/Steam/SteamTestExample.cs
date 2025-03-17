@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.Analytic;
 using ReflectionOfAmber.Scripts.Authenticator;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace ReflectionOfAmber.Scripts.Steam
     public class SteamTestExample : MonoBehaviour
     {
         private UserUnityService m_UserUnityService;
+        private GameResourcesService m_GameResourcesService;
         private SteamService m_SteamService;
         private AuthenticatorService m_AuthenticatorService;
         private AnalyticService m_AnalyticService;
@@ -24,12 +26,14 @@ namespace ReflectionOfAmber.Scripts.Steam
         private void Awake()
         {
             m_UserUnityService = new ();
+            m_GameResourcesService = new ();
             m_SteamService = new ();
             m_AuthenticatorService = new ();
             m_AnalyticService = new ();
 
             m_Inits = new Queue<IInit>();
             m_Inits.Enqueue(m_UserUnityService);
+            m_Inits.Enqueue(m_GameResourcesService);
             m_Inits.Enqueue(m_SteamService);
             m_Inits.Enqueue(m_AuthenticatorService);
             m_Inits.Enqueue(m_AnalyticService);

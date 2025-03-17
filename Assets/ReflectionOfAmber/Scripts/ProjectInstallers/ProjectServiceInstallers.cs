@@ -42,6 +42,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         private void ServicesInstallers()
         {
             Container.BindInterfacesAndSelfTo<UserUnityService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameResourcesService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<SteamService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AuthenticatorService>().AsSingle().NonLazy();
 #if ANALYTIC_ENABLED          

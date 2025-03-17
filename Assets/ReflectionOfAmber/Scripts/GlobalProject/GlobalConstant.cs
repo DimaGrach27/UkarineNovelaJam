@@ -21,7 +21,7 @@ namespace ReflectionOfAmber.Scripts
         
 #if GAME_DEMO
         public const string LAST_DEMO_SCENE_KEY = "scene_0_2";
-        // public const string LAST_DEMO_SCENE_KEY = "scene_2_60";
+        // public const string LAST_DEMO_SCENE_KEY = "scene_6_61";
 #endif
     }
 }

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: fe11e4dd737c5497faf2e03563f50759
+  m_SerializeEntries:
+  - m_GUID: 0fa78f319363d5343be6afbd8dd4078b
+    m_Address: Assets/ReflectionOfAmber/Configs/CharacterNames
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - character
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b2c4ccec50fbe446974ccf197cc9033
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - main_story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cee30d04076eee4fa7885c3be1fd940
+    m_Address: Assets/ReflectionOfAmber/Configs/Music
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - music
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 753cffa6d1003c648b7830ac1fb5c608
+    m_Address: Assets/ReflectionOfAmber/Configs/BackGrounds
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - background
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5c5894677927ca4994961a03daf88f8
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - main_story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b650a481863a9b34789a2ba80640c88f
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - main_story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8f09917c51bd4d439f58c987c49a16e
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_1/scene_2/scene_2_60.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - main_story
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7be2e5a443f46e49be5d40ed93d916a
+    m_Address: Assets/ReflectionOfAmber/Configs/Characters
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - character
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de7e40965063aaf4c8d9ca349d3c1ec0
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f79c3d61240af824f9fb869d14b4d9e3
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - main_story
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 89e8268d98f4244ca9fe2293fc1daa83, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: bc89aad1e6ca44d8db7b55e6a6240708, type: 2}
+    - {fileID: 11400000, guid: 8fc88039a34ca452388d408425cdc07b, type: 2}
