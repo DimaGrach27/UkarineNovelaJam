@@ -18,5 +18,10 @@ namespace ReflectionOfAmber.Scripts
         public const char SymbolN = '\n';
         public const char SymbolT = '\t';
         public static string StringComa => $"{DubbleComa}{DubbleComa}";
+        
+#if GAME_DEMO
+        public const string LAST_DEMO_SCENE_KEY = "scene_0_2";
+        // public const string LAST_DEMO_SCENE_KEY = "scene_2_60";
+#endif
     }
 }

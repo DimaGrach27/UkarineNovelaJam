@@ -27,7 +27,12 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             {
                 int currentProgress = SaveService.GetPart;
                 string sceneKey = SaveService.GetScene;
-
+#if GAME_DEMO
+                if (sceneKey == GlobalConstant.LAST_DEMO_SCENE_KEY)
+                {
+                    return false;
+                }
+#endif
                 return currentProgress > 0 || sceneKey != "scene_0_0";
             }
         }

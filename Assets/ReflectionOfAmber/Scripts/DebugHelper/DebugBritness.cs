@@ -6,6 +6,11 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
     {
         public float britness = 1;
 
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         private void Update()
         {
             Screen.brightness = britness;

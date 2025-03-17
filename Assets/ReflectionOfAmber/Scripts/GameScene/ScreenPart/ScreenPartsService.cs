@@ -195,12 +195,31 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         {
             CurrentScene = key;
             CurrentPart = part;
-#if ANALYTIC_ENABLED
-            m_AnalyticService.ReportEvent(new StartSceneAnalyticEvent(key));
-#endif
+            
             SaveService.SaveScene(CurrentScene);
             SaveService.SavePart(CurrentPart);
             
+#if ANALYTIC_ENABLED
+            m_AnalyticService.ReportEvent(new StartSceneAnalyticEvent(key));
+#endif
+#if GAME_DEMO
+            if (key == GlobalConstant.LAST_DEMO_SCENE_KEY)
+            {
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new EndDemoAnalyticEvent());
+#endif
+                Debug.Log("You have finished a demo of this game, the full game will be realized soon...");
+                
+                _characterService.HideAllCharacters();
+                _screenTextService.HideText();
+                _chooseWindowService.SetActive(false);
+                _cameraActionService.ChangeVisible(false);
+                
+                _sceneService.EndDemoScene();
+                GameModel.IsGamePlaying = false;
+                return;
+            }
+#endif
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             _chooseWindowService.SetActive(false);

@@ -1,4 +1,5 @@
 ﻿using ReflectionOfAmber.Scripts.FadeScreen;
+using ReflectionOfAmber.Scripts.Input;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -9,13 +10,16 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
     {
         [Inject]
         public SceneService(
-            FadeService fadeService)
+            FadeService fadeService,
+            InputService inputService)
         {
-            _fadeService = fadeService;
+            m_FadeService = fadeService;
+            m_InputService = inputService;
         }
 
-        private readonly FadeService _fadeService;
-        
+        private readonly FadeService m_FadeService;
+        private readonly InputService m_InputService;
+
         private Coroutine _loadCoroutine;
 
         public void LoadEndGame()
@@ -33,12 +37,19 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
         {
             LoadScene(Scenes.MainMenuScene);
         }
-        
+#if GAME_DEMO
+        public void EndDemoScene()
+        {
+            LoadScene(Scenes.EndDemoScene);
+        }
+#endif
         private void LoadScene(string sceneName)
         {
+            m_InputService.ForceBlockInput(true);
             float duration = 1.5f;
-            _fadeService.FadeIn(duration, () =>
+            m_FadeService.FadeIn(duration, () =>
             {
+                m_InputService.ForceBlockInput(false);
                 SceneManager.LoadScene(sceneName);
             });
         }
@@ -49,5 +60,8 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
         public const string MainMenuScene = "MainMenu";
         public const string MainScene = "MainScene";
         public const string EndScene = "EndScene";
+#if GAME_DEMO
+        public const string EndDemoScene = "EndSceneDemo";
+#endif
     } 
 }

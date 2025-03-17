@@ -15,7 +15,9 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
         [SerializeField] private Button applyShowBtn;
         [SerializeField] private Toggle openClose;
 
-        private CanvasGroup _canvasGroup;
+        [SerializeField]
+        private CanvasGroup m_CanvasGroup;
+        
         private ScreenPartsServiceFacade _screenPartsServiceFacade;
         private SceneService _sceneService;
 
@@ -31,8 +33,6 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
         
         private void Awake()
         {
-            _canvasGroup = GetComponent<CanvasGroup>();
-            
             applyShowBtn.onClick.AddListener(OnClickBtn);
             openClose.onValueChanged.AddListener(OpenClose);
 
@@ -41,9 +41,9 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
 
         private void OpenClose(bool isOpen)
         {
-            _canvasGroup.alpha = isOpen ? 1.0f : 0.0f;
-            _canvasGroup.interactable = isOpen;
-            _canvasGroup.blocksRaycasts = isOpen;
+            m_CanvasGroup.alpha = isOpen ? 1.0f : 0.0f;
+            m_CanvasGroup.interactable = isOpen;
+            m_CanvasGroup.blocksRaycasts = isOpen;
         }
 
         private void OnClickBtn()

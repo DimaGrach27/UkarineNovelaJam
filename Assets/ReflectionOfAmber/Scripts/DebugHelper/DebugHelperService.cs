@@ -1,13 +1,23 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.DebugHelper
 {
     public class DebugHelperService : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI debugShowSceneId;
-        [SerializeField] private TextMeshProUGUI debugShowPartCount;
-        
+        [SerializeField] 
+        private TextMeshProUGUI debugShowSceneId;
+        [SerializeField] 
+        private TextMeshProUGUI debugShowPartCount;
+        [SerializeField] 
+        public DebugOpenSceneService debugOpenSceneService;
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         // [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public void ShowSceneId(string sceneId)
         {

@@ -83,6 +83,7 @@ MonoBehaviour:
   confirmScreen: {fileID: 1398210350778895683}
   globalBrightnessService: {fileID: 1555554530416647547}
   settingsService: {fileID: 1398210350210313751}
+  debugHelperService: {fileID: 4758486662552106726, guid: 5944bcf46493af149b4f30f7f82430ef, type: 3}
 --- !u!1001 &146151909902911464
 PrefabInstance:
   m_ObjectHideFlags: 0

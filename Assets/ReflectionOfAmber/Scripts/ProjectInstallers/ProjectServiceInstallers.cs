@@ -23,11 +23,20 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         [SerializeField] private GlobalBrightnessService globalBrightnessService;
         [SerializeField] private SettingsService settingsService;
 
+#if !GAME_FINAL
+        [Header("DEBUG:")]
+        [SerializeField] 
+        private DebugHelperService debugHelperService;
+#endif
         public override void InstallBindings()
         {
             GameModel.Init();
             
             ServicesInstallers();
+            
+#if !GAME_FINAL
+            DebugInstallers();
+#endif
         }
         
         private void ServicesInstallers()
@@ -52,5 +61,14 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
 
             SaveService.SteamService = Container.Resolve<SteamService>();
         }
+        
+#if !GAME_FINAL
+        private void DebugInstallers()
+        {
+            DebugHelperService debugHelperSer = Instantiate(debugHelperService);
+            Container.Bind<DebugHelperService>().FromInstance(debugHelperSer).AsSingle().NonLazy();
+            Container.Inject(debugHelperSer.debugOpenSceneService);
+        }
+#endif
     }
 }
