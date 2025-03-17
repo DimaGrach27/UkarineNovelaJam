@@ -23,12 +23,6 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         [SerializeField] private GlobalBrightnessService globalBrightnessService;
         [SerializeField] private SettingsService settingsService;
 
-#if !GAME_FINAL
-        //DEBUG
-        [SerializeField] private DebugHelperService debugHelperService;
-#endif
-
-
         public override void InstallBindings()
         {
             GameModel.Init();
@@ -57,15 +51,6 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
 
             SaveService.SteamService = Container.Resolve<SteamService>();
-#if !GAME_FINAL
-            DebugInstallers();
-#endif
         }
-#if !GAME_FINAL
-        private void DebugInstallers()
-        {
-            Container.Bind<DebugHelperService>().FromInstance(debugHelperService).AsSingle().NonLazy();
-        }
-#endif
     }
 }

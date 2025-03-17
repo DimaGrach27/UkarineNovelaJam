@@ -39,10 +39,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             ScreenPartNextDialogButton screenPartNextDialogButton,
             InputService inputService,
 #if ANALYTIC_ENABLED
-            AnalyticService analyticService,
+            AnalyticService analyticService
 #endif
 #if !GAME_FINAL
-            DebugHelperService debugHelperService
+            ,DebugHelperService debugHelperService
 #endif
         )
         {
