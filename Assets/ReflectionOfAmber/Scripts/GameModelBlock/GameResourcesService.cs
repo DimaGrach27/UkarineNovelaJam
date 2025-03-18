@@ -76,28 +76,28 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 
         private void OnAssetLoaded(ScreenSceneScriptableObject handle)
         {
-            Debug.Log($"KEY: {handle.SceneKey}");
+            Debug.Log($"SCENE KEY: {handle.SceneKey}");
 
             ScreenScenesMap.Add(handle.SceneKey, handle);
         }
 
         private void OnAssetLoaded(CharacterNameScriptableObject handle)
         {
-            Debug.Log($"KEY: {handle.characterName}");
+            Debug.Log($"cHAR NAME KEY: {handle.characterName}");
 
             CharacterNameMap.Add(handle.characterNameType, handle);
         }
 
         private void OnAssetLoaded(BgScriptableObject handle)
         {
-            Debug.Log($"KEY: {handle.Bg}");
+            Debug.Log($"BG KEY: {handle.Bg}");
 
             BgMap.Add(handle.Bg, handle);
         }
         
         private void OnAssetLoaded(MusicSo handle)
         {
-            Debug.Log($"KEY: {handle.type}");
+            Debug.Log($"MUSIC KEY: {handle.type}");
 
             AudioClipsMap.Add(handle.type, handle);
         }

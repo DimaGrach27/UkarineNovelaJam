@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using Steamworks;
 using Steamworks.Data;
 using UnityEngine;
@@ -25,7 +26,8 @@ namespace ReflectionOfAmber.Scripts.Steam
                 SteamClient.Init(APP_ID);
                 string steamName = SteamClient.Name;
                 Debug.Log($"Steam name is = {steamName}"); 
-                Debug.Log($"Steam language is = {SteamApps.GameLanguage}");
+
+                CheckLang();
                 
                 Debug.Log($"Files saved in cloud: ");
                 foreach (var file in SteamRemoteStorage.Files)
@@ -104,6 +106,27 @@ namespace ReflectionOfAmber.Scripts.Steam
             string result = System.Text.Encoding.UTF8.GetString(bytes, 0, bytesLength);
             
             return result;
+        }
+
+        private void CheckLang()
+        {
+            string lang = SteamApps.GameLanguage;
+            
+            Debug.Log($"Steam language is = {lang}");
+
+            switch (lang)
+            {
+                case "ukrainian":
+                    SaveService.LanguageStatus = TranslatorLanguages.UKR;
+                    break;
+                case "english":
+                    SaveService.LanguageStatus = TranslatorLanguages.ENG;
+                    break;
+                
+                default:
+                    SaveService.LanguageStatus = TranslatorLanguages.ENG;
+                    break;
+            }
         }
         
         public void Dispose()
