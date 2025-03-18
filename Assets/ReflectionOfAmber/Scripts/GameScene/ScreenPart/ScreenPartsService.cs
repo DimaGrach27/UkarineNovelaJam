@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using ModestTree;
+#if ANALYTIC_ENABLED
 using ReflectionOfAmber.Scripts.Analytic;
 using ReflectionOfAmber.Scripts.Analytic.Events;
+#endif
 using ReflectionOfAmber.Scripts.DebugHelper;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameModelBlock;
@@ -37,9 +39,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             AudioSystemService audioSystemService,
             FadeService fadeService,
             ScreenPartNextDialogButton screenPartNextDialogButton,
-            InputService inputService,
+            InputService inputService
 #if ANALYTIC_ENABLED
-            AnalyticService analyticService
+            ,AnalyticService analyticService
 #endif
 #if !GAME_FINAL
             ,DebugHelperService debugHelperService

@@ -1,6 +1,8 @@
 ﻿using System;
+#if ANALYTIC_ENABLED
 using ReflectionOfAmber.Scripts.Analytic;
 using ReflectionOfAmber.Scripts.Analytic.Events;
+#endif
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
@@ -26,9 +28,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         public NoteWindowInvestigationScreenService(
             NoteWindowInvestigationScreen noteWindowInvestigationScreen, 
             ScreenPartsServiceFacade screenPartsServiceFacade,
-            ConfirmScreen confirmScreen,
+            ConfirmScreen confirmScreen
 #if ANALYTIC_ENABLED
-            AnalyticService analyticService
+            ,AnalyticService analyticService
 #endif
             )
         {
