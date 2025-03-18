@@ -6,7 +6,7 @@ namespace ReflectionOfAmber.Scripts.Characters
 {
     public static class CharactersService
     {
-        private static  readonly Dictionary<CharacterSprite, CharacterSpriteScriptableObject> CharacterSpriteMap = new();
+        private static readonly Dictionary<CharacterSprite, CharacterSpriteScriptableObject> CharacterSpriteMap = new();
         
         static CharactersService()
         {

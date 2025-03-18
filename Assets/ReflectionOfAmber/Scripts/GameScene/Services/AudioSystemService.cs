@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.Services
 {
@@ -11,7 +13,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         [SerializeField] private AudioSource soundAudioSource;
         [SerializeField] private AudioSource soundAudioLooperSource;
 
-        private readonly Dictionary<MusicType, AudioClip> _audioClipsMap = new();
+        private Dictionary<MusicType, MusicSo> _audioClipsMap = new();
         
         private readonly Queue<AudioClip> _audioClips = new();
         private readonly Queue<AudioClip> _audioClipsLooper = new();
@@ -24,16 +26,22 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         public AudioSource AudioSourceMusic => musicAudioSource;
         public AudioSource SoundAudioLooperSource => soundAudioLooperSource;
 
+        [Inject]
+        public void Construct(GameResourcesService gameResourcesService)
+        {
+            _audioClipsMap = gameResourcesService.AudioClipsMap;
+        }
+
         private void Awake()
         {
             musicAudioSource.volume = SaveService.MusicVolume;
             soundAudioSource.volume = SaveService.AudioVolume;
             soundAudioLooperSource.volume = SaveService.AudioVolume;
 
-            foreach (var musicSo in Resources.LoadAll<MusicSo>("Configs/Music"))
-            {
-                _audioClipsMap.Add(musicSo.type, musicSo.clip);
-            }
+            // foreach (var musicSo in Resources.LoadAll<MusicSo>("Configs/Music"))
+            // {
+            //     _audioClipsMap.Add(musicSo.type, musicSo.clip);
+            // }
 
             _coroutine = StartCoroutine(PlayRoutineLoop());
             _coroutineLoop = StartCoroutine(PlayRoutineLooper());
@@ -70,9 +78,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
             
             _audioClips.Clear();
             
-            _audioClipLoop = _audioClipsMap[type];
+            _audioClipLoop = _audioClipsMap[type].clip;
             
-            musicAudioSource.clip = _audioClipsMap[type];
+            musicAudioSource.clip = _audioClipsMap[type].clip;
             
             musicAudioSource.Stop();
             musicAudioSource.Play();
@@ -83,7 +91,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         public AudioClip GetClip(MusicType type)
         {
             if (_audioClipsMap.ContainsKey(type))
-                return _audioClipsMap[type];
+                return _audioClipsMap[type].clip;
 
             return null;
         }
@@ -96,7 +104,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
             
             _audioClipsLooper.Clear();
 
-            soundAudioLooperSource.clip = _audioClipsMap[type];
+            soundAudioLooperSource.clip = _audioClipsMap[type].clip;
             
             soundAudioLooperSource.Stop();
             soundAudioLooperSource.Play();
@@ -117,7 +125,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         public void PlayShotSound(MusicType type)
         {
             if(!_audioClipsMap.ContainsKey(type)) return;
-            soundAudioSource.PlayOneShot(_audioClipsMap[type]);
+            soundAudioSource.PlayOneShot(_audioClipsMap[type].clip);
         }
 
         public void ChangeMusic(float value) => musicAudioSource.volume = value;
@@ -132,14 +140,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         {
             if(!_audioClipsMap.ContainsKey(type)) return;
             
-            _audioClips.Enqueue(_audioClipsMap[type]);
+            _audioClips.Enqueue(_audioClipsMap[type].clip);
         }
         
         public void AddQueueClipToSound(MusicType type)
         {
             if(!_audioClipsMap.ContainsKey(type)) return;
             
-            _audioClipsLooper.Enqueue(_audioClipsMap[type]);
+            _audioClipsLooper.Enqueue(_audioClipsMap[type].clip);
         }
         
         IEnumerator PlayRoutineLoop()

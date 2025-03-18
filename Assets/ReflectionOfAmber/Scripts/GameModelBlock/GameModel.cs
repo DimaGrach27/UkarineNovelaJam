@@ -1,54 +1,72 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
+using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameModelBlock
 {
-    public static class GameModel
+    public class GameModel : IInit
     {
+        private readonly GameResourcesService m_gameResourcesService;
+        
         public static bool IsGamePlaying = false;
         public static float TYPING_SPEED = 0.05f;
         
-        private static readonly Dictionary<string, ScreenSceneScriptableObject> ScreenScenesMap = new();
-        private static readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
-        private static readonly Dictionary<BgEnum, BgScriptableObject> _bgMap = new();
+        private static Dictionary<string, ScreenSceneScriptableObject> m_ScreenScenesMap = new();
+        private static Dictionary<CharacterName, CharacterNameScriptableObject> m_CharacterNameMap = new();
+        private static Dictionary<BgEnum, BgScriptableObject> m_BgMap = new();
 
         public static TranslatorLanguages CurrentLanguage = TranslatorLanguages.UKR;
 
-        public static void Init()
-        {
-            ScreenSceneScriptableObject[] list = Resources.LoadAll<ScreenSceneScriptableObject>("Graphs");
-            // ScreenSceneScriptableObject[] list = Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
+        public event Action OnReady;
 
-            CharacterNameScriptableObject[] listNames = Resources.LoadAll<CharacterNameScriptableObject>("Configs/CharacterNames");
-            
-            BgScriptableObject[] bgScriptableObjects = Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
-            
-            foreach (var screenScene in list)
-            {
-                ScreenScenesMap.Add(screenScene.SceneKey, screenScene);
-            }
-            
-            foreach (var characterName in listNames)
-            {
-                CharacterNameMap.Add(characterName.characterNameType, characterName);
-            }
-            
-            foreach (var bgScriptable in bgScriptableObjects)
-            {
-                _bgMap.Add(bgScriptable.Bg, bgScriptable);
-            }
+        [Inject]
+        public GameModel(GameResourcesService gameResourcesService)
+        {
+            m_gameResourcesService = gameResourcesService;
+        }
+        
+        public void Init()
+        {
+            // ScreenSceneScriptableObject[] list = Resources.LoadAll<ScreenSceneScriptableObject>("Graphs");
+            // // ScreenSceneScriptableObject[] list = Resources.LoadAll<ScreenSceneScriptableObject>("Configs/Screens");
+
+            // CharacterNameScriptableObject[] listNames = Resources.LoadAll<CharacterNameScriptableObject>("Configs/CharacterNames");
+            //
+            // BgScriptableObject[] bgScriptableObjects = Resources.LoadAll<BgScriptableObject>("Configs/BackGrounds");
+            //
+            // foreach (var screenScene in list)
+            // {
+            //     m_ScreenScenesMap.Add(screenScene.SceneKey, screenScene);
+            // }
+            //
+            // foreach (var characterName in listNames)
+            // {
+            //     m_CharacterNameMap.Add(characterName.characterNameType, characterName);
+            // }
+            //
+            // foreach (var bgScriptable in bgScriptableObjects)
+            // {
+            //     m_BgMap.Add(bgScriptable.Bg, bgScriptable);
+            // }
+
+            m_ScreenScenesMap = m_gameResourcesService.ScreenScenesMap;
+            m_CharacterNameMap = m_gameResourcesService.CharacterNameMap;
+            m_BgMap = m_gameResourcesService.BgMap;
 
             CurrentLanguage = SaveService.LanguageStatus;
+            
+            OnReady?.Invoke();
         }
 
         public static ScreenSceneScriptableObject GetScene(string key)
         {
-            if (ScreenScenesMap.ContainsKey(key))
-                return ScreenScenesMap[key];
+            if (m_ScreenScenesMap.ContainsKey(key))
+                return m_ScreenScenesMap[key];
 
             return null;
         }
@@ -57,9 +75,9 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         {
             string result = "";
 
-            if (!CharacterNameMap.ContainsKey(characterName)) return result;
+            if (!m_CharacterNameMap.ContainsKey(characterName)) return result;
 
-            result = CharacterNameMap[characterName].characterName;
+            result = m_CharacterNameMap[characterName].characterName;
             return result;
         }
         
@@ -67,9 +85,9 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         {
             Sprite sprite = null;
 
-            if (_bgMap.ContainsKey(bgEnum))
+            if (m_BgMap.ContainsKey(bgEnum))
             {
-                sprite = _bgMap[bgEnum].Image;
+                sprite = m_BgMap[bgEnum].Image;
             }
 
             return sprite;
@@ -79,9 +97,9 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         {
             AnimationScreen animationScreen = null;
 
-            if (_bgMap.ContainsKey(bgEnum))
+            if (m_BgMap.ContainsKey(bgEnum))
             {
-                animationScreen = _bgMap[bgEnum].AnimationScreen;
+                animationScreen = m_BgMap[bgEnum].AnimationScreen;
             }
 
             return animationScreen;

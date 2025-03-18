@@ -30,10 +30,9 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
 #endif
         public override void InstallBindings()
         {
-            GameModel.Init();
-            
             ServicesInstallers();
-            
+            // GameModel.Init();
+
 #if !GAME_FINAL
             DebugInstallers();
 #endif
@@ -48,6 +47,8 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
 #if ANALYTIC_ENABLED          
             Container.BindInterfacesAndSelfTo<AnalyticService>().AsSingle().NonLazy();
 #endif
+            Container.BindInterfacesAndSelfTo<GameModel>().AsSingle().NonLazy();
+
             Container.Bind<ScreenPartsServiceFacade>().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<SettingsService>().FromInstance(settingsService).AsSingle().NonLazy();

@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace ReflectionOfAmber.Scripts.GameModelBlock
 {
     public class GameResourcesService : IInit
     {
-        private static readonly Dictionary<string, ScreenSceneScriptableObject> ScreenScenesMap = new();
-        private static readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
-        private static readonly Dictionary<BgEnum, BgScriptableObject> BgMap = new();
+        public readonly Dictionary<string, ScreenSceneScriptableObject> ScreenScenesMap = new();
+        public readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
+        public readonly Dictionary<BgEnum, BgScriptableObject> BgMap = new();
+        public readonly Dictionary<MusicType, MusicSo> AudioClipsMap = new();
 
         public event Action OnReady;
 
@@ -29,7 +30,7 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 #endif
         };
 
-        private const int LOAD_GROUP_COUNT = 3;
+        private const int LOAD_GROUP_COUNT = 4;
         private int m_CurrentLoadCount = 0;
 
         public void Init()
@@ -63,6 +64,14 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
                     m_CurrentLoadCount--;
                     OnAllAssetsLoaded();
                 };
+            
+            Addressables.LoadAssetsAsync<MusicSo>(MUSIC_ASSETS_GROUP, OnAssetLoaded)
+                    .Completed +=
+                _ =>
+                {
+                    m_CurrentLoadCount--;
+                    OnAllAssetsLoaded();
+                };
         }
 
         private void OnAssetLoaded(ScreenSceneScriptableObject handle)
@@ -85,7 +94,14 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 
             BgMap.Add(handle.Bg, handle);
         }
+        
+        private void OnAssetLoaded(MusicSo handle)
+        {
+            Debug.Log($"KEY: {handle.type}");
 
+            AudioClipsMap.Add(handle.type, handle);
+        }
+        
         private void OnAllAssetsLoaded()
         {
             if (m_CurrentLoadCount > 0)
