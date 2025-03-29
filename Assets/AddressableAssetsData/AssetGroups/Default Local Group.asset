@@ -58,12 +58,6 @@ MonoBehaviour:
     - main_story
     - prologue
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d7be2e5a443f46e49be5d40ed93d916a
-    m_Address: Assets/ReflectionOfAmber/Configs/Characters
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - character
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de7e40965063aaf4c8d9ca349d3c1ec0
     m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0
     m_ReadOnly: 0
