@@ -19,6 +19,8 @@ namespace ReflectionOfAmber.Scripts.Steam
         
         public event Action OnReady;
         
+        private const string LANG_SET_KEY = "lang_was_set_key";
+        
         public void Init()
         {
             try
@@ -61,10 +63,12 @@ namespace ReflectionOfAmber.Scripts.Steam
 
         public void CompleteAchievement(AchievementKeys achieveKey)
         {
+#if !GAME_DEMO
             var ach = new Achievement(SteamAchievementKeys.GetId(achieveKey));
             ach.Trigger();
             
             SteamUserStats.StoreStats();
+#endif
         }
 
         public void ClearAchievement(AchievementKeys achieveKey)
@@ -110,6 +114,11 @@ namespace ReflectionOfAmber.Scripts.Steam
 
         private void CheckLang()
         {
+            if (PlayerPrefs.HasKey(LANG_SET_KEY))
+            {
+                return;
+            }
+            
             string lang = SteamApps.GameLanguage;
             
             Debug.Log($"Steam language is = {lang}");
@@ -127,6 +136,8 @@ namespace ReflectionOfAmber.Scripts.Steam
                     SaveService.LanguageStatus = TranslatorLanguages.ENG;
                     break;
             }
+            
+            PlayerPrefs.SetInt(LANG_SET_KEY, 1);
         }
         
         public void Dispose()

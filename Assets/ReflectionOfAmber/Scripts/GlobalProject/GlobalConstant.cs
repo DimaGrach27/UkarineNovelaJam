@@ -20,8 +20,8 @@ namespace ReflectionOfAmber.Scripts
         public static string StringComa => $"{DubbleComa}{DubbleComa}";
         
 #if GAME_DEMO
-        public const string LAST_DEMO_SCENE_KEY = "scene_0_2";
-        // public const string LAST_DEMO_SCENE_KEY = "scene_6_61";
+        // public const string LAST_DEMO_SCENE_KEY = "scene_0_2";
+        public const string LAST_DEMO_SCENE_KEY = "scene_6_61";
 #endif
     }
 }

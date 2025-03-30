@@ -154,6 +154,11 @@ namespace ReflectionOfAmber.Scripts.Settings
             if(_routine != null)
                 StopCoroutine(_routine);
             
+            speedText.SetValue(SaveService.TypingSpeed * 10);
+            musicVolume.SetValue(SaveService.MusicVolume * 10);
+            soundVolume.SetValue(SaveService.AudioVolume * 10);
+            brightnessValue.SetValue(SaveService.BrightnessValue * 10);
+            
             _routine = StartCoroutine(FadeInWindow());
         }
         
