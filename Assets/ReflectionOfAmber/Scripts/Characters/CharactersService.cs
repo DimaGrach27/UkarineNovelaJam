@@ -10,7 +10,7 @@ namespace ReflectionOfAmber.Scripts.Characters
         
         static CharactersService()
         {
-            foreach (var characterSprite in Resources.LoadAll<CharacterSpriteScriptableObject>("Configs/Characters"))
+            foreach (var characterSprite in Resources.LoadAll<CharacterSpriteScriptableObject>("Characters"))
             {
                 CharacterSpriteMap.Add(characterSprite.typeSprite, characterSprite);
             }

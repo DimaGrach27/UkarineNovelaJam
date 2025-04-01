@@ -31,10 +31,11 @@ namespace ReflectionOfAmber.Scripts.GameScene
         private InputService m_inputService;
         
         [Inject]
-        public void Construct(InputService inputService)
+        public void Construct(InputService inputService, ScreenPartsServiceFacade screenPartsServiceFacade)
         {
             Debug.Log($"Construct: {gameObject.name}");
             m_inputService = inputService;
+            ScreenPartsServiceFacade = screenPartsServiceFacade;
         }
         
         private void Awake()
