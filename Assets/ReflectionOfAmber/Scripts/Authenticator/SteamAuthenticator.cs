@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using ReflectionOfAmber.Scripts.Steam;
 using Steamworks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -20,7 +21,7 @@ namespace ReflectionOfAmber.Scripts.Authenticator
             {
                 Debug.Log("Start init to authenticate Steam");
                 
-                await AuthenticationService.Instance.SignInWithSteamAsync(task, IDENTITY);
+                await AuthenticationService.Instance.SignInWithSteamAsync(task, IDENTITY, SteamService.APP_ID.ToString());
                 Debug.Log("SignIn in Steam is successful.");
 
                 callback?.Invoke(true);
@@ -47,6 +48,7 @@ namespace ReflectionOfAmber.Scripts.Authenticator
             
             Debug.Log(ticket.Handle);
             string token = BitConverter.ToString(ticket.Data);
+            Debug.Log(token);
             token = token.Replace("-", string.Empty);
             Debug.Log(token);
 

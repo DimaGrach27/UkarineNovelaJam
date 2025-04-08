@@ -12,9 +12,9 @@ namespace ReflectionOfAmber.Scripts.Steam
     public class SteamService : IInit, ITickable, IDisposable
     {
 #if GAME_DEMO
-        private const int APP_ID = 3580180;
+        public const int APP_ID = 3580180;
 #else
-        private const int APP_ID = 3562420;
+        public const int APP_ID = 3562420;
 #endif
         
         public event Action OnReady;
