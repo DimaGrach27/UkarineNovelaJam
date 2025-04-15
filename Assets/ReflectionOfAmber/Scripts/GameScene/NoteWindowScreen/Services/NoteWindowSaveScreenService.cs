@@ -16,31 +16,32 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             NoteWindowSaveScreen noteWindowSaveScreen,
             ConfirmScreen confirmScreen)
         {
-            _noteWindowSaveScreen = noteWindowSaveScreen;
-            _confirmScreen = confirmScreen;
+            m_NoteWindowSaveScreen = noteWindowSaveScreen;
+            m_ConfirmScreen = confirmScreen;
 
-            _noteWindowSaveScreen.OnOpen += OnOpenHandler;
-            _noteWindowSaveScreen.OnCLickButton += OnClickButtonHandler;
+            m_NoteWindowSaveScreen.OnOpen += OnOpenHandler;
+            m_NoteWindowSaveScreen.OnCLickButton += OnClickButtonHandler;
         }
 
-        private readonly NoteWindowSaveScreen _noteWindowSaveScreen;
-        private readonly ConfirmScreen _confirmScreen;
+        private readonly NoteWindowSaveScreen m_NoteWindowSaveScreen;
+        private readonly ConfirmScreen m_ConfirmScreen;
 
-        private int _confirmIndex = -1;
+        private int m_ConfirmIndex = -1;
 
         private void OnOpenHandler()
         {
-            for (int i = 0; i < _noteWindowSaveScreen.ButtonsCount; i++)
+            for (int i = 0; i < m_NoteWindowSaveScreen.ButtonsCount; i++)
             {
                 if (SaveService.TryGetSaveGame(i, out SaveFile saveFile))
                 {
                     BgEnum bgEnum = (BgEnum)saveFile.currentBg;
                     Sprite spriteBg = GameModel.GetBg(bgEnum);
-                    _noteWindowSaveScreen.UpdateElement(i, spriteBg, true, $"Save {i}");
+                    string saveText = $"{TranslatorService.GetText(TranslatorKeys.SAVE_ON_CARD)} {i + 1}";
+                    m_NoteWindowSaveScreen.UpdateElement(i, spriteBg, true, saveText);
                 }
                 else
                 {
-                    _noteWindowSaveScreen.UpdateElement(i, null, false, TranslatorService.GetText(TranslatorKeys.EMPTY));
+                    m_NoteWindowSaveScreen.UpdateElement(i, null, false, TranslatorService.GetText(TranslatorKeys.EMPTY));
                 }
             }
         }
@@ -51,33 +52,35 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             {
                 BgEnum bgEnum = SaveService.GetCurrentBg();
                 Sprite spriteBg = GameModel.GetBg(bgEnum);
-                _noteWindowSaveScreen.UpdateElement(index, spriteBg, true, $"Save {index}");
+                string saveText = $"{TranslatorService.GetText(TranslatorKeys.SAVE_ON_CARD)} {index + 1}";
+                m_NoteWindowSaveScreen.UpdateElement(index, spriteBg, true, saveText);
                 SaveService.SaveGame(index);
             }
             else
             {
-                _confirmIndex = index;
-                _confirmScreen.Check(OnConfirmHandler, TranslatorKeys.CONFIRM_RESAVE);
+                m_ConfirmIndex = index;
+                m_ConfirmScreen.Check(OnConfirmHandler, TranslatorKeys.CONFIRM_RESAVE);
             }
         }
 
         private void OnConfirmHandler(bool isConfirm)
         {
             if(!isConfirm) return;
-            if(_confirmIndex < 0) return;
+            if(m_ConfirmIndex < 0) return;
             
             BgEnum bgEnum = SaveService.GetCurrentBg();
             Sprite spriteBg = GameModel.GetBg(bgEnum);
-            _noteWindowSaveScreen.UpdateElement(_confirmIndex, spriteBg, true, $"Save {_confirmIndex}");
-            SaveService.SaveGame(_confirmIndex);
+            string saveText = $"{TranslatorService.GetText(TranslatorKeys.SAVE_ON_CARD)} {m_ConfirmIndex + 1}";
+            m_NoteWindowSaveScreen.UpdateElement(m_ConfirmIndex, spriteBg, true, saveText);
+            SaveService.SaveGame(m_ConfirmIndex);
 
-            _confirmIndex = -1;
+            m_ConfirmIndex = -1;
         }
 
         public void Dispose()
         {
-            _noteWindowSaveScreen.OnOpen -= OnOpenHandler;
-            _noteWindowSaveScreen.OnCLickButton -= OnClickButtonHandler;
+            m_NoteWindowSaveScreen.OnOpen -= OnOpenHandler;
+            m_NoteWindowSaveScreen.OnCLickButton -= OnClickButtonHandler;
         }
     }
 }

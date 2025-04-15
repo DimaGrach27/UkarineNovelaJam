@@ -31,5 +31,12 @@
         CONFIRM_CHOOSE = 26,
         INVESTIGATION = 27,
         LANGUAGE = 28,
+        THE_END = 29,
+        DEMO_DESCRIPTION = 30,
+        CLICK_TO_EXIT_TO_MENU = 31,
+        BRIGHTNESS_SETTING_INIT_SCENE = 32,
+        SAVE_ON_CARD = 33,
+        
+        COUNT = 34,
     }
 }
