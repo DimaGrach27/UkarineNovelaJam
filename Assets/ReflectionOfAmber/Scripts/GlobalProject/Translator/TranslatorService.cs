@@ -104,23 +104,24 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 
         public static string GetText(string key)
         {
-            string text = null;
+            if (!TranslatorData.TryGetValue(key, out TranslatorData value))
+            {
+                return String.Empty;
+            }
+            
+            string text = value.GetText(GameModel.CurrentLanguage.ToString());
 
-            if (TranslatorData.ContainsKey(key))
-                text = TranslatorData[key].GetText(GameModel.CurrentLanguage.ToString());
+            if (string.IsNullOrEmpty(text))
+            {
+                text = value.GetText(TranslatorLanguages.UKR.ToString());
+            }
 
             return text;
         }
         
         public static string GetText(TranslatorKeys key)
         {
-            string text = null;
-            string keyStr = key.ToString();
-            
-            if (TranslatorData.ContainsKey(keyStr))
-                text = TranslatorData[keyStr].GetText(GameModel.CurrentLanguage.ToString());
-
-            return text;
+            return GetText(key.ToString());
         }
 
         public void ChangeLanguage(TranslatorLanguages translatorLanguages)
