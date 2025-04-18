@@ -34,6 +34,7 @@ MonoBehaviour:
   - GAME_DEMO
   - ANALYTIC_ENABLED
   - GAME_FINAL
+  - STEAM_GAME
   m_PlayerSettingsYaml:
     m_Settings: []
   references:

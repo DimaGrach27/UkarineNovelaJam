@@ -42,7 +42,9 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         {
             Container.BindInterfacesAndSelfTo<UserUnityService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameResourcesService>().AsSingle().NonLazy();
+#if STEAM_GAME
             Container.BindInterfacesAndSelfTo<SteamService>().AsSingle().NonLazy();
+#endif
             Container.BindInterfacesAndSelfTo<AuthenticatorService>().AsSingle().NonLazy();
 #if ANALYTIC_ENABLED          
             Container.BindInterfacesAndSelfTo<AnalyticService>().AsSingle().NonLazy();
@@ -61,7 +63,9 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.BindInterfacesAndSelfTo<TranslatorService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
 
+#if STEAM_GAME
             SaveService.SteamService = Container.Resolve<SteamService>();
+#endif
         }
         
 #if !GAME_FINAL

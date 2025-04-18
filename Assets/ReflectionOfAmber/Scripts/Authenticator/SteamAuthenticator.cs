@@ -1,3 +1,4 @@
+#if STEAM_GAME
 using System;
 using System.Threading.Tasks;
 using ReflectionOfAmber.Scripts.Steam;
@@ -56,3 +57,4 @@ namespace ReflectionOfAmber.Scripts.Authenticator
         }
     }
 }
+#endif // STEAM_GAME
