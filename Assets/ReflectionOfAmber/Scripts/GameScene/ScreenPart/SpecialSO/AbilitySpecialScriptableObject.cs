@@ -26,19 +26,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO
             int escapeCount = SaveService.GetIntValue(escape);
             int beliefCount = SaveService.GetIntValue(belief);
 
-            if (escapeCount > 1 || beliefCount > 0)
+            if (escapeCount > 1 || beliefCount > 1)
             {
-                if (beliefCount == 2 || beliefCount >= escapeCount)
+                if (beliefCount >= escapeCount)
                 {
                     _returnScene = beliefScene;
                     return true;
                 }
-            
-                if (escapeCount == 3 || escapeCount >= beliefCount)
-                {
-                    _returnScene = escapeScene;
-                    return true;
-                }
+
+                _returnScene = escapeScene;
+                return true;
             }
             
             _returnScene = wastedScene;
