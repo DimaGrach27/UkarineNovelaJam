@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -37,12 +38,12 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             }
         }
 
-        private AudioSystemService _audioSystemService;
-        private ConfirmScreen _confirmScreen;
-        private FadeService _fadeService;
-        private SceneService _sceneService;
-        private LoadScreenService _loadScreenService;
-        private SettingsService _settingsService;
+        private AudioSystemService m_audioSystemService;
+        private ConfirmScreen m_confirmScreen;
+        private FadeService m_fadeService;
+        private SceneService m_sceneService;
+        private LoadScreenService m_loadScreenService;
+        private SettingsService m_settingsService;
         
         [Inject]
         public void Construct(ConfirmScreen confirmScreen, 
@@ -53,24 +54,24 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             SettingsService settingsService
             )
         {
-            _audioSystemService = audioSystemService;
-            _confirmScreen = confirmScreen;
-            _sceneService = sceneService;
-            _fadeService = fadeService;
-            _loadScreenService = loadScreenService;
-            _settingsService = settingsService;
+            m_audioSystemService = audioSystemService;
+            m_confirmScreen = confirmScreen;
+            m_sceneService = sceneService;
+            m_fadeService = fadeService;
+            m_loadScreenService = loadScreenService;
+            m_settingsService = settingsService;
 
-            _loadScreenService.OnCloseClick += EnableButtonFade;
-            _settingsService.OnCloseButtonClick += EnableButtonFade;
+            m_loadScreenService.OnCloseClick += EnableButtonFade;
+            m_settingsService.OnCloseButtonClick += EnableButtonFade;
         }
 
         private Tween _fadeTween;
         
         private void Start()
         {
-            _fadeService.FadeOut();
-            _audioSystemService.StopAllMusic();
-            _audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
+            m_fadeService.FadeOut();
+            m_audioSystemService.StopAllMusic();
+            m_audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             
             continueButton.onClick.AddListener(LoadGameScene);
             startButton.onClick.AddListener(StartNewGame);
@@ -85,7 +86,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         {
             if (IsGameWasStarted)
             {
-                _confirmScreen.Check(ConfirmStart, TranslatorKeys.CONFIRM_NEW_GAME);
+                m_confirmScreen.Check(ConfirmStart, TranslatorKeys.CONFIRM_NEW_GAME);
                 buttonGroup.enabled = true;
                 if (_fadeTween != null) DOTween.Kill(_fadeTween);
                 
@@ -112,13 +113,13 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         
         private void LoadGameScene()
         {
-            _audioSystemService.StopAllMusic();
-            _sceneService.LoadGameScene();
+            m_audioSystemService.StopAllMusic();
+            m_sceneService.LoadGameScene();
         }
 
         private void Exit()
         {
-            _confirmScreen.Check(ConfirmExit, TranslatorKeys.CONFIRM_EXIT);
+            m_confirmScreen.Check(ConfirmExit, TranslatorKeys.CONFIRM_EXIT);
             buttonGroup.enabled = true;
             FadeOutWindow(0.3f);
         }
@@ -134,7 +135,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         private void OpenLoadScreen()
         {
             buttonGroup.enabled = true;
-            _loadScreenService.Open();
+            m_loadScreenService.Open();
             FadeOutWindow(0.3f);
         }
 
@@ -164,8 +165,14 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         private void OpenSettingHandler()
         {
             buttonGroup.enabled = true;
-            _settingsService.Open();
+            m_settingsService.Open();
             FadeOutWindow(0.3f);
+        }
+
+        private void OnDestroy()
+        {
+            m_loadScreenService.OnCloseClick -= EnableButtonFade;
+            m_settingsService.OnCloseButtonClick -= EnableButtonFade;
         }
     }
 }

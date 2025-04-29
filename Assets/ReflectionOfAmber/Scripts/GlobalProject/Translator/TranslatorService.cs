@@ -21,9 +21,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private readonly CoroutineHelper _coroutineHelper;
         
         private static readonly Dictionary<string, TranslatorData> TranslatorData = new();
-        
+
+        private readonly Dictionary<uint, Sub> m_subscribers = new();
+        private uint m_subsCount = 0;
         public event Action OnReady;
-        public event Action OnLanguageChanged;
+        // public event Action OnLanguageChanged;
 
         private readonly List<IEnumerator> _loadList = new ();
 
@@ -124,6 +126,38 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             return GetText(key.ToString());
         }
 
+        public uint Subscribe(object obj, Action callback)
+        {
+            Sub sub = new Sub(obj, callback);
+ 
+            if (!m_subscribers.TryAdd(m_subsCount, sub))
+            {
+            }
+
+            return m_subsCount++;
+        }
+
+        public uint Subscribe(MonoBehaviour obj, Action callback)
+        {
+            Sub sub = new Sub(obj, callback);
+
+            if (!m_subscribers.TryAdd(m_subsCount, sub))
+            {
+                
+            }
+            return m_subsCount++;
+        }
+        
+        public void Unsubscribe(uint index)
+        {
+            if (!m_subscribers.ContainsKey(index))
+            {
+                Debug.LogWarning($"{index} don't present in map!");
+                return;
+            }
+            m_subscribers.Remove(index);
+        }
+        
         public void ChangeLanguage(TranslatorLanguages translatorLanguages)
         {
             if (translatorLanguages != GameModel.CurrentLanguage)
@@ -132,8 +166,39 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             }
             
             GameModel.CurrentLanguage = translatorLanguages;
-            
-            OnLanguageChanged?.Invoke();
+
+            List<uint> invalidIndexes = new();
+            foreach (var keyVal in m_subscribers)
+            {
+                try
+                {
+                    if (keyVal.Value.Obj != null)
+                    {
+                        keyVal.Value.Callback?.Invoke();
+                    }
+                }
+                catch (MissingReferenceException missRef)
+                {
+                    invalidIndexes.Add(keyVal.Key);
+                }
+            }
+
+            foreach (var index in invalidIndexes)
+            {
+                Unsubscribe(index);
+            }
+        }
+
+        class Sub
+        {
+            public readonly object Obj;
+            public Action Callback;
+
+            public Sub(object obj, Action callback)
+            {
+                Obj = obj;
+                Callback = callback;
+            }
         }
     }
 }

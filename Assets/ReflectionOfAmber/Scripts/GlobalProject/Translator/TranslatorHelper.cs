@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -15,10 +14,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         {
             m_translatorService = translatorService;
             m_translatorService.OnReady += OnTranslatorReady;
-            m_translatorService.OnLanguageChanged += UpdateText;
+            m_subIndex = m_translatorService.Subscribe(this, UpdateText);
         }
 
         private TranslatorService m_translatorService;
+        private uint m_subIndex;
 
         private void Start()
         {
@@ -43,7 +43,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private void OnDestroy()
         {
             m_translatorService.OnReady -= OnTranslatorReady;
-            m_translatorService.OnLanguageChanged -= UpdateText;
+            m_translatorService.Unsubscribe(m_subIndex);
         }
     }
 }
