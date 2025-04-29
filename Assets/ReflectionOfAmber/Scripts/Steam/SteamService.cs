@@ -1,3 +1,4 @@
+#if STEAM_GAME
 using System;
 using System.IO;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -146,3 +147,4 @@ namespace ReflectionOfAmber.Scripts.Steam
         }
     }
 }
+#endif // STEAM_GAME

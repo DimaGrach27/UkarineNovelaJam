@@ -1,3 +1,4 @@
+#if STEAM_GAME
 using System;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.Analytic;
@@ -102,3 +103,4 @@ namespace ReflectionOfAmber.Scripts.Steam
         }
     }
 }
+#endif // STEAM_GAME

@@ -30,6 +30,7 @@ MonoBehaviour:
     m_path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
   m_ScriptingDefines:
   - ANALYTIC_ENABLED
+  - STEAM_GAME
   m_PlayerSettingsYaml:
     m_Settings: []
   references:

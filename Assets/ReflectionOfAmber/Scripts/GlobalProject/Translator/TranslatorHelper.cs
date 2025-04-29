@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -37,6 +38,12 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         {
             GetComponent<TextMeshProUGUI>().text =
                 TranslatorService.GetText(translatorKey);
+        }
+
+        private void OnDestroy()
+        {
+            m_translatorService.OnReady -= OnTranslatorReady;
+            m_translatorService.OnLanguageChanged -= UpdateText;
         }
     }
 }

@@ -51,7 +51,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
             
             foreach (var textShowKey in textsShow)
             {
-                string textShow = TranslatorService.GetText(textShowKey.ToString());
+                string textShow = TranslatorService.GetText(textShowKey);
                 _texts.Add(textShow);
             }
             

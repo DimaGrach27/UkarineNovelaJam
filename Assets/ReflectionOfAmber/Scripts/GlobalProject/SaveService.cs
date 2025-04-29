@@ -16,7 +16,9 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          private const string SETTINGS_KEY = "settings";
          private const string STATUSES_KEY = "statuses";
 
+#if STEAM_GAME
          public static SteamService SteamService { get; set; }
+#endif
 
          private static StatusFlagFile _statusFlagFile;
          private static StatusFlagFile StatusFlagFile
@@ -125,7 +127,9 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              string jsonData = JsonUtility.ToJson(GetJson(key));
              File.WriteAllText(Path(key), jsonData);
+#if STEAM_GAME
              SteamService.SaveFileToCloud(jsonData, key);
+#endif
          }
 
          public static void SaveChapterNotesJson()
@@ -394,9 +398,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              File.WriteAllText(pathStatuses, statusFlagFileJson);
              File.WriteAllText(pathChapter, chapterNotesFileJson);
              
+#if STEAM_GAME
              SteamService.SaveFileToCloud(saveFileJson, pathProgress);
              SteamService.SaveFileToCloud(statusFlagFileJson, pathStatuses);
              SteamService.SaveFileToCloud(chapterNotesFileJson, pathChapter);
+#endif
          }
 
          public static bool TryGetSaveGame(int index, out SaveFile saveFile)

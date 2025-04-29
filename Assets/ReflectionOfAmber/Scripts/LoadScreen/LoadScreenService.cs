@@ -45,7 +45,8 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
                     _hasSaveArray[i] = true;
                     BgEnum bgEnum = (BgEnum)saveFile.currentBg;
                     Sprite spriteBg = GameModel.GetBg(bgEnum);
-                    _loadScreenView.UpdateElement(i, spriteBg, true, $"Save {i}");
+                    string saveText = $"{TranslatorService.GetText(TranslatorKeys.SAVE_ON_CARD)} {i + 1}";
+                    _loadScreenView.UpdateElement(i, spriteBg, true, saveText);
                 }
                 else
                 {

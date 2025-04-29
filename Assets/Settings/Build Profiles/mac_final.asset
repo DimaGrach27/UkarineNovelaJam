@@ -31,6 +31,7 @@ MonoBehaviour:
   m_ScriptingDefines:
   - GAME_FINAL
   - ANALYTIC_ENABLED
+  - STEAM_GAME
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
