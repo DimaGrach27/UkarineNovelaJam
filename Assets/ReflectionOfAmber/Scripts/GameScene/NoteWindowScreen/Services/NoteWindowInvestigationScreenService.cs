@@ -43,12 +43,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             m_NoteWindowInvestigationScreen = noteWindowInvestigationScreen;
             
             m_NextScenes = new string[3];
-
+#if !GAME_DEMO
             m_NextScenes[0] = "scene_3_164_3";
             m_NextScenes[1] = "scene_3_164_1";
             m_NextScenes[2] = "scene_3_164_2";
             
             m_NoteWindowInvestigationScreen.OnChoose += OnChooseClick;
+#endif
         }
         
 

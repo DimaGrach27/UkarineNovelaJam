@@ -203,13 +203,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
 #if ANALYTIC_ENABLED
             m_AnalyticService.ReportEvent(new StartSceneAnalyticEvent(key));
-#endif
+#endif //ANALYTIC_ENABLED
 #if GAME_DEMO
             if (key == GlobalConstant.LAST_DEMO_SCENE_KEY)
             {
 #if ANALYTIC_ENABLED
                 m_AnalyticService.ReportEvent(new EndDemoAnalyticEvent());
-#endif
+#endif //ANALYTIC_ENABLED
                 Debug.Log("You have finished a demo of this game, the full game will be realized soon...");
                 
                 _characterService.HideAllCharacters();
@@ -221,7 +221,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 GameModel.IsGamePlaying = false;
                 return;
             }
-#endif
+#endif//GAME_DEMO
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             _chooseWindowService.SetActive(false);

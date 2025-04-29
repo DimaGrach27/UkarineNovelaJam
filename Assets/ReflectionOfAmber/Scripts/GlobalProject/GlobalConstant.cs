@@ -21,7 +21,9 @@ namespace ReflectionOfAmber.Scripts
         
 #if GAME_DEMO
         // public const string LAST_DEMO_SCENE_KEY = "scene_0_2";
-        public const string LAST_DEMO_SCENE_KEY = "scene_6_61";
+        // scene_6_61 - scene where Vilhanka went to trap
+        // scene_2_30 - scene where Vilhanka ended looking to the body
+        public const string LAST_DEMO_SCENE_KEY = "scene_2_30";
 #endif
     }
 }

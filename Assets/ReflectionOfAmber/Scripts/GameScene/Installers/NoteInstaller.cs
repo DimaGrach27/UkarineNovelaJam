@@ -11,7 +11,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
     {
         [Header("Note")]
         [SerializeField] private NoteWindowScreenPopup noteWindowScreen;
+// #if !GAME_DEMO
         [SerializeField] private NoteWindowInvestigationScreen noteWindowInvestigationScreen;
+// #endif
         [SerializeField] private NoteWindowSaveScreen noteWindowSaveScreen;
         [SerializeField] private NoteWindowSettingsScreenView noteWindowSettingsScreenView;
         [SerializeField] private NoteWindowMainScreenView noteWindowMainScreenView;
@@ -28,8 +30,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
             Container.BindInterfacesAndSelfTo<NoteWindowScreenPopupService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<NoteWindowScreenChangeHandler>().AsSingle().NonLazy();
             
+// #if !GAME_DEMO
             Container.BindInterfacesAndSelfTo<NoteWindowInvestigationScreen>()
                 .FromInstance(noteWindowInvestigationScreen).AsSingle().NonLazy();
+// #endif
+
             Container.BindInterfacesAndSelfTo<NoteWindowSaveScreen>()
                 .FromInstance(noteWindowSaveScreen).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<NoteWindowSettingsScreenView>()
@@ -38,7 +43,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.Installers
                 .FromInstance(noteWindowMainScreenView).AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<NoteWindowSettingsScreenService>().AsSingle().NonLazy();
+// #if !GAME_DEMO
             Container.BindInterfacesAndSelfTo<NoteWindowInvestigationScreenService>().AsSingle().NonLazy();
+// #endif
             Container.BindInterfacesAndSelfTo<NoteWindowSaveScreenService>().AsSingle().NonLazy();
         }
     }

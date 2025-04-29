@@ -26,6 +26,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                 _buttonsNoteMap = new();
                 foreach (var button in buttons)
                 {
+#if GAME_DEMO
+                    if (button.NoteWindowScreensEnum == NoteWindowScreensEnum.INVESTIGATION_SCREEN)
+                    {
+                        button.gameObject.SetActive(false);
+                        continue;
+                    }
+#endif
                     _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
                     button.OnClickButton += OnSelectWindowHandler;
                 }
@@ -45,18 +52,27 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                 _buttonsNoteMap = new();
                 foreach (var button in buttons)
                 {
+#if GAME_DEMO
+                    if (button.NoteWindowScreensEnum == NoteWindowScreensEnum.INVESTIGATION_SCREEN)
+                    {
+                        button.gameObject.SetActive(false);
+                        continue;
+                    }            
+#endif
                     _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
                     button.OnClickButton += OnSelectWindowHandler;
                     button.gameObject.SetActive(true);
                 }
             }
-
+            
+#if !GAME_DEMO
             bool canOpenInvestigationScreen = !SaveService.GetStatusValue(StatusEnum.CHOOSE_WAS_PICK);
             _buttonsNoteMap[NoteWindowScreensEnum.INVESTIGATION_SCREEN].gameObject.SetActive(canOpenInvestigationScreen);
-            
+#endif
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
         }
-        
+
+#if !GAME_DEMO
         public void OpenWithoutCanClose()
         {
             Open();
@@ -69,6 +85,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 
             OnSelectWindowHandler(NoteWindowScreensEnum.INVESTIGATION_SCREEN);
         }
+#endif
         
         public void Hide()
         {
