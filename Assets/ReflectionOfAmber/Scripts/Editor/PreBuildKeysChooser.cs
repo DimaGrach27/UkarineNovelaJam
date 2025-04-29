@@ -54,23 +54,25 @@ namespace ReflectionOfAmber.Scripts.Editor
 
                 Debug.Log($"[GAME ANALYTICS] GameKey = {settings.GetGameKey(index)}");
                 Debug.Log($"[GAME ANALYTICS] GameSecret = {settings.GetSecretKey(index)}");
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+// #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
                 if (plat == RuntimePlatform.WindowsPlayer)
                 {
+                    Debug.Log("Changing analytic keys for WIN");
                     GameAnalyticsSDK.Setup.Settings.UpdateKeys(index, GameKeyWin, SecretKeyWin);
                     Debug.Log($"[GAME ANALYTICS] GameKey = {GameKeyWin}");
                     Debug.Log($"[GAME ANALYTICS] GameSecret = {SecretKeyWin}");
                 }
-#endif
+// #endif
                 
-#if UNITY_EDITOR_OSX
+// #if UNITY_EDITOR_OSX
                 if (plat == RuntimePlatform.OSXPlayer)
                 {
+                    Debug.Log("Changing analytic keys in OSX");
                     GameAnalyticsSDK.Setup.Settings.UpdateKeys(index, GameKeyOSX, SecretKeyOSX);
                     Debug.Log($"[GAME ANALYTICS] GameKey = {GameKeyOSX}");
                     Debug.Log($"[GAME ANALYTICS] GameSecret = {SecretKeyOSX}");
                 }
-#endif
+// #endif
                 index++;
             }
         }
