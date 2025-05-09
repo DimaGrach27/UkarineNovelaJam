@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - main_story
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de7e40965063aaf4c8d9ca349d3c1ec0
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - main_story
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f79c3d61240af824f9fb869d14b4d9e3
     m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_4
     m_ReadOnly: 0

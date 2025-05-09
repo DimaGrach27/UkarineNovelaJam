@@ -15,15 +15,74 @@ MonoBehaviour:
   m_GroupName: Prologue
   m_GUID: 9f5e813ae4bc24628b206e3c58635791
   m_SerializeEntries:
-  - m_GUID: c8f09917c51bd4d439f58c987c49a16e
-    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_1/scene_2/scene_2_60.asset
+  - m_GUID: 28cb34b2807eae340b36be193251351d
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_15.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - main_story
     - prologue
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: de7e40965063aaf4c8d9ca349d3c1ec0
-    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0
+  - m_GUID: 3a2ad3a8f4cd7a449abe1e4698c9fe62
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_15_1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ec8913e09b17094aaf940a537812e50
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_18.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 535258767d9c67a44b3e518ae453f3b5
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_17.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ffa762069326264f91dc59ec9c76341
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_16.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67e189ae999f5544da9f45368855ba56
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 898688d8efeee3645a5927519fb69c44
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_15_3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a767665ab6bab074f8b98b25e68bd1b8
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acbdf28fda0cb1f41ac0d481037137b7
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_30.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2b60dbe75a718e42aee09fe6026c397
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_15_2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c27b645ac8b9a5d4db8d41610b1289d3
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prologue
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d664b8d81ab5bde43acabb6d9663fe5f
+    m_Address: Assets/ReflectionOfAmber/Configs/Graphs/block_0/scene_2/scene_2_19.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - prologue
