@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ReflectionOfAmber.Scripts
+namespace ReflectionOfAmber.Scripts.GlobalProject
 {
     public static class GlobalConstant
     {
@@ -25,5 +25,15 @@ namespace ReflectionOfAmber.Scripts
         // scene_2_30 - scene where Vilhanka ended looking to the body
         public const string LAST_DEMO_SCENE_KEY = "scene_2_30";
 #endif
+        
+            //for localization
+            public const string Id = "1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc";
+            public const string ExportFormat = "export?format=tsv";
+            public const string GidScenario = "327397956"; // 0 - is old scenario, 327397956 - new scenario (parsed)
+            public const string GidOtherText = "208247162";
+            // private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}";
+            public static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid={GidScenario}";
+            public static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid={GidOtherText}";
+
     }
 }

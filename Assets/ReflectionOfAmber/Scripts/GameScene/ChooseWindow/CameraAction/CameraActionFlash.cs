@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using ReflectionOfAmber.Scripts.GameScene.Services;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

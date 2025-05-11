@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using ReflectionOfAmber.Scripts.GameScene;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.UI

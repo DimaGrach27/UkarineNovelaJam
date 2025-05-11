@@ -1,4 +1,6 @@
-﻿namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
+﻿using ReflectionOfAmber.Scripts.GlobalProject;
+
+namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens.Actions
 {
     public class ActionFullHeal : ActionBase
     {

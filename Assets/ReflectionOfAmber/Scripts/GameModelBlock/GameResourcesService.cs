@@ -4,6 +4,7 @@ using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -15,12 +16,15 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         public readonly Dictionary<CharacterName, CharacterNameScriptableObject> CharacterNameMap = new();
         public readonly Dictionary<BgEnum, BgScriptableObject> BgMap = new();
         public readonly Dictionary<MusicType, MusicSo> AudioClipsMap = new();
+        public LocalizationConfig LocalizationConfig { get; private set; }
 
         public event Action OnReady;
 
         private const string BG_ASSETS_GROUP = "background";
         private const string CHARACTER_ASSETS_GROUP = "character";
         private const string MUSIC_ASSETS_GROUP = "music";
+        private const string LOCALIZATION_ASSETS_GROUP = "localization";
+        private const string LOCALIZATION_ASSET_KEY = "Localization";
 
         private readonly string[] SCENES_ASSETS_GROUP =
         {
@@ -31,6 +35,7 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
         };
 
         private const int LOAD_GROUP_COUNT = 4;
+        private const int LOAD_ASSET_COUNT = 1;
         private int m_CurrentLoadCount = 0;
 
         public void Init()
@@ -40,7 +45,7 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 
         private void LoadAllAssetsFromFolder()
         {
-            m_CurrentLoadCount = LOAD_GROUP_COUNT;
+            m_CurrentLoadCount = LOAD_GROUP_COUNT + LOAD_ASSET_COUNT;
             Debug.Log("Start load");
             Addressables
                     .LoadAssetsAsync<ScreenSceneScriptableObject>(SCENES_ASSETS_GROUP, OnAssetLoaded,
@@ -72,6 +77,15 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
                     m_CurrentLoadCount--;
                     OnAllAssetsLoaded();
                 };
+
+            Addressables.LoadAssetAsync<LocalizationConfig>(LOCALIZATION_ASSET_KEY).Completed += handle =>
+            {
+                Debug.Log("LOCALIZATION CONFIG LOADED");
+                LocalizationConfig = handle.Result;
+                
+                m_CurrentLoadCount--;
+                OnAllAssetsLoaded();
+            };
         }
 
         private void OnAssetLoaded(ScreenSceneScriptableObject handle)
