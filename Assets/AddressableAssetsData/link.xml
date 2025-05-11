@@ -13,6 +13,7 @@
     <type fullname="ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO.OrBlockSpecialScriptableObject" preserve="all" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO.ThoughtsSpecialScriptableObject" preserve="all" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.Services.MusicSo" preserve="all" />
+    <type fullname="ReflectionOfAmber.Scripts.GlobalProject.Translator.LocalizationConfig" preserve="all" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.ScreenPart.CameraDependent" preserve="nothing" serialized="true" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.ScreenPart.ChangeBackGround" preserve="nothing" serialized="true" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.ScreenPart.CountSetter" preserve="nothing" serialized="true" />
@@ -26,6 +27,8 @@
     <type fullname="ReflectionOfAmber.Scripts.GameScene.ScreenPart.StatusesValue" preserve="nothing" serialized="true" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.BgScreen.AnimationScreen" preserve="nothing" serialized="true" />
     <type fullname="ReflectionOfAmber.Scripts.GameScene.Services.OverridenSettings" preserve="nothing" serialized="true" />
+    <type fullname="ReflectionOfAmber.Scripts.GlobalProject.Translator.LocalizationBlockData" preserve="nothing" serialized="true" />
+    <type fullname="ReflectionOfAmber.Scripts.GlobalProject.Translator.LocalizationData" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />

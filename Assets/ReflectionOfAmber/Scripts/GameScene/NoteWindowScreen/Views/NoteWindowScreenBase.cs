@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views

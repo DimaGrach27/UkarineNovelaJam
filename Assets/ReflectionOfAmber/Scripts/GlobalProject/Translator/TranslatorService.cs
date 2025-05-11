@@ -10,39 +10,70 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 {
     public class TranslatorService : IInit
     {
-        private const string Id = "1ym156FGXOVntcnxxydhQx8hRfOE5EzgpoxMXq53fCbc";
-        private const string ExportFormat = "export?format=tsv";
-        private const string GidScenario = "327397956"; // 0 - is old scenario, 327397956 - new scenario (parsed)
-        private const string GidOtherText = "208247162";
-        // private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}";
-        private static readonly string ScenarioURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid={GidScenario}";
-        private static readonly string OtherTextURL = $"https://docs.google.com/spreadsheets/d/{Id}/{ExportFormat}&id={Id}&gid={GidOtherText}";
-        
-        private readonly CoroutineHelper _coroutineHelper;
-        
+        private readonly CoroutineHelper m_coroutineHelper;
+        private readonly GameResourcesService m_gameResourcesService;
+
         private static readonly Dictionary<string, TranslatorData> TranslatorData = new();
 
         private readonly Dictionary<uint, Sub> m_subscribers = new();
         private uint m_subsCount = 0;
         public event Action OnReady;
-        // public event Action OnLanguageChanged;
 
         private readonly List<IEnumerator> _loadList = new ();
 
         [Inject]
-        public TranslatorService(CoroutineHelper coroutineHelper)
+        public TranslatorService(CoroutineHelper coroutineHelper, GameResourcesService gameResourcesService)
         {
-            _coroutineHelper = coroutineHelper;
+            m_coroutineHelper = coroutineHelper;
+            m_gameResourcesService = gameResourcesService;
         }
 
         public void Init()
         {
-            _loadList.Add(LoadText(ScenarioURL));
-            _loadList.Add(LoadText(OtherTextURL));
-
-            _coroutineHelper.StartCoroutine(_loadList[0]);
+            m_coroutineHelper.StartCoroutine(CheckConnectToTablets(GlobalConstant.ScenarioURL));
         }
 
+        private IEnumerator CheckConnectToTablets(string url)
+        {
+            UnityWebRequest unityWebRequest = UnityWebRequest.Get(url);
+            
+            yield return unityWebRequest.SendWebRequest();
+
+            if (unityWebRequest.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(unityWebRequest.error);
+
+                TakeCashedText();
+                
+                OnReady?.Invoke();
+            }
+            else
+            {
+                _loadList.Add(LoadText(GlobalConstant.ScenarioURL));
+                _loadList.Add(LoadText(GlobalConstant.OtherTextURL));
+
+                m_coroutineHelper.StartCoroutine(_loadList[0]);
+            }
+        }
+
+        private void TakeCashedText()
+        {
+            foreach (var localizationBlockData in m_gameResourcesService.LocalizationConfig.ScenarioLocalizationBlockData)
+            {
+                string[] langs = new string[localizationBlockData.LocalizationDatas.Length];
+                string[] texts = new string[localizationBlockData.LocalizationDatas.Length];
+
+                for (int i = 0; i < localizationBlockData.LocalizationDatas.Length; i++)
+                {
+                    langs[i] = localizationBlockData.LocalizationDatas[i].Language.ToString();
+                    texts[i] = localizationBlockData.LocalizationDatas[i].Text;
+                }
+
+                TranslatorData translatorData = new TranslatorData(langs, texts);
+                TranslatorData.Add(localizationBlockData.Key, translatorData);
+            }
+        }
+        
         private IEnumerator LoadText(string urlLoad)
         {
             UnityWebRequest unityWebRequest = UnityWebRequest.Get(urlLoad);
@@ -97,7 +128,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 
             if (_loadList.Count > 0)
             {
-                _coroutineHelper.StartCoroutine(_loadList[0]);
+                m_coroutineHelper.StartCoroutine(_loadList[0]);
                 return;
             }
 
