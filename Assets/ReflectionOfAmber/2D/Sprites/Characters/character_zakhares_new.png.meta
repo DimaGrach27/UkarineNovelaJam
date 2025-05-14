@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 9c30379134dfd49e1990604834aef15b
+guid: 0c9cfadeb4cca4cb8a7b0736be578ff8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5182093050309777877
-    second: character_vilshanka 1_0
-  - first:
-      213: -375052329615740758
-    second: character_vilshanka 1_1
+      213: -4609078540083540488
+    second: character_zakhares 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,35 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_vilshanka 1_0
+      name: character_zakhares 1_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 159
-        width: 6
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b26e34f93d18518b0800000000000000
-      internalID: -5182093050309777877
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_vilshanka 1_1
-      rect:
-        serializedVersion: 2
-        x: 78
+        x: 6
         y: 0
-        width: 513
-        height: 956
+        width: 599
+        height: 952
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa03211b4eb8bcaf0800000000000000
-      internalID: -375052329615740758
+      spriteID: 8fdc17cdc734900c0800000000000000
+      internalID: -4609078540083540488
       vertices: []
       indices: 
       edges: []
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      character_vilshanka 1_0: -5182093050309777877
-      character_vilshanka 1_1: -375052329615740758
+      character_zakhares 1_0: -4609078540083540488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

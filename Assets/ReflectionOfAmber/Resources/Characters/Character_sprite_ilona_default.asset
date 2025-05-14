@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Character_sprite_ilona_default
   m_EditorClassIdentifier: 
   typeSprite: 2
-  sprite: {fileID: 21300000, guid: cad32511468565c4bb77ebe7e939e7d0, type: 3}
+  sprite: {fileID: 21300000, guid: c09b07a7e09314d9f994a50f7ce3bbac, type: 3}

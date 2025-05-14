@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Character_sprite_vilshanka_default
   m_EditorClassIdentifier: 
   typeSprite: 1
-  sprite: {fileID: 21300000, guid: 5c09b5e4eaa5a4248a4d993964393c0b, type: 3}
+  sprite: {fileID: 21300000, guid: 9c30379134dfd49e1990604834aef15b, type: 3}
