@@ -20,6 +20,8 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         
         public void Initialize()
         {
+            Debug.Log($"Data saved path: {Application.persistentDataPath}");
+
             if (m_Inits.Count > 0)
             {
                 Debug.Log($"Init: {m_Inits[0].GetType().Name}");

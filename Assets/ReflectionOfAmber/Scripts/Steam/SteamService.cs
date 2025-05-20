@@ -89,12 +89,6 @@ namespace ReflectionOfAmber.Scripts.Steam
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(data);
 
             SteamRemoteStorage.FileWrite(filename, bytes);
-            
-            Debug.Log("Saved files: ");
-            foreach ( var file in SteamRemoteStorage.Files )
-            {
-                Debug.Log( $"{file} ({SteamRemoteStorage.FileSize(file)} {SteamRemoteStorage.FileTime( file )})" );
-            }
         }
 
         public void DeleteFileFromCloud(string filename)
