@@ -3,36 +3,36 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TestButton : MonoBehaviour
+namespace ReflectionOfAmber.Scripts.GameDebug_Test
 {
-    [SerializeField] private Button button;
-    [SerializeField] private Image image;
-    
-    private Tween _tween;
-
-    private void Awake()
+    public class TestButton : MonoBehaviour
     {
-        button.onClick.AddListener(OnClick);
-    }
+        [SerializeField] private Button button;
+        [SerializeField] private Image image;
 
-    private void OnClick()
-    {
-        Debug.Log($"OnClick {gameObject.name}");
-        EventSystem.current.SetSelectedGameObject(null);
+        private Tween _tween;
 
-        CallTween();
-    }
-
-    private void CallTween()
-    {
-        if (_tween != null)
+        private void Awake()
         {
-            _tween.Kill();
+            button.onClick.AddListener(OnClick);
         }
-        
-        _tween = image.DOFade(0, 3.0f).OnComplete(() =>
+
+        private void OnClick()
         {
-            print("Tween Complete");
-        });
+            Debug.Log($"OnClick {gameObject.name}");
+            EventSystem.current.SetSelectedGameObject(null);
+
+            CallTween();
+        }
+
+        private void CallTween()
+        {
+            if (_tween != null)
+            {
+                _tween.Kill();
+            }
+
+            _tween = image.DOFade(0, 3.0f).OnComplete(() => { print("Tween Complete"); });
+        }
     }
 }

@@ -43,5 +43,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
                 nameText.enabled = !string.IsNullOrEmpty(value);
             }
         }
+
+        void Update()
+        {
+            float mouseScroll = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            print($"Mouse scroll: {mouseScroll}");
+        }
     }
 }
