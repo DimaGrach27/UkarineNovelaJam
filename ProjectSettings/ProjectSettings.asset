@@ -931,7 +931,13 @@ PlayerSettings:
   windowsGamepadBackendHint: 0
   cloudProjectId: c10ac846-a4ad-49dc-8d63-81ab672546a1
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: Reflections in Amber
   organizationId: unity_v2ha569ovgvygq
   cloudEnabled: 0
