@@ -41,14 +41,14 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
                 return;
             }
             
-            if (SaveService.BrightnessStatus)
-            {
+            // if (SaveService.BrightnessStatus)
+            // {
                 LoadMineMenu();
-            }
-            else
-            {
-                Object.Destroy(m_LoadingScreenView.gameObject);
-            }
+            // }
+            // else
+            // {
+                // Object.Destroy(m_LoadingScreenView.gameObject);
+            // }
         }
         
         private void LoadMineMenu()

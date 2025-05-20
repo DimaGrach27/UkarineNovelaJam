@@ -20,8 +20,8 @@ namespace ReflectionOfAmber.Scripts.Authenticator
 #endif
             if (m_Authenticator == null)
             {
-                Debug.LogError("AuthenticatorService::Init - Authenticator is null");
-                OnReady?.Invoke();
+                Debug.LogWarning("AuthenticatorService::Init - Authenticator is null");
+                SignInAnonymously();
                 return;
             }
             SignIn();
@@ -40,6 +40,27 @@ namespace ReflectionOfAmber.Scripts.Authenticator
                 {
                     await m_Authenticator.SignIn(OnSignIn);
                 }
+            }
+            catch (AuthenticationException ex)
+            {
+                // Compare error code to AuthenticationErrorCodes
+                // Notify the player with the proper error message
+                Debug.LogException(ex);
+            }
+            catch (RequestFailedException ex)
+            {
+                // Compare error code to CommonErrorCodes
+                // Notify the player with the proper error message
+                Debug.LogException(ex);
+            }
+        }
+
+        private async void SignInAnonymously()
+        {
+            try
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                OnSignIn(true);
             }
             catch (AuthenticationException ex)
             {
