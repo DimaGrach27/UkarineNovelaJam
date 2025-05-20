@@ -55,6 +55,7 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         
         private void LoadMineMenu()
         {
+            SaveService.Init();
             SaveService.BrightnessStatus = true;
             SceneManager.LoadScene("MainMenu");
         }

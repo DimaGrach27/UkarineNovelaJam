@@ -13,7 +13,7 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
         {
             m_scrollRect.verticalScrollbar.value += m_mouseScrollValue;
             m_mouseScrollValue = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
-            print($"Mouse scroll: {m_mouseScrollValue}");
+           // print($"Mouse scroll: {m_mouseScrollValue}");
         }
     }
 }

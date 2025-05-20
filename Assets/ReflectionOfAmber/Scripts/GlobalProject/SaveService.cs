@@ -19,13 +19,67 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 #if STEAM_GAME
          public static SteamService SteamService { get; set; }
 #endif
+         public static void Init()
+         {
+             if (!ExistFile(SETTINGS_KEY))
+             {
+                 _settingFile = new SettingFile();
+
+                 File.WriteAllText(Path(SETTINGS_KEY), JsonUtility.ToJson(_settingFile));
+             }
+             else
+             {
+                 _settingFile = JsonUtility.FromJson<SettingFile>(File.ReadAllText(Path(SETTINGS_KEY)));
+             }
+             
+             if (!ExistFile(PROGRESS_KEY))
+             {
+                 _saveFile = new SaveFile();
+
+                 File.WriteAllText(Path(PROGRESS_KEY), JsonUtility.ToJson(_saveFile));
+             }
+             else
+             {
+                 _saveFile = JsonUtility.FromJson<SaveFile>(File.ReadAllText(Path(PROGRESS_KEY)));
+             }
+             
+             if (!ExistFile(CHAPTER_NOTES_KEY))
+             {
+                 _chapterNotesFile = new ChapterNotesFile();
+
+                 File.WriteAllText(Path(CHAPTER_NOTES_KEY), JsonUtility.ToJson(_chapterNotesFile));
+             }
+             else
+             {
+                 _chapterNotesFile = JsonUtility.FromJson<ChapterNotesFile>(File.ReadAllText(Path(CHAPTER_NOTES_KEY)));
+             }
+             
+             if (!ExistFile(STATUSES_KEY))
+             {
+                 _statusFlagFile = new StatusFlagFile
+                 {
+                     statuses = new int[Enum.GetNames(typeof(StatusEnum)).Length],
+                     killersValue = new int[Enum.GetNames(typeof(KillerName)).Length],
+                     countValue = new int[Enum.GetNames(typeof(CountType)).Length]
+                 };
+
+                 File.WriteAllText(Path(STATUSES_KEY), JsonUtility.ToJson(_statusFlagFile));
+             }
+             else
+             {
+                 _statusFlagFile = JsonUtility.FromJson<StatusFlagFile>(File.ReadAllText(Path(STATUSES_KEY)));
+             }
+         }
 
          private static StatusFlagFile _statusFlagFile;
          private static StatusFlagFile StatusFlagFile
          {
              get
              {
-                 if (_statusFlagFile != null) return _statusFlagFile;
+                 if (_statusFlagFile != null)
+                 {
+                     return _statusFlagFile;
+                 }
 
                  if (!ExistFile(STATUSES_KEY))
                  {
@@ -52,7 +106,10 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              get
              {
-                 if (_saveFile != null) return _saveFile;
+                 if (_saveFile != null)
+                 {
+                     return _saveFile;
+                 }
 
                  if (!ExistFile(PROGRESS_KEY))
                  {
@@ -74,7 +131,10 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              get
              {
-                 if (_chapterNotesFile != null) return _chapterNotesFile;
+                 if (_chapterNotesFile != null)
+                 {
+                     return _chapterNotesFile;
+                 }
 
                  if (!ExistFile(CHAPTER_NOTES_KEY))
                  {
@@ -96,7 +156,10 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
          {
              get
              {
-                 if (_settingFile != null) return _settingFile;
+                 if (_settingFile != null)
+                 {
+                     return _settingFile;
+                 }
 
                  if (!ExistFile(SETTINGS_KEY))
                  {

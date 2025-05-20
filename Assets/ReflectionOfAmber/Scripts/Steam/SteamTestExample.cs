@@ -1,10 +1,12 @@
 #if STEAM_GAME
 using System;
 using System.Collections.Generic;
+using System.IO;
 using ReflectionOfAmber.Scripts.Analytic;
 using ReflectionOfAmber.Scripts.Authenticator;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using Steamworks;
 using UnityEngine;
 
 namespace ReflectionOfAmber.Scripts.Steam
@@ -33,16 +35,28 @@ namespace ReflectionOfAmber.Scripts.Steam
             m_AnalyticService = new ();
 
             m_Inits = new Queue<IInit>();
-            m_Inits.Enqueue(m_UserUnityService);
-            m_Inits.Enqueue(m_GameResourcesService);
+            // m_Inits.Enqueue(m_UserUnityService);
+            // m_Inits.Enqueue(m_GameResourcesService);
             m_Inits.Enqueue(m_SteamService);
-            m_Inits.Enqueue(m_AuthenticatorService);
-            m_Inits.Enqueue(m_AnalyticService);
+            // m_Inits.Enqueue(m_AuthenticatorService);
+            // m_Inits.Enqueue(m_AnalyticService);
         }
 
         private void Start()
         {
-            Initialize();
+            // Initialize();
+            
+            const int APP_ID = 3580180;
+            SteamClient.Init(APP_ID);
+            string steamName = SteamClient.Name;
+            Debug.Log($"Steam name is = {steamName}"); 
+            
+            Debug.Log($"Files saved in cloud: ");
+            foreach (var file in SteamRemoteStorage.Files)
+            {
+                string jsonFile = m_SteamService?.LoadFileFromCloud(file);
+                Debug.Log( $"{file} [{jsonFile}] ({SteamRemoteStorage.FileSize(file)} {SteamRemoteStorage.FileTime(file)})" );
+            }
         }
         
         private void Initialize()
@@ -100,6 +114,16 @@ namespace ReflectionOfAmber.Scripts.Steam
             fileData += "[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] ";
 
             m_SteamService?.SaveFileToCloud(fileData, filePath);
+        }
+        
+        [ContextMenu("ClearSaves")]
+        private void ClearSaves()
+        {
+            Debug.Log($"Files saved in cloud: ");
+            foreach (var file in SteamRemoteStorage.Files)
+            {
+                SteamRemoteStorage.FileDelete(file);
+            }
         }
     }
 }
