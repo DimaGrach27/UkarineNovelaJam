@@ -93,6 +93,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart.ActionScreens
             
             _actionMap.Add(ActionType.ALL_ITEM_WAS_FOUND, new ActionAllItemWasFound());
             _actionMap.Add(ActionType.OPEN_NOTE_ACTION, new ActionOpenNote());
+            
+            _actionMap.Add(ActionType.INSTA_SHOW_NEXT_PART, new ActionInstaShowNextPart());
 
             foreach (var actionBase in _actionMap.Values)
             {

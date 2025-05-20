@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 8a089a46e1b58904b85a81d72213d72d
+guid: 9c30379134dfd49e1990604834aef15b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5697942140082657589
-    second: character_vilshanka_new_0
+      213: -5182093050309777877
+    second: character_vilshanka 1_0
   - first:
-      213: -2732729183433046537
-    second: character_vilshanka_new_1
+      213: -375052329615740758
+    second: character_vilshanka 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,11 +129,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_vilshanka_new_0
+      name: character_vilshanka 1_0
       rect:
         serializedVersion: 2
-        x: 80
-        y: 151
+        x: 63
+        y: 159
         width: 6
         height: 16
       alignment: 0
@@ -144,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc6e4a500d7dce0b0800000000000000
-      internalID: -5697942140082657589
+      spriteID: b26e34f93d18518b0800000000000000
+      internalID: -5182093050309777877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_vilshanka_new_1
+      name: character_vilshanka 1_1
       rect:
         serializedVersion: 2
-        x: 95
+        x: 78
         y: 0
-        width: 488
-        height: 914
+        width: 513
+        height: 956
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f5412a4945631ad0800000000000000
-      internalID: -2732729183433046537
+      spriteID: aa03211b4eb8bcaf0800000000000000
+      internalID: -375052329615740758
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      character_vilshanka_new_0: -5697942140082657589
-      character_vilshanka_new_1: -2732729183433046537
+      character_vilshanka 1_0: -5182093050309777877
+      character_vilshanka 1_1: -375052329615740758
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

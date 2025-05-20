@@ -36,6 +36,7 @@
         CHANGE_DARK_SCREEN = 31,
         CHANGE_FOREST_SCREEN = 32,
         OPEN_NOTE_ACTION = 33,
+        INSTA_SHOW_NEXT_PART = 34,
         DEBUG = 228
     }
 }
