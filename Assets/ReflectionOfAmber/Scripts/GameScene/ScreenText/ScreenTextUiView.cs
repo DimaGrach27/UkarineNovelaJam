@@ -10,17 +10,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         [SerializeField] private TextMeshProUGUI mainText;
         [SerializeField] private Scrollbar scrollbar;
         
-        private CanvasGroup _canvasGroup;
-        public CanvasGroup CanvasGroup
-        {
-            get
-            {
-                if (_canvasGroup == null)
-                    _canvasGroup = GetComponent<CanvasGroup>();
-                return _canvasGroup;
-            }
-        }
-        
+        private CanvasGroup m_CanvasGroup;
+        public CanvasGroup CanvasGroup => m_CanvasGroup ??= GetComponent<CanvasGroup>();
+
         public bool Visible
         {
             set => gameObject.SetActive(value);
@@ -46,8 +38,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
 
         void Update()
         {
+            MoveScrollbar();
+        }
+
+        private void MoveScrollbar()
+        {
             float mouseScroll = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
-            print($"Mouse scroll: {mouseScroll}");
+            scrollbar.value += mouseScroll;
         }
     }
 }
