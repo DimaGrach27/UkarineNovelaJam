@@ -4,6 +4,7 @@ using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 {
@@ -12,7 +13,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         public event Action<NextScene> OnChoose;
 
         [SerializeField] private TextMeshProUGUI chooseText;
-        [SerializeField] private Transform container;
+        [SerializeField] private ScrollRect container;
         [SerializeField] private ChooseButtonUiView buttonPrefab;
 
         private readonly List<ChooseButtonUiView> _chooseButtonUiViews = new();
@@ -44,7 +45,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             {
                 if (i > _chooseButtonUiViews.Count - 1)
                 {
-                    ChooseButtonUiView chooseButtonUiView = Instantiate(buttonPrefab, container);
+                    ChooseButtonUiView chooseButtonUiView = Instantiate(buttonPrefab, container.content);
                     chooseButtonUiView.OnChoose += OnButtonChooseClick;
                     
                     _chooseButtonUiViews.Add(chooseButtonUiView);
@@ -63,6 +64,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         private void OnButtonChooseClick(NextScene choose)
         {
             OnChoose?.Invoke(choose);
+        }
+        
+        void Update()
+        {
+            MoveScrollbar();
+        }
+
+        private void MoveScrollbar()
+        {
+            float mouseScroll = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            container.verticalScrollbar.value += mouseScroll;
         }
     }
 }

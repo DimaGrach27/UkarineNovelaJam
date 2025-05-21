@@ -198,7 +198,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 #if ANALYTIC_ENABLED
             m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.ARROW_UI_CLICK));
 #endif
-            // ShowNextPart();
+            ShowNextPart();
         }
         
         private void ShowNextScene(string key, int part = 0)

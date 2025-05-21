@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.Input
@@ -84,7 +86,19 @@ namespace ReflectionOfAmber.Scripts.Input
             
             if (UnityEngine.Input.GetMouseButtonDown(0))
             {
-                SetAction(InputAction.LEFT_MOUSE);
+                bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
+                bool isClickOnUI = EventSystem.current.IsPointerOverGameObject();
+                
+                // bool hasDragObject = EventSystem.current.currentInputModule;
+             
+                if(!hasSelectedObject && !isClickOnUI)
+                {
+                    SetAction(InputAction.LEFT_MOUSE);
+                }
+
+                // 
+                // string pressedObject = hasSelectedObject ? EventSystem.current.currentSelectedGameObject.name : String.Empty;
+                // Debug.Log($"Mouse click on UI = {isClickOnUI} on {pressedObject} and has object {hasSelectedObject}");
             }
         }
     }
