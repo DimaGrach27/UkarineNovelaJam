@@ -42,10 +42,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             InputService inputService
 #if ANALYTIC_ENABLED
             ,AnalyticService analyticService
-#endif
+#endif //ANALYTIC_ENABLED
 #if !GAME_FINAL
             ,DebugHelperService debugHelperService
-#endif
+#endif //!GAME_FINAL
         )
         {
             _bgService = bgService;
@@ -63,14 +63,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             m_inputService = inputService;
 #if ANALYTIC_ENABLED
             m_AnalyticService = analyticService;
-#endif
+#endif //ANALYTIC_ENABLED
 #if !GAME_FINAL
             _debugHelperService = debugHelperService;
-#endif
+#endif //!GAME_FINAL
             _screenTextService.OnEndTyping += OnEndTyping;
             _chooseWindowService.OnChoose += OnChooseClick;
             _cameraActionService.OnTakePhoto += TakePhoto;
-            _screenPartNextDialogButton.OnClickButton += ShowNextPart;
+            _screenPartNextDialogButton.OnClickButton += ClickNextButton;
             _screenPartsServiceFacade.OnPlayNextPart += ForceShowNextPart;
             _screenPartsServiceFacade.OnPlayNextScene += ShowNextScene;
             
@@ -126,10 +126,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         private readonly InputService m_inputService;
 #if ANALYTIC_ENABLED
         private readonly AnalyticService m_AnalyticService;
-#endif
+#endif //ANALYTIC_ENABLED
 #if !GAME_FINAL
         private readonly DebugHelperService _debugHelperService;
-#endif
+#endif //!GAME_FINAL
         private bool _blockClick;
         private bool m_LoadingNewBg;
         
@@ -191,6 +191,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             yield return new WaitForSeconds(8.0f);
             
             ShowScene();
+        }
+
+        private void ClickNextButton()
+        {
+#if ANALYTIC_ENABLED
+            m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.ARROW_UI_CLICK));
+#endif
+            // ShowNextPart();
         }
         
         private void ShowNextScene(string key, int part = 0)
@@ -284,7 +292,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                || _currentPartSo == null 
                || m_LoadingNewBg)
             {
-                Debug.Log("Return");
                 return;
             }
             
@@ -296,14 +303,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 }
             }
             
-            Debug.Log($"SHOW next: {CurrentPart}");
             CurrentPart++;
             _blockClick = true;
 
             if (CurrentPart >= _currentSceneSo.ScreenParts.Length )
             {
-                Debug.Log($"End scene: {_currentSceneSo.SceneKey}");
-
 #if ANALYTIC_ENABLED
                 m_AnalyticService.ReportEvent(new EndSceneAnalyticEvent(_currentSceneSo.SceneKey));
 #endif
@@ -385,7 +389,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             string showText = TranslatorService.GetText(key);
             _screenPartNextDialogButton.Visible = true;
             _screenTextService.SetText(_currentPartSo.CharacterName, showText, _currentPartSo.EndOfText);
-            // _screenTextService.SetText(_currentPartSo.CharacterName, _currentPartSo.TextShow, _currentPartSo.EndOfText);
                 
             _blockClick = true;
         }
@@ -442,7 +445,6 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _chooseWindowService.SetChooses(
                 PrepareList(false, out bool isCameraAfter), 
                 showText, 
-                // _currentPartSo.TextShow, 
                 isCameraAfter);
         }
 
@@ -603,8 +605,24 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.SPACE && !_blockClick)
+            if (_blockClick)
             {
+                return;
+            }
+            
+            if (inputAction == InputAction.SPACE)
+            {
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.KEBOARD_CLICK));
+#endif
+                ShowNextPart();
+            }
+            
+            if (inputAction == InputAction.LEFT_MOUSE)
+            {
+#if ANALYTIC_ENABLED
+                m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.MOUSE_CLICK));
+#endif
                 ShowNextPart();
             }
         }
@@ -618,7 +636,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _screenTextService.OnEndTyping -= OnEndTyping;
             _chooseWindowService.OnChoose -= OnChooseClick;
             _cameraActionService.OnTakePhoto -= TakePhoto;
-            _screenPartNextDialogButton.OnClickButton -= ShowNextPart;
+            _screenPartNextDialogButton.OnClickButton -= ClickNextButton;
             _screenPartsServiceFacade.OnPlayNextPart -= ForceShowNextPart;
             _screenPartsServiceFacade.OnPlayNextScene -= ShowNextScene;
         }

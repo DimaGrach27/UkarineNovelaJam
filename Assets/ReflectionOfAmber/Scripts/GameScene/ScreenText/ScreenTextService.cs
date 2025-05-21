@@ -28,8 +28,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             m_UiClickHandler = uiClickHandler;
             m_ScreenPartNextDialogButton = screenPartNextDialogButton;
             
-            m_UiClickHandler.OnClick += EndTyping;
-            m_ScreenPartNextDialogButton.OnClickButton += EndTyping;
+            // m_UiClickHandler.OnClick += EndTyping;
+            // m_ScreenPartNextDialogButton.OnClickButton += EndTyping;
             m_inputService.AddListener(this);
         }
      
@@ -151,6 +151,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             {
                 EndTyping();
             }
+            
+            if (inputAction == InputAction.LEFT_MOUSE)
+            {
+                EndTyping();
+            }
         }
 
         public bool ShouldReceiveInput { get; set; } = true;
@@ -169,8 +174,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             
             m_inputService.RemoveListener(this);
             
-            m_UiClickHandler.OnClick -= EndTyping;
-            m_ScreenPartNextDialogButton.OnClickButton -= EndTyping;
+            // m_UiClickHandler.OnClick -= EndTyping;
+            // m_ScreenPartNextDialogButton.OnClickButton -= EndTyping;
         }
     }
 }

@@ -81,6 +81,11 @@ namespace ReflectionOfAmber.Scripts.Input
             {
                 SetAction(InputAction.SPACE);
             }
+            
+            if (UnityEngine.Input.GetMouseButtonDown(0))
+            {
+                SetAction(InputAction.LEFT_MOUSE);
+            }
         }
     }
 
@@ -88,6 +93,7 @@ namespace ReflectionOfAmber.Scripts.Input
     {
         NONE,
         PAUSE,
-        SPACE
+        SPACE,
+        LEFT_MOUSE
     }
 }
