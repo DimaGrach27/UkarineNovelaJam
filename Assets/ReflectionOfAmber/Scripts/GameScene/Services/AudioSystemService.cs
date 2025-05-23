@@ -23,6 +23,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         private Coroutine _coroutine;
         private Coroutine _coroutineLoop;
 
+        private bool m_appHidden;
+
         public AudioSource AudioSourceMusic => musicAudioSource;
         public AudioSource SoundAudioLooperSource => soundAudioLooperSource;
 
@@ -38,11 +40,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
             soundAudioSource.volume = SaveService.AudioVolume;
             soundAudioLooperSource.volume = SaveService.AudioVolume;
 
-            // foreach (var musicSo in Resources.LoadAll<MusicSo>("Configs/Music"))
-            // {
-            //     _audioClipsMap.Add(musicSo.type, musicSo.clip);
-            // }
-
+            m_appHidden = false;
+            
             _coroutine = StartCoroutine(PlayRoutineLoop());
             _coroutineLoop = StartCoroutine(PlayRoutineLooper());
         }
@@ -154,7 +153,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
         {
             while (true)
             {
-                if (!musicAudioSource.isPlaying)
+                if (!musicAudioSource.isPlaying && !m_appHidden)
                 {
                     if (_audioClips.TryDequeue(out AudioClip result))
                     {
@@ -192,6 +191,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.Services
                 
                 yield return null;
             }
+        }
+
+        private void OnApplicationPause(bool pause)
+        {
+            m_appHidden = pause;
         }
     }
 
