@@ -98,7 +98,7 @@ namespace ReflectionOfAmber.Scripts.Input
 
                 // 
                 // string pressedObject = hasSelectedObject ? EventSystem.current.currentSelectedGameObject.name : String.Empty;
-                // Debug.Log($"Mouse click on UI = {isClickOnUI} on {pressedObject} and has object {hasSelectedObject}");
+                // Debug.Log($"Mouse click on UI [isClickOnUI = {isClickOnUI}] [hasSelectedObject = {hasSelectedObject}]");
             }
         }
     }

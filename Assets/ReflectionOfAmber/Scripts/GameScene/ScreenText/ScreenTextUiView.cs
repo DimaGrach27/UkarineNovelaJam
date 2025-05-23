@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using ReflectionOfAmber.Scripts.GlobalProject;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,8 +44,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
 
         private void MoveScrollbar()
         {
-            float mouseScroll = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
-            scrollbar.value += mouseScroll;
+            scrollbar.ScrollByMouseWheel();
         }
     }
 }

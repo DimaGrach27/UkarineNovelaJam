@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ReflectionOfAmber.Scripts.GameScene.ChooseWindow;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,8 +73,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         private void MoveScrollbar()
         {
-            float mouseScroll = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
-            container.verticalScrollbar.value += mouseScroll;
+            container.verticalScrollbar.ScrollByMouseWheel();
         }
     }
 }
