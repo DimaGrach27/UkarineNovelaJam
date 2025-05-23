@@ -140,6 +140,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         public void Initialize()
         {
+            m_inputService.ForceBlockInput(true);
             CurrentPart = SaveService.GetPart;
             CurrentScene = SaveService.GetScene;
             
@@ -162,8 +163,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             }
             
             _audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
-            _fadeService.FadeOut();
-            ShowScene();
+            _fadeService.FadeOut(GlobalConstant.DEFAULT_FADE_DURATION, () =>
+            {
+                m_inputService.ForceBlockInput(false);
+                ShowScene();
+            });
         }
 
         IEnumerator FirstInit()
@@ -190,6 +194,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             
             yield return new WaitForSeconds(8.0f);
             
+            m_inputService.ForceBlockInput(false);
             ShowScene();
         }
 
