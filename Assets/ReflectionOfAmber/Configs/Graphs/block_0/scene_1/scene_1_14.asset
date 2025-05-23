@@ -26,7 +26,7 @@ MonoBehaviour:
     type: 0
   actionsType: 
   screenParts:
-  - actionsType: 02000000
+  - actionsType: 
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
       \u0442\u0440\u0435\u043C\u0442\u0456\u043D\u043D\u044F."
     endOfText: 1
     actionsTypeEnd: 
-  - actionsType: 
+  - actionsType: 02000000
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
