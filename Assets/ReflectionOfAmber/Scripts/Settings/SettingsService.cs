@@ -6,6 +6,7 @@ using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -169,6 +170,8 @@ namespace ReflectionOfAmber.Scripts.Settings
             float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION;
             _canvasGroup.DOFade(1.0f, duration);
             yield return null;
+            
+            FocusUIManager.Instance.JumpSelectionToObject(m_languageDropdown);
         }
         
         private IEnumerator FadeOutWindow()

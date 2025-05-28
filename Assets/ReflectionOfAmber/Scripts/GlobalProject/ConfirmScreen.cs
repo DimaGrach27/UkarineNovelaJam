@@ -2,6 +2,7 @@
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using ReflectionOfAmber.Scripts.Input;
+using ReflectionOfAmber.Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +14,10 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
     {
         [SerializeField] private TextMeshProUGUI textDescription;
         
-        [SerializeField] private Button confirm;
-        [SerializeField] private Button notConfirm;
+        [SerializeField] 
+        private ButtonExt confirm;
+        [SerializeField] 
+        private ButtonExt notConfirm;
 
         private CanvasGroup _canvasGroup;
         private Action<bool> _currentAction;
@@ -48,6 +51,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             
             _currentAction = onSelectAction;
             
+            FocusUIManager.Instance.JumpSelectionToObject(confirm);
             m_inputService.ForceRedirectInput(this);
         }
 
@@ -73,6 +77,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             _canvasGroup.blocksRaycasts = false;
             _tween = _canvasGroup.DOFade(0.0f, 0.5f);
             
+            FocusUIManager.Instance.ResetSelectionObject();
             m_inputService.RemoveForceRedirected(this);
         }
 

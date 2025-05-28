@@ -10,8 +10,10 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
         private void Awake()
         {
             m_InputService = new InputService();
+            
+            m_InputService.Init();
         }
-
+        
         private void Update()
         {
             m_InputService?.Tick();

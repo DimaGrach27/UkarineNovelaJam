@@ -2,6 +2,7 @@
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,6 +51,8 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
         public void Open()
         {
             FadeInWindow();
+            
+            FocusUIManager.Instance.JumpSelectionToObject(buttons[0].GetSelectable);
         }
         
         

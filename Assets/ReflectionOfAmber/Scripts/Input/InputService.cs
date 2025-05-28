@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.Input
 {
-    public class InputService : ITickable
+    public class InputService : IInit, ITickable
     {
         private List<IInputListener> m_listeners = new();
 
@@ -74,6 +77,11 @@ namespace ReflectionOfAmber.Scripts.Input
 
         public void Tick()
         {
+            if (Mouse.current.delta.value.magnitude > 0.1f)
+            {
+                Cursor.visible = true;
+            }
+            
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
             {
                 SetAction(InputAction.PAUSE);
@@ -100,6 +108,29 @@ namespace ReflectionOfAmber.Scripts.Input
                 // string pressedObject = hasSelectedObject ? EventSystem.current.currentSelectedGameObject.name : String.Empty;
                 // Debug.Log($"Mouse click on UI [isClickOnUI = {isClickOnUI}] [hasSelectedObject = {hasSelectedObject}]");
             }
+        }
+
+        public event Action OnReady;
+        public void Init()
+        {
+            SetupInputEvents();
+            
+            OnReady?.Invoke();
+        }
+
+        private void SetupInputEvents()
+        {
+            UnityEngine.InputSystem.InputAction inputAction = InputSystem.actions.FindAction("Submit");
+            if (inputAction != null)
+            {
+                inputAction.performed += InputActionPerformed;
+            }
+        }
+
+        private void InputActionPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            Debug.Log($"InputActionPerformed: {obj.action.name}");
+            Cursor.visible = false;
         }
     }
 

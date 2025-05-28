@@ -1,11 +1,11 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using ReflectionOfAmber.Scripts.LoadScreen;
 using ReflectionOfAmber.Scripts.Settings;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -80,6 +80,17 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             exitButton.onClick.AddListener(Exit);
             
             continueButton.targetGraphic.enabled = IsGameWasStarted;
+            
+            SetupNavigation();
+        }
+
+        private void SetupNavigation()
+        {
+            Navigation startButtonNavigation = startButton.navigation;
+            startButtonNavigation.selectOnUp = IsGameWasStarted ? continueButton : null;
+            startButton.navigation = startButtonNavigation;
+            
+            FocusUIManager.Instance.Initialize(IsGameWasStarted ? continueButton : startButton); 
         }
 
         private void StartNewGame()
@@ -106,9 +117,9 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             }
             else
             {
+                FocusUIManager.Instance.JumpSelectionToObject(startButton);
                 FadeInWindow(0.5f);
             }
-            
         }
         
         private void LoadGameScene()
@@ -127,20 +138,28 @@ namespace ReflectionOfAmber.Scripts.MainMenu
         private void ConfirmExit(bool isConfirm)
         {
             if(isConfirm)
+            {
                 Application.Quit();
+            }
             else
+            {
+                FocusUIManager.Instance.JumpSelectionToObject(exitButton);
                 FadeInWindow(0.5f);
+            }
         }
 
         private void OpenLoadScreen()
         {
+            FocusUIManager.Instance.ResetSelectionObject();
+
             buttonGroup.enabled = true;
             m_loadScreenService.Open();
             FadeOutWindow(0.3f);
         }
-
+        
         private void EnableButtonFade()
         {
+            FocusUIManager.Instance.JumpSelectionToObject(IsGameWasStarted ? continueButton : startButton);
             FadeInWindow(0.5f);
         }
         
@@ -164,6 +183,8 @@ namespace ReflectionOfAmber.Scripts.MainMenu
 
         private void OpenSettingHandler()
         {
+            FocusUIManager.Instance.ResetSelectionObject();
+            
             buttonGroup.enabled = true;
             m_settingsService.Open();
             FadeOutWindow(0.3f);
