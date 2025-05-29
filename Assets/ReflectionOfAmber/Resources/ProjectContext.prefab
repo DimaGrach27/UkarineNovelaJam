@@ -83,6 +83,7 @@ MonoBehaviour:
   confirmScreen: {fileID: 1398210350778895683}
   globalBrightnessService: {fileID: 1555554530416647547}
   settingsService: {fileID: 1398210350210313751}
+  mouseInteractBlocker: {fileID: 8336532471983963173}
   debugHelperService: {fileID: 4758486662552106726, guid: 5944bcf46493af149b4f30f7f82430ef, type: 3}
 --- !u!1001 &146151909902911464
 PrefabInstance:
@@ -631,6 +632,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6434ecb930eb436e9b73d00bad3d917d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8336532471983963173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6876912081836101952, guid: 9fc5759448a2dea44b6f14c73cfc9988, type: 3}
+  m_PrefabInstance: {fileID: 3233271202079452517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2425de0d9f4c6a901972a87f194eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7180298617402540676

@@ -70,7 +70,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.PAUSE)
+            if (inputAction == InputAction.CANCEL)
             {
                 CloseNotesHandler();
             }

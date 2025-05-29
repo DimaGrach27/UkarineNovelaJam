@@ -615,7 +615,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 return;
             }
             
-            if (inputAction == InputAction.SPACE)
+            if (inputAction == InputAction.SUBMIT)
             {
 #if ANALYTIC_ENABLED
                 m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.KEBOARD_CLICK));

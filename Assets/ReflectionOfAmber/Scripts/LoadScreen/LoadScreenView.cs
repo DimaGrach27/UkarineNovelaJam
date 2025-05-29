@@ -66,7 +66,7 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
             _fade = CanvasGroup.DOFade(1.0f, duration);
         }
         
-        private void FadeOutWindow()
+        public void FadeOutWindow()
         {
             if (_fade != null) DOTween.Kill(_fade);
             

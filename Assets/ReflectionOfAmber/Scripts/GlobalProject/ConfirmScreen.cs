@@ -83,7 +83,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.PAUSE)
+            if (inputAction == InputAction.CANCEL)
             {
                 NotConfirm();
             }

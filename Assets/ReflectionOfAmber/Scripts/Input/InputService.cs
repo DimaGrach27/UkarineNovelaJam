@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.Input
 {
     public class InputService : IInit, ITickable
     {
+        private readonly MouseInteractBlocker m_mouseInteractBlocker;
         private List<IInputListener> m_listeners = new();
 
         private Stack<IInputListener> m_forceRedirected = new();
 
         private bool m_isInputBlocked;
+
+        [Inject]
+        public InputService(MouseInteractBlocker mouseInteractBlocker)
+        {
+            m_mouseInteractBlocker = mouseInteractBlocker;
+        }
         
         public void AddListener(IInputListener inputListener)
         {
@@ -79,35 +86,35 @@ namespace ReflectionOfAmber.Scripts.Input
         {
             if (Mouse.current.delta.value.magnitude > 0.1f)
             {
-                Cursor.visible = true;
+                BlockAndHideMouse(false);
             }
             
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
-            {
-                SetAction(InputAction.PAUSE);
-            }
-
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
-            {
-                SetAction(InputAction.SPACE);
-            }
-            
-            if (UnityEngine.Input.GetMouseButtonDown(0))
-            {
-                bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
-                bool isClickOnUI = EventSystem.current.IsPointerOverGameObject();
-                
-                // bool hasDragObject = EventSystem.current.currentInputModule;
-             
-                if(!hasSelectedObject && !isClickOnUI)
-                {
-                    SetAction(InputAction.LEFT_MOUSE);
-                }
-
-                // 
-                // string pressedObject = hasSelectedObject ? EventSystem.current.currentSelectedGameObject.name : String.Empty;
-                // Debug.Log($"Mouse click on UI [isClickOnUI = {isClickOnUI}] [hasSelectedObject = {hasSelectedObject}]");
-            }
+            // if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+            // {
+            //     SetAction(InputAction.CANCEL);
+            // }
+            //
+            // if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     SetAction(InputAction.SPACE);
+            // }
+            //
+            // if (UnityEngine.Input.GetMouseButtonDown(0))
+            // {
+            //     bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
+            //     bool isClickOnUI = EventSystem.current.IsPointerOverGameObject();
+            //     
+            //     // bool hasDragObject = EventSystem.current.currentInputModule;
+            //  
+            //     if(!hasSelectedObject && !isClickOnUI)
+            //     {
+            //         SetAction(InputAction.LEFT_MOUSE);
+            //     }
+            //
+            //     // 
+            //     // string pressedObject = hasSelectedObject ? EventSystem.current.currentSelectedGameObject.name : String.Empty;
+            //     // Debug.Log($"Mouse click on UI [isClickOnUI = {isClickOnUI}] [hasSelectedObject = {hasSelectedObject}]");
+            // }
         }
 
         public event Action OnReady;
@@ -120,25 +127,73 @@ namespace ReflectionOfAmber.Scripts.Input
 
         private void SetupInputEvents()
         {
-            UnityEngine.InputSystem.InputAction inputAction = InputSystem.actions.FindAction("Submit");
-            if (inputAction != null)
+            InputActionMap uiActionMap = InputSystem.actions.FindActionMap("UI");
+            
+            InputSystem.actions.FindActionMap("Player")?.Disable();
+            
+            foreach (var inputAction in uiActionMap.actions)
             {
-                inputAction.performed += InputActionPerformed;
+                if (inputAction != null)
+                {
+                    inputAction.performed += InputActionPerformed;
+                }
             }
         }
 
         private void InputActionPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
             Debug.Log($"InputActionPerformed: {obj.action.name}");
-            Cursor.visible = false;
+
+            switch (obj.action.name)
+            {
+                case "Submit":
+                {
+                    SetAction(InputAction.SUBMIT); 
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
+                case "Cancel":
+                {
+                    SetAction(InputAction.CANCEL);
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
+                case "Navigate":
+                {
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
+                case "CLick":
+                {
+                    // bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
+                    bool isClickOnUI = EventSystem.current.IsPointerOverGameObject();
+                    
+                    if(!isClickOnUI)
+                    // if(!hasSelectedObject && !isClickOnUI)
+                    {
+                        SetAction(InputAction.LEFT_MOUSE);
+                    }
+                    break;
+                }
+            }
+        }
+
+        private void BlockAndHideMouse(bool block)
+        {
+            Cursor.visible = !block;
+            m_mouseInteractBlocker.SetBlock(block);
         }
     }
 
     public enum InputAction
     {
         NONE,
-        PAUSE,
+        CANCEL,
         SPACE,
-        LEFT_MOUSE
+        LEFT_MOUSE,
+        SUBMIT,
     }
 }

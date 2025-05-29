@@ -73,7 +73,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.PAUSE)
+            if (inputAction == InputAction.CANCEL)
             {
                 if (m_isNoteWindowOpened)
                 {

@@ -6,6 +6,7 @@ using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.Input;
 using ReflectionOfAmber.Scripts.UI;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ using Zenject;
 
 namespace ReflectionOfAmber.Scripts.Settings
 {
-    public class SettingsService : MonoBehaviour, IInit
+    public class SettingsService : MonoBehaviour, IInit, IInputListener
     {
         public event Action OnCloseButtonClick;
         public event Action OnReady;
@@ -26,11 +27,12 @@ namespace ReflectionOfAmber.Scripts.Settings
         [SerializeField] private SettingElementSlider soundVolume;
         [SerializeField] private SettingElementSlider brightnessValue;
 
-        [SerializeField] private Button button;
+        [SerializeField] private Button closeButton;
 
         private AudioSystemService _audioSystemService;
         private GlobalBrightnessService _globalBrightnessService;
         private TranslatorService m_TranslatorService;
+        private InputService m_InputService;
         
         private CanvasGroup _canvasGroup;
         private Coroutine _routine;
@@ -39,12 +41,14 @@ namespace ReflectionOfAmber.Scripts.Settings
         public void Construct(
             AudioSystemService audioSystemService,
             GlobalBrightnessService globalBrightnessService,
-            TranslatorService translatorService
+            TranslatorService translatorService,
+            InputService inputService
             )
         {
             _audioSystemService = audioSystemService;
             _globalBrightnessService = globalBrightnessService;
             m_TranslatorService = translatorService;
+            m_InputService = inputService;
         }
         
         public void Init()
@@ -64,7 +68,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             _audioSystemService.ChangeAudio(SaveService.AudioVolume);
             _globalBrightnessService.BrightnessValue = SaveService.BrightnessValue;
             
-            button.onClick.AddListener(Close);
+            closeButton.onClick.AddListener(Close);
 
             speedText.OnChangeValue += ChangeSpeedText;
             musicVolume.OnChangeValue += ChangeMusicVolume;
@@ -147,6 +151,7 @@ namespace ReflectionOfAmber.Scripts.Settings
                 StopCoroutine(_routine);
 
             _routine = StartCoroutine(FadeOutWindow());
+            m_InputService.RemoveForceRedirected(this);
             OnCloseButtonClick?.Invoke();
         }
 
@@ -172,6 +177,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             yield return null;
             
             FocusUIManager.Instance.JumpSelectionToObject(m_languageDropdown);
+            m_InputService.ForceRedirectInput(this);
         }
         
         private IEnumerator FadeOutWindow()
@@ -182,5 +188,15 @@ namespace ReflectionOfAmber.Scripts.Settings
             yield return new WaitForSeconds(duration);
             _canvasGroup.blocksRaycasts = false;
         }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if (inputAction == InputAction.CANCEL)
+            {
+                Close();
+            }
+        }
+
+        public bool ShouldReceiveInput { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using ReflectionOfAmber.Scripts.GlobalProject.Translator;
 using ReflectionOfAmber.Scripts.Input;
 using ReflectionOfAmber.Scripts.Settings;
 using ReflectionOfAmber.Scripts.Steam;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +23,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         [SerializeField] private ConfirmScreen confirmScreen;
         [SerializeField] private GlobalBrightnessService globalBrightnessService;
         [SerializeField] private SettingsService settingsService;
+        [SerializeField] private MouseInteractBlocker mouseInteractBlocker;
 
 #if !GAME_FINAL
         [Header("DEBUG:")]
@@ -40,6 +42,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         
         private void ServicesInstallers()
         {
+            Container.Bind<MouseInteractBlocker>().FromInstance(mouseInteractBlocker).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<UserUnityService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameResourcesService>().AsSingle().NonLazy();
 #if STEAM_GAME
