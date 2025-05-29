@@ -115,7 +115,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.SPACE)
+            if (inputAction == InputAction.SUBMIT)
             {
                 OnPointerClick();
             }

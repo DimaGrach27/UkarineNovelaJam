@@ -3,13 +3,14 @@ using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.EndSceneDemo
 {
-    public class EndSceneDemoService : MonoBehaviour, IPointerClickHandler
+    public class EndSceneDemoService : MonoBehaviour, IPointerClickHandler, IInputListener
     {
         [SerializeField] 
         private CanvasGroup tapToExit;
@@ -22,16 +23,22 @@ namespace ReflectionOfAmber.Scripts.EndSceneDemo
         private AudioSystemService m_AudioSystemService;
         private FadeService m_FadeService;
         private SceneService m_SceneService;
-
+        private InputService m_inputService;
+        
         [Inject]
         public void Construct(
             AudioSystemService audioSystemService,
             FadeService fadeService,
-            SceneService sceneService)
+            SceneService sceneService,
+            InputService inputService
+            )
         {
             m_AudioSystemService = audioSystemService;
             m_FadeService = fadeService;
             m_SceneService = sceneService;
+            m_inputService = inputService;
+            
+            m_inputService.AddListener(this);
         }
 
         private void Awake()
@@ -48,6 +55,11 @@ namespace ReflectionOfAmber.Scripts.EndSceneDemo
             StartCoroutine(DelayWait());
         }
 
+        private void OnDestroy()
+        {
+            m_inputService.RemoveListener(this);
+        }
+        
         private IEnumerator DelayWait()
         {
             yield return new WaitForSeconds(1.0f);
@@ -58,6 +70,8 @@ namespace ReflectionOfAmber.Scripts.EndSceneDemo
             
             tapToExit.DOFade(1.0f, 0.75f);
             m_IsReadyToTap = true;
+
+            ShouldReceiveInput = true;
         }
         
         public void OnPointerClick(PointerEventData eventData)
@@ -75,5 +89,17 @@ namespace ReflectionOfAmber.Scripts.EndSceneDemo
             m_LoadRunning = true;
             m_SceneService.LoadMainMenuScene();
         }
+
+        public void OnInputAction(InputAction inputAction)
+        {
+            if(!m_IsReadyToTap || m_LoadRunning)
+            {
+                return;
+            }
+            
+            LoadMainMenu();
+        }
+
+        public bool ShouldReceiveInput { get; set; }
     }
 }

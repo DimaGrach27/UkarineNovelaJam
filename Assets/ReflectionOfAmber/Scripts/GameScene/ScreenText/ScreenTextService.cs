@@ -147,7 +147,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.SPACE)
+            if (inputAction == InputAction.SUBMIT)
             {
                 EndTyping();
             }

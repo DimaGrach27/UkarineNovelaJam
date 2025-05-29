@@ -136,8 +136,20 @@ namespace ReflectionOfAmber.Scripts.Input
                 if (inputAction != null)
                 {
                     inputAction.performed += InputActionPerformed;
+                    inputAction.started += InputActionStarted;
+                    inputAction.canceled += InputActionCanceled;
                 }
             }
+        }
+
+        private void InputActionCanceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            Debug.Log($"InputActionCanceled: {obj.action.name}");
+        }
+        
+        private void InputActionStarted(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            Debug.Log($"InputActionStarted: {obj.action.name}");
         }
 
         private void InputActionPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -166,16 +178,19 @@ namespace ReflectionOfAmber.Scripts.Input
                     break;
                 }
                 
-                case "CLick":
+                case "Click":
                 {
                     // bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
-                    bool isClickOnUI = EventSystem.current.IsPointerOverGameObject();
+                    bool isClickOnUI = EventSystemUtility.IsPointerOverGUIAction();
+                    // bool isClickOnUI = EventSystem.current.IsPointerOverGameObject();
                     
                     if(!isClickOnUI)
                     // if(!hasSelectedObject && !isClickOnUI)
                     {
+                        Debug.Log("Actually was clicked!");
                         SetAction(InputAction.LEFT_MOUSE);
                     }
+
                     break;
                 }
             }
@@ -192,7 +207,6 @@ namespace ReflectionOfAmber.Scripts.Input
     {
         NONE,
         CANCEL,
-        SPACE,
         LEFT_MOUSE,
         SUBMIT,
     }
