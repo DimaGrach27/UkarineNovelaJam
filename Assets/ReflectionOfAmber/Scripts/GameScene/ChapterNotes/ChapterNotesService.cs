@@ -17,25 +17,43 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             )
         {
             m_screenPartsService = screenPartsService;
-            _chapterNotesView = chapterNotesView;
+            m_chapterNotesView = chapterNotesView;
             m_inputService = inputService;
 
             m_screenPartsService.OnOpenPart += OnChangePartHandler;
             GlobalEvent.OnCallType += OnOpenNotesHandler;
+            m_inputService.AddListener(this);
         }
 
-        private readonly ChapterNotesView _chapterNotesView;
+        private readonly ChapterNotesView m_chapterNotesView;
         private readonly InputService m_inputService;
         private readonly ScreenPartsService m_screenPartsService;
+        
+        private bool m_isChapterNotesOpen = false;
 
         private void OnOpenNotesHandler(CallKeyType callKeyType)
         {
-            if(callKeyType != CallKeyType.OPEN_CHAPTERS) return;
+            if(callKeyType != CallKeyType.OPEN_CHAPTERS)
+            {
+                return;
+            }
+
+            ShowChapterNotes();
+        }
+
+        private void ShowChapterNotes()
+        {
+            if (m_isChapterNotesOpen)
+            {
+                return;
+            }
             
             ChapterNotesFile chapterNotesFile = SaveService.ChapterNotesFile;
-            _chapterNotesView.Open(chapterNotesFile.chapters);
-            _chapterNotesView.OnCloseButtonClick += CloseNotesHandler;
+            m_chapterNotesView.Open(chapterNotesFile.chapters);
+            m_chapterNotesView.OnCloseButtonClick += CloseNotesHandler;
             m_inputService.ForceRedirectInput(this);
+            
+            m_isChapterNotesOpen = true;
         }
         
         private void OnChangePartHandler(int part)
@@ -74,20 +92,33 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             {
                 CloseNotesHandler();
             }
+
+            if (inputAction == InputAction.LOG_SCREEN)
+            {
+                ShowChapterNotes();
+            }
         }
 
         private void CloseNotesHandler()
         {
-            _chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
-            _chapterNotesView.Close();
+            if (!m_isChapterNotesOpen)
+            {
+                return;
+            }
+            
+            m_chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
+            m_chapterNotesView.Close();
             m_inputService.RemoveForceRedirected(this);
+
+			m_isChapterNotesOpen = false;
         }
 
         public void Dispose()
         {
+            m_inputService.RemoveListener(this);
             m_inputService.RemoveForceRedirected(this);
             GlobalEvent.OnCallType -= OnOpenNotesHandler;
-            _chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
+            m_chapterNotesView.OnCloseButtonClick -= CloseNotesHandler;
             m_screenPartsService.OnOpenPart -= OnChangePartHandler;
         }
         

@@ -36,7 +36,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         private void OnOpenHandler(CallKeyType callKeyType)
         {
-            if(callKeyType != CallKeyType.NOTE_BOOKE) return;
+            if(callKeyType != CallKeyType.NOTE_BOOK)
+            {
+                return;
+            }
             
             _noteWindowScreenPopup.OnClose += CloseHandler;
             _noteWindowScreenPopup.OpenWithClose();
@@ -51,7 +54,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             _noteWindowScreenPopup.OnClose -= CloseHandler;
 
             _noteWindowScreenPopup.Close();
-            m_inputService.ForceBlockInput(false);
+            // m_inputService.ForceBlockInput(false);
             m_inputService.RemoveForceRedirected(this);
 
             m_isNoteWindowOpened = false;
@@ -60,9 +63,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 #if !GAME_DEMO
         private void OnOpenWithoutCanCloseHandler(CallKeyType callKeyType)
         {
-            if(callKeyType != CallKeyType.NOTE_BOOKE_WITHOUT_EXIT) return;
+            if(callKeyType != CallKeyType.NOTE_BOOKE_WITHOUT_EXIT)
+            {
+                return;
+            }
+
             _noteWindowScreenPopup.OpenWithoutCanClose();
-            m_inputService.ForceBlockInput(true);
+            m_inputService.ForceRedirectInput(this);
+            // m_inputService.ForceBlockInput(true);
         }
 #endif
         
@@ -73,15 +81,37 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (inputAction == InputAction.CANCEL)
+            // if (m_isNoteWindowOpened)
+            // {
+            //     if (inputAction == InputAction.CANCEL)
+            //     {
+            //         CloseHandler();
+            //     }
+            // }
+            // else
+            // {
+            //     if (inputAction == InputAction.NOTE_SCREEN)
+            //     {
+            //         OnOpenHandler(CallKeyType.NOTE_BOOK);
+            //     }
+            // }
+            // if (inputAction == InputAction.CANCEL)
+            // {
+            //     if (m_isNoteWindowOpened)
+            //     {
+            //         CloseHandler();
+            //     }
+            // }
+            //
+            if (inputAction == InputAction.NOTE_SCREEN)
             {
-                if (m_isNoteWindowOpened)
+                if(!m_isNoteWindowOpened)
                 {
-                    CloseHandler();
+                    OnOpenHandler(CallKeyType.NOTE_BOOK);
                 }
                 else
                 {
-                    OnOpenHandler(CallKeyType.NOTE_BOOKE);
+                    CloseHandler();
                 }
             }
         }
@@ -91,7 +121,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         public void Dispose()
         {
             m_inputService.RemoveForceRedirected(this);
-            m_inputService.ForceBlockInput(false);
+            // m_inputService.ForceBlockInput(false);
             m_inputService.RemoveListener(this);
             
             _noteWindowScreenPopup.OnSelectWindowClick -= OnSelectWindowHandler;

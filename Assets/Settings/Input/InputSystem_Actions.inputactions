@@ -6,6 +6,24 @@
             "id": "272f6d14-89ba-496f-b7ff-215263d3219f",
             "actions": [
                 {
+                    "name": "NoteScreen",
+                    "type": "Button",
+                    "id": "0672d340-668f-4e10-a030-2f9c1c23d784",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LogScreen",
+                    "type": "Button",
+                    "id": "ef93746c-e770-42ff-b380-9ddf0159ec9d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Navigate",
                     "type": "PassThrough",
                     "id": "c95b2375-e6d9-4b88-9c4c-c5e76515df4b",
@@ -512,6 +530,50 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8fefd30-3e86-4560-bc2c-258ae13d4aec",
+                    "path": "<Keyboard>/#(L)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "LogScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12bd7159-9412-46e4-bdc3-08cf05b3d2b3",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "LogScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "486a50f7-7923-4dc1-aab8-5a8a33ef4368",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "NoteScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "617cee6f-0c6b-4c67-ad64-10ebcfd68d8a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "NoteScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

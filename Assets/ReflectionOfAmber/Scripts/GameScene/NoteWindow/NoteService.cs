@@ -41,7 +41,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindow
 
         private void OpenNote(CallKeyType callKeyType)
         {
-            if(callKeyType != CallKeyType.NOTE_BOOKE) return;
+            if(callKeyType != CallKeyType.NOTE_BOOK) return;
             
             _noteWindowUIView.Open();
         }

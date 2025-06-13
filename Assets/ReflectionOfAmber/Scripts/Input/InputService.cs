@@ -17,6 +17,8 @@ namespace ReflectionOfAmber.Scripts.Input
         private Stack<IInputListener> m_forceRedirected = new();
 
         private bool m_isInputBlocked;
+        // private int m_lastPerformedFrame;
+        // private Queue<InputAction> m_inputActions = new();
 
         [Inject]
         public InputService(MouseInteractBlocker mouseInteractBlocker)
@@ -115,6 +117,8 @@ namespace ReflectionOfAmber.Scripts.Input
             //     // string pressedObject = hasSelectedObject ? EventSystem.current.currentSelectedGameObject.name : String.Empty;
             //     // Debug.Log($"Mouse click on UI [isClickOnUI = {isClickOnUI}] [hasSelectedObject = {hasSelectedObject}]");
             // }
+            
+            
         }
 
         public event Action OnReady;
@@ -160,6 +164,7 @@ namespace ReflectionOfAmber.Scripts.Input
             {
                 case "Submit":
                 {
+                    // m_inputActions.Enqueue(InputAction.SUBMIT);
                     SetAction(InputAction.SUBMIT); 
                     BlockAndHideMouse(true);
                     break;
@@ -167,6 +172,7 @@ namespace ReflectionOfAmber.Scripts.Input
                 
                 case "Cancel":
                 {
+                    // m_inputActions.Enqueue(InputAction.CANCEL);
                     SetAction(InputAction.CANCEL);
                     BlockAndHideMouse(true);
                     break;
@@ -174,6 +180,22 @@ namespace ReflectionOfAmber.Scripts.Input
                 
                 case "Navigate":
                 {
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
+                case "LogScreen":
+                {
+                    // m_inputActions.Enqueue(InputAction.LOG_SCREEN);
+                    SetAction(InputAction.LOG_SCREEN);
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
+                case "NoteScreen":
+                {
+                    // m_inputActions.Enqueue(InputAction.NOTE_SCREEN);
+                    SetAction(InputAction.NOTE_SCREEN);
                     BlockAndHideMouse(true);
                     break;
                 }
@@ -188,6 +210,7 @@ namespace ReflectionOfAmber.Scripts.Input
                     // if(!hasSelectedObject && !isClickOnUI)
                     {
                         Debug.Log("Actually was clicked!");
+                        // m_inputActions.Enqueue(InputAction.LEFT_MOUSE);
                         SetAction(InputAction.LEFT_MOUSE);
                     }
 
@@ -209,5 +232,7 @@ namespace ReflectionOfAmber.Scripts.Input
         CANCEL,
         LEFT_MOUSE,
         SUBMIT,
+        NOTE_SCREEN,
+        LOG_SCREEN,
     }
 }

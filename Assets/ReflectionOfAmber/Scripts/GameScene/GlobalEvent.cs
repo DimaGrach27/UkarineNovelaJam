@@ -17,7 +17,7 @@ namespace ReflectionOfAmber.Scripts.GameScene
     public enum CallKeyType
     {
         NONE = 0,
-        NOTE_BOOKE = 3,
+        NOTE_BOOK = 3,
         OPEN_SETTINGS = 1,
         GAME_PAUSE_MENU = 2,
         NOTE_BOOKE_WITHOUT_EXIT = 4,
