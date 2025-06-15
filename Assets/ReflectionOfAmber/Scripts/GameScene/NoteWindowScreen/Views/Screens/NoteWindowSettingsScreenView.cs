@@ -3,7 +3,9 @@ using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.Settings;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 {
@@ -20,6 +22,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         public event Action<float> OnChangeMusicVolume; 
         public event Action<float> OnChangeSoundVolume; 
         public event Action<float> OnChangeBrightnessValue;
+
+        public override Selectable GetFirstSelectable()
+        {
+            return speedText.GetComponent<SliderExt>();
+        }
 
         public override void Open()
         {

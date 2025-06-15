@@ -1,5 +1,6 @@
 ﻿using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
+using UnityEngine.UI;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
@@ -25,5 +26,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         }
 
         public NoteWindowScreensEnum NoteWindowScreensEnum => NoteWindowScreensEnum.RESUME;
+        public Selectable GetFirstSelectable()
+        {
+            return null;
+        }
     }
 }

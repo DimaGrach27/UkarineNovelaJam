@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
-using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 {
@@ -12,8 +11,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
     {
         public event Action<NoteWindowScreensEnum> OnSelectWindowClick;
         
-        [SerializeField] private NoteWindowScreenButton[] buttons;
-        [SerializeField] private NoteWindowScreenBgView noteWindowScreenBgView;
+        [SerializeField] 
+        private NoteWindowScreenButton[] buttons;
+        [SerializeField] 
+        private NoteWindowScreenBgView noteWindowScreenBgView;
         
         private Dictionary<NoteWindowScreensEnum, NoteWindowScreenButton> _buttonsNoteMap;
 
@@ -21,22 +22,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         
         private void Awake()
         {
-            if (_buttonsNoteMap == null)
-            {
-                _buttonsNoteMap = new();
-                foreach (var button in buttons)
-                {
-#if GAME_DEMO
-                    if (button.NoteWindowScreensEnum == NoteWindowScreensEnum.INVESTIGATION_SCREEN)
-                    {
-                        button.gameObject.SetActive(false);
-                        continue;
-                    }
-#endif
-                    _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
-                    button.OnClickButton += OnSelectWindowHandler;
-                }
-            }
+            InitButtons();
         }
 
         protected override void PreOpen()
@@ -47,21 +33,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         public void OpenWithClose()
         {
             Open();
-            if (_buttonsNoteMap == null)
+            InitButtons();
+
+            foreach (var button in buttons)
             {
-                _buttonsNoteMap = new();
-                foreach (var button in buttons)
+                if (button.NoteWindowScreensEnum == NoteWindowScreensEnum.MAIN_SCREEN)
                 {
-#if GAME_DEMO
-                    if (button.NoteWindowScreensEnum == NoteWindowScreensEnum.INVESTIGATION_SCREEN)
-                    {
-                        button.gameObject.SetActive(false);
-                        continue;
-                    }            
-#endif
-                    _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
-                    button.OnClickButton += OnSelectWindowHandler;
-                    button.gameObject.SetActive(true);
+                    FocusUIManager.Instance.JumpSelectionToObject(button.GetComponent<ButtonExt>());
                 }
             }
             
@@ -72,6 +50,41 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
         }
 
+        private void InitButtons()
+        {
+            if (_buttonsNoteMap != null)
+            {
+                return;
+            }
+
+            _buttonsNoteMap = new();
+            foreach (var button in buttons)
+            {
+#if GAME_DEMO
+                if (button.NoteWindowScreensEnum == NoteWindowScreensEnum.INVESTIGATION_SCREEN)
+                {
+                    foreach (var buttonInert in buttons)
+                    {
+                        if (buttonInert.NoteWindowScreensEnum == NoteWindowScreensEnum.SETTINGS_SCREEN)
+                        {
+                            ButtonExt btn = buttonInert.GetComponent<ButtonExt>();
+                            if (btn)
+                            {
+                                Navigation nav = btn.navigation;
+                                nav.selectOnDown = null;
+                                btn.navigation = nav;
+                            }
+                        }
+                    }
+                    button.gameObject.SetActive(false);
+                    continue;
+                }
+#endif
+                _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
+                button.OnClickButton += OnSelectWindowHandler;
+            }
+        }
+        
 #if !GAME_DEMO
         public void OpenWithoutCanClose()
         {
@@ -83,6 +96,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                 button.gameObject.SetActive(false);
             }
 
+            //TODO: set focus to first element in investigation screen
             OnSelectWindowHandler(NoteWindowScreensEnum.INVESTIGATION_SCREEN);
         }
 #endif
@@ -90,6 +104,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         public void Hide()
         {
             OnClose?.Invoke();
+        }
+
+        public void SetLeftNavigationToButtons(Selectable selectable)
+        {
+            foreach (var screenButton in buttons)
+            {
+                ButtonExt btn = screenButton.GetComponent<ButtonExt>();
+                if (btn)
+                {
+                    Navigation nav = btn.navigation;
+                    nav.selectOnLeft = selectable;
+                    btn.navigation = nav;
+                }
+            }
         }
         
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)

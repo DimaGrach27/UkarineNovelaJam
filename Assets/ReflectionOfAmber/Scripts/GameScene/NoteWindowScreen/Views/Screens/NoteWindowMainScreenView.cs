@@ -1,8 +1,8 @@
-﻿using System;
-using ReflectionOfAmber.Scripts.GameModelBlock;
+﻿using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,14 +11,20 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 {
     public class NoteWindowMainScreenView : NoteWindowScreenBase
     {
-        [SerializeField] private Button m_continueButton;
-        [SerializeField] private Button m_exitButton;
+        [SerializeField] 
+        private ButtonExt m_continueButton;
+        [SerializeField] 
+        private ButtonExt m_exitButton;
         
         private NoteWindowScreenPopup m_noteWindowScreenPopup;
         private  ConfirmScreen m_confirmScreen;
         private  SceneService m_sceneService;
         
         public override NoteWindowScreensEnum NoteWindowScreensEnum => NoteWindowScreensEnum.MAIN_SCREEN;
+        public override Selectable GetFirstSelectable()
+        {
+            return m_continueButton;
+        }
 
         [Inject]
         public void Construct(

@@ -1,6 +1,7 @@
 ﻿using System;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 {
@@ -14,7 +15,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         
         public event Action<int> OnCLickButton;
         public event Action OnOpen;
-        
+
+        public override Selectable GetFirstSelectable()
+        {
+            return buttons[^1].GetSelectable;
+        }
+
         public override void Open()
         {
             base.Open();

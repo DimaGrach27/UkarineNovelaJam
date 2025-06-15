@@ -8,7 +8,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
 {
     public class NoteWindowScreenPopupService : IInputListener, IDisposable
     {
-        public event Action<NoteWindowScreensEnum> OnSelectWindowClick;
+        // public event Action<NoteWindowScreensEnum> OnSelectWindowClick;
         public event Action OnOpenNote;
         
         private readonly NoteWindowScreenPopup _noteWindowScreenPopup;
@@ -24,7 +24,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         {
             _noteWindowScreenPopup = noteWindowScreenPopup;
             m_inputService = inputService;
-            _noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
+            // _noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
             GlobalEvent.OnCallType += OnOpenHandler;
 #if !GAME_DEMO
 
@@ -74,10 +74,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         }
 #endif
         
-        private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)
-        {
-            OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
-        }
+        // private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)
+        // {
+        //     OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
+        // }
 
         public void OnInputAction(InputAction inputAction)
         {
@@ -124,7 +124,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             // m_inputService.ForceBlockInput(false);
             m_inputService.RemoveListener(this);
             
-            _noteWindowScreenPopup.OnSelectWindowClick -= OnSelectWindowHandler;
+            // _noteWindowScreenPopup.OnSelectWindowClick -= OnSelectWindowHandler;
             GlobalEvent.OnCallType -= OnOpenHandler;
 #if !GAME_DEMO
             GlobalEvent.OnCallType -= OnOpenWithoutCanCloseHandler;

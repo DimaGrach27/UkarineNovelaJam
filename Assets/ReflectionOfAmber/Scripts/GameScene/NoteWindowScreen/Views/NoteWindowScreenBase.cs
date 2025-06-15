@@ -2,6 +2,7 @@
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 {
@@ -21,6 +22,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         private Tween _fade;
         
         public abstract NoteWindowScreensEnum NoteWindowScreensEnum { get; }
+
+        public abstract Selectable GetFirstSelectable();
 
         public virtual void Open()
         {

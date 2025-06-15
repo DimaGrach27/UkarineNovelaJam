@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services;
+using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
@@ -10,24 +11,29 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
     {
         private readonly Dictionary<NoteWindowScreensEnum, INoteWindowScreen> _noteWindowScreensMap;
 
-        private INoteWindowScreen _noteWindowScreen;
-        private NoteWindowScreenPopupService m_NoteWindowScreenPopupService;
+        private INoteWindowScreen m_noteWindowScreen;
+        private readonly NoteWindowScreenPopupService m_NoteWindowScreenPopupService;
+        private readonly NoteWindowScreenPopup m_noteWindowScreenPopup;
         
         [Inject]
         public NoteWindowScreenChangeHandler(
             List<INoteWindowScreen> noteWindowScreens,
-            NoteWindowScreenPopupService noteWindowScreenPopupService)
+            NoteWindowScreenPopupService noteWindowScreenPopupService,
+            NoteWindowScreenPopup noteWindowScreenPopup
+            )
         {
             _noteWindowScreensMap = new();
             m_NoteWindowScreenPopupService = noteWindowScreenPopupService;
+            m_noteWindowScreenPopup = noteWindowScreenPopup;
             
             foreach (var iNoteWindowScreen in noteWindowScreens)
             {
                 _noteWindowScreensMap.Add(iNoteWindowScreen.NoteWindowScreensEnum, iNoteWindowScreen);
             }
 
-            m_NoteWindowScreenPopupService.OnSelectWindowClick += OnSelectWindowHandler;
+            // m_NoteWindowScreenPopupService.OnSelectWindowClick += OnSelectWindowHandler;
             m_NoteWindowScreenPopupService.OnOpenNote += OnOpenNoteHandler;
+            m_noteWindowScreenPopup.OnSelectWindowClick += OnSelectWindowHandler;
         }
 
         private void OnOpenNoteHandler()
@@ -46,18 +52,21 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
 
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)
         {
-            if(_noteWindowScreen != null) _noteWindowScreen.Close();
+            if(m_noteWindowScreen != null) m_noteWindowScreen.Close();
             if(_noteWindowScreensMap.ContainsKey(noteWindowScreensEnum))
             {
-                _noteWindowScreen = _noteWindowScreensMap[noteWindowScreensEnum];
-                _noteWindowScreen.Open();
+                m_noteWindowScreen = _noteWindowScreensMap[noteWindowScreensEnum];
+                m_noteWindowScreen.Open();
+                
+                m_noteWindowScreenPopup.SetLeftNavigationToButtons(m_noteWindowScreen.GetFirstSelectable());
             }
         }
 
         public void Dispose()
         {
-            m_NoteWindowScreenPopupService.OnSelectWindowClick -= OnSelectWindowHandler;
+            // m_NoteWindowScreenPopupService.OnSelectWindowClick -= OnSelectWindowHandler;
             m_NoteWindowScreenPopupService.OnOpenNote -= OnOpenNoteHandler;
+            m_noteWindowScreenPopup.OnSelectWindowClick -= OnSelectWindowHandler;
         }
     }
 }

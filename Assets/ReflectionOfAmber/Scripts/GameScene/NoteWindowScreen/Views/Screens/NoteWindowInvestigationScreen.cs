@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindow;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
@@ -48,6 +51,19 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
                 buttonPrefab[i].Visible = false;
                 buttonPrefab[i].InitButton(i);
             }
+        }
+
+        public override Selectable GetFirstSelectable()
+        {
+            foreach ((KillerName killerName, NoteButtonUiView noteButton) in _killersMap.Reverse())
+            {
+                if (GetButtonVisible(killerName))
+                {
+                    return noteButton.GetComponent<ButtonExt>();
+                }
+            }
+            
+            return null;
         }
 
         public override void Open()
@@ -99,6 +115,17 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
                         break;
                 }
             }
+        }
+
+        private bool GetButtonVisible(KillerName killerName)
+        {
+            return killerName switch
+            {
+                KillerName.ILONA_VOR => SaveService.GetStatusValue(StatusEnum.ILONA_HAVE_SHOW),
+                KillerName.OLEKSIY_VOR => SaveService.GetStatusValue(StatusEnum.OLEKSII_HAVE_SHOW),
+                KillerName.ZAHARES_VOR => SaveService.GetStatusValue(StatusEnum.ZAHARES_HAVE_SHOW),
+                _ => throw new ArgumentOutOfRangeException(nameof(killerName), killerName, null)
+            };
         }
     }
 }
