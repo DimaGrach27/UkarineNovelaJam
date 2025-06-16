@@ -19,7 +19,9 @@ namespace ReflectionOfAmber.Scripts.Input
         private bool m_isInputBlocked;
         // private int m_lastPerformedFrame;
         // private Queue<InputAction> m_inputActions = new();
-
+        
+        private UnityEngine.InputSystem.InputAction TabNavigation;
+        
         [Inject]
         public InputService(MouseInteractBlocker mouseInteractBlocker)
         {
@@ -144,6 +146,8 @@ namespace ReflectionOfAmber.Scripts.Input
                     inputAction.canceled += InputActionCanceled;
                 }
             }
+            
+            TabNavigation = InputSystem.actions.FindAction("TabNavigation");
         }
 
         private void InputActionCanceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -200,6 +204,17 @@ namespace ReflectionOfAmber.Scripts.Input
                     break;
                 }
                 
+                case "TabNavigation":
+                {
+                    // m_inputActions.Enqueue(InputAction.NOTE_SCREEN);
+                    // SetAction(InputAction.NOTE_SCREEN);
+
+                    float val = TabNavigation.ReadValue<float>();
+                    SetAction(val > 0 ? InputAction.TAB_NAVIGATION_RIGHT : InputAction.TAB_NAVIGATION_LEFT);
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
                 case "Click":
                 {
                     // bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
@@ -234,5 +249,7 @@ namespace ReflectionOfAmber.Scripts.Input
         SUBMIT,
         NOTE_SCREEN,
         LOG_SCREEN,
+        TAB_NAVIGATION_LEFT,
+        TAB_NAVIGATION_RIGHT,
     }
 }

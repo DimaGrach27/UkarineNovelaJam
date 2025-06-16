@@ -1,5 +1,4 @@
 ﻿using System;
-using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
 using ReflectionOfAmber.Scripts.Input;
 using Zenject;
@@ -113,6 +112,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
                 {
                     CloseHandler();
                 }
+            }
+
+            if (inputAction == InputAction.TAB_NAVIGATION_LEFT)
+            {
+                _noteWindowScreenPopup.MoveUpTabNavigation();
+            }
+            else if(inputAction == InputAction.TAB_NAVIGATION_RIGHT)
+            {
+                _noteWindowScreenPopup.MoveDownTabNavigation();
             }
         }
 

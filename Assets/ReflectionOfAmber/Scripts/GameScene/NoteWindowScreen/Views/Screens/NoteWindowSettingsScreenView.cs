@@ -36,6 +36,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
             musicVolume.SetValue(SaveService.MusicVolume * 10);
             soundVolume.SetValue(SaveService.AudioVolume * 10);
             brightnessValue.SetValue(SaveService.BrightnessValue * 10);
+            
+            FocusUIManager.Instance.JumpSelectionToObject(GetFirstSelectable());
         }
 
         private void Start()

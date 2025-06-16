@@ -46,6 +46,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         //     m_confirmScreen = confirmScreen;
         //     m_sceneService = sceneService;
         // }
+        public override void Open()
+        {
+            base.Open();
+            
+            FocusUIManager.Instance.JumpSelectionToObject(GetFirstSelectable());
+        }
         
         private void Awake()
         {

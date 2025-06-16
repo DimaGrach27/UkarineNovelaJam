@@ -1,5 +1,6 @@
 ﻿using System;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,9 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 
         private void Awake()
         {
-            GetComponent<Button>().onClick.AddListener(OnClickButtonHandler);
+            ButtonExt buttonExt = GetComponent<ButtonExt>();
+            buttonExt.onClick.AddListener(OnClickButtonHandler);
+            buttonExt.SetSelectedOnHover(false);
         }
 
         private void OnClickButtonHandler() => OnClickButton?.Invoke(noteWindowScreensEnum);

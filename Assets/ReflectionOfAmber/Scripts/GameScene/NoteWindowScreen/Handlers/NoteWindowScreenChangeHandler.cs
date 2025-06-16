@@ -58,7 +58,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Handlers
                 m_noteWindowScreen = _noteWindowScreensMap[noteWindowScreensEnum];
                 m_noteWindowScreen.Open();
                 
-                m_noteWindowScreenPopup.SetLeftNavigationToButtons(m_noteWindowScreen.GetFirstSelectable());
+                // m_noteWindowScreenPopup.SetLeftNavigationToButtons(m_noteWindowScreen.GetFirstSelectable());
             }
         }
 

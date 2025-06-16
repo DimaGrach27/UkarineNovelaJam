@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindow;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
@@ -55,7 +54,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 
         public override Selectable GetFirstSelectable()
         {
-            foreach ((KillerName killerName, NoteButtonUiView noteButton) in _killersMap.Reverse())
+            foreach ((KillerName killerName, NoteButtonUiView noteButton) in _killersMap)
             {
                 if (GetButtonVisible(killerName))
                 {
@@ -86,6 +85,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 
                 IsTutorWasShow = true;
             }
+            
+            FocusUIManager.Instance.JumpSelectionToObject(GetFirstSelectable());
         }
 
         private void NoteButtonUiViewOnOnChoose(int index)

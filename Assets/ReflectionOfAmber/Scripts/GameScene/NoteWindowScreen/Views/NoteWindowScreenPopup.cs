@@ -17,6 +17,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
         private NoteWindowScreenBgView noteWindowScreenBgView;
         
         private Dictionary<NoteWindowScreensEnum, NoteWindowScreenButton> _buttonsNoteMap;
+        private List<NoteWindowScreenButton> m_buttonOrderingMap;
+
+        private int m_upperIndex = 0;
+        private int m_selectedIndex;
+        private int m_lowerIndex;
 
         public event Action OnClose;
         
@@ -50,6 +55,26 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             OnSelectWindowHandler(NoteWindowScreensEnum.MAIN_SCREEN);
         }
 
+        public void MoveUpTabNavigation()
+        {
+            int tempNext = Math.Clamp(m_selectedIndex - 1, m_upperIndex, m_lowerIndex);
+            if (tempNext != m_selectedIndex)
+            {
+                NoteWindowScreensEnum nextTab = m_buttonOrderingMap[tempNext].NoteWindowScreensEnum;
+                OnSelectWindowHandler(nextTab);
+            }
+        }
+
+        public void MoveDownTabNavigation()
+        {
+            int tempNext = Math.Clamp(m_selectedIndex + 1, m_upperIndex, m_lowerIndex);
+            if (tempNext != m_selectedIndex)
+            {
+                NoteWindowScreensEnum nextTab = m_buttonOrderingMap[tempNext].NoteWindowScreensEnum;
+                OnSelectWindowHandler(nextTab);
+            }
+        }
+        
         private void InitButtons()
         {
             if (_buttonsNoteMap != null)
@@ -57,7 +82,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
                 return;
             }
 
+            m_buttonOrderingMap = new();
             _buttonsNoteMap = new();
+            int index = m_upperIndex;
+            
             foreach (var button in buttons)
             {
 #if GAME_DEMO
@@ -82,7 +110,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 #endif
                 _buttonsNoteMap.Add(button.NoteWindowScreensEnum, button);
                 button.OnClickButton += OnSelectWindowHandler;
+                m_buttonOrderingMap.Add(button);
+                index++;
             }
+
+            m_lowerIndex = m_buttonOrderingMap.Count - 1;
         }
         
 #if !GAME_DEMO
@@ -131,6 +163,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
             noteWindowScreenBgView.FirstPage = isFirstPage;
             // noteWindowScreenBgView.SetLastElement();
             // _buttonsNoteMap[noteWindowScreensEnum].transform.SetAsLastSibling();
+
+            m_selectedIndex = m_buttonOrderingMap.IndexOf(_buttonsNoteMap[noteWindowScreensEnum]);
             
             OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
         }

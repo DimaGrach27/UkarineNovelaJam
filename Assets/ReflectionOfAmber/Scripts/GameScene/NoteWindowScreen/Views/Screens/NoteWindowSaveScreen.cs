@@ -1,5 +1,6 @@
 ﻿using System;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,13 +19,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 
         public override Selectable GetFirstSelectable()
         {
-            return buttons[^1].GetSelectable;
+            return buttons[0].GetSelectable;
         }
 
         public override void Open()
         {
             base.Open();
             OnOpen?.Invoke();
+            
+            FocusUIManager.Instance.JumpSelectionToObject(GetFirstSelectable());
         }
 
         private void Awake()
