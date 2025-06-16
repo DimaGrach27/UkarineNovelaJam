@@ -86,14 +86,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChapterNotes
             SaveService.SaveChapterNotesJson();
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
-            if (inputAction == InputAction.CANCEL)
+            if (inputActionEnum == InputActionEnum.CANCEL)
             {
                 CloseNotesHandler();
             }
 
-            if (inputAction == InputAction.LOG_SCREEN)
+            if (inputActionEnum == InputActionEnum.LOG_SCREEN)
             {
                 ShowChapterNotes();
             }

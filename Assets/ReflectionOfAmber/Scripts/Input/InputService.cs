@@ -64,7 +64,7 @@ namespace ReflectionOfAmber.Scripts.Input
             m_forceRedirected.Pop();
         }
 
-        private void SetAction(InputAction inputAction)
+        private void SetAction(InputActionEnum inputActionEnum)
         {
             if (m_isInputBlocked)
             {
@@ -73,7 +73,7 @@ namespace ReflectionOfAmber.Scripts.Input
             
             if (m_forceRedirected.Count > 0)
             {
-                m_forceRedirected.Peek().OnInputAction(inputAction);
+                m_forceRedirected.Peek().OnInputAction(inputActionEnum);
                 return;
             }
 
@@ -81,7 +81,7 @@ namespace ReflectionOfAmber.Scripts.Input
             {
                 if(inputListener.ShouldReceiveInput)
                 {
-                    inputListener.OnInputAction(inputAction);
+                    inputListener.OnInputAction(inputActionEnum);
                 }
             }
         }
@@ -152,24 +152,30 @@ namespace ReflectionOfAmber.Scripts.Input
 
         private void InputActionCanceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
-            Debug.Log($"InputActionCanceled: {obj.action.name}");
+            // Debug.Log($"InputActionCanceled: {obj.action.name}");
         }
         
         private void InputActionStarted(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
-            Debug.Log($"InputActionStarted: {obj.action.name}");
+            // Debug.Log($"InputActionStarted: {obj.action.name}");
         }
 
         private void InputActionPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
-            Debug.Log($"InputActionPerformed: {obj.action.name}");
+            Debug.Log($"Current device: {obj.control.device.path}");
+            
+            // DeviceType currentDeviceType;
+            // Enum.TryParse<DeviceType>(obj.control.device.name, true, out currentDeviceType);
+            // Debug.Log($"Current device: {currentDeviceType}");
+            
+            // Debug.Log($"InputActionPerformed: {obj.action.name}");
 
             switch (obj.action.name)
             {
                 case "Submit":
                 {
                     // m_inputActions.Enqueue(InputAction.SUBMIT);
-                    SetAction(InputAction.SUBMIT); 
+                    SetAction(InputActionEnum.SUBMIT); 
                     BlockAndHideMouse(true);
                     break;
                 }
@@ -177,7 +183,7 @@ namespace ReflectionOfAmber.Scripts.Input
                 case "Cancel":
                 {
                     // m_inputActions.Enqueue(InputAction.CANCEL);
-                    SetAction(InputAction.CANCEL);
+                    SetAction(InputActionEnum.CANCEL);
                     BlockAndHideMouse(true);
                     break;
                 }
@@ -191,7 +197,7 @@ namespace ReflectionOfAmber.Scripts.Input
                 case "LogScreen":
                 {
                     // m_inputActions.Enqueue(InputAction.LOG_SCREEN);
-                    SetAction(InputAction.LOG_SCREEN);
+                    SetAction(InputActionEnum.LOG_SCREEN);
                     BlockAndHideMouse(true);
                     break;
                 }
@@ -199,18 +205,30 @@ namespace ReflectionOfAmber.Scripts.Input
                 case "NoteScreen":
                 {
                     // m_inputActions.Enqueue(InputAction.NOTE_SCREEN);
-                    SetAction(InputAction.NOTE_SCREEN);
+                    SetAction(InputActionEnum.NOTE_SCREEN);
                     BlockAndHideMouse(true);
                     break;
                 }
                 
-                case "TabNavigation":
-                {
-                    // m_inputActions.Enqueue(InputAction.NOTE_SCREEN);
-                    // SetAction(InputAction.NOTE_SCREEN);
+                // case "TabNavigation":
+                // {
+                //     float val = TabNavigation.ReadValue<float>();
+                //     SetAction(val > 0 ? InputActionEnum.TAB_NAVIGATION_RIGHT : InputActionEnum.TAB_NAVIGATION_LEFT);
+                //     BlockAndHideMouse(true);
+                //     break;
+                // }
 
-                    float val = TabNavigation.ReadValue<float>();
-                    SetAction(val > 0 ? InputAction.TAB_NAVIGATION_RIGHT : InputAction.TAB_NAVIGATION_LEFT);
+                case "TabNavigation_Right":
+                {
+
+                    SetAction(InputActionEnum.TAB_NAVIGATION_RIGHT);
+                    BlockAndHideMouse(true);
+                    break;
+                }
+
+                case "TabNavigation_Left":
+                {
+                    SetAction(InputActionEnum.TAB_NAVIGATION_LEFT);
                     BlockAndHideMouse(true);
                     break;
                 }
@@ -224,9 +242,9 @@ namespace ReflectionOfAmber.Scripts.Input
                     if(!isClickOnUI)
                     // if(!hasSelectedObject && !isClickOnUI)
                     {
-                        Debug.Log("Actually was clicked!");
+                        // Debug.Log("Actually was clicked!");
                         // m_inputActions.Enqueue(InputAction.LEFT_MOUSE);
-                        SetAction(InputAction.LEFT_MOUSE);
+                        SetAction(InputActionEnum.LEFT_MOUSE);
                     }
 
                     break;
@@ -241,7 +259,7 @@ namespace ReflectionOfAmber.Scripts.Input
         }
     }
 
-    public enum InputAction
+    public enum InputActionEnum
     {
         NONE,
         CANCEL,

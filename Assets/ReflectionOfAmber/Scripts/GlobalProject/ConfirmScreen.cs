@@ -81,9 +81,9 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
             m_inputService.RemoveForceRedirected(this);
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
-            if (inputAction == InputAction.CANCEL)
+            if (inputActionEnum == InputActionEnum.CANCEL)
             {
                 NotConfirm();
             }

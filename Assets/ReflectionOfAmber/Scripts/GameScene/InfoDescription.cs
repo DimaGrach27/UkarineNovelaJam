@@ -113,9 +113,9 @@ namespace ReflectionOfAmber.Scripts.GameScene
             _isTyping = false;
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
-            if (inputAction == InputAction.SUBMIT)
+            if (inputActionEnum == InputActionEnum.SUBMIT)
             {
                 OnPointerClick();
             }

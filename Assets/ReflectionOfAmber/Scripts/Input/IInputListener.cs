@@ -2,7 +2,7 @@
 {
     public interface IInputListener
     {
-        public void OnInputAction(InputAction inputAction);
+        public void OnInputAction(InputActionEnum inputActionEnum);
         
         public bool ShouldReceiveInput { get; set; }
     }

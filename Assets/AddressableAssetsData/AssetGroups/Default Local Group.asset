@@ -36,8 +36,12 @@ MonoBehaviour:
   - m_GUID: 95d3402f1c324794f85f1ce2fc265287
     m_Address: Localization
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - localization
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a67adb92bf159d04d8ad21b145a18db3
+    m_Address: UIHints
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 89e8268d98f4244ca9fe2293fc1daa83, type: 2}

@@ -145,14 +145,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _endText = null;
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
-            if (inputAction == InputAction.SUBMIT)
+            if (inputActionEnum == InputActionEnum.SUBMIT)
             {
                 EndTyping();
             }
             
-            if (inputAction == InputAction.LEFT_MOUSE)
+            if (inputActionEnum == InputActionEnum.LEFT_MOUSE)
             {
                 EndTyping();
             }

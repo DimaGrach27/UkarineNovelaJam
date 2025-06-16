@@ -189,9 +189,9 @@ namespace ReflectionOfAmber.Scripts.Settings
             _canvasGroup.blocksRaycasts = false;
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
-            if (inputAction == InputAction.CANCEL)
+            if (inputActionEnum == InputActionEnum.CANCEL)
             {
                 Close();
             }

@@ -608,14 +608,14 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _blockClick = false;
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
             if (_blockClick)
             {
                 return;
             }
             
-            if (inputAction == InputAction.SUBMIT)
+            if (inputActionEnum == InputActionEnum.SUBMIT)
             {
 #if ANALYTIC_ENABLED
                 m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.KEBOARD_CLICK));
@@ -623,7 +623,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 ShowNextPart();
             }
             
-            if (inputAction == InputAction.LEFT_MOUSE)
+            if (inputActionEnum == InputActionEnum.LEFT_MOUSE)
             {
 #if ANALYTIC_ENABLED
                 m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.MOUSE_CLICK));

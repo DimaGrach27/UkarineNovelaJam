@@ -92,9 +92,9 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
             m_loadScreenView.OnCloseClick -= OnCloseClickHandler;
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
-            if (inputAction == InputAction.CANCEL)
+            if (inputActionEnum == InputActionEnum.CANCEL)
             { 
                 m_loadScreenView.FadeOutWindow();
                 OnCloseClickHandler();

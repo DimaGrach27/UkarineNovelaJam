@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafb8aa09c5a42bfabba1ec205957178, type: 3}
+  m_Name: UiInputHintsConfig
+  m_EditorClassIdentifier: 
+  UIHintData:
+  - DeviceType: 0
+    KeybindingData:
+    - ActionID: 4
+      Icon: {fileID: -8794221140060327813, guid: 2c07fc940ce95584199af7258c5e9ac6, type: 3}
+    - ActionID: 5
+      Icon: {fileID: 8278528618179344262, guid: 42fe7a534fbc4f9429a13b85f633e0cb, type: 3}
+    - ActionID: 3
+      Icon: {fileID: 3548900496980605608, guid: eb3912f2e5a3d4f409a28c357477d668, type: 3}
+    - ActionID: 1
+      Icon: {fileID: -5121687663805154390, guid: 26ad9706996636041b795324ebcd206d, type: 3}
+    - ActionID: 2
+      Icon: {fileID: -1996464940526327524, guid: 5ebe677d1777e8748bb8a190bc971361, type: 3}
+  - DeviceType: 1
+    KeybindingData:
+    - ActionID: 6
+      Icon: {fileID: -2922044605309930907, guid: 88cd2302e0a2699408333b0aae957b02, type: 3}
+    - ActionID: 7
+      Icon: {fileID: 4292458542781250519, guid: 177601d7e7a783348b278367b913bfa2, type: 3}
+    - ActionID: 8
+      Icon: {fileID: 2344782116907578832, guid: d49a898260af47145b19ce03a6a143e1, type: 3}
+    - ActionID: 9
+      Icon: {fileID: 8455310594317103604, guid: 37253142ceb2c6e4eacd1b3d30c7a61c, type: 3}
+    - ActionID: 10
+      Icon: {fileID: -1476518179023079721, guid: a7aaa87a32efdc44fa2bddadc6a50328, type: 3}
+    - ActionID: 11
+      Icon: {fileID: 6214764616161918336, guid: 983d4fe5e07ca654b8cc36f021e181d2, type: 3}
+    - ActionID: 12
+      Icon: {fileID: -5066522875620236344, guid: 228a5829b57ee334a945a4bf24feb360, type: 3}
+  - DeviceType: 2
+    KeybindingData:
+    - ActionID: 6
+      Icon: {fileID: -6744449585340860221, guid: 850aa63e02087014da7c8db11fc42c34, type: 3}
+    - ActionID: 7
+      Icon: {fileID: 8139630082527126742, guid: 00b782e80fce36e4c8e2f94af03ff5a9, type: 3}
+    - ActionID: 8
+      Icon: {fileID: 158321559626003830, guid: 9adbc8947e92a404e841fd8f7d3f5d72, type: 3}
+    - ActionID: 9
+      Icon: {fileID: 5846478666474721031, guid: 2be40e3a993ebbb44b79ee6bba4fcd54, type: 3}
+    - ActionID: 10
+      Icon: {fileID: -2377837725512920147, guid: 4a99fa46214758e42b22667d6c7bf3c5, type: 3}
+    - ActionID: 11
+      Icon: {fileID: -2299360346848807046, guid: 6457d81a7cc6cd949b5b4ab4c35b828d, type: 3}
+    - ActionID: 12
+      Icon: {fileID: 8367663834574295989, guid: 4c02e91959e3a324480fff6d59b83ce4, type: 3}
+  - DeviceType: 3
+    KeybindingData:
+    - ActionID: 6
+      Icon: {fileID: -2922044605309930907, guid: 88cd2302e0a2699408333b0aae957b02, type: 3}
+    - ActionID: 7
+      Icon: {fileID: 4292458542781250519, guid: 177601d7e7a783348b278367b913bfa2, type: 3}
+    - ActionID: 8
+      Icon: {fileID: 2344782116907578832, guid: d49a898260af47145b19ce03a6a143e1, type: 3}
+    - ActionID: 9
+      Icon: {fileID: 8455310594317103604, guid: 37253142ceb2c6e4eacd1b3d30c7a61c, type: 3}
+    - ActionID: 10
+      Icon: {fileID: -1476518179023079721, guid: a7aaa87a32efdc44fa2bddadc6a50328, type: 3}
+    - ActionID: 11
+      Icon: {fileID: 6214764616161918336, guid: 983d4fe5e07ca654b8cc36f021e181d2, type: 3}
+    - ActionID: 12
+      Icon: {fileID: -5066522875620236344, guid: 228a5829b57ee334a945a4bf24feb360, type: 3}

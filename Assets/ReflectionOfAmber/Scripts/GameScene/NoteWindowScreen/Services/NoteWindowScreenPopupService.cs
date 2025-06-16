@@ -78,7 +78,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         //     OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
         // }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
             // if (m_isNoteWindowOpened)
             // {
@@ -102,7 +102,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             //     }
             // }
             //
-            if (inputAction == InputAction.NOTE_SCREEN)
+            if (inputActionEnum == InputActionEnum.NOTE_SCREEN)
             {
                 if(!m_isNoteWindowOpened)
                 {
@@ -114,11 +114,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
                 }
             }
 
-            if (inputAction == InputAction.TAB_NAVIGATION_LEFT)
+            if (inputActionEnum == InputActionEnum.TAB_NAVIGATION_LEFT)
             {
                 _noteWindowScreenPopup.MoveUpTabNavigation();
             }
-            else if(inputAction == InputAction.TAB_NAVIGATION_RIGHT)
+            else if(inputActionEnum == InputActionEnum.TAB_NAVIGATION_RIGHT)
             {
                 _noteWindowScreenPopup.MoveDownTabNavigation();
             }

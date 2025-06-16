@@ -89,7 +89,7 @@ namespace ReflectionOfAmber.Scripts.EndScene
             m_SceneService.LoadMainMenuScene();
         }
 
-        public void OnInputAction(InputAction inputAction)
+        public void OnInputAction(InputActionEnum inputActionEnum)
         {
             if(!_isReadyToTap || m_loadRunning)
             {

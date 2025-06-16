@@ -12,6 +12,7 @@ using ReflectionOfAmber.Scripts.Settings;
 using ReflectionOfAmber.Scripts.Steam;
 using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.ProjectInstallers
@@ -24,6 +25,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         [SerializeField] private GlobalBrightnessService globalBrightnessService;
         [SerializeField] private SettingsService settingsService;
         [SerializeField] private MouseInteractBlocker mouseInteractBlocker;
+        [SerializeField] private PlayerInput playerInput;
 
 #if !GAME_FINAL
         [Header("DEBUG:")]
@@ -43,6 +45,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
         private void ServicesInstallers()
         {
             Container.Bind<MouseInteractBlocker>().FromInstance(mouseInteractBlocker).AsSingle().NonLazy();
+            Container.Bind<PlayerInput>().FromInstance(playerInput).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<UserUnityService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameResourcesService>().AsSingle().NonLazy();
 #if STEAM_GAME
@@ -65,7 +68,7 @@ namespace ReflectionOfAmber.Scripts.ProjectInstallers
             Container.Bind<FadeService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<TranslatorService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
-
+            Container.BindInterfacesAndSelfTo<PlayerInputHandler>().AsSingle().NonLazy();
 #if STEAM_GAME
             SaveService.SteamService = Container.Resolve<SteamService>();
 #endif
