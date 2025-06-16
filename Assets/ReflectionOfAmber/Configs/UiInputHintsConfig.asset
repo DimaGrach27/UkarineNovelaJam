@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UiInputHintsConfig
   m_EditorClassIdentifier: 
   UIHintData:
-  - DeviceType: 0
+  - DeviceType: 1
     KeybindingData:
     - ActionID: 4
       Icon: {fileID: -8794221140060327813, guid: 2c07fc940ce95584199af7258c5e9ac6, type: 3}
@@ -25,7 +25,7 @@ MonoBehaviour:
       Icon: {fileID: -5121687663805154390, guid: 26ad9706996636041b795324ebcd206d, type: 3}
     - ActionID: 2
       Icon: {fileID: -1996464940526327524, guid: 5ebe677d1777e8748bb8a190bc971361, type: 3}
-  - DeviceType: 1
+  - DeviceType: 2
     KeybindingData:
     - ActionID: 6
       Icon: {fileID: -2922044605309930907, guid: 88cd2302e0a2699408333b0aae957b02, type: 3}
@@ -41,7 +41,7 @@ MonoBehaviour:
       Icon: {fileID: 6214764616161918336, guid: 983d4fe5e07ca654b8cc36f021e181d2, type: 3}
     - ActionID: 12
       Icon: {fileID: -5066522875620236344, guid: 228a5829b57ee334a945a4bf24feb360, type: 3}
-  - DeviceType: 2
+  - DeviceType: 4
     KeybindingData:
     - ActionID: 6
       Icon: {fileID: -6744449585340860221, guid: 850aa63e02087014da7c8db11fc42c34, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
       Icon: {fileID: -2299360346848807046, guid: 6457d81a7cc6cd949b5b4ab4c35b828d, type: 3}
     - ActionID: 12
       Icon: {fileID: 8367663834574295989, guid: 4c02e91959e3a324480fff6d59b83ce4, type: 3}
-  - DeviceType: 3
+  - DeviceType: 5
     KeybindingData:
     - ActionID: 6
       Icon: {fileID: -2922044605309930907, guid: 88cd2302e0a2699408333b0aae957b02, type: 3}
@@ -73,3 +73,19 @@ MonoBehaviour:
       Icon: {fileID: 6214764616161918336, guid: 983d4fe5e07ca654b8cc36f021e181d2, type: 3}
     - ActionID: 12
       Icon: {fileID: -5066522875620236344, guid: 228a5829b57ee334a945a4bf24feb360, type: 3}
+  - DeviceType: 3
+    KeybindingData:
+    - ActionID: 6
+      Icon: {fileID: 107784107539520471, guid: 48048138b3a6c2248a53763e045e66ad, type: 3}
+    - ActionID: 7
+      Icon: {fileID: 6502435699722092522, guid: 09993bbf0a8bf99439c0d3f37763e66e, type: 3}
+    - ActionID: 8
+      Icon: {fileID: 1020893816739932007, guid: 8b1cf6149fa13be439eafcffff83cab3, type: 3}
+    - ActionID: 9
+      Icon: {fileID: -5543303931271698807, guid: e72230938742b934a93ae659856779c3, type: 3}
+    - ActionID: 10
+      Icon: {fileID: 6106100807343793065, guid: ae81a0016fe3c75489e2f484c72f4beb, type: 3}
+    - ActionID: 11
+      Icon: {fileID: 6169474342374048484, guid: c245e11beab864b4db90da0b6680a22e, type: 3}
+    - ActionID: 12
+      Icon: {fileID: -3937498410574654694, guid: fc76f8f70243d6548905a828ff9ac1a0, type: 3}

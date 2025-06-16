@@ -7,6 +7,7 @@ using ReflectionOfAmber.Scripts.PreInitScene;
 using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.GameDebug_Test
 {
@@ -17,6 +18,13 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
         
         [SerializeField]
         private PlayerInput m_playerInput;
+
+        [Space (10)]
+        [SerializeField] 
+        private Image m_icon;
+        [SerializeField] 
+        private InputActionID m_InputActionID;
+        [Space (10)]
         
         private PlayerInputHandler m_PlayerInput;
         
@@ -28,7 +36,6 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
         
         private GameIniter m_GameIniter;
         
-
         [SerializeField] 
         private UiButton[] m_Buttons;
 
@@ -44,39 +51,17 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
                 m_InputService,
                 m_PlayerInput
             });
-            
+
+            m_GameIniter.OnInitEnded += EndInit;
             m_GameIniter.Initialize();
+        }
 
-            m_GameResourcesService.OnReady += InitInput;
-            m_GameResourcesService.Init();
-            m_PlayerInput.Init();
-
+        private void EndInit()
+        {
+            m_GameIniter.OnInitEnded -= EndInit;
             m_InputService.AddListener(this);
-        }
 
-        private void InitInput()
-        {
-            m_GameResourcesService.OnReady -= InitInput;
-            m_InputService.OnReady += InitPlayerInput;
-            m_InputService.Init();
-        }
-        
-        private void InitPlayerInput()
-        {
-            m_InputService.OnReady -= InitPlayerInput;
-            
-        }
-
-        private void Start()
-        {
-            for (int i = 0; i < m_Buttons.Length; i++)
-            {
-                UiButton uiButton = m_Buttons[i];
-
-                uiButton.DisplayedText = PlayerInputHandler.Instance.GetButtonHint(uiButton.InputActionID);
-                
-                m_Buttons[i] = uiButton;
-            }
+            UpdateHints();
         }
 
         private void Update()
@@ -85,6 +70,16 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
             
             // HintLeft = m_PlayerInput.GetButtonHint(InputActionID.TabNavigation_Left);
             // HintRight = m_PlayerInput.GetButtonHint(InputActionID.TabNavigation_Right);
+
+            UpdateHints();
+        }
+
+        private void UpdateHints()
+        {
+            if (PlayerInputHandler.Instance == null)
+            {
+                return;
+            }
             
             for (int i = 0; i < m_Buttons.Length; i++)
             {
@@ -95,7 +90,8 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
                 m_Buttons[i] = uiButton;
             }
 
-            Device = PlayerInputHandler.Instance.CurrentControlScheme();
+            Device = PlayerInputHandler.Instance.GetCurrentDeviceName().ToString();
+            m_icon.sprite = PlayerInputHandler.Instance.GetIconHint(m_InputActionID);
         }
         
         public void OnInputAction(InputActionEnum inputActionEnum)

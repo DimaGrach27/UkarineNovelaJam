@@ -74,14 +74,21 @@ namespace ReflectionOfAmber.Scripts.Input
             int binding = inputAction.GetBindingIndex(m_PlayerInput.currentControlScheme);
             inputAction.GetBindingDisplayString(binding, out string layoutName, out string controlPath);
 
-            DeviceType deviceType = DeviceType.KeyboardAndMouse;
-            switch (layoutName)
-            {
-                
-            }
+            DeviceType deviceType = GetCurrentDeviceName();
+
             foreach (var uiHintData in m_gameResourcesService.UiInputHintsConfig.GetUiHintData())
             {
-                
+                if (uiHintData.DeviceType == deviceType)
+                {
+                    foreach (var keybindingData in uiHintData.KeybindingData)
+                    {
+                        if (keybindingData.ActionID.ToString()
+                            .Equals(controlPath, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            return keybindingData.Icon;
+                        }
+                    }
+                }
             }
 
             return null;
@@ -90,6 +97,29 @@ namespace ReflectionOfAmber.Scripts.Input
         public string CurrentControlScheme()
         {
             return m_PlayerInput.currentControlScheme;
+        }
+
+        public DeviceType GetCurrentDeviceName()
+        {
+            string deviceName = m_PlayerInput.devices[0].displayName;
+            if (deviceName.Contains("XBOX", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return DeviceType.XBOX;
+            }
+            else if (deviceName.Contains("PS4", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return DeviceType.PS4;
+            }
+            else if (deviceName.Contains("PS5", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return DeviceType.PS5;
+            }
+            else if (deviceName.Contains("Controller", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return DeviceType.DefaultGamepad;
+            }
+
+            return DeviceType.KeyboardAndMouse;
         }
     }
 
@@ -107,9 +137,11 @@ namespace ReflectionOfAmber.Scripts.Input
 
     public enum DeviceType
     {
+        Unknown,
         KeyboardAndMouse,
         XBOX,
-        PS,
+        PS4,
+        PS5,
         DefaultGamepad,
     }
 
