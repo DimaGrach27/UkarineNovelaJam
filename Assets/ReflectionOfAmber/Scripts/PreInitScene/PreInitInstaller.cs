@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ReflectionOfAmber.Scripts.ProjectInstallers;
+using UnityEngine;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.PreInitScene
@@ -11,7 +12,8 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
         public override void InstallBindings()
         {
             Container.Bind<LoadingScreenView>().FromInstance(loadingScreenView).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<GameIniter>().AsSingle().NonLazy();
+            Container.Bind<GameIniter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EntryPoint>().AsSingle().NonLazy();
         }
     }
 }

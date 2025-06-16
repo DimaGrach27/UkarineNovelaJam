@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace ReflectionOfAmber.Scripts.PreInitScene
 {
-    public class GameIniter : IInitializable
+    public class GameIniter
     {
         [Inject]
-        public GameIniter(List<IInit> inits, LoadingScreenView loadingScreenView)
+        public GameIniter(List<IInit> inits)
         {
             m_Inits = inits;
-            m_LoadingScreenView = loadingScreenView;
         }
 
         private readonly List<IInit> m_Inits;
-        private readonly LoadingScreenView m_LoadingScreenView;
+        public event Action OnInitEnded;
         
         public void Initialize()
         {
@@ -43,21 +42,8 @@ namespace ReflectionOfAmber.Scripts.PreInitScene
                 return;
             }
             
-            // if (SaveService.BrightnessStatus)
-            // {
-                LoadMineMenu();
-            // }
-            // else
-            // {
-                // Object.Destroy(m_LoadingScreenView.gameObject);
-            // }
-        }
-        
-        private void LoadMineMenu()
-        {
-            SaveService.Init();
-            SaveService.BrightnessStatus = true;
-            SceneManager.LoadScene("MainMenu");
+            
+            OnInitEnded?.Invoke();
         }
     }
 }
