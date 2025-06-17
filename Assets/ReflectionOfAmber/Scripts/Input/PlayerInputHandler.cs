@@ -175,6 +175,7 @@ namespace ReflectionOfAmber.Scripts.Input
         NoteScreen,
         TabNavigation_Right,
         TabNavigation_Left,
+        CameraAction,
     }
 
     public enum DeviceType
@@ -187,6 +188,7 @@ namespace ReflectionOfAmber.Scripts.Input
         DefaultGamepad,
     }
 
+    //Last 14
     public enum KeyCodePath
     {
         //Keyboard
@@ -195,6 +197,7 @@ namespace ReflectionOfAmber.Scripts.Input
         L = 3,
         Enter = 4,
         Escape = 5,
+        F = 14,
         
         //Gamepad
         LeftShoulder = 6,
@@ -204,5 +207,6 @@ namespace ReflectionOfAmber.Scripts.Input
         ButtonNorth = 10,
         ButtonSouth = 11,
         Start = 12,
+        RightTrigger = 13,
     }
 }

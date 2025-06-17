@@ -25,6 +25,8 @@ MonoBehaviour:
       Icon: {fileID: -5121687663805154390, guid: 26ad9706996636041b795324ebcd206d, type: 3}
     - ActionID: 2
       Icon: {fileID: -1996464940526327524, guid: 5ebe677d1777e8748bb8a190bc971361, type: 3}
+    - ActionID: 14
+      Icon: {fileID: -7058289739972398185, guid: 03cadc033e7f01847b1c305a9d4347dc, type: 3}
   - DeviceType: 2
     KeybindingData:
     - ActionID: 6
@@ -41,6 +43,8 @@ MonoBehaviour:
       Icon: {fileID: 6214764616161918336, guid: 983d4fe5e07ca654b8cc36f021e181d2, type: 3}
     - ActionID: 12
       Icon: {fileID: -5066522875620236344, guid: 228a5829b57ee334a945a4bf24feb360, type: 3}
+    - ActionID: 13
+      Icon: {fileID: -665746445919483091, guid: 12cd6aa9315d1864eb4e91be0b8c76c8, type: 3}
   - DeviceType: 4
     KeybindingData:
     - ActionID: 6
@@ -57,6 +61,8 @@ MonoBehaviour:
       Icon: {fileID: -2299360346848807046, guid: 6457d81a7cc6cd949b5b4ab4c35b828d, type: 3}
     - ActionID: 12
       Icon: {fileID: 8367663834574295989, guid: 4c02e91959e3a324480fff6d59b83ce4, type: 3}
+    - ActionID: 13
+      Icon: {fileID: -8459219227681265482, guid: 75bb0a6869135674390dc876f1be72ed, type: 3}
   - DeviceType: 5
     KeybindingData:
     - ActionID: 6
@@ -73,6 +79,8 @@ MonoBehaviour:
       Icon: {fileID: 6214764616161918336, guid: 983d4fe5e07ca654b8cc36f021e181d2, type: 3}
     - ActionID: 12
       Icon: {fileID: -5066522875620236344, guid: 228a5829b57ee334a945a4bf24feb360, type: 3}
+    - ActionID: 13
+      Icon: {fileID: -665746445919483091, guid: 12cd6aa9315d1864eb4e91be0b8c76c8, type: 3}
   - DeviceType: 3
     KeybindingData:
     - ActionID: 6
@@ -89,3 +97,5 @@ MonoBehaviour:
       Icon: {fileID: 6169474342374048484, guid: c245e11beab864b4db90da0b6680a22e, type: 3}
     - ActionID: 12
       Icon: {fileID: -3937498410574654694, guid: fc76f8f70243d6548905a828ff9ac1a0, type: 3}
+    - ActionID: 13
+      Icon: {fileID: -5266880453846207894, guid: 7cc0692ef23b85148a512502cb6bcbdb, type: 3}

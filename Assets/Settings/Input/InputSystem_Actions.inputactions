@@ -130,6 +130,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CameraAction",
+                    "type": "Button",
+                    "id": "fcafc6fc-545e-4bf5-a98f-16ac4e0523a3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -636,6 +645,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "TabNavigation_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4df7864b-c2f8-4055-85aa-f19f7c6bae7b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CameraAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e620b522-c56d-48cd-baf7-6e3ea5123f10",
+                    "path": "<Keyboard>/#(F)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -232,6 +232,13 @@ namespace ReflectionOfAmber.Scripts.Input
                     break;
                 }
                 
+                case "CameraAction":
+                {
+                    SetAction(InputActionEnum.CAMERA_ACTION);
+                    BlockAndHideMouse(true);
+                    break;
+                }
+                
                 case "Click":
                 {
                     // bool hasSelectedObject = EventSystem.current.currentSelectedGameObject;
@@ -268,5 +275,6 @@ namespace ReflectionOfAmber.Scripts.Input
         LOG_SCREEN,
         TAB_NAVIGATION_LEFT,
         TAB_NAVIGATION_RIGHT,
+        CAMERA_ACTION,
     }
 }
