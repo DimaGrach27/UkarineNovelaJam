@@ -360,7 +360,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      T_P5_R_2D_Light_0: -6194145288234896340
+      T_P5_R_2D_Light_1: -6244344584243078726
+      T_P5_R_2D_Light_2: 7268958485183313669
+      T_P5_R_2D_Light_3: 8409599887860128773
+      T_P5_R_2D_Light_4: 793322697128561753
+      T_P5_R_2D_Light_5: 8384889935756783006
+      T_P5_R_2D_Light_6: 8670563073282610065
+      T_P5_R_2D_Light_7: 6909716994694506288
+      T_P5_R_2D_Light_8: 7383643151420161634
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

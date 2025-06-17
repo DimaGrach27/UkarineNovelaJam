@@ -1310,7 +1310,54 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      T_S_Light_Sprite_0: -174785652646394432
+      T_S_Light_Sprite_1: -8249091287216640643
+      T_S_Light_Sprite_10: -816956263503968194
+      T_S_Light_Sprite_11: -5462477797915916036
+      T_S_Light_Sprite_12: 9038956682121907664
+      T_S_Light_Sprite_13: -1409168766089927106
+      T_S_Light_Sprite_14: 1077917979275249655
+      T_S_Light_Sprite_15: -3191976235540013695
+      T_S_Light_Sprite_16: 1417302689490424144
+      T_S_Light_Sprite_17: -8448488632439870227
+      T_S_Light_Sprite_18: 8363878705152789651
+      T_S_Light_Sprite_19: 4450554523085406447
+      T_S_Light_Sprite_2: 2280281243522083733
+      T_S_Light_Sprite_20: -3019781337565624556
+      T_S_Light_Sprite_21: -8414615239674819054
+      T_S_Light_Sprite_22: 8720411845641513309
+      T_S_Light_Sprite_23: -4099044491258690491
+      T_S_Light_Sprite_24: -836147091013845060
+      T_S_Light_Sprite_25: 3533198407155685043
+      T_S_Light_Sprite_26: 3619470828017436291
+      T_S_Light_Sprite_27: -1286303612754723457
+      T_S_Light_Sprite_28: 1145445496251936139
+      T_S_Light_Sprite_29: -5147109201264882464
+      T_S_Light_Sprite_3: 1344915129181394843
+      T_S_Light_Sprite_30: 205243163693702791
+      T_S_Light_Sprite_31: 7444031196967284298
+      T_S_Light_Sprite_32: -7341283460580782288
+      T_S_Light_Sprite_33: 1843512552763043460
+      T_S_Light_Sprite_34: -7544599490217861113
+      T_S_Light_Sprite_35: 2640672495821398471
+      T_S_Light_Sprite_36: 5201335788355838305
+      T_S_Light_Sprite_37: -3047121197503358955
+      T_S_Light_Sprite_38: -4681799912965420491
+      T_S_Light_Sprite_39: 3380829359604623410
+      T_S_Light_Sprite_4: 2119290283002516797
+      T_S_Light_Sprite_40: -7846729460261674711
+      T_S_Light_Sprite_41: -4307307189019105275
+      T_S_Light_Sprite_42: 395087156811452743
+      T_S_Light_Sprite_43: 4033231448641327674
+      T_S_Light_Sprite_44: -1732158939259021121
+      T_S_Light_Sprite_45: -6982125327833222142
+      T_S_Light_Sprite_46: -3314516568174408534
+      T_S_Light_Sprite_5: -6083432218634832970
+      T_S_Light_Sprite_6: 3067593112604788479
+      T_S_Light_Sprite_7: -7557030369203813410
+      T_S_Light_Sprite_8: -605354339379801000
+      T_S_Light_Sprite_9: 6032429201284985976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

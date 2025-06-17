@@ -235,7 +235,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      T_P4_Dpad_Y_Light_0: -323122156968142903
+      T_P4_Dpad_Y_Light_1: -8865783394779566192
+      T_P4_Dpad_Y_Light_2: 8008189977995851451
+      T_P4_Dpad_Y_Light_3: -4785389001801509919
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

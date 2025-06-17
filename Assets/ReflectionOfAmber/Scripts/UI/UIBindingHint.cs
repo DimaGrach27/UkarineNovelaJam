@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ReflectionOfAmber.Scripts.UI
 {
-    public class UIBindingHint : MonoBehaviour
+    public class UIBindingHint : MonoBehaviour, IDeviceChangeListener
     {
         [SerializeField] 
         private InputActionID m_InputActionID;
@@ -14,6 +14,7 @@ namespace ReflectionOfAmber.Scripts.UI
 
         private void Start()
         {
+            PlayerInputHandler.Instance.Subscribe(this);
             UpdateHint();
         }
 
@@ -22,9 +23,19 @@ namespace ReflectionOfAmber.Scripts.UI
             UpdateHint();
         }
 
-        public void UpdateHint()
+        private void OnDestroy()
+        {
+            PlayerInputHandler.Instance.Unsubscribe(this);
+        }
+
+        private void UpdateHint()
         {
             m_icon.sprite = PlayerInputHandler.Instance.GetIconHint(m_InputActionID);
+        }
+
+        public void OnDeviceChangedHandler()
+        {
+            UpdateHint();
         }
     }
 }

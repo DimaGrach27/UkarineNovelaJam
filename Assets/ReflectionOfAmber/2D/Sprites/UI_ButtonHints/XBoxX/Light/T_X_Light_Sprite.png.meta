@@ -1885,7 +1885,77 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      T_X_Light_Sprite_0: -9136606705708620368
+      T_X_Light_Sprite_1: -3261284851534657597
+      T_X_Light_Sprite_10: -8132607252005145445
+      T_X_Light_Sprite_11: -267173826042129860
+      T_X_Light_Sprite_12: 6476183069180698739
+      T_X_Light_Sprite_13: -830632368369144765
+      T_X_Light_Sprite_14: -5083526623671340337
+      T_X_Light_Sprite_15: -782368756945737511
+      T_X_Light_Sprite_16: 3192216460892752170
+      T_X_Light_Sprite_17: 7292053243047991944
+      T_X_Light_Sprite_18: -4201623426474954329
+      T_X_Light_Sprite_19: -2585169576062602925
+      T_X_Light_Sprite_2: 7577171192055861120
+      T_X_Light_Sprite_20: 7164719359644003825
+      T_X_Light_Sprite_21: 8311461819445613946
+      T_X_Light_Sprite_22: 6506179955804411058
+      T_X_Light_Sprite_23: -2823843770635710925
+      T_X_Light_Sprite_24: 5377708798697858509
+      T_X_Light_Sprite_25: 7692465596537268881
+      T_X_Light_Sprite_26: 2427736186523503423
+      T_X_Light_Sprite_27: 8889439740312884063
+      T_X_Light_Sprite_28: -7688713609300672052
+      T_X_Light_Sprite_29: 105345175659792431
+      T_X_Light_Sprite_3: -8754735634553019903
+      T_X_Light_Sprite_30: 1492274230087443704
+      T_X_Light_Sprite_31: 1495453408079633688
+      T_X_Light_Sprite_32: 5358494706902580881
+      T_X_Light_Sprite_33: -4081464135770367127
+      T_X_Light_Sprite_34: 5618176743476865864
+      T_X_Light_Sprite_35: -4613232906270309588
+      T_X_Light_Sprite_36: 932576413240496354
+      T_X_Light_Sprite_37: -2142350501160777521
+      T_X_Light_Sprite_38: 8701076644999514903
+      T_X_Light_Sprite_39: -3079642543154044530
+      T_X_Light_Sprite_4: -2341035323962690616
+      T_X_Light_Sprite_40: 3382645381658497135
+      T_X_Light_Sprite_41: -1591742600440587347
+      T_X_Light_Sprite_42: -7712369467694816871
+      T_X_Light_Sprite_43: -5126625442150532403
+      T_X_Light_Sprite_44: 1460318541712459544
+      T_X_Light_Sprite_45: 578541811342257719
+      T_X_Light_Sprite_46: 5916840699811301473
+      T_X_Light_Sprite_47: -7725041771046538333
+      T_X_Light_Sprite_48: 5020285307348866598
+      T_X_Light_Sprite_49: 8318469586878308272
+      T_X_Light_Sprite_5: 6229885946954362655
+      T_X_Light_Sprite_50: -5150792009703334664
+      T_X_Light_Sprite_51: -5890116614363785798
+      T_X_Light_Sprite_52: 5202304867201698858
+      T_X_Light_Sprite_53: -2686146357860366930
+      T_X_Light_Sprite_54: -2236002038645942113
+      T_X_Light_Sprite_55: -8236657326820511306
+      T_X_Light_Sprite_56: 425482453030092944
+      T_X_Light_Sprite_57: 7320596333979138747
+      T_X_Light_Sprite_58: 7388813483847464032
+      T_X_Light_Sprite_59: -3579040716500115707
+      T_X_Light_Sprite_6: 7964128898536016183
+      T_X_Light_Sprite_60: 6800118774414557107
+      T_X_Light_Sprite_61: 7692090398598775993
+      T_X_Light_Sprite_62: 2765763661213686032
+      T_X_Light_Sprite_63: -1392724616001336576
+      T_X_Light_Sprite_64: -695726584125189506
+      T_X_Light_Sprite_65: -1267481998572540866
+      T_X_Light_Sprite_66: 4778881094229492338
+      T_X_Light_Sprite_67: -3441748795225529124
+      T_X_Light_Sprite_68: -8014296566128471921
+      T_X_Light_Sprite_69: 1595337987260317125
+      T_X_Light_Sprite_7: 5587186978329008983
+      T_X_Light_Sprite_8: 1312958958410452667
+      T_X_Light_Sprite_9: 6082063273450147924
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

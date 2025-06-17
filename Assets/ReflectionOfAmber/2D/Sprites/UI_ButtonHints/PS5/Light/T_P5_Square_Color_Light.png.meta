@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      T_P5_Square_Color_Light_0: -7756751719146188745
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

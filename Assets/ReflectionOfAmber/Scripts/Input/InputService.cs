@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GlobalProject;
 using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -20,7 +19,7 @@ namespace ReflectionOfAmber.Scripts.Input
         // private int m_lastPerformedFrame;
         // private Queue<InputAction> m_inputActions = new();
         
-        private UnityEngine.InputSystem.InputAction TabNavigation;
+        // private UnityEngine.InputSystem.InputAction TabNavigation;
         
         [Inject]
         public InputService(MouseInteractBlocker mouseInteractBlocker)
@@ -147,7 +146,7 @@ namespace ReflectionOfAmber.Scripts.Input
                 }
             }
             
-            TabNavigation = InputSystem.actions.FindAction("TabNavigation");
+            // TabNavigation = InputSystem.actions.FindAction("TabNavigation");
         }
 
         private void InputActionCanceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)

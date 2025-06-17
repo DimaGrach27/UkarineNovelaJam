@@ -13,17 +13,20 @@ namespace ReflectionOfAmber.Scripts.Input
         public static PlayerInputHandler Instance;
         
         private readonly PlayerInput m_PlayerInput;
-        private readonly GameResourcesService m_gameResourcesService;
-        
+        private readonly GameResourcesService m_GameResourcesService;
+
         public event Action OnReady;
 
-        private Dictionary<InputActionID, InputAction> m_Actions = new ();
+        private readonly Dictionary<InputActionID, InputAction> m_Actions = new ();
+        private readonly List<IDeviceChangeListener> m_DeviceChangeListeners = new ();
+
+        private DeviceType m_CurrentDeviceType;
 
         [Inject]
         public PlayerInputHandler(PlayerInput playerInput, GameResourcesService gameResourcesService)
         {
             m_PlayerInput = playerInput;
-            m_gameResourcesService = gameResourcesService;
+            m_GameResourcesService = gameResourcesService;
         }
         
         public void Init()
@@ -45,8 +48,15 @@ namespace ReflectionOfAmber.Scripts.Input
                 Enum.TryParse(inputAction.name, true, out InputActionID inputActionID);
                 m_Actions[inputActionID] = inputAction;
             }
+
+            SetupInputEvents();
             
             OnReady?.Invoke();
+        }
+        
+        public DeviceType GetCurrentDeviceName()
+        {
+            return m_CurrentDeviceType;
         }
         
         public string GetButtonHint(InputActionID action)
@@ -74,11 +84,9 @@ namespace ReflectionOfAmber.Scripts.Input
             int binding = inputAction.GetBindingIndex(m_PlayerInput.currentControlScheme);
             inputAction.GetBindingDisplayString(binding, out string layoutName, out string controlPath);
 
-            DeviceType deviceType = GetCurrentDeviceName();
-
-            foreach (var uiHintData in m_gameResourcesService.UiInputHintsConfig.GetUiHintData())
+            foreach (var uiHintData in m_GameResourcesService.UiInputHintsConfig.GetUiHintData())
             {
-                if (uiHintData.DeviceType == deviceType)
+                if (uiHintData.DeviceType == m_CurrentDeviceType)
                 {
                     foreach (var keybindingData in uiHintData.KeybindingData)
                     {
@@ -94,32 +102,66 @@ namespace ReflectionOfAmber.Scripts.Input
             return null;
         }
 
-        public string CurrentControlScheme()
+        public void Subscribe(IDeviceChangeListener listener)
         {
-            return m_PlayerInput.currentControlScheme;
+            m_DeviceChangeListeners.Add(listener);
         }
 
-        public DeviceType GetCurrentDeviceName()
+        public void Unsubscribe(IDeviceChangeListener listener)
+        {
+            m_DeviceChangeListeners.Remove(listener);
+        }
+        
+        private void UpdateDeviceType()
         {
             string deviceName = m_PlayerInput.devices[0].displayName;
             if (deviceName.Contains("XBOX", StringComparison.CurrentCultureIgnoreCase))
             {
-                return DeviceType.XBOX;
+                m_CurrentDeviceType = DeviceType.XBOX;
             }
             else if (deviceName.Contains("PS4", StringComparison.CurrentCultureIgnoreCase))
             {
-                return DeviceType.PS4;
+                m_CurrentDeviceType = DeviceType.PS4;
             }
             else if (deviceName.Contains("PS5", StringComparison.CurrentCultureIgnoreCase))
             {
-                return DeviceType.PS5;
+                m_CurrentDeviceType = DeviceType.PS5;
             }
             else if (deviceName.Contains("Controller", StringComparison.CurrentCultureIgnoreCase))
             {
-                return DeviceType.DefaultGamepad;
+                m_CurrentDeviceType = DeviceType.DefaultGamepad;
             }
+            else
+            {
+                m_CurrentDeviceType = DeviceType.KeyboardAndMouse;
+            }
+        }
+        
+        private void SetupInputEvents()
+        {
+            InputActionMap uiActionMap = m_PlayerInput.actions.FindActionMap("UI");
+            
+            foreach (var inputAction in uiActionMap.actions)
+            {
+                if (inputAction != null)
+                {
+                    inputAction.performed += InputActionPerformed;
+                }
+            }
+        }
 
-            return DeviceType.KeyboardAndMouse;
+        private void InputActionPerformed(InputAction.CallbackContext obj)
+        {
+            DeviceType deviceTypeTemp = m_CurrentDeviceType;
+            UpdateDeviceType();
+
+            if (m_CurrentDeviceType != deviceTypeTemp)
+            {
+                foreach (var deviceChangeListener in m_DeviceChangeListeners)
+                {
+                    deviceChangeListener.OnDeviceChangedHandler();
+                }
+            }
         }
     }
 

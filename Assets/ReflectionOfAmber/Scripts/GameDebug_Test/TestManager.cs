@@ -71,7 +71,7 @@ namespace ReflectionOfAmber.Scripts.GameDebug_Test
             // HintLeft = m_PlayerInput.GetButtonHint(InputActionID.TabNavigation_Left);
             // HintRight = m_PlayerInput.GetButtonHint(InputActionID.TabNavigation_Right);
 
-            UpdateHints();
+            // UpdateHints();
         }
 
         private void UpdateHints()
