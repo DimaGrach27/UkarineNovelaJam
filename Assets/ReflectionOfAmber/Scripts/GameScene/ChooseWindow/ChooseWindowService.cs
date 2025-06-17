@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject;
+using ReflectionOfAmber.Scripts.UI;
 using UnityEngine;
 using Zenject;
 
@@ -30,7 +31,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
 
         public void SetChooses(NextScene[] nextScenes, string textChoose, bool isCameraAction)
         {
-            if(_coroutine !=null) _coroutineHelper.StopCoroutine(_coroutine);
+            FocusUIManager.Instance.ResetSelectionObject();
+            
+            if(_coroutine != null)
+            {
+                _coroutineHelper.StopCoroutine(_coroutine);
+            }
             _coroutine = _coroutineHelper.StartCoroutine(FadeInWindow());
             
             _chooseWindowUiView.InitButtons(nextScenes, isCameraAction);

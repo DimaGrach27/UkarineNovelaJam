@@ -147,7 +147,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _characterService.HideAllCharactersInstant();
             _screenTextService.HideText();
             _chooseWindowService.SetActive(false);
-            _cameraActionService.ChangeVisible(false);
+            _cameraActionService.SetActive(false);
             
             _bgService.Show(SaveService.GetCurrentBg(), null);
             
@@ -228,7 +228,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 _characterService.HideAllCharacters();
                 _screenTextService.HideText();
                 _chooseWindowService.SetActive(false);
-                _cameraActionService.ChangeVisible(false);
+                _cameraActionService.SetActive(false);
                 
                 _sceneService.EndDemoScene();
                 GameModel.IsGamePlaying = false;
@@ -238,7 +238,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             _chooseWindowService.SetActive(false);
-            _cameraActionService.ChangeVisible(false);
+            _cameraActionService.SetActive(false);
 
             ScreenSceneScriptableObject currentSceneSo = GameModel.GetScene(CurrentScene);
             
@@ -439,7 +439,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         {
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
-            _cameraActionService.ChangeVisible(_currentSceneSo.IsActiveCamera);
+            _cameraActionService.SetActive(_currentSceneSo.IsActiveCamera);
             
             string key = $"{_currentScene}_part_{CurrentPart}";
             string showText = TranslatorService.GetText(key);

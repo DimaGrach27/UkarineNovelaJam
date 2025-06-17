@@ -18,7 +18,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         public event Action<NextScene> OnChoose; 
         
         private ButtonExt _button;
-        private ButtonExt Button => _button ??= GetComponent<ButtonExt>();
+        public ButtonExt Button => _button ??= GetComponent<ButtonExt>();
 
         private NextScene _chooseScene;
 
