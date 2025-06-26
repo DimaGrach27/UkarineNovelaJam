@@ -36,7 +36,7 @@ namespace ReflectionOfAmber.Scripts.Input
         {
             if (m_forceRedirected.Peek() != inputListener)
             {
-                Debug.LogError($"Wrong redirected listener: {inputListener.GetType()}, current is {m_forceRedirected.GetType()}");
+                Debug.LogError($"Wrong redirected listener: {inputListener.GetType()}, current is {m_forceRedirected.Peek().GetType()}");
                 return;
             }
 
