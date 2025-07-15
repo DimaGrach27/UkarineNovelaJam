@@ -102,7 +102,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             //     }
             // }
             //
-            if (inputActionEnum == InputActionEnum.NOTE_SCREEN)
+            if (inputActionEnum == InputActionEnum.CANCEL)
             {
                 if(!m_isNoteWindowOpened)
                 {

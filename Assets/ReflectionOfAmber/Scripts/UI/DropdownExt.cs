@@ -15,7 +15,7 @@ namespace ReflectionOfAmber.Scripts.UI
                 return;
             }
             
-            FocusUIManager.Instance.JumpSelectionToObject(this);
+            FocusUIManager.Instance?.JumpSelectionToObject(this);
         }
     }
 }
