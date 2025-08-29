@@ -87,7 +87,7 @@ namespace ReflectionOfAmber.Scripts.Input
 
         public void Tick()
         {
-            if (Mouse.current.delta.value.magnitude > 0.1f)
+            if (Mouse.current != null && Mouse.current.delta.value.magnitude > 0.1f)
             {
                 BlockAndHideMouse(false);
             }
