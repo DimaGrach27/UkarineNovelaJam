@@ -458,9 +458,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             
+            string key = $"{_currentScene}_part_{CurrentPart}";
+            string showText = TranslatorService.GetText(key);
+            
             _chooseWindowService.SetChooses(
                 PrepareList(true, out bool isCameraAfter), 
-                _currentPartSo.TextShow, 
+                showText, 
                 isCameraAfter);
         }
 
