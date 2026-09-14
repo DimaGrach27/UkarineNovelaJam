@@ -120,6 +120,11 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
         
         private IEnumerator DissolveOut(float duration = GlobalConstant.ANIMATION_DISSOLVE_DURATION)
         {
+            if (_screenTextUiView.CanvasGroup.alpha == 0.0f)
+            {
+                yield break;
+            }
+            
             _screenTextUiView.CanvasGroup.alpha = 1.0f;
             _screenTextUiView.CanvasGroup.DOFade(0.0f, duration);
             yield return new WaitForSeconds(duration);
