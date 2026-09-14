@@ -8,6 +8,16 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
     public class TranslatorHelper : MonoBehaviour
     {
         [SerializeField] private TranslatorKeys translatorKey;
+        
+        private TextMeshProUGUI m_textMesh;
+
+        private TextMeshProUGUI TextMesh
+        {
+            get
+            {
+                return m_textMesh ??= GetComponent<TextMeshProUGUI>();
+            }
+        }
 
         [Inject]
         public void Construct(TranslatorService translatorService)
@@ -20,24 +30,32 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         private TranslatorService m_translatorService;
         private uint m_subIndex;
 
+        private void Awake()
+        {
+            m_textMesh = GetComponent<TextMeshProUGUI>();
+        }
+
         private void Start()
         {
-            GetComponent<TextMeshProUGUI>().text =
-                TranslatorService.GetText(translatorKey);
+            UpdateText();
         }
 
         private void OnTranslatorReady()
         {
             m_translatorService.OnReady -= UpdateText;
-            
-            GetComponent<TextMeshProUGUI>().text =
-                TranslatorService.GetText(translatorKey);
+
+            UpdateText();
         }
 
         private void UpdateText()
         {
-            GetComponent<TextMeshProUGUI>().text =
-                TranslatorService.GetText(translatorKey);
+            if (TextMesh is null)
+            {
+                Debug.LogError($"{transform.parent.name} = m_textMesh is null");
+                return;
+            }
+            
+            TextMesh.text = TranslatorService.GetText(translatorKey);
         }
 
         private void OnDestroy()
