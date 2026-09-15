@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens;
 using ReflectionOfAmber.Scripts.GameScene.Services;
@@ -25,6 +25,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             m_noteWindowSettingsScreenView.OnChangeMusicVolume += ChangeMusicVolume;
             m_noteWindowSettingsScreenView.OnChangeSoundVolume += ChangeSoundVolume;
             m_noteWindowSettingsScreenView.OnChangeBrightnessValue += ChangeBrightnessValue;
+            m_noteWindowSettingsScreenView.OnChangeDialogInput += ChangeDialogInput;
         }
 
         private readonly NoteWindowSettingsScreenView m_noteWindowSettingsScreenView;
@@ -60,12 +61,18 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             SaveService.BrightnessValue = value / 10;
         }
 
+        private void ChangeDialogInput(bool enabled)
+        {
+            SaveService.DialogKeyboardMouseEnabled = enabled;
+        }
+
         public void Dispose()
         {
             m_noteWindowSettingsScreenView.OnChangeSpeedText -= ChangeSpeedText;
             m_noteWindowSettingsScreenView.OnChangeMusicVolume -= ChangeMusicVolume;
             m_noteWindowSettingsScreenView.OnChangeSoundVolume -= ChangeSoundVolume;
             m_noteWindowSettingsScreenView.OnChangeBrightnessValue -= ChangeBrightnessValue;
+            m_noteWindowSettingsScreenView.OnChangeDialogInput -= ChangeDialogInput;
         }
     }
 }

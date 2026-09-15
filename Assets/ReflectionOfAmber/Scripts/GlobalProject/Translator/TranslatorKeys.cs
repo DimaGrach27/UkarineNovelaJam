@@ -1,4 +1,4 @@
-﻿namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
+namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 {
     public enum TranslatorKeys
     {
@@ -39,6 +39,10 @@
         SUSPECTS = 34,
         NUMBER_OF_CLUES = 35,
         
-        COUNT = 36,
+        ADVANCE_DIALOG = 36,
+        ADVANCE_DIALOG_UI = 37,
+        ADVANCE_DIALOG_UI_KEYS = 38,
+
+        COUNT = 39,
     }
 }

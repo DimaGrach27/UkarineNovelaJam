@@ -613,7 +613,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (_blockClick)
+            if (!SaveService.DialogKeyboardMouseEnabled || _blockClick)
             {
                 return;
             }

@@ -97,7 +97,7 @@ namespace ReflectionOfAmber.Scripts.GameModelBlock
 
         private void OnAssetLoaded(CharacterNameScriptableObject handle)
         {
-            Debug.Log($"cHAR NAME KEY: {handle.characterName}");
+            Debug.Log($"СHAR NAME KEY: {handle.characterName}");
 
             CharacterNameMap.Add(handle.characterNameType, handle);
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -19,6 +19,9 @@ namespace ReflectionOfAmber.Scripts.Settings
         public event Action OnReady;
 
         [SerializeField] private TMP_Dropdown m_languageDropdown;
+        [SerializeField] private TMP_Dropdown m_dialogInputDropdown;
+        [SerializeField] private TMP_Text m_dialogInputLabel;
+        private uint? m_languageSubscription;
         
         [SerializeField] private SettingElementSlider speedText;
         [SerializeField] private SettingElementSlider musicVolume;
@@ -75,6 +78,10 @@ namespace ReflectionOfAmber.Scripts.Settings
             _canvasGroup.blocksRaycasts = false;
 
             InitLanguage();
+            RefreshDialogInput();
+            m_dialogInputDropdown.onValueChanged.AddListener(OnDialogInputChanged);
+            m_languageSubscription = m_TranslatorService.Subscribe(this, RefreshDialogInput);
+            m_TranslatorService.OnReady += RefreshDialogInput;
             
             OnReady?.Invoke();
         }
@@ -105,6 +112,35 @@ namespace ReflectionOfAmber.Scripts.Settings
             m_languageDropdown.options = options;
             m_languageDropdown.SetValueWithoutNotify((int)GameModel.CurrentLanguage);
             m_languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
+        }
+
+        private void RefreshDialogInput()
+        {
+            m_dialogInputLabel.text = TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG);
+            m_dialogInputDropdown.options = new List<TMP_Dropdown.OptionData>
+            {
+                new(TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG_UI)),
+                new(TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG_UI_KEYS))
+            };
+            m_dialogInputDropdown.SetValueWithoutNotify(SaveService.DialogKeyboardMouseEnabled ? 1 : 0);
+            m_dialogInputDropdown.RefreshShownValue();
+        }
+
+        private void OnDialogInputChanged(int index)
+        {
+            SaveService.DialogKeyboardMouseEnabled = index == 1;
+        }
+
+        private void OnDestroy()
+        {
+            if (m_languageSubscription.HasValue)
+            {
+                m_TranslatorService.Unsubscribe(m_languageSubscription.Value);
+                m_TranslatorService.OnReady -= RefreshDialogInput;
+            }
+
+            m_languageDropdown.onValueChanged.RemoveListener(OnLanguageChanged);
+            m_dialogInputDropdown.onValueChanged.RemoveListener(OnDialogInputChanged);
         }
 
         private void OnLanguageChanged(int langIndex)
@@ -151,6 +187,7 @@ namespace ReflectionOfAmber.Scripts.Settings
 
         public void Open()
         {
+            RefreshDialogInput();
             if(_routine != null)
                 StopCoroutine(_routine);
             

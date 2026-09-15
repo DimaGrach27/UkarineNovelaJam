@@ -406,6 +406,16 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              }
          }
          
+         public static bool DialogKeyboardMouseEnabled
+         {
+             get => SettingFile.dialogKeyboardMouseEnabled;
+             set
+             {
+                 SettingFile.dialogKeyboardMouseEnabled = value;
+                 SaveJson(SETTINGS_KEY);
+             }
+         }
+
          public static float TypingSpeed
          {
              get => SettingFile.typingSpeed;
@@ -522,6 +532,7 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
      [Serializable]
      public class SettingFile
      {
+         public bool dialogKeyboardMouseEnabled = false;
          public float musicVolume = 1.0f;
          public float soundVolume = 1.0f;
          public float typingSpeed = 0.5f;
