@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameModelBlock;
@@ -48,6 +49,7 @@ namespace ReflectionOfAmber.Scripts
 
             Inst = this;
             _canvasGroup = GetComponent<CanvasGroup>();
+            
             _activeImage = GetLanguageImage();
             _target = _activeImage != null ? (Graphic)_activeImage : textMeshProUGUI;
             Material source = _activeImage != null ? (imageMaterial != null ? imageMaterial : _activeImage.material) : fontMaterial;
@@ -79,6 +81,10 @@ namespace ReflectionOfAmber.Scripts
                 textMeshProUGUI.fontSharedMaterial = _runtimeFontMaterial;
             }
             RefreshLanguage();
+            
+            _canvasGroup.alpha = 0.0f;
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
 
         private Image GetLanguageImage()
