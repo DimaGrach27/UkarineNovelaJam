@@ -203,12 +203,17 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
             {
                 try
                 {
-                    if (keyVal.Value.Obj != null)
+                    var owner = keyVal.Value.Obj;
+                    // Obj is stored as object, so explicitly use Unity's destroyed-object check.
+                    if (owner == null || (owner is UnityEngine.Object unityObject && unityObject == null))
                     {
-                        keyVal.Value.Callback?.Invoke();
+                        invalidIndexes.Add(keyVal.Key);
+                        continue;
                     }
+
+                    keyVal.Value.Callback?.Invoke();
                 }
-                catch (MissingReferenceException missRef)
+                catch (MissingReferenceException)
                 {
                     invalidIndexes.Add(keyVal.Key);
                 }

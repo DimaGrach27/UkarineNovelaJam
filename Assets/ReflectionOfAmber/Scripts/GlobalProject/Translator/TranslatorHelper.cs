@@ -15,20 +15,26 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
         {
             get
             {
-                return m_textMesh ??= GetComponent<TextMeshProUGUI>();
+                if (m_textMesh == null)
+                {
+                    m_textMesh = GetComponent<TextMeshProUGUI>();
+                }
+
+                return m_textMesh;
             }
         }
 
         [Inject]
         public void Construct(TranslatorService translatorService)
         {
+            Unsubscribe();
             m_translatorService = translatorService;
             m_translatorService.OnReady += OnTranslatorReady;
             m_subIndex = m_translatorService.Subscribe(this, UpdateText);
         }
 
         private TranslatorService m_translatorService;
-        private uint m_subIndex;
+        private uint? m_subIndex;
 
         private void Awake()
         {
@@ -42,26 +48,48 @@ namespace ReflectionOfAmber.Scripts.GlobalProject.Translator
 
         private void OnTranslatorReady()
         {
-            m_translatorService.OnReady -= UpdateText;
+            m_translatorService.OnReady -= OnTranslatorReady;
 
             UpdateText();
         }
 
         private void UpdateText()
         {
-            if (TextMesh is null)
+            // Inactive scene objects can be destroyed without receiving OnDestroy.
+            if (this == null)
             {
-                Debug.LogError($"{transform.parent.name} = m_textMesh is null");
+                Unsubscribe();
+                return;
+            }
+
+            var textMesh = TextMesh;
+            if (textMesh == null)
+            {
+                Debug.LogError("TranslatorHelper requires a TextMeshProUGUI component.", this);
                 return;
             }
             
-            TextMesh.text = TranslatorService.GetText(translatorKey);
+            textMesh.text = TranslatorService.GetText(translatorKey);
         }
 
         private void OnDestroy()
         {
+            Unsubscribe();
+        }
+
+        private void Unsubscribe()
+        {
+            if (m_translatorService == null)
+            {
+                return;
+            }
+
             m_translatorService.OnReady -= OnTranslatorReady;
-            m_translatorService.Unsubscribe(m_subIndex);
+            if (m_subIndex.HasValue)
+            {
+                m_translatorService.Unsubscribe(m_subIndex.Value);
+                m_subIndex = null;
+            }
         }
     }
 }
