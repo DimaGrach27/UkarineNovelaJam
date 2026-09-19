@@ -32,7 +32,7 @@ MonoBehaviour:
       enable: 0
       statusesValues: []
     screenPosition: 2
-    characterImage: 6
+    characterImage: 0
     nameCharacter: 0
     textShow: "\u042F \u0448\u0432\u0438\u0434\u043A\u043E \u0440\u043E\u0437\u0437\u0438\u0440\u043D\u0443\u043B\u0430\u0441\u044C
       \u0434\u043E\u0432\u043A\u043E\u043B\u0430. \u0412 \u043E\u0434\u0438\u043D
