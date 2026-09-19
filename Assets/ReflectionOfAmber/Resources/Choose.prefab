@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.18039216, g: 0.15686275, b: 0.18431373, a: 1}
-    m_HighlightedColor: {r: 0.45880452, g: 0.21960784, b: 0.8509804, a: 1}
+    m_HighlightedColor: {r: 0.74, g: 0.37, b: 0.05, a: 1}
     m_PressedColor: {r: 1, g: 0.7152307, b: 0.25943398, a: 1}
     m_SelectedColor: {r: 0.18039216, g: 0.15686275, b: 0.18431373, a: 1}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
