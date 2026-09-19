@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
@@ -13,7 +13,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
     {
         [SerializeField] private TextMeshProUGUI textMeshProUGUI;
 
-        [SerializeField] private Color m_highlightColor = new Color(0.74f, 0.37f, 0.05f);
+        [SerializeField, Min(0.01f)] private float glowPulseDuration = 1.333333f;
         
         public event Action<NextScene> OnChoose; 
         
@@ -23,14 +23,22 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
         private NextScene _chooseScene;
 
         private Coroutine _coroutine;
+        private Material _textMaterial;
+        private const float MaxGlowOuter = 0.1f;
+        private bool _hasGlow;
         
         private void Awake()
         {
             Button.onClick.AddListener(ClickButton);
+            // TMP creates a private instance so other labels keep their material settings.
+            _textMaterial = textMeshProUGUI.fontMaterial;
+            _hasGlow = _textMaterial.HasProperty(ShaderUtilities.ID_GlowOuter);
+            StopGlowPulse();
         }
 
         public void InitButton(NextScene chooseScene, bool isCameraAction)
         {
+            StopGlowPulse();
             string showText = TranslatorService.GetText(chooseScene.Scene.SceneKey);
             
             textMeshProUGUI.text = showText;
@@ -43,11 +51,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             
             if(!isCameraAction) return;
             
-            if(_coroutine != null) StopCoroutine(_coroutine);
-            
-            if (_chooseScene.cameraDependent.isPrepAction || _chooseScene.cameraDependent.visibleOnPhoto)
+            if (_hasGlow && (_chooseScene.cameraDependent.isPrepAction || _chooseScene.cameraDependent.visibleOnPhoto))
             {
-                _coroutine = StartCoroutine(ChooseBlinkRoutine());
+                _textMaterial.EnableKeyword(ShaderUtilities.Keyword_Glow);
+                _coroutine = StartCoroutine(ChooseGlowPulseRoutine());
             }
         }
 
@@ -57,28 +64,63 @@ namespace ReflectionOfAmber.Scripts.GameScene.ChooseWindow
             OnChoose?.Invoke(_chooseScene);
         }
 
-        private IEnumerator ChooseBlinkRoutine()
+        private void OnDisable()
         {
+            StopGlowPulse();
+        }
+
+        private void OnDestroy()
+        {
+            if (_textMaterial != null)
+                Destroy(_textMaterial);
+        }
+
+        private void StopGlowPulse()
+        {
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+
+            if (_textMaterial != null)
+            {
+                _textMaterial.DisableKeyword(ShaderUtilities.Keyword_Glow);
+                SetGlowPulse(0f);
+            }
+        }
+
+        private void SetGlowPulse(float intensity)
+        {
+            if (_hasGlow)
+            {
+                _textMaterial.SetFloat(ShaderUtilities.ID_GlowOuter, MaxGlowOuter * intensity);
+                textMeshProUGUI.UpdateMeshPadding();
+                // UI Mask caches a separate material and does not refresh its shader properties.
+                Material renderingMaterial = textMeshProUGUI.materialForRendering;
+                if (renderingMaterial != null && renderingMaterial != _textMaterial)
+                {
+                    renderingMaterial.SetFloat(ShaderUtilities.ID_GlowOuter, MaxGlowOuter * intensity);
+                    renderingMaterial.SetFloat(ShaderUtilities.ID_ScaleRatio_B,
+                        _textMaterial.GetFloat(ShaderUtilities.ID_ScaleRatio_B));
+                    if (_textMaterial.IsKeywordEnabled(ShaderUtilities.Keyword_Glow))
+                        renderingMaterial.EnableKeyword(ShaderUtilities.Keyword_Glow);
+                    else
+                        renderingMaterial.DisableKeyword(ShaderUtilities.Keyword_Glow);
+                }
+                textMeshProUGUI.SetVerticesDirty();
+                textMeshProUGUI.SetMaterialDirty();
+            }
+        }
+
+        private IEnumerator ChooseGlowPulseRoutine()
+        {
+            float phase = 0f;
             while (true)
             {
-                ColorBlock colorBlock = Button.colors;
-                Color colorButton;
-                
-                for (float i = 0; i <= 1.0f; i += Time.deltaTime * 1.5f)
-                {
-                    colorButton = Color.Lerp(Color.black, m_highlightColor, i);
-                    colorBlock.normalColor = colorButton;
-                    Button.colors = colorBlock;
-                    yield return null;
-                }
-                
-                for (float i = 1.0f; i >= 0.0f; i -= Time.deltaTime * 1.5f)
-                {
-                    colorButton = Color.Lerp(Color.black, m_highlightColor, i);
-                    colorBlock.normalColor = colorButton;
-                    Button.colors = colorBlock;
-                    yield return null;
-                }
+                SetGlowPulse((1f - Mathf.Cos(phase * Mathf.PI * 2f)) * 0.5f);
+                yield return null;
+                phase = Mathf.Repeat(phase + Time.unscaledDeltaTime / Mathf.Max(0.01f, glowPulseDuration), 1f);
             }
         }
     }
