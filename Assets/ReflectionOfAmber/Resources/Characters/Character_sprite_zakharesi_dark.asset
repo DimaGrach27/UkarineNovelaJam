@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Character_sprite_zakharesi_dark
   m_EditorClassIdentifier: 
   typeSprite: 6
-  sprite: {fileID: 21300000, guid: 84c98c88664b14d6f8439fec2500d895, type: 3}
+  sprite: {fileID: 21300000, guid: e88c313840eb33f488d8c379f28d7dfd, type: 3}
