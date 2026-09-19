@@ -37,6 +37,31 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             }
         }
 
+        public int CharacterCount => mainText.textInfo.characterCount;
+
+        public int MaxVisibleCharacters
+        {
+            set => mainText.maxVisibleCharacters = value;
+        }
+
+        public int PrepareTyping(string text, int previousTextLength)
+        {
+            // Parse complete rich-text tags before revealing any characters.
+            mainText.maxVisibleCharacters = 0;
+            Text = text;
+            mainText.ForceMeshUpdate(ignoreActiveState: true);
+
+            int visibleCharacters = 0;
+            while (visibleCharacters < CharacterCount &&
+                   mainText.textInfo.characterInfo[visibleCharacters].index < previousTextLength)
+            {
+                visibleCharacters++;
+            }
+
+            mainText.maxVisibleCharacters = visibleCharacters;
+            return visibleCharacters;
+        }
+
         void Update()
         {
             MoveScrollbar();

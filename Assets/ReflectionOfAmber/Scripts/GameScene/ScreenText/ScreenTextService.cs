@@ -67,7 +67,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             if(_typingCoroutine != null)
                 _coroutineHelper.StopCoroutine(_typingCoroutine);
             
-            _typingCoroutine = _coroutineHelper.StartCoroutine(TypingRoutine(text));
+            _typingCoroutine = _coroutineHelper.StartCoroutine(TypingRoutine());
             
             ShowText();
         }
@@ -96,16 +96,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _isTextEnable = false;
         }
 
-        private IEnumerator TypingRoutine(string text)
+        private IEnumerator TypingRoutine()
         {
             _screenTextUiView.CanvasGroup.blocksRaycasts = false;
             _isTyping = true;
-            string resultText = _prevText;
+            int visibleCharacters = _screenTextUiView.PrepareTyping(_endText, _prevText?.Length ?? 0);
 
-            foreach (char symbol in text)
+            while (visibleCharacters < _screenTextUiView.CharacterCount)
             {
-                resultText += symbol;
-                _screenTextUiView.Text = resultText;
+                _screenTextUiView.MaxVisibleCharacters = ++visibleCharacters;
                 yield return new WaitForSeconds(GameModel.TYPING_SPEED);
             }
 
@@ -145,6 +144,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
             _isTyping = false;
             _screenTextUiView.CanvasGroup.blocksRaycasts = true;
             if(_endText != null) _screenTextUiView.Text = _endText;
+            _screenTextUiView.MaxVisibleCharacters = int.MaxValue;
             
             _prevText = _isEndOfText ? "" : _endText;
             _endText = null;
