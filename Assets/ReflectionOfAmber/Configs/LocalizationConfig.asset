@@ -16,7 +16,7 @@ MonoBehaviour:
   - Key: scene_0_0_part_1
     LocalizationDatas:
     - Language: 0
-      Text: "\u0411\u0456\u0441\u043E\u0432\u0456 \u043D\u0435\u0442\u0440\u0456\u2026"
+      Text: "\u0411\u0456\u0441\u043E\u0432\u0456 <i>\u043D\u0435\u0442\u0440\u0456\u2026</i>"
     - Language: 1
       Text: "These goddamn woods\u2026"
   - Key: scene_0_0_part_2
