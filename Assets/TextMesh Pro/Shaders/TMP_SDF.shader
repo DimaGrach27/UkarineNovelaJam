@@ -117,7 +117,8 @@ SubShader {
 		#pragma fragment PixShader
 		#pragma shader_feature __ BEVEL_ON
 		#pragma shader_feature __ UNDERLAY_ON UNDERLAY_INNER
-		#pragma shader_feature __ GLOW_ON
+		// Choice buttons toggle glow at runtime; retain both variants in player builds.
+		#pragma multi_compile __ GLOW_ON
 
 		#pragma multi_compile __ UNITY_UI_CLIP_RECT
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
