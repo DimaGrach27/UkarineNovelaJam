@@ -26,7 +26,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views
 
         public bool IsHaveSave
         {
-            set => image.color = value ? Color.white : Color.black;
+            set => image.color = value ? Color.white : Color.clear;
         }
 
         public string Description
