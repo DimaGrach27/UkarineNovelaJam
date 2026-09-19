@@ -38,7 +38,7 @@ MonoBehaviour:
       \u043C\u0456\u0439 \u0440\u044F\u0442\u0456\u0432\u043D\u0438\u043A\u0443!"
     endOfText: 1
     actionsTypeEnd: 
-  - actionsType: 06000000
+  - actionsType: 
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     textShow: "\u041A\u043B\u0456\u043A!.."
     endOfText: 1
     actionsTypeEnd: 
-  - actionsType: 
+  - actionsType: 06000000
     musicTypeOnStart: 0
     statusSetter:
       enable: 0
