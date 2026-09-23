@@ -28,6 +28,7 @@ namespace ReflectionOfAmber.Scripts.DebugHelper
         // [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public void ShowPartCount(int part)
         {
+            part++;
             string show = $"Part: {part:00}";
             debugShowPartCount.text = show;
         }
