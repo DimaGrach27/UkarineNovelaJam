@@ -119,7 +119,7 @@ MonoBehaviour:
       statusesValues: []
     screenPosition: 0
     characterImage: 0
-    nameCharacter: 0
+    nameCharacter: 6
     textShow: "\u0427\u043E\u0440\u0442\u2026 \u041D\u0435 \u043A\u0430\u0436\u0438
       \u0446\u044C\u043E\u0433\u043E."
     endOfText: 1
