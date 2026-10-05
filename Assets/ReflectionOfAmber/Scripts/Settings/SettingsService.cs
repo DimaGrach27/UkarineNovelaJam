@@ -19,8 +19,8 @@ namespace ReflectionOfAmber.Scripts.Settings
         public event Action OnReady;
 
         [SerializeField] private TMP_Dropdown m_languageDropdown;
-        [SerializeField] private TMP_Dropdown m_dialogInputDropdown;
-        [SerializeField] private TMP_Text m_dialogInputLabel;
+        [SerializeField] private SettingElementCheckbox dialogInput;
+
         private uint? m_languageSubscription;
         
         [SerializeField] private SettingElementSlider speedText;
@@ -61,6 +61,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             musicVolume.SetValue(SaveService.MusicVolume * 10);
             soundVolume.SetValue(SaveService.AudioVolume * 10);
             brightnessValue.SetValue(SaveService.BrightnessValue * 10);
+            dialogInput.SetValue(SaveService.DialogKeyboardMouseEnabled);
 
             _audioSystemService.ChangeMusic(SaveService.MusicVolume);
             _audioSystemService.ChangeAudio(SaveService.AudioVolume);
@@ -72,16 +73,14 @@ namespace ReflectionOfAmber.Scripts.Settings
             musicVolume.OnChangeValue += ChangeMusicVolume;
             soundVolume.OnChangeValue += ChangeSoundVolume;
             brightnessValue.OnChangeValue += ChangeBrightnessValue;
+            dialogInput.OnChangeValue += ChangeDialogInput;
 
             _canvasGroup.interactable = false;
             _canvasGroup.alpha = 0;
             _canvasGroup.blocksRaycasts = false;
 
             InitLanguage();
-            RefreshDialogInput();
-            m_dialogInputDropdown.onValueChanged.AddListener(OnDialogInputChanged);
-            m_languageSubscription = m_TranslatorService.Subscribe(this, RefreshDialogInput);
-            m_TranslatorService.OnReady += RefreshDialogInput;
+            m_languageSubscription = m_TranslatorService.Subscribe(this, null);
             
             OnReady?.Invoke();
         }
@@ -114,21 +113,9 @@ namespace ReflectionOfAmber.Scripts.Settings
             m_languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
         }
 
-        private void RefreshDialogInput()
+        private void ChangeDialogInput(bool value)
         {
-            m_dialogInputLabel.text = TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG);
-            m_dialogInputDropdown.options = new List<TMP_Dropdown.OptionData>
-            {
-                new(TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG_UI)),
-                new(TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG_UI_KEYS))
-            };
-            m_dialogInputDropdown.SetValueWithoutNotify(SaveService.DialogKeyboardMouseEnabled ? 1 : 0);
-            m_dialogInputDropdown.RefreshShownValue();
-        }
-
-        private void OnDialogInputChanged(int index)
-        {
-            SaveService.DialogKeyboardMouseEnabled = index == 1;
+            SaveService.DialogKeyboardMouseEnabled = value;
         }
 
         private void OnDestroy()
@@ -136,11 +123,9 @@ namespace ReflectionOfAmber.Scripts.Settings
             if (m_languageSubscription.HasValue)
             {
                 m_TranslatorService.Unsubscribe(m_languageSubscription.Value);
-                m_TranslatorService.OnReady -= RefreshDialogInput;
             }
 
             m_languageDropdown.onValueChanged.RemoveListener(OnLanguageChanged);
-            m_dialogInputDropdown.onValueChanged.RemoveListener(OnDialogInputChanged);
         }
 
         private void OnLanguageChanged(int langIndex)
@@ -187,7 +172,6 @@ namespace ReflectionOfAmber.Scripts.Settings
 
         public void Open()
         {
-            RefreshDialogInput();
             if(_routine != null)
                 StopCoroutine(_routine);
             
@@ -195,6 +179,7 @@ namespace ReflectionOfAmber.Scripts.Settings
             musicVolume.SetValue(SaveService.MusicVolume * 10);
             soundVolume.SetValue(SaveService.AudioVolume * 10);
             brightnessValue.SetValue(SaveService.BrightnessValue * 10);
+            dialogInput.SetValue(SaveService.DialogKeyboardMouseEnabled);
             
             _routine = StartCoroutine(FadeInWindow());
         }

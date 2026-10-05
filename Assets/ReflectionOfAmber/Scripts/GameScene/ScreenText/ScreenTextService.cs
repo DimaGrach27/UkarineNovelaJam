@@ -152,17 +152,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenText
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (!SaveService.DialogKeyboardMouseEnabled)
-            {
-                return;
-            }
-
             if (inputAction == InputAction.SPACE)
             {
                 EndTyping();
             }
             
-            if (inputAction == InputAction.LEFT_MOUSE)
+            if (inputAction == InputAction.LEFT_MOUSE && SaveService.DialogKeyboardMouseEnabled)
             {
                 EndTyping();
             }

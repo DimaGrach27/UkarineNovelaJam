@@ -20,9 +20,8 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         [SerializeField] private SettingElementSlider soundVolume;
         [SerializeField] private SettingElementSlider brightnessValue;
 
-        [SerializeField] private TMP_Dropdown m_dialogInputDropdown;
-        [SerializeField] private TMP_Text m_dialogInputLabel;
-
+        [SerializeField] private SettingElementCheckbox dialogInput;
+        
         private TranslatorService m_translatorService;
         private uint? m_languageSubscription;
 
@@ -30,8 +29,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         public void Construct(TranslatorService translatorService)
         {
             m_translatorService = translatorService;
-            m_languageSubscription = translatorService.Subscribe(this, RefreshDialogInput);
-            translatorService.OnReady += RefreshDialogInput;
+            m_languageSubscription = translatorService.Subscribe(this, null);
         }
 
         public event Action<bool> OnChangeDialogInput;
@@ -43,12 +41,12 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
         public override void Open()
         {
             base.Open();
-            RefreshDialogInput();
             
             speedText.SetValue(SaveService.TypingSpeed * 10);
             musicVolume.SetValue(SaveService.MusicVolume * 10);
             soundVolume.SetValue(SaveService.AudioVolume * 10);
             brightnessValue.SetValue(SaveService.BrightnessValue * 10);
+            dialogInput.SetValue(SaveService.DialogKeyboardMouseEnabled);
         }
 
         private void Start()
@@ -57,29 +55,16 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
             musicVolume.OnChangeValue += ChangeMusicVolume;
             soundVolume.OnChangeValue += ChangeSoundVolume;
             brightnessValue.OnChangeValue += ChangeBrightnessValue;
-            m_dialogInputDropdown.onValueChanged.AddListener(ChangeDialogInput);
-            RefreshDialogInput();
+            dialogInput.OnChangeValue += ChangeDialogInput;
             
             float valueTyping = 1.0f - SaveService.TypingSpeed / 10;
             valueTyping = Mathf.Clamp(valueTyping, 0.01f, 0.1f);
             GameModel.TYPING_SPEED = valueTyping;
         }
 
-        private void RefreshDialogInput()
+        private void ChangeDialogInput(bool value)
         {
-            m_dialogInputLabel.text = TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG);
-            m_dialogInputDropdown.options = new List<TMP_Dropdown.OptionData>
-            {
-                new(TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG_UI)),
-                new(TranslatorService.GetText(TranslatorKeys.ADVANCE_DIALOG_UI_KEYS))
-            };
-            m_dialogInputDropdown.SetValueWithoutNotify(SaveService.DialogKeyboardMouseEnabled ? 1 : 0);
-            m_dialogInputDropdown.RefreshShownValue();
-        }
-
-        private void ChangeDialogInput(int index)
-        {
-            OnChangeDialogInput?.Invoke(index == 1);
+            OnChangeDialogInput?.Invoke(value);
         }
 
         private void OnDestroy()
@@ -87,14 +72,13 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
             if (m_languageSubscription.HasValue)
             {
                 m_translatorService.Unsubscribe(m_languageSubscription.Value);
-                m_translatorService.OnReady -= RefreshDialogInput;
             }
 
-            m_dialogInputDropdown.onValueChanged.RemoveListener(ChangeDialogInput);
             speedText.OnChangeValue -= ChangeSpeedText;
             musicVolume.OnChangeValue -= ChangeMusicVolume;
             soundVolume.OnChangeValue -= ChangeSoundVolume;
             brightnessValue.OnChangeValue -= ChangeBrightnessValue;
+            dialogInput.OnChangeValue -= ChangeDialogInput;
         }
 
         private void ChangeSpeedText(float value)

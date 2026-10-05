@@ -613,7 +613,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         public void OnInputAction(InputAction inputAction)
         {
-            if (!SaveService.DialogKeyboardMouseEnabled || _blockClick)
+            if (_blockClick)
             {
                 return;
             }
@@ -626,7 +626,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
                 ShowNextPart();
             }
             
-            if (inputAction == InputAction.LEFT_MOUSE)
+            if (inputAction == InputAction.LEFT_MOUSE && SaveService.DialogKeyboardMouseEnabled)
             {
 #if ANALYTIC_ENABLED
                 m_AnalyticService.ReportEvent(new InputTypeUsedAnalyticEvent(InputTypeUsed.MOUSE_CLICK));
