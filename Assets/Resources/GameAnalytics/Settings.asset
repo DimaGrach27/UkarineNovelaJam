@@ -12,98 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f78192cec1344d83a177ac5e6139ab3, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  TotalMessagesSubmitted: 0
-  TotalMessagesFailed: 0
-  DesignMessagesSubmitted: 0
-  DesignMessagesFailed: 0
-  QualityMessagesSubmitted: 0
-  QualityMessagesFailed: 0
-  ErrorMessagesSubmitted: 0
-  ErrorMessagesFailed: 0
-  BusinessMessagesSubmitted: 0
-  BusinessMessagesFailed: 0
-  UserMessagesSubmitted: 0
-  UserMessagesFailed: 0
-  CustomArea: 
   gameKey:
-  - b92bb7f27519cedeae17197483b4a357
+  - c7630c3b5f6d95d352cd2a0abff87af1
   - a54b960045b8944a04310bd2639d5f0c
   secretKey:
-  - 9bf51f6681794020c19d221fd9c998d63f8132ca
+  - 08ca02f66186abda3f39312f22456d540ae0f4da
   - 6b337b9efcd317e8b489015ced0742d83a9862bd
   Build:
   - 0.9.91
   - 0.9.91
   SelectedPlatformOrganization:
   - Frog Croaked team
-  - 
+  - Frog Croaked team
   SelectedPlatformStudio:
   - Frog Croaked team
-  - 
+  - Frog Croaked team
   SelectedPlatformGame:
-  - Reflection of Amber
-  - 
-  SelectedPlatformGameID: e4ca040086cb0400
-  SelectedOrganization: 0100000001000000
-  SelectedStudio: 0100000001000000
-  SelectedGame: 0100000001000000
+  - Reflections in Amber_macOS_Demo
+  - Reflections in Amber_Win_Demo
+  SelectedPlatformGameID: d4d2040086cb0400i
+  SelectedOrganization: 0100000001000000i
+  SelectedStudio: 0100000001000000i
+  SelectedGame: 0300000005000000i
   NewVersion: 0.9.91
   Changes: 
-  SignUpOpen: 0
   StudioName: Frog Croaked Team
   GameName: Reflections in Amber
-  OrganizationName: 
-  OrganizationIdentifier: 
   EmailGA: dima.grach333@gmail.com
-  IntroScreen: 0
   InfoLogEditor: 1
   InfoLogBuild: 1
   VerboseLogBuild: 0
   UseManualSessionHandling: 0
-  SendExampleGameDataToMyGame: 0
-  InternetConnectivity: 0
   CustomDimensions01: []
   CustomDimensions02: []
   CustomDimensions03: []
   ResourceItemTypes: []
   ResourceCurrencies: []
   LastCreatedGamePlatform: -1
-  Platforms: 0100000002000000
-  CurrentInspectorState: 1
-  ClosedHints: 
-  DisplayHints: 0
-  DisplayHintsScrollState: {x: 0, y: 0}
-  Logo: {fileID: 2800000, guid: 98df8f9c5678a4e5d964caa1244e8958, type: 3}
-  UpdateIcon: {fileID: 2800000, guid: 810bbb19deed24f3cb7b854f9bafde26, type: 3}
-  InfoIcon: {fileID: 2800000, guid: 1b4dd779aadd54ac88856975af0d3c0a, type: 3}
-  DeleteIcon: {fileID: 2800000, guid: 85a626f1668244d30a4e9f616991a793, type: 3}
-  GameIcon: {fileID: 2800000, guid: a9ac7103fc40b4e00923bf8c2cb5d30f, type: 3}
-  HomeIcon: {fileID: 2800000, guid: fe7e2ecc9b2fe447bafe90f6395d4709, type: 3}
-  InstrumentIcon: {fileID: 2800000, guid: 2ba470b4dffd848c6b267c34770cc63e, type: 3}
-  QuestionIcon: {fileID: 2800000, guid: f8ea67e311b0c4b2ea05718e90fd3b5b, type: 3}
-  UserIcon: {fileID: 2800000, guid: f49ef75333ff247cfb5dad4dab0d4dac, type: 3}
-  AmazonIcon: {fileID: 0}
-  GooglePlayIcon: {fileID: 0}
-  iosIcon: {fileID: 0}
-  macIcon: {fileID: 0}
-  windowsPhoneIcon: {fileID: 0}
+  Platforms: 0100000002000000i
   UsePlayerSettingsBuildNumber: 0
+  BuildNumberAutoDetect: 0000y
   SubmitErrors: 1
   NativeErrorReporting: 0
   MaxErrorCount: 10
   SubmitFpsAverage: 0
   SubmitFpsCritical: 0
-  IncludeGooglePlay: 1
   FpsCriticalThreshold: 20
   FpsCirticalSubmitInterval: 1
-  PlatformFoldOut: 0101
-  CustomDimensions01FoldOut: 0
-  CustomDimensions02FoldOut: 0
-  CustomDimensions03FoldOut: 0
-  ResourceItemTypesFoldOut: 0
-  ResourceCurrenciesFoldOut: 0
   EnableMemoryHistogram: 0
-  EnableHealthEvent: 0
   EnableFPSHistogram: 0
   EnableSDKInitEvent: 0
   EnableHardwareTracking: 0

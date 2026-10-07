@@ -24,7 +24,9 @@ namespace ReflectionOfAmber.Scripts.Editor.Debug_test
 #elif UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
             Debug.Log("Changing analytic keys for WIN");
 #endif
-            settings.SetKeys(GameKey, SecretKey);
+            settings.UpdateGameKey(0, GameKey);
+            settings.UpdateSecretKey(0, SecretKey);
+            // settings.SetKeys(GameKey, SecretKey);
             settings.NewVersion = PlayerSettings.bundleVersion;
             
             Debug.Log($"[GAME ANALYTICS] GameKey = {GameKey}");
