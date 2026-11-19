@@ -1,4 +1,5 @@
-﻿using System;
+using ReflectionOfAmber.Scripts.Analytic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using ReflectionOfAmber.Scripts.GameModelBlock;
@@ -347,8 +348,12 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
          public static void SetStatusValue(StatusEnum statusEnum, bool status)
          {
+             bool changed = GetStatusValue(statusEnum) != status;
              StatusFlagFile.statuses[(int)statusEnum] = status ? 1 : 0;
              SaveJson(STATUSES_KEY);
+             if (changed)
+                 DemoAnalytics.Track("StoryStatusChanged", $"StoryStatusChanged:{statusEnum}:{status}", data:
+                     new Dictionary<string, object> { { "StatusID", statusEnum.ToString() }, { "StatusValue", status }, { "SceneID", GetScene } });
          }
 
          public static int GetIntValue(CountType countType)
@@ -391,8 +396,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              get => SettingFile.musicVolume;
              set
              {
+                 bool changed = SettingFile.musicVolume != value;
                  SettingFile.musicVolume = value;
                  SaveJson(SETTINGS_KEY);
+                 if (changed)
+                     DemoAnalytics.SettingChanged("music_volume", value);
              }
          }
          
@@ -401,8 +409,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              get => SettingFile.soundVolume;
              set
              {
+                 bool changed = SettingFile.soundVolume != value;
                  SettingFile.soundVolume = value;
                  SaveJson(SETTINGS_KEY);
+                 if (changed)
+                     DemoAnalytics.SettingChanged("sound_volume", value);
              }
          }
          
@@ -411,8 +422,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              get => SettingFile.dialogKeyboardMouseEnabled;
              set
              {
+                 bool changed = SettingFile.dialogKeyboardMouseEnabled != value;
                  SettingFile.dialogKeyboardMouseEnabled = value;
                  SaveJson(SETTINGS_KEY);
+                 if (changed)
+                     DemoAnalytics.SettingChanged("dialog_keyboard_mouse", value ? "on" : "off");
              }
          }
 
@@ -421,8 +435,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              get => SettingFile.typingSpeed;
              set
              {
+                 bool changed = SettingFile.typingSpeed != value;
                  SettingFile.typingSpeed = value;
                  SaveJson(SETTINGS_KEY);
+                 if (changed)
+                     DemoAnalytics.SettingChanged("text_speed", value);
              }
          }
          
@@ -431,8 +448,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
              get => SettingFile.brightnessValue;
              set
              {
+                 bool changed = SettingFile.brightnessValue != value;
                  SettingFile.brightnessValue = value;
                  SaveJson(SETTINGS_KEY);
+                 if (changed)
+                     DemoAnalytics.SettingChanged("brightness", value);
              }
          }
          
@@ -452,8 +472,11 @@ namespace ReflectionOfAmber.Scripts.GlobalProject
 
              set
              {
+                 bool changed = SettingFile.currentLang != value;
                  SettingFile.currentLang = value;
                  SaveJson(SETTINGS_KEY);
+                 if (changed)
+                     DemoAnalytics.SettingChanged("language", value.ToString());
              }
          }
 

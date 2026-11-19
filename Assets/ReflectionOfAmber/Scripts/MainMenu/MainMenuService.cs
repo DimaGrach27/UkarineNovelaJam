@@ -1,4 +1,5 @@
-﻿using System;
+using ReflectionOfAmber.Scripts.Analytic;
+using System;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
@@ -73,7 +74,11 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             m_audioSystemService.StopAllMusic();
             m_audioSystemService.StarPlayMusicOnLoop(MusicType.EMBIENT_SLOW);
             
-            continueButton.onClick.AddListener(LoadGameScene);
+            continueButton.onClick.AddListener(() =>
+            {
+                DemoAnalytics.Track("ContinueGame");
+                LoadGameScene();
+            });
             startButton.onClick.AddListener(StartNewGame);
             loadButton.onClick.AddListener(OpenLoadScreen);
             settingButton.onClick.AddListener(OpenSettingHandler);
@@ -102,6 +107,7 @@ namespace ReflectionOfAmber.Scripts.MainMenu
             if(isConfirm)
             {
                 SaveService.ResetAllSaves();
+                DemoAnalytics.Track("NewGameStarted");
                 LoadGameScene();
             }
             else

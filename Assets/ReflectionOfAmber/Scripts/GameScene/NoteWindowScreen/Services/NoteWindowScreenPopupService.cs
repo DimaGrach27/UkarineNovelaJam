@@ -1,4 +1,5 @@
-﻿using System;
+using ReflectionOfAmber.Scripts.Analytic;
+using System;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Misc;
 using ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views;
 using ReflectionOfAmber.Scripts.Input;
@@ -41,6 +42,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
             _noteWindowScreenPopup.OnClose += CloseHandler;
             _noteWindowScreenPopup.OpenWithClose();
             OnOpenNote?.Invoke();
+            DemoAnalytics.Track("NotebookOpened");
 
             m_inputService.ForceRedirectInput(this);
             m_isNoteWindowOpened = true;
@@ -69,6 +71,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Services
         private void OnSelectWindowHandler(NoteWindowScreensEnum noteWindowScreensEnum)
         {
             OnSelectWindowClick?.Invoke(noteWindowScreensEnum);
+            DemoAnalytics.Track("NotebookTabOpened", $"NotebookTabOpened:{noteWindowScreensEnum}");
         }
 
         public void OnInputAction(InputAction inputAction)

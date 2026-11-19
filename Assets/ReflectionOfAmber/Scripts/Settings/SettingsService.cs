@@ -1,3 +1,4 @@
+using ReflectionOfAmber.Scripts.Analytic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -172,6 +173,7 @@ namespace ReflectionOfAmber.Scripts.Settings
 
         public void Open()
         {
+            DemoAnalytics.Track("SettingsOpened", "SettingsOpened:main_menu");
             if(_routine != null)
                 StopCoroutine(_routine);
             

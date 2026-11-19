@@ -1,4 +1,5 @@
-﻿using System;
+using ReflectionOfAmber.Scripts.Analytic;
+using System;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.BgScreen;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -68,6 +69,7 @@ namespace ReflectionOfAmber.Scripts.LoadScreen
             if (isConfirm)
             {
                 SaveService.SetLoadGame(_confirmIndex);
+                DemoAnalytics.Track("SaveLoaded");
                 _sceneService.LoadGameScene();
             }
 

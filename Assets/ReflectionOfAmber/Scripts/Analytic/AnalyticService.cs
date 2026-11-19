@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 using ReflectionOfAmber.Scripts.Analytic.Events;
 using ReflectionOfAmber.Scripts.GlobalProject;
 
@@ -7,6 +9,7 @@ namespace ReflectionOfAmber.Scripts.Analytic
     public class AnalyticService : IInit
     {
         private IAnalyticService[] m_AnalyticsServices;
+        private readonly HashSet<Type> reportedFailures = new();
         public event Action OnReady;
         public void Init()
         {
@@ -21,6 +24,7 @@ namespace ReflectionOfAmber.Scripts.Analytic
                 analyticsService.Initialize();
             }
             
+            DemoAnalytics.Create(this);
             OnReady?.Invoke();
         }
 
@@ -28,7 +32,16 @@ namespace ReflectionOfAmber.Scripts.Analytic
         {
             foreach (var analyticsService in m_AnalyticsServices)
             {
-                analyticsService.TrackEvent(analyticEvent);
+                try
+                {
+                    analyticsService.TrackEvent(analyticEvent);
+                }
+                catch (Exception exception)
+                {
+                    // Telemetry failures must not interrupt a choice or prevent the other provider receiving it.
+                    if (reportedFailures.Add(analyticsService.GetType()))
+                        Debug.LogWarning($"Analytics provider {analyticsService.GetType().Name} failed: {exception.Message}");
+                }
             }
         }
     }

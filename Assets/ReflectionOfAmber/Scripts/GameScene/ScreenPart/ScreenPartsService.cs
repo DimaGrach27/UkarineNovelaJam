@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ModestTree;
-#if ANALYTIC_ENABLED
 using ReflectionOfAmber.Scripts.Analytic;
+#if ANALYTIC_ENABLED
 using ReflectionOfAmber.Scripts.Analytic.Events;
 #endif
 using ReflectionOfAmber.Scripts.DebugHelper;
@@ -130,6 +130,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 #if !GAME_FINAL
         private readonly DebugHelperService _debugHelperService;
 #endif //!GAME_FINAL
+        private float analyticsSceneStarted;
         private bool _blockClick;
         private bool m_LoadingNewBg;
         
@@ -152,6 +153,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
             _bgService.Show(SaveService.GetCurrentBg(), null);
             
             GameModel.IsGamePlaying = true;
+            DemoAnalytics.SetPaused(false);
+            analyticsSceneStarted = DemoAnalytics.ActiveSeconds;
+            DemoAnalytics.Track("GameplayEntered", $"GameplayEntered:{CurrentScene}", data:
+                new Dictionary<string, object> { { "SceneID", CurrentScene }, { "PartIndex", CurrentPart } });
             
             if (CurrentScene == "scene_0_0" && CurrentPart == 0)
             {
@@ -208,6 +213,10 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
         
         private void ShowNextScene(string key, int part = 0)
         {
+            DemoAnalytics.Track("SceneTime", $"SceneTime:{CurrentScene}", DemoAnalytics.ActiveSeconds - analyticsSceneStarted,
+                new Dictionary<string, object> { { "SceneID", CurrentScene },
+                    { "ActiveSeconds", DemoAnalytics.ActiveSeconds - analyticsSceneStarted } });
+            analyticsSceneStarted = DemoAnalytics.ActiveSeconds;
             CurrentScene = key;
             CurrentPart = part;
             
@@ -455,6 +464,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.ScreenPart
 
         private void TakePhoto()
         {
+            DemoAnalytics.Track("CameraUsed", $"CameraUsed:{CurrentScene}");
             _characterService.HideAllCharacters();
             _screenTextService.HideText();
             

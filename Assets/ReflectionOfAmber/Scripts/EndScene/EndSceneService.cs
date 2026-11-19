@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using ReflectionOfAmber.Scripts.Analytic;
+using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.FadeScreen;
 using ReflectionOfAmber.Scripts.GameScene.Services;
@@ -56,6 +57,7 @@ namespace ReflectionOfAmber.Scripts.EndScene
             
             tapToExit.DOFade(1.0f, 0.75f);
             _isReadyToTap = true;
+            DemoAnalytics.Track("DemoEndScreenShown");
         }
         
         public void OnPointerClick(PointerEventData eventData)

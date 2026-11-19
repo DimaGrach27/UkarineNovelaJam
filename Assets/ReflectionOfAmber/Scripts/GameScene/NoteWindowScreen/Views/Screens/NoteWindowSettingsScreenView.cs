@@ -1,3 +1,4 @@
+using ReflectionOfAmber.Scripts.Analytic;
 using System;
 using System.Collections.Generic;
 using ReflectionOfAmber.Scripts.GlobalProject.Translator;
@@ -40,6 +41,7 @@ namespace ReflectionOfAmber.Scripts.GameScene.NoteWindowScreen.Views.Screens
 
         public override void Open()
         {
+            DemoAnalytics.Track("SettingsOpened", "SettingsOpened:notebook");
             base.Open();
             
             speedText.SetValue(SaveService.TypingSpeed * 10);

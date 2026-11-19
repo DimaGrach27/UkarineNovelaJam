@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using ReflectionOfAmber.Scripts.Analytic;
+using System.Collections;
 using DG.Tweening;
 using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GlobalProject;
@@ -48,12 +49,15 @@ namespace ReflectionOfAmber.Scripts.GameScene.Menu
 
         private void Close()
         {
+            DemoAnalytics.SetPaused(false);
             FadeOut();
         }
         
         private void Open(CallKeyType type)
         {
             if(type != CallKeyType.GAME_PAUSE_MENU) return;
+            DemoAnalytics.SetPaused(true);
+            DemoAnalytics.Track("PauseMenuOpened");
             FadeIn();
         }
         

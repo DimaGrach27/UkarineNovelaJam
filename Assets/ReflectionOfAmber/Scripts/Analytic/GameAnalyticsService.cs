@@ -16,6 +16,13 @@ namespace ReflectionOfAmber.Scripts.Analytic
         {
             switch (analyticEvent)
             {
+                case GameplayAnalyticEvent gameplay:
+                    if (gameplay.Value.HasValue)
+                        GameAnalytics.NewDesignEvent(gameplay.DesignPath, gameplay.Value.Value, gameplay.Data);
+                    else
+                        GameAnalytics.NewDesignEvent(gameplay.DesignPath, gameplay.Data);
+                    break;
+
                 case StartSceneAnalyticEvent @event:
                     GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start,@event.Data["SceneID"].ToString());
                     break;
