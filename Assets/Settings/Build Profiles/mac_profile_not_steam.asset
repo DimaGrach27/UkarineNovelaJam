@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: mac_profile_not_steam
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.Build.Profile.BuildProfile
+  m_AssetVersion: 2
+  m_BuildTarget: 2
+  m_Subtarget: 2
+  m_PlatformId: 0d2129357eac403d8b359c2dcbf82502
+  m_PlatformBuildProfile:
+    rid: 7432801282524446721
+  m_ActivePlatformGuid: 
+  m_AdditionalPlatformBuildSettings: []
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/ReflectionOfAmber/Scenes/PreInitScene.unity
+    m_guid: f5e881e26c0f97547a32d4ad0b9417f1
+  - m_enabled: 1
+    m_path: Assets/ReflectionOfAmber/Scenes/MainMenu.unity
+    m_guid: 493b791b572e0e54d950edee42c6b25e
+  - m_enabled: 1
+    m_path: Assets/ReflectionOfAmber/Scenes/MainScene.unity
+    m_guid: 2cda990e2423bbf4892e6590ba056729
+  - m_enabled: 1
+    m_path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
+    m_guid: e0f4631cce1b6c848b7e23bd0ec7ffc5
+  m_HasScriptingDefines: 1
+  m_ScriptingDefines:
+  - ANALYTIC_ENABLED
+  m_PlayerSettingsYaml:
+    m_Settings: []
+  requiredComponents: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 7432801282524446721
+      type: {class: OSXStandaloneBuildProfile, ns: UnityEditor.OSXStandalone, asm: UnityEditor.OSXStandalone.Extensions}
+      data:
+        m_Development: 0
+        m_ConnectProfiler: 0
+        m_BuildWithDeepProfilingSupport: 0
+        m_BuildWithCodeCoverage: 0
+        m_AllowDebugging: 0
+        m_WaitForManagedDebugger: 0
+        m_ManagedDebuggerFixedPort: 0
+        m_ExplicitNullChecks: 0
+        m_ExplicitDivideByZeroChecks: 0
+        m_ExplicitArrayBoundsChecks: 0
+        m_CompressionType: 0
+        m_InstallInBuildFolder: 0
+        m_InsightsSettingsContainer:
+          m_BuildProfileEngineDiagnosticsState: 2
+        m_AdaptivePerformanceEnabled: 0
+        m_MacOSXcodeBuildConfig: 1
+        m_Architecture: 1
+        m_CreateXcodeProject: 0
