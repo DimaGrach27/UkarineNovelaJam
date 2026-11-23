@@ -7,12 +7,6 @@
       "dependencies": {},
       "hash": "7f661deab09d5224fbd32af5c24f7259c11b238f"
     },
-    "com.google.external-dependency-manager": {
-      "version": "file:../GooglePackages/com.google.external-dependency-manager-1.2.185.tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {}
-    },
     "com.unity.2d.animation": {
       "version": "16.0.1",
       "depth": 1,

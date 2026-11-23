@@ -10,37 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: win_profile_no_steam
-  m_EditorClassIdentifier: 
-  m_AssetVersion: 1
+  m_Name: win_final_not_steam
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.Build.Profile.BuildProfile
+  m_AssetVersion: 2
   m_BuildTarget: 19
   m_Subtarget: 2
   m_PlatformId: 4e3c793746204150860bf175a9a41a05
   m_PlatformBuildProfile:
-    rid: 3038054380288606372
+    rid: 3234522856125366272
+  m_ActivePlatformGuid: 
+  m_AdditionalPlatformBuildSettings: []
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/PreInitScene.unity
+    m_guid: f5e881e26c0f97547a32d4ad0b9417f1
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/MainMenu.unity
+    m_guid: 493b791b572e0e54d950edee42c6b25e
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/MainScene.unity
+    m_guid: 2cda990e2423bbf4892e6590ba056729
   - m_enabled: 1
     m_path: Assets/ReflectionOfAmber/Scenes/EndScene.unity
+    m_guid: e0f4631cce1b6c848b7e23bd0ec7ffc5
+  m_HasScriptingDefines: 1
   m_ScriptingDefines:
+  - GAME_FINAL
   - ANALYTIC_ENABLED
   m_PlayerSettingsYaml:
     m_Settings: []
+  requiredComponents: []
   references:
     version: 2
     RefIds:
-    - rid: 3038054380288606372
+    - rid: 3234522856125366272
       type: {class: WindowsPlatformSettings, ns: UnityEditor.WindowsStandalone, asm: UnityEditor.WindowsStandalone.Extensions}
       data:
         m_Development: 0
         m_ConnectProfiler: 0
         m_BuildWithDeepProfilingSupport: 0
+        m_BuildWithCodeCoverage: 0
         m_AllowDebugging: 0
         m_WaitForManagedDebugger: 0
         m_ManagedDebuggerFixedPort: 0
@@ -49,6 +59,9 @@ MonoBehaviour:
         m_ExplicitArrayBoundsChecks: 0
         m_CompressionType: 0
         m_InstallInBuildFolder: 0
+        m_InsightsSettingsContainer:
+          m_BuildProfileEngineDiagnosticsState: 2
+        m_AdaptivePerformanceEnabled: 0
         m_WindowsBuildAndRunDeployTarget: 0
         m_Architecture: 0
         m_CreateSolution: 0
