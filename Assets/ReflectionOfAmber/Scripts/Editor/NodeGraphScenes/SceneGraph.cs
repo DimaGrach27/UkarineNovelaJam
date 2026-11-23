@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
+using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
 using ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,108 +12,209 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 {
     public class SceneGraph : EditorWindow
     {
-        private SceneGraphView m_graphView;
-        private string m_fileName = "Narrative_test";
-        
-        private NarrativeContainer m_narrativeContainer;
+        [SerializeField] private NarrativeContainer source;
+        [SerializeField] private NarrativeContainer draft;
+        [SerializeField] private bool layoutDirty;
+        private SceneGraphView graph;
+        private ObjectField layoutField;
+        private Label summary;
+        private bool refreshQueued;
 
         [MenuItem("ReflectionOfAmber/Narrative Graph")]
-        public static void CreateGraphViewWindow()
+        public static void CreateGraphViewWindow() => GetWindow<SceneGraph>("Narrative Graph");
+
+        public static void FocusScene(ScreenSceneScriptableObject scene)
         {
-            var window = GetWindow<SceneGraph>();
-            window.titleContent = new GUIContent("Narrative Graph");
-        }
-
-        private void ConstructGraphView()
-        {
-            m_graphView = new SceneGraphView(this)
-            {
-                name = "Narrative Graph",
-            };
-            m_graphView.StretchToParentSize();
-            rootVisualElement.Add(m_graphView);
-        }
-
-        private void GenerateToolbar()
-        {
-            var toolbar = new Toolbar();
-
-            var fileNameTextField = new TextField("File Name:");
-            fileNameTextField.SetValueWithoutNotify(m_fileName);
-            fileNameTextField.MarkDirtyRepaint();
-            fileNameTextField.RegisterValueChangedCallback(evt => m_fileName = evt.newValue);
-            toolbar.Add(fileNameTextField);
-
-            toolbar.Add(new Button(() => RequestDataOperation(true)) {text = "Save Data"});
-
-            toolbar.Add(new Button(() => RequestDataOperation(false)) {text = "Load Data"});
-            // toolbar.Add(new Button(() => _graphView.CreateNewDialogueNode("Dialogue Node")) {text = "New Node",});
-            rootVisualElement.Add(toolbar);
-        }
-
-        private void RequestDataOperation(bool save)
-        {
-            if (!string.IsNullOrEmpty(m_fileName))
-            {
-                var saveUtility = GraphSaveUtility.GetInstance(m_graphView);
-                if (save)
-                    saveUtility.SaveGraph(m_fileName);
-                else
-                    saveUtility.LoadGraph($"Graphs/{m_fileName}");
-            }
-            else
-            {
-                EditorUtility.DisplayDialog("Invalid File name", "Please Enter a valid filename", "OK");
-            }
+            if (scene == null) return;
+            var window = GetWindow<SceneGraph>("Narrative Graph");
+            window.graph.FocusScene(scene);
+            window.Focus();
         }
 
         private void OnEnable()
         {
-            ConstructGraphView();
-            GenerateToolbar();
-            GenerateMiniMap();
-            //GenerateBlackBoard();
-        }
-
-        private void GenerateMiniMap()
-        {
-            var miniMap = new MiniMap {anchored = true};
-            // var cords = m_graphView.contentViewContainer.WorldToLocal(new Vector2(this.maxSize.x - 10, 30));
-            // miniMap.SetPosition(new Rect(cords.x, cords.y, 200, 140));
-            miniMap.SetPosition(new Rect(0, 0, 200, 140));
-            m_graphView.Add(miniMap);
-        }
-
-        private void GenerateBlackBoard()
-        {
-            var blackboard = new Blackboard(m_graphView);
-            blackboard.Add(new BlackboardSection {title = "Exposed Variables"});
-            blackboard.addItemRequested = _blackboard =>
+            titleContent = new GUIContent("Narrative Graph");
+            minSize = new Vector2(750, 400);
+            rootVisualElement.Clear();
+            if (draft == null)
             {
-                m_graphView.AddPropertyToBlackBoard(ExposedProperty.CreateInstance(), false);
-            };
-            blackboard.editTextRequested = (_blackboard, element, newValue) =>
+                draft = CreateInstance<NarrativeContainer>();
+                draft.hideFlags = HideFlags.HideAndDontSave;
+            }
+            var toolbar = new Toolbar();
+            layoutField = new ObjectField("Layout") { objectType = typeof(NarrativeContainer), allowSceneObjects = false, value = source };
+            layoutField.style.width = 280;
+            layoutField.RegisterValueChangedCallback(evt =>
             {
-                var oldPropertyName = ((BlackboardField) element).text;
-                if (m_graphView.ExposedProperties.Any(x => x.PropertyName == newValue))
-                {
-                    EditorUtility.DisplayDialog("Error", "This property name already exists, please chose another one.",
-                        "OK");
-                    return;
-                }
-
-                var targetIndex = m_graphView.ExposedProperties.FindIndex(x => x.PropertyName == oldPropertyName);
-                m_graphView.ExposedProperties[targetIndex].PropertyName = newValue;
-                ((BlackboardField) element).text = newValue;
-            };
-            blackboard.SetPosition(new Rect(10,30,200,300));
-            m_graphView.Add(blackboard);
-            m_graphView.Blackboard = blackboard;
+                if (ConfirmSwitch()) Load(evt.newValue as NarrativeContainer);
+                else layoutField.SetValueWithoutNotify(source);
+            });
+            toolbar.Add(layoutField);
+            toolbar.Add(new ToolbarButton(() => { if (ConfirmSwitch()) Load(source); }) { text = "Reload" });
+            toolbar.Add(new ToolbarButton(OpenAll) { text = "All scenes" });
+            toolbar.Add(new ToolbarButton(() => Save(false)) { text = "Save" });
+            toolbar.Add(new ToolbarButton(() => Save(true)) { text = "Save as…" });
+            toolbar.Add(new ToolbarButton(() => ReflectionOfAmber.Scripts.Editor.SceneValidator.Validate()) { text = "Validate" });
+            rootVisualElement.Add(toolbar);
+            var navigation = new Toolbar();
+            var search = new ToolbarSearchField();
+            search.style.width = 280;
+            search.RegisterCallback<KeyDownEvent>(evt => { if (evt.keyCode == KeyCode.Return) graph.Search(search.value); });
+            navigation.Add(search);
+            navigation.Add(new ToolbarButton(() => graph.Search(search.value)) { text = "Find" });
+            navigation.Add(new ToolbarButton(() => graph.FrameAll()) { text = "Frame all" });
+            navigation.Add(new ToolbarButton(() => graph.RefreshFromAssets()) { text = "Refresh links" });
+            summary = new Label();
+            navigation.Add(summary);
+            rootVisualElement.Add(navigation);
+            graph = new SceneGraphView(this);
+            rootVisualElement.Add(graph);
+            graph.LoadLayout(draft);
+            rootVisualElement.Add(new Label("Drag an option to another scene. Select Inspector to edit text/conditions. Special links are read-only. START is a layout marker.")
+            { style = { whiteSpace = WhiteSpace.Normal } });
+            hasUnsavedChanges = layoutDirty;
+            saveChangesMessage = "Save changes to the narrative layout? Scene edits remain available in Unity Undo.";
+            UpdateSummary();
+            Undo.undoRedoPerformed += OnUndoRedo;
+            Undo.postprocessModifications += OnModified;
+            EditorApplication.projectChanged += QueueRefresh;
         }
 
         private void OnDisable()
         {
-            rootVisualElement.Remove(m_graphView);
+            Undo.undoRedoPerformed -= OnUndoRedo;
+            Undo.postprocessModifications -= OnModified;
+            EditorApplication.projectChanged -= QueueRefresh;
+            EditorApplication.delayCall -= Refresh;
+            refreshQueued = false;
+        }
+
+        private void OnDestroy()
+        {
+            if (draft != null) DestroyImmediate(draft);
+        }
+
+        private void Load(NarrativeContainer asset)
+        {
+            source = asset;
+            if (draft != null) DestroyImmediate(draft);
+            draft = source != null ? Instantiate(source) : CreateInstance<NarrativeContainer>();
+            draft.hideFlags = HideFlags.HideAndDontSave;
+            layoutField.SetValueWithoutNotify(source);
+            graph.LoadLayout(draft);
+            layoutDirty = false;
+            hasUnsavedChanges = false;
+            UpdateSummary();
+            graph.schedule.Execute(() => graph.FrameAll());
+        }
+
+        private void OpenAll()
+        {
+            if (!ConfirmSwitch()) return;
+            Load(null);
+            int index = 0;
+            foreach (var scene in SceneGraphData.FindScenes())
+            {
+                draft.DialogueNodeData.Add(new SceneNodeData
+                {
+                    GUID = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(scene)),
+                    Key = scene.SceneKey, Scene = scene,
+                    Position = new Vector2(index % 8 * 420, index / 8 * 700)
+                });
+                index++;
+            }
+            graph.LoadLayout(draft);
+            MarkLayoutChanged();
+            graph.schedule.Execute(() => graph.FrameAll());
+        }
+
+        private bool ConfirmSwitch()
+        {
+            if (!layoutDirty) return true;
+            int action = EditorUtility.DisplayDialogComplex("Unsaved layout", "Save the current layout before switching?", "Save", "Cancel", "Discard layout");
+            return action == 2 || action == 0 && Save(false);
+        }
+
+        public void MarkLayoutChanged()
+        {
+            layoutDirty = true;
+            hasUnsavedChanges = true;
+            UpdateSummary();
+        }
+
+        private void UpdateSummary()
+        {
+            if (summary != null) summary.text = $"  {graph?.nodes.Count() ?? 0} nodes" + (layoutDirty ? " · layout modified" : "");
+        }
+
+        public override void SaveChanges()
+        {
+            if (Save(false)) base.SaveChanges();
+        }
+
+        public override void DiscardChanges()
+        {
+            layoutDirty = false;
+            base.DiscardChanges();
+        }
+
+        private bool Save(bool saveAs)
+        {
+            GraphSaveUtility.Capture(graph, draft);
+            var target = source;
+            if (target == null || saveAs)
+            {
+                string path = EditorUtility.SaveFilePanelInProject("Save narrative layout", "Narrative", "asset", "Choose layout asset", SceneGraphData.Root);
+                if (string.IsNullOrEmpty(path)) return false;
+                target = AssetDatabase.LoadAssetAtPath<NarrativeContainer>(path);
+                if (target == null)
+                {
+                    if (AssetDatabase.LoadMainAssetAtPath(path) != null)
+                    {
+                        ShowNotification(new GUIContent("Choose a layout asset, not a scene"));
+                        return false;
+                    }
+                    target = CreateInstance<NarrativeContainer>();
+                    AssetDatabase.CreateAsset(target, path);
+                }
+            }
+            GraphSaveUtility.Save(draft, target);
+            foreach (var scene in SceneGraphData.FindScenes())
+            {
+                AssetDatabase.SaveAssetIfDirty(scene);
+                foreach (var special in SceneGraphData.GetSpecialTransitions(scene)) AssetDatabase.SaveAssetIfDirty(special.Asset);
+            }
+            source = target;
+            layoutField.SetValueWithoutNotify(source);
+            layoutDirty = false;
+            hasUnsavedChanges = false;
+            UpdateSummary();
+            return true;
+        }
+
+        private void OnUndoRedo()
+        {
+            graph.Rebuild();
+            MarkLayoutChanged();
+        }
+
+        private UndoPropertyModification[] OnModified(UndoPropertyModification[] modifications)
+        {
+            if (modifications.Any(m => m.currentValue.target is ScreenSceneScriptableObject || m.currentValue.target is SpecialScriptableObjectBase)) QueueRefresh();
+            return modifications;
+        }
+
+        private void QueueRefresh()
+        {
+            if (refreshQueued) return;
+            refreshQueued = true;
+            EditorApplication.delayCall += Refresh;
+        }
+
+        private void Refresh()
+        {
+            refreshQueued = false;
+            if (this != null && graph != null) graph.RefreshFromAssets();
         }
     }
 }

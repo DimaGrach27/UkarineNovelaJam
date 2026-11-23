@@ -1,283 +1,46 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
 using ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 {
-    public class GraphSaveUtility
+    // Layout persistence only. Game transitions belong exclusively to scene assets.
+    public static class GraphSaveUtility
     {
-        private List<Edge> Edges => m_graphView.edges.ToList();
-
-        private List<SceneNode> Nodes
+        public static void Capture(SceneGraphView view, NarrativeContainer layout)
         {
-            get
-            {
-                List<SceneNode> tempNodes = m_graphView.nodes.ToList().Cast<SceneNode>().ToList();
-                // List<SceneNode> nodes = new();
-                //
-                // for (int i = tempNodes.Count - 1; i >= 0; i--)
-                // {
-                //     nodes.Add(tempNodes[i]);
-                // }
-                return tempNodes;
-            }
-        }
-
-        private List<Group> CommentBlocks =>
-            m_graphView.graphElements.ToList().Where(x => x is Group).Cast<Group>().ToList();
-
-        private NarrativeContainer m_narativeContainer;
-        private SceneGraphView m_graphView;
-
-        public static GraphSaveUtility GetInstance(SceneGraphView graphView)
-        {
-            return new GraphSaveUtility
-            {
-                m_graphView = graphView
-            };
-        }
-
-        public void SaveGraph(string fileName)
-        {
-            var narrativeContainer = ScriptableObject.CreateInstance<NarrativeContainer>();
-            if (!SaveNodes(fileName, narrativeContainer)) return;
-            // SaveExposedProperties(narrativeContainer);
-            SaveCommentBlocks(narrativeContainer);
-
-            string path = "Assets/ReflectionOfAmber/Resources/Graphs";
-            if (!AssetDatabase.IsValidFolder(path))
-                AssetDatabase.CreateFolder("/ReflectionOfAmber/Resources", "Graphs");
-
-            UnityEngine.Object loadedAsset = AssetDatabase.LoadAssetAtPath($"{path}/{fileName}.asset", typeof(NarrativeContainer));
-
-            if (loadedAsset == null || !AssetDatabase.Contains(loadedAsset)) 
-			{
-                AssetDatabase.CreateAsset(narrativeContainer, $"{path}/{fileName}.asset");
-            }
-            else 
-			{
-                NarrativeContainer container = loadedAsset as NarrativeContainer;
-                container.NodeLinks = narrativeContainer.NodeLinks;
-                container.DialogueNodeData = narrativeContainer.DialogueNodeData;
-                container.ExposedProperties = narrativeContainer.ExposedProperties;
-                container.CommentBlockData = narrativeContainer.CommentBlockData;
-                EditorUtility.SetDirty(container);
-            }
-
-            AssetDatabase.SaveAssets();
-        }
-
-        private bool SaveNodes(string fileName, NarrativeContainer narrativeContainer)
-        {
-            if (!Edges.Any()) return false;
-            var connectedSockets = Edges.Where(x => x.input.node != null).ToArray();
-            for (var i = 0; i < connectedSockets.Count(); i++)
-            {
-                var outputNode = (connectedSockets[i].output.node as SceneNode);
-                var inputNode = (connectedSockets[i].input.node as SceneNode);
-                narrativeContainer.NodeLinks.Add(new NodeLinkData
+            layout.DialogueNodeData = view.nodes.OfType<SceneNode>().Where(n => !n.EntryPoint)
+                .Select(n => new SceneNodeData
                 {
-                    BaseNodeGUID = outputNode.GUID,
-                    PortName = connectedSockets[i].output.portName,
-                    TargetNodeGUID = inputNode.GUID
-                });
-            }
-
-            foreach (var node in Nodes.Where(node => !node.EntryPoint))
+                    GUID = n.GUID, Key = n.Key, Scene = n.Scene, ReturnNode = n.ReturnNode,
+                    Position = n.GetPosition().position
+                }).ToList();
+            layout.CommentBlockData = view.graphElements.OfType<Group>().Select(group => new CommentBlockData
             {
-                // NextScene[] nextScenes = GetNextScenes(node, node.GUID);
-                // node.Scene.nextScenes = nextScenes;
-                
-                if(!node.ReturnNode)
+                Title = group.title, Position = group.GetPosition().position,
+                ChildNodes = group.containedElements.OfType<SceneNode>().Select(n => n.GUID).ToList()
+            }).ToList();
+            // Visual routing hints preserve return references. Loading validates the hinted scene
+            // against actual scene data; these links never change a game transition.
+            layout.NodeLinks = view.edges.Where(e => e.output?.node is SceneNode && e.input?.node is SceneNode)
+                .Select(e => new NodeLinkData
                 {
-                    node.Scene.nextScenes = GetNextScenes(node, node.GUID);
-                }
-                
-                narrativeContainer.DialogueNodeData.Add(new SceneNodeData()
-                {
-                    GUID = node.GUID,
-                    Key = node.Key,
-                    Position = node.GetPosition().position,
-                    Scene = node.Scene,
-                    ReturnNode = node.ReturnNode
-                });
-            }
-
-            return true;
+                    BaseNodeGUID = ((SceneNode)e.output.node).GUID,
+                    TargetNodeGUID = ((SceneNode)e.input.node).GUID, PortName = SceneGraphView.GetPortKey(e.output)
+                }).ToList();
         }
 
-        private NextScene[] GetNextScenes(SceneNode sceneNode, string outputNodeGUID)
+        public static void Save(NarrativeContainer draft, NarrativeContainer target)
         {
-            var connectedSockets = Edges.Where(x => x.output.node != null).ToArray();
-
-            List<NextScene> nextScenes = new List<NextScene>();
-            
-
-            foreach (var edge in connectedSockets)
-            {
-                var outputNode = edge.output.node as SceneNode;
-                var inputNode = edge.input.node as SceneNode;
-                if (outputNode.GUID == outputNodeGUID)
-                {
-                    nextScenes.Add(new NextScene()
-                    {
-                        scene = inputNode.Scene
-                    });
-                }
-            }
-
-
-            for (int i = 0; i < sceneNode.Scene.nextScenes.Length; i++)
-            {
-                if (nextScenes.Count > i)
-                {
-                    ScreenSceneScriptableObject sceneTemp = nextScenes[i].scene;
-                    nextScenes[i] = sceneNode.Scene.nextScenes[i];
-                    nextScenes[i].scene = sceneTemp;
-                }
-            }
-
-            return nextScenes.ToArray();
-        }
-
-        private void SaveExposedProperties(NarrativeContainer narrativeContainer)
-        {
-            narrativeContainer.ExposedProperties.Clear();
-            narrativeContainer.ExposedProperties.AddRange(m_graphView.ExposedProperties);
-        }
-
-        private void SaveCommentBlocks(NarrativeContainer narrativeContainer)
-        {
-            foreach (var block in CommentBlocks)
-            {
-                var nodes = block.containedElements.Where(x => x is SceneNode).Cast<SceneNode>().Select(x => x.GUID)
-                    .ToList();
-
-                narrativeContainer.CommentBlockData.Add(new CommentBlockData
-                {
-                    ChildNodes = nodes,
-                    Title = block.title,
-                    Position = block.GetPosition().position
-                });
-            }
-        }
-
-        public void LoadGraph(string fileName)
-        // public async void LoadGraph(string fileName)
-        {
-            m_narativeContainer = Resources.Load<NarrativeContainer>(fileName);
-            if (m_narativeContainer == null)
-            {
-                EditorUtility.DisplayDialog("File Not Found", "Target Narrative Data does not exist!", "OK");
-                return;
-            }
-
-            ClearGraph();
-            // await GenerateSceneNodes();
-            // await ConnectSceneNodes();
-            GenerateSceneNodes();
-            ConnectSceneNodes();
-            AddExposedProperties();
-            GenerateCommentBlocks();
-        }
-
-        /// <summary>
-        /// Set Entry point GUID then Get All Nodes, remove all and their edges. Leave only the entrypoint node. (Remove its edge too)
-        /// </summary>
-        private void ClearGraph()
-        {
-            Nodes.Find(x => x.EntryPoint).GUID = m_narativeContainer.NodeLinks[0].BaseNodeGUID;
-            foreach (var perNode in Nodes)
-            {
-                if (perNode.EntryPoint) continue;
-                Edges.Where(x => x.input.node == perNode).ToList()
-                    .ForEach(edge => m_graphView.RemoveElement(edge));
-                m_graphView.RemoveElement(perNode);
-            }
-        }
-
-        /// <summary>
-        /// Create All serialized nodes and assign their guid and dialogue text to them
-        /// </summary>
-        private void GenerateSceneNodes()
-        // private Task GenerateSceneNodes()
-        {
-            foreach (var perNode in m_narativeContainer.DialogueNodeData)
-            {
-                var tempNode = m_graphView.CreateNode(perNode.Key, perNode.Position, perNode.Scene, perNode.ReturnNode);
-                tempNode.GUID = perNode.GUID;
-                
-                m_graphView.AddElement(tempNode);
-
-                // var nodePorts = m_narativeContainer.NodeLinks.Where(x => x.BaseNodeGUID == perNode.GUID).ToList();
-                // nodePorts.ForEach(x => m_graphView.AddCachedChoicePort(tempNode, x.PortName));
-            }
-            
-            // return Task.CompletedTask;
-        }
-
-        // private Task ConnectSceneNodes()
-        private void ConnectSceneNodes()
-        {
-            for (var i = 0; i < Nodes.Count; i++)
-            {
-                var k = i; //Prevent access to modified closure
-                var connections = m_narativeContainer.NodeLinks.Where(x => x.BaseNodeGUID == Nodes[k].GUID).ToList();
-                for (var j = 0; j < connections.Count(); j++)
-                {
-                    var targetNodeGUID = connections[j].TargetNodeGUID;
-                    var targetNode = Nodes.First(x => x.GUID == targetNodeGUID);
-                    LinkNodesTogether(Nodes[i].outputContainer[j].Q<Port>(), (Port) targetNode.inputContainer[0]);
-
-                    targetNode.SetPosition(new Rect(
-                        m_narativeContainer.DialogueNodeData.First(x => x.GUID == targetNodeGUID).Position,
-                        m_graphView.DefaultNodeSize));
-                }
-            }
-            
-            // return Task.CompletedTask;
-        }
-
-        private void LinkNodesTogether(Port outputSocket, Port inputSocket)
-        {
-            var tempEdge = new Edge()
-            {
-                output = outputSocket,
-                input = inputSocket
-            };
-            tempEdge?.input.Connect(tempEdge);
-            tempEdge?.output.Connect(tempEdge);
-            m_graphView.Add(tempEdge);
-        }
-
-        private void AddExposedProperties()
-        {
-            m_graphView.ClearBlackBoardAndExposedProperties();
-            foreach (var exposedProperty in m_narativeContainer.ExposedProperties)
-            {
-                m_graphView.AddPropertyToBlackBoard(exposedProperty);
-            }
-        }
-
-        private void GenerateCommentBlocks()
-        {
-            foreach (var commentBlock in CommentBlocks)
-            {
-                m_graphView.RemoveElement(commentBlock);
-            }
-
-            foreach (var commentBlockData in m_narativeContainer.CommentBlockData)
-            {
-               var block = m_graphView.CreateCommentBlock(new Rect(commentBlockData.Position, m_graphView.DefaultCommentBlockSize),
-                    commentBlockData);
-               block.AddElements(Nodes.Where(x=>commentBlockData.ChildNodes.Contains(x.GUID)));
-            }
+            Undo.RegisterCompleteObjectUndo(target, "Save narrative layout");
+            var name = target.name;
+            EditorUtility.CopySerialized(draft, target);
+            target.name = name;
+            target.hideFlags = HideFlags.None;
+            EditorUtility.SetDirty(target);
+            AssetDatabase.SaveAssetIfDirty(target);
         }
     }
 }

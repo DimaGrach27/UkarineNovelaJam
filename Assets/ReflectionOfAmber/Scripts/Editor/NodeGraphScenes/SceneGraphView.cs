@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using ReflectionOfAmber.Scripts.GameModelBlock;
 using ReflectionOfAmber.Scripts.GameScene.ScreenPart;
-using ReflectionOfAmber.Scripts.GameScene.ScreenPart.SpecialSO;
-using ReflectionOfAmber.Scripts.NodeGraphScenes.Editor.Fields;
 using ReflectionOfAmber.Scripts.NodeGraphScenes.Runtime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -17,825 +13,338 @@ namespace ReflectionOfAmber.Scripts.NodeGraphScenes.Editor
 {
     public class SceneGraphView : GraphView
     {
-        public readonly Vector2 DefaultNodeSize = new Vector2(200, 150);
-        public readonly Vector2 DefaultCommentBlockSize = new Vector2(300, 200);
-        public SceneNode EntryPointNode;
-        public Blackboard Blackboard = new Blackboard();
-        public List<ExposedProperty> ExposedProperties { get; private set; } = new List<ExposedProperty>();
-        private NodeSearchWindow _searchWindow;
+        public readonly Vector2 DefaultNodeSize = new Vector2(270, 160);
+        public readonly Vector2 DefaultCommentBlockSize = new Vector2(320, 220);
+        public NarrativeContainer Layout { get; private set; }
+        private readonly SceneGraph owner;
+        private bool rebuilding;
+        private bool captureQueued;
 
-        //Status setter elements
-        private Label m_status;
-        private EnumField m_statusEnums;
-        private Toggle m_statusValues;
+        private sealed class OptionPort
+        {
+            public ScreenSceneScriptableObject Scene;
+            public int Index;
+            public bool ReadOnly;
+            public ScreenSceneScriptableObject Target;
+            public string Key;
+        }
 
         public SceneGraphView(SceneGraph editorWindow)
         {
-            styleSheets.Add(Resources.Load<StyleSheet>("Grid"));
-            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
-
+            owner = editorWindow;
+            style.flexGrow = 1;
+            SetupZoom(0.05f, 1.5f);
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
-            this.AddManipulator(new FreehandSelector());
-
             var grid = new GridBackground();
             Insert(0, grid);
             grid.StretchToParentSize();
-
-            AddElement(GetEntryPointNodeInstance());
-
-            AddSearchWindow(editorWindow);
+            graphViewChanged = OnGraphChanged;
+            groupTitleChanged = (_, __) => QueueCapture();
+            elementsAddedToGroup = (_, __) => QueueCapture();
+            elementsRemovedFromGroup = (_, __) => QueueCapture();
         }
 
-        private void AddSearchWindow(SceneGraph editorWindow)
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            _searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
-            _searchWindow.Configure(editorWindow, this);
-            nodeCreationRequest = context =>
-                SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), _searchWindow);
-        }
-
-        public void ClearBlackBoardAndExposedProperties()
-        {
-            ExposedProperties.Clear();
-            Blackboard.Clear();
-        }
-
-        public Group CreateCommentBlock(Rect rect, CommentBlockData commentBlockData = null)
-        {
-            if (commentBlockData == null)
-                commentBlockData = new CommentBlockData();
-            var group = new Group
+            base.BuildContextualMenu(evt);
+            var position = contentViewContainer.WorldToLocal(evt.localMousePosition);
+            evt.menu.AppendAction("Add scene", _ => CreateNewSceneNode("Scene", position, false));
+            evt.menu.AppendAction("Add return reference", _ => CreateNewSceneNode("Return", position, true));
+            evt.menu.AppendAction("Add group", _ =>
             {
-                autoUpdateGeometry = true,
-                title = commentBlockData.Title
-            };
-            AddElement(group);
-            group.SetPosition(rect);
-            return group;
-        }
-
-        public void AddPropertyToBlackBoard(ExposedProperty property, bool loadMode = false)
-        {
-            var localPropertyName = property.PropertyName;
-            var localPropertyValue = property.PropertyValue;
-            if (!loadMode)
-            {
-                while (ExposedProperties.Any(x => x.PropertyName == localPropertyName))
-                    localPropertyName = $"{localPropertyName}(1)";
-            }
-
-            var item = ExposedProperty.CreateInstance();
-            item.PropertyName = localPropertyName;
-            item.PropertyValue = localPropertyValue;
-            ExposedProperties.Add(item);
-
-            var container = new VisualElement();
-            var field = new BlackboardField { text = localPropertyName, typeText = "string" };
-            container.Add(field);
-
-            var propertyValueTextField = new TextField("Value:")
-            {
-                value = localPropertyValue
-            };
-            propertyValueTextField.RegisterValueChangedCallback(evt =>
-            {
-                var index = ExposedProperties.FindIndex(x => x.PropertyName == item.PropertyName);
-                ExposedProperties[index].PropertyValue = evt.newValue;
+                RecordLayout();
+                CreateCommentBlock(new Rect(position, DefaultCommentBlockSize));
+                CaptureLayout();
             });
-            var sa = new BlackboardRow(field, propertyValueTextField);
-            container.Add(sa);
-            Blackboard.Add(container);
         }
 
-        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        public void LoadLayout(NarrativeContainer layout)
         {
-            var compatiblePorts = new List<Port>();
-            var startPortView = startPort;
-
-            ports.ForEach((port) =>
-            {
-                var portView = port;
-                if (startPortView != portView && startPortView.node != portView.node)
-                    compatiblePorts.Add(port);
-            });
-
-            return compatiblePorts;
+            Layout = layout;
+            Rebuild();
         }
 
-        public void CreateNewSceneNode(string nodeName, Vector2 position, bool isReturnNode)
+        public void Rebuild()
         {
-            AddElement(CreateNode(nodeName, position, isReturnNode));
-        }
-
-        public CameraDependentNode CreateTestNode(Vector2 position)
-        {
-            var node = new CameraDependentNode();
-            node.SetPosition(new Rect(position,
-                DefaultNodeSize));
-
-            AddElement(node);
-            return node;
-        }
-
-        public SceneNode CreateNode(string nodeName, Vector2 position, ScreenSceneScriptableObject obj,
-            bool isReturnNode)
-        {
-            var tempSceneNode = new SceneNode()
+            if (Layout == null) return;
+            rebuilding = true;
+            try
             {
-                title = nodeName,
-                Key = nodeName,
-                GUID = Guid.NewGuid().ToString(),
-                ReturnNode = isReturnNode,
-                Scene = obj
-            };
-
-            var tempNode = CreateNode(tempSceneNode, position);
-
-            if(!isReturnNode)
-            {
-                RefreshPorts(tempNode);
-            }
-
-            return tempNode;
-
-            tempSceneNode.styleSheets.Add(Resources.Load<StyleSheet>("Node"));
-            var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
-            inputPort.portName = "Input";
-            tempSceneNode.inputContainer.Add(inputPort);
-            tempSceneNode.RefreshExpandedState();
-            tempSceneNode.RefreshPorts();
-            tempSceneNode.SetPosition(new Rect(position,
-                DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
-
-            tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
-
-            var sceneSo = new ObjectField
-            {
-                objectType = typeof(ScreenSceneScriptableObject),
-            };
-
-            sceneSo.RegisterValueChangedCallback(evt =>
-            {
-                sceneSo.value = evt.newValue;
-                ScreenSceneScriptableObject so = (ScreenSceneScriptableObject)sceneSo.value;
-
-                tempSceneNode.Key = so.SceneKey;
-                tempSceneNode.title = so.SceneKey;
-                tempSceneNode.Scene = so;
-
-                RefreshPorts(tempSceneNode);
-            });
-            sceneSo.SetValueWithoutNotify(obj);
-
-            tempSceneNode.mainContainer.Add(sceneSo);
-
-            var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
-            {
-                text = "Add Next Scene"
-            };
-            tempSceneNode.titleButtonContainer.Add(button);
-            return tempSceneNode;
-        }
-
-        public SceneNode CreateNode(string nodeName, Vector2 position, bool isReturnNode)
-        {
-            var tempSceneNode = new SceneNode()
-            {
-                title = nodeName,
-                Key = nodeName,
-                GUID = Guid.NewGuid().ToString(),
-                ReturnNode = isReturnNode
-                // Scene = obj
-            };
-
-            return CreateNode(tempSceneNode, position);
-            
-            tempSceneNode.styleSheets.Add(isReturnNode
-                ? Resources.Load<StyleSheet>("Node_return")
-                : Resources.Load<StyleSheet>("Node"));
-            
-            var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
-            inputPort.portName = !isReturnNode ? "Input" : "Input return";
-            tempSceneNode.inputContainer.Add(inputPort);
-            tempSceneNode.RefreshExpandedState();
-            tempSceneNode.RefreshPorts();
-            tempSceneNode.SetPosition(new Rect(position,
-                DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
-
-            tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
-            
-            var sceneSo = new ObjectField
-            {
-                objectType = typeof(ScreenSceneScriptableObject),
-            };
-
-            sceneSo.RegisterValueChangedCallback(evt =>
-            {
-                sceneSo.value = evt.newValue;
-                ScreenSceneScriptableObject so = (ScreenSceneScriptableObject)sceneSo.value;
-
-                tempSceneNode.Key = so.SceneKey;
-                tempSceneNode.title = so.SceneKey;
-                tempSceneNode.Scene = so;
-                
-                if(!isReturnNode)
+                foreach (var element in graphElements.ToList()) RemoveElement(element);
+                var records = Layout.DialogueNodeData ?? new List<SceneNodeData>();
+                var primary = new HashSet<ScreenSceneScriptableObject>();
+                var ids = new HashSet<string>();
+                foreach (var data in records.Where(d => d != null))
                 {
-                    RefreshPorts(tempSceneNode);
+                    bool isReturn = data.ReturnNode || (data.Scene != null && !primary.Add(data.Scene));
+                    var node = CreateNode(data.Key, data.Position, data.Scene, isReturn);
+                    node.GUID = !string.IsNullOrEmpty(data.GUID) && ids.Add(data.GUID) ? data.GUID : Guid.NewGuid().ToString();
+                    AddElement(node);
                 }
-            });
-            sceneSo.SetValueWithoutNotify(tempSceneNode.Scene);
 
-            tempSceneNode.mainContainer.Add(sceneSo);
-
-            if (isReturnNode)
-            {
-                return tempSceneNode;
-            }
-            
-            var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
-            {
-                text = "Add Next Scene"
-            };
-            tempSceneNode.titleButtonContainer.Add(button);
-            return tempSceneNode;
-        }
-
-        private SceneNode CreateNode(SceneNode tempSceneNode, Vector2 position)
-        {
-            tempSceneNode.styleSheets.Add(tempSceneNode.ReturnNode
-                ? Resources.Load<StyleSheet>("Node_return")
-                : Resources.Load<StyleSheet>("Node"));
-            
-            var inputPort = GetPortInstance(tempSceneNode, Direction.Input, Port.Capacity.Multi);
-            inputPort.portName = !tempSceneNode.ReturnNode ? "Input" : "Input return";
-            tempSceneNode.inputContainer.Add(inputPort);
-            tempSceneNode.RefreshExpandedState();
-            tempSceneNode.RefreshPorts();
-            tempSceneNode.SetPosition(new Rect(position,
-                DefaultNodeSize)); //To-Do: implement screen center instantiation positioning
-
-            tempSceneNode.outputContainer.style.alignItems = Align.FlexStart;
-            
-            var sceneSo = new ObjectField
-            {
-                objectType = typeof(ScreenSceneScriptableObject),
-            };
-
-            sceneSo.RegisterValueChangedCallback(evt =>
-            {
-                sceneSo.value = evt.newValue;
-                ScreenSceneScriptableObject so = (ScreenSceneScriptableObject)sceneSo.value;
-
-                tempSceneNode.Key = so.SceneKey;
-                tempSceneNode.title = so.SceneKey;
-                tempSceneNode.Scene = so;
-                
-                if(!tempSceneNode.ReturnNode)
+                // References outside this layout stay visible without expanding their whole story.
+                var normalNodes = nodes.OfType<SceneNode>().Where(n => !n.ReturnNode).ToList();
+                foreach (var node in normalNodes)
                 {
-                    RefreshPorts(tempSceneNode);
-                }
-            });
-            sceneSo.SetValueWithoutNotify(tempSceneNode.Scene);
-
-            tempSceneNode.mainContainer.Add(sceneSo);
-
-            if (tempSceneNode.ReturnNode)
-            {
-                return tempSceneNode;
-            }
-            
-            var button = new Button(() => { AddCachedChoicePort(tempSceneNode); })
-            {
-                text = "Add Next Scene"
-            };
-            tempSceneNode.titleButtonContainer.Add(button);
-            return tempSceneNode;
-        }
-
-        public void AddChoicePort(SceneNode nodeCache, string overriddenPortName = "")
-        {
-            var generatedPort = GetPortInstance(nodeCache, Direction.Output);
-            var portLabel = generatedPort.contentContainer.Q<Label>("type");
-            generatedPort.contentContainer.Remove(portLabel);
-
-            var outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count();
-            var outputPortName = string.IsNullOrEmpty(overriddenPortName)
-                ? $"Option {outputPortCount + 1}"
-                : overriddenPortName;
-
-            generatedPort.contentContainer.Add(new Label(outputPortName));
-            
-            var customContainer = new VisualElement();
-
-            NextScene[] nextScenes = new NextScene[outputPortCount + 1];
-
-            if (nodeCache.Scene != null && nodeCache.Scene.nextScenes != null)
-            {
-                for (int i = 0; i < nextScenes.Length; i++)
-                {
-                    if (nodeCache.Scene.nextScenes.Length > i)
+                    foreach (var port in node.outputContainer.Query<Port>().ToList())
                     {
-                        nextScenes[i] = nodeCache.Scene.nextScenes[i];
+                        if (!(port.userData is OptionPort option) || option.Target == null) continue;
+                        var hint = Layout.NodeLinks?.FirstOrDefault(link => link != null && link.BaseNodeGUID == node.GUID
+                            && (link.PortName == option.Key || !option.ReadOnly && link.PortName == $"Option {option.Index + 1}"));
+                        var target = nodes.OfType<SceneNode>().FirstOrDefault(n => n.GUID == hint?.TargetNodeGUID && n.Scene == option.Target)
+                            ?? FindTarget(option.Target);
+                        if (target == null)
+                        {
+                            target = CreateNode(option.Target.SceneKey,
+                                FindFreeReferencePosition(node), option.Target, true);
+                            AddElement(target);
+                        }
+                        Connect(port, target.inputContainer.Q<Port>(), option.ReadOnly);
                     }
                 }
-            }
-            
-            NextScene nextScene = nextScenes[outputPortCount];
-            nextScene.optionLabel = outputPortName;
 
-            var chooseText = new TextField("Choose: ");
-            chooseText.RegisterValueChangedCallback(evt =>
-            {
-                chooseText.value = evt.newValue;
-                nextScene.chooseText = evt.newValue;
-            });
-            customContainer.Add(chooseText);
-            
-            StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
-            statusDependedField.Build(generatedPort, nextScene.statusDependent.enable);
-            
-            CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
-            cameraDependedField.Build(generatedPort, nextScene.cameraDependent.enable);
-
-            var exclusionToggle = new Toggle("Exclusion dependent: ");
-            exclusionToggle.RegisterValueChangedCallback(evt =>
-            {
-                exclusionToggle.value = evt.newValue;
-                nextScene.exclusionDependent.enable = evt.newValue;
-            });
-            customContainer.Add(exclusionToggle);
-
-            FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
-            findDependentField.Build(generatedPort, nextScene.findDependent.enable);
-
-            SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
-            specialDependentField.Build(generatedPort, nextScene.specialDependent.enable);
-                
-            customContainer.Add(new Label("========"));
-            generatedPort.contentContainer.Add(customContainer);
-
-            if(nodeCache.Scene != null)
-            {
-                nextScenes[outputPortCount] = nextScene;
-                nodeCache.Scene.nextScenes = nextScenes;
-            }
-
-            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort, outputPortCount))
-            {
-                text = "X"
-            };
-            
-            generatedPort.contentContainer.Add(deleteButton);
-            generatedPort.portName = outputPortName;
-            nodeCache.outputContainer.Add(generatedPort);
-            nodeCache.RefreshExpandedState();
-            nodeCache.RefreshPorts();
-        }
-
-        private void RefreshPorts(SceneNode nodeCache)
-        {
-            nodeCache.outputContainer.Clear();
-            foreach (var nextScene in nodeCache.Scene.nextScenes)
-            {
-                if(nextScene.Scene != null)
+                var entryLink = Layout.NodeLinks?.FirstOrDefault(link => link != null && link.PortName == "Next"
+                    && !records.Any(d => d != null && d.GUID == link.BaseNodeGUID));
+                var entry = new SceneNode { title = "START (layout marker)", GUID = entryLink?.BaseNodeGUID ?? Guid.NewGuid().ToString(), EntryPoint = true };
+                entry.capabilities &= ~Capabilities.Deletable;
+                var entryPort = Port.Create<Edge>(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                entryPort.portName = "Next";
+                entry.outputContainer.Add(entryPort);
+                entry.SetPosition(new Rect(-350, 0, 270, 100));
+                AddElement(entry);
+                var entryTarget = nodes.OfType<SceneNode>().FirstOrDefault(n => n.GUID == entryLink?.TargetNodeGUID);
+                if (entryTarget != null) Connect(entryPort, entryTarget.inputContainer.Q<Port>(), false);
+                foreach (var groupData in Layout.CommentBlockData ?? new List<CommentBlockData>())
                 {
-                    AddCachedChoicePort(nodeCache);
+                    if (groupData == null) continue;
+                    var group = CreateCommentBlock(new Rect(groupData.Position, DefaultCommentBlockSize), groupData);
+                    group.AddElements(nodes.OfType<SceneNode>().Where(n => groupData.ChildNodes != null && groupData.ChildNodes.Contains(n.GUID)));
                 }
             }
-
-            // int count = 0;
-            // for (int i = 0; i < nodeCache.Scene.nextScenes.Length; i++)
-            // {
-            //     if (nodeCache.Scene.nextScenes[i].Scene == null)
-            //     {
-            //         count = i;
-            //         
-            //         break;
-            //     }
-            // }
-            //
-            // NextScene[] nextScenes = new NextScene[count];
-            //
-            // for (int i = 0; i < nextScenes.Length; i++)
-            // {
-            //     nextScenes[i] = nodeCache.Scene.nextScenes[i];
-            // }
-            //
-            // nodeCache.Scene.nextScenes = nextScenes;
+            finally { rebuilding = false; }
         }
-        
-        public void AddCachedChoicePort(SceneNode nodeCache, string overriddenPortName = "")
+
+        private SceneNode FindTarget(ScreenSceneScriptableObject scene) => nodes.OfType<SceneNode>()
+            .Where(n => n.Scene == scene).OrderBy(n => n.ReturnNode).FirstOrDefault();
+
+        private Vector2 FindFreeReferencePosition(SceneNode source)
         {
-            var generatedPort = GetPortInstance(nodeCache, Direction.Output);
-            var portLabel = generatedPort.contentContainer.Q<Label>("type");
-            generatedPort.contentContainer.Remove(portLabel);
-        
-            var outputPortCount = nodeCache.outputContainer.Query("connector").ToList().Count();
-            var outputPortName = string.IsNullOrEmpty(overriddenPortName)
-                ? $"Option {outputPortCount + 1}"
-                : overriddenPortName;
+            var candidate = source.GetPosition().position + new Vector2(420, 0);
+            var occupied = nodes.OfType<SceneNode>().Select(n => new Rect(n.GetPosition().position,
+                new Vector2(380, Mathf.Max(240, 180 + n.outputContainer.Query<Port>().ToList().Count * 28)))).ToList();
+            while (occupied.Any(rect => rect.Overlaps(new Rect(candidate, new Vector2(380, 240)))))
+                candidate.y += 260;
+            return candidate;
+        }
 
-            // generatedPort.contentContainer.style.alignItems = Align.FlexStart;
-            generatedPort.contentContainer.style.marginLeft = 112;
-            generatedPort.contentContainer.Add(new Label(outputPortName));
-            
-            // var customContainer = new VisualElement();
-
-            NextScene[] nextScenes;
-        
-            if (nodeCache.Scene != null && nodeCache.Scene.nextScenes != null)
+        public SceneNode CreateNode(string name, Vector2 position, ScreenSceneScriptableObject scene, bool isReturnNode)
+        {
+            var node = new SceneNode
             {
-                nextScenes = nodeCache.Scene.nextScenes;
-            }
-            else
-            {
-                nextScenes = new NextScene[outputPortCount + 1];
-            }
-            
-
-            NextScene nextScene;
-            
-            if (nextScenes.Length > outputPortCount)
-            {
-                nextScene = nextScenes[outputPortCount];
-            }
-            else
-            {
-                NextScene[] tempNextScenes = new NextScene[outputPortCount + 1];
-                for (int i = 0; i < nextScenes.Length; i++)
-                {
-                    tempNextScenes[i] = nextScenes[i];
-                }
-                
-                nextScene = new NextScene();
-                tempNextScenes[outputPortCount] = nextScene;
-
-                nextScenes = tempNextScenes;
-            }
-
-            nextScene.optionLabel = outputPortName;
-        
-            // var chooseText = new TextField("Choose: ");
-            // chooseText.RegisterValueChangedCallback(evt =>
-            // {
-            //     chooseText.value = evt.newValue;
-            //     nextScene.chooseText = evt.newValue;
-            // });
-            // chooseText.SetValueWithoutNotify(nextScene.chooseText);
-            // customContainer.Add(chooseText);
-            //
-            // StatusDependedField statusDependedField = new (nextScene.statusDependent, customContainer);
-            // statusDependedField.Build(generatedPort, nextScene.statusDependent.enable);
-            //
-            // CameraDependedField cameraDependedField = new (nextScene.cameraDependent, customContainer);
-            // cameraDependedField.Build(generatedPort, nextScene.cameraDependent.enable);
-            //
-            // var exclusionToggle = new Toggle("Exclusion dependent: ");
-            // exclusionToggle.RegisterValueChangedCallback(evt =>
-            // {
-            //     exclusionToggle.value = evt.newValue;
-            //     nextScene.exclusionDependent.enable = evt.newValue;
-            // });
-            // exclusionToggle.SetValueWithoutNotify(nextScene.exclusionDependent.enable);
-            // customContainer.Add(exclusionToggle);
-            //
-            // FindDependentField findDependentField = new(nextScene.findDependent, customContainer);
-            // findDependentField.Build(generatedPort, nextScene.findDependent.enable);
-            //
-            // SpecialDependentField specialDependentField = new(nextScene.specialDependent, customContainer);
-            // specialDependentField.Build(generatedPort, nextScene.specialDependent.enable);
-            //     
-            // customContainer.Add(new Label("========"));
-            // generatedPort.contentContainer.Add(customContainer);
-            
-            if(nodeCache.Scene != null)
-            {
-                nextScenes[outputPortCount] = nextScene;
-                nodeCache.Scene.nextScenes = nextScenes;
-            }
-            
-            var deleteButton = new Button(() => RemovePort(nodeCache, generatedPort, outputPortCount))
-            {
-                text = "X"
+                GUID = Guid.NewGuid().ToString(), Key = scene != null ? scene.SceneKey : name,
+                Scene = scene, ReturnNode = isReturnNode,
+                title = (scene != null ? scene.SceneKey : name) + (isReturnNode ? " ↩" : "")
             };
-            
-            generatedPort.contentContainer.Add(deleteButton);
-            generatedPort.portName = outputPortName;
-            nodeCache.outputContainer.Add(generatedPort);
-            nodeCache.RefreshExpandedState();
-            nodeCache.RefreshPorts();
-        }
-
-        private void RemovePort(SceneNode node, Port socket, int portIndex)
-        {
-            List<NextScene> nextScenes = node.Scene.nextScenes.ToList();
-            nextScenes.RemoveAt(portIndex);
-            node.Scene.nextScenes = nextScenes.ToArray();
-            
-            var targetEdge = edges.ToList()
-                .Where(x => x.output.portName == socket.portName && x.output.node == socket.node);
-            if (targetEdge.Any())
+            node.style.minWidth = 270;
+            node.SetPosition(new Rect(position, DefaultNodeSize));
+            var input = Port.Create<Edge>(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
+            input.portName = "Input";
+            node.inputContainer.Add(input);
+            var field = new ObjectField { objectType = typeof(ScreenSceneScriptableObject), allowSceneObjects = false, value = scene };
+            field.style.maxWidth = 280;
+            field.RegisterValueChangedCallback(evt =>
             {
-                var edge = targetEdge.First();
-                edge.input.Disconnect(edge);
-                RemoveElement(targetEdge.First());
-            }
-            
-            node.outputContainer.Remove(socket);
-            node.RefreshPorts();
-            node.RefreshExpandedState();
-        }
-
-        private Port GetPortInstance(SceneNode node, Direction nodeDirection,
-            Port.Capacity capacity = Port.Capacity.Single)
-        {
-            return node.InstantiatePort(Orientation.Horizontal, nodeDirection, capacity, typeof(float));
-        }
-
-        private SceneNode GetEntryPointNodeInstance()
-        {
-            var nodeCache = new SceneNode()
+                RecordLayout();
+                node.Scene = evt.newValue as ScreenSceneScriptableObject;
+                node.Key = node.Scene != null ? node.Scene.SceneKey : "Scene";
+                CaptureLayout();
+                Rebuild();
+            });
+            node.extensionContainer.Add(field);
+            if (scene != null)
             {
-                title = "START",
-                GUID = Guid.NewGuid().ToString(),
-                Key = "ENTRYPOINT",
-                EntryPoint = true
-            };
-
-            var generatedPort = GetPortInstance(nodeCache, Direction.Output);
-            generatedPort.portName = "Next";
-            nodeCache.outputContainer.Add(generatedPort);
-
-            nodeCache.capabilities &= ~Capabilities.Movable;
-            nodeCache.capabilities &= ~Capabilities.Deletable;
-
-            nodeCache.RefreshExpandedState();
-            nodeCache.RefreshPorts();
-            nodeCache.SetPosition(new Rect(100, 200, 100, 150));
-            return nodeCache;
-        }
-    }
-
-    public class CameraDependentNode : Node
-    {
-        // public CameraDependent cameraDependent = new CameraDependent();
-        // private CameraDependedField cameraDependedField;
-        // private StatusDependedField statusDependedField;
-        // private FindDependentField findDependentField;
-        // private SpecialDependentField specialDependentField;
-        //
-        // private Spe statusesValues;
-        // private List<StatusesValue> statusesFindValues;
-        // private List<SpecialScriptableObjectBase> specialArray;
-        
-        private Port m_outpu1;
-        private Port m_outpu2;
-
-        public CameraDependentNode()
-        {
-            title = "Camera Dependent Node";
-
-            // Додаємо кастомний порт
-            // var inputPort = InstantiateCustomPort(Direction.Input, "Input");
-            var inputPort =
-                InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
-            inputPort.portName = "Input";
-
-            inputContainer.Add(inputPort);
-
-            m_outpu1 = InstantiateCustomPort(Direction.Output, "Output 1");
-            // m_outpu2 = InstantiateCustomPort(Direction.Output, "Output 2");
-            outputContainer.Add(m_outpu1);
-            // outputContainer.Add(m_outpu2);
-
-            // mainContainer.style.height = 123;
-            // Оновлення вузла
-            RefreshExpandedState();
-            RefreshPorts();
-        }
-
-        private Port InstantiateCustomPort(Direction direction, string portName)
-        {
-            // Створюємо стандартний порт
-            var port = InstantiatePort(Orientation.Horizontal, direction, Port.Capacity.Single, typeof(bool));
-            port.portName = portName;
-
-            // Головний контейнер для порта та полів
-            var portContainer = new VisualElement();
-            // portContainer.style.marginBottom = 16;
-            // portContainer.style.flexDirection = FlexDirection.Column; // Елементи вертикально
-            // portContainer.style.alignItems = Align.Stretch; // Вирівнювання по лівому краю
-            // portContainer.style.paddingBottom = 10; // Додаємо відступ знизу
-            // portContainer.style.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.1f); // Для тесту видимості
-            // portContainer.style.borderBottomWidth = 1;
-            // portContainer.style.borderBottomColor = Color.gray;
-
-            // Додаємо сам порт до контейнера
-            // portContainer.Add(port);
-
-            // Додаємо кастомні поля для CameraDependent
-            // AddToggleField(portContainer, "Enable", value => cameraDependent.enable = value, cameraDependent.enable);
-            // AddToggleField(portContainer, "Is Prep Action", value => cameraDependent.isPrepAction = value,
-            // cameraDependent.isPrepAction);
-            // AddToggleField(portContainer, "Visible on Photo", value => cameraDependent.visibleOnPhoto = value,
-            // cameraDependent.visibleOnPhoto);
-            // AddToggleField(portContainer, "Visible out Photo", value => cameraDependent.visibleOutPhoto = value,
-            // cameraDependent.visibleOutPhoto);
-
-            // Замінюємо вміст порта на кастомний контейнер
-            // port.contentContainer.Clear();
-
-            CameraDependent cameraDependent = new();
-            CameraDependedField cameraDependedField = new CameraDependedField(cameraDependent, portContainer);
-            cameraDependedField.Build(port, false);
-
-            StatusDependent statusDependent = new();
-            StatusDependedField statusDependedField = new StatusDependedField(statusDependent, portContainer);
-            statusDependedField.Build(port, false);
-
-            FindDependent findDependent = new();
-            FindDependentField findDependentField = new FindDependentField(findDependent, portContainer);
-            findDependentField.Build(port, false);
-
-            SpecialDependent specialDependent = new();
-            SpecialDependentField specialDependentField = new SpecialDependentField(specialDependent, portContainer);
-            specialDependentField.Build(port, false);
-            
-            port.contentContainer.Add(portContainer);
-
-            // AddCameraDependent(port);
-            
-            // var arrayField = CreateArrayField(
-            //     "Test Array",
-            //     new List<string>(),
-            //     () => Debug.Log("Array changed!"), // Викликається після змін
-            //     () => "New Item" // Як створювати новий елемент
-            // );
-            //
-            // port.Add(arrayField);
-
-            // Примусово задаємо мінімальну висоту для уникнення накладання
-            port.style.minHeight = 40; // Приклад висоти
-            port.style.alignItems = Align.Stretch;
-            // port.style.paddingBottom = 20;
-
-            return port;
-        }
-
-        private void AddCameraDependent(Port cachedPort)
-        {
-            int blockSize = 60;
-            int titleMargin = 4;
-            int elementMargin = 12;
-
-            var container = new VisualElement();
-
-            var toggle = new Toggle("Camera dependent: ");
-            var togglePrep = new Toggle("isPrepAction");
-            var toggleVisible = new Toggle("visibleOnPhoto");
-            var toggleOutVisible = new Toggle("visibleOutPhoto");
-
-            toggle.style.marginLeft = titleMargin; // Відступ ліворуч для гарного вигляду
-            togglePrep.style.marginLeft = elementMargin; // Відступ ліворуч для гарного вигляду
-            toggleVisible.style.marginLeft = elementMargin; // Відступ ліворуч для гарного вигляду
-            toggleOutVisible.style.marginLeft = elementMargin; // Відступ ліворуч для гарного вигляду
-
-
-            toggle.RegisterValueChangedCallback(evt =>
-            {
-                toggle.value = evt.newValue;
-                togglePrep.visible = evt.newValue;
-                toggleVisible.visible = evt.newValue;
-                toggleOutVisible.visible = evt.newValue;
-
-                if (evt.newValue)
+                var inspect = new Button(() => { Selection.activeObject = scene; EditorGUIUtility.PingObject(scene); }) { text = "Inspector: text / conditions" };
+                node.extensionContainer.Add(inspect);
+                if (isReturnNode)
                 {
-                    container.contentContainer.Add(togglePrep);
-                    container.contentContainer.Add(toggleVisible);
-                    container.contentContainer.Add(toggleOutVisible);
-
-                    float height = cachedPort.resolvedStyle.height;
-                    height += blockSize;
-
-                    cachedPort.style.height = height;
+                    node.extensionContainer.Add(new Button(() => Expand(node)) { text = "Expand scene here" });
                 }
                 else
                 {
-                    container.contentContainer.Remove(togglePrep);
-                    container.contentContainer.Remove(toggleVisible);
-                    container.contentContainer.Remove(toggleOutVisible);
-
-                    float height = cachedPort.resolvedStyle.height;
-                    height -= blockSize;
-                    cachedPort.style.height = height;
-                }
-            });
-
-            togglePrep.RegisterValueChangedCallback(evt => togglePrep.value = evt.newValue);
-            toggleVisible.RegisterValueChangedCallback(evt => toggleVisible.value = evt.newValue);
-            toggleOutVisible.RegisterValueChangedCallback(evt => toggleOutVisible.value = evt.newValue);
-
-            toggle.SetValueWithoutNotify(false);
-            togglePrep.SetValueWithoutNotify(false);
-            toggleVisible.SetValueWithoutNotify(false);
-            toggleOutVisible.SetValueWithoutNotify(false);
-
-            container.contentContainer.Add(toggle);
-
-            cachedPort.contentContainer.Add(container);
-        }
-
-        private void AddToggleField(VisualElement container, string label, Action<bool> onChanged, bool initialValue)
-        {
-            var toggle = new Toggle(label)
-            {
-                value = initialValue
-            };
-            toggle.RegisterValueChangedCallback(evt => onChanged(evt.newValue));
-            toggle.style.marginLeft = 5; // Відступ ліворуч для гарного вигляду
-            container.Add(toggle);
-        }
-
-        private VisualElement CreateArrayField<T>(string label, List<T> array, Action onArrayChanged,
-            Func<T> createNewItem)
-        {
-            // Створюємо Foldout для масиву
-            var foldout = new Foldout
-            {
-                text = label,
-                value = true // Відкрити за замовчуванням
-            };
-
-            // Контейнер для елементів
-            var elementsContainer = new VisualElement();
-            elementsContainer.style.flexDirection = FlexDirection.Column;
-            foldout.Add(elementsContainer);
-
-            // Кнопка додавання нового елемента
-            var addButton = new Button(() =>
-            {
-                array.Add(createNewItem());
-                onArrayChanged?.Invoke();
-                RefreshArrayFields(array, elementsContainer, onArrayChanged);
-            })
-            {
-                text = "Add"
-            };
-            foldout.Add(addButton);
-
-            // Оновлення полів
-            RefreshArrayFields(array, elementsContainer, onArrayChanged);
-
-            return foldout;
-        }
-
-        private void RefreshArrayFields<T>(List<T> array, VisualElement container, Action onArrayChanged)
-        {
-            // Очищаємо контейнер
-            container.Clear();
-
-            // Додаємо кожен елемент масиву
-            for (int i = 0; i < array.Count; i++)
-            {
-                int index = i;
-
-                // Контейнер для елемента
-                var elementContainer = new VisualElement();
-                elementContainer.style.flexDirection = FlexDirection.Row;
-                elementContainer.style.alignItems = Align.Center;
-
-                // Поле редагування (приклад для string, можна адаптувати під інші типи)
-                var textField = new TextField($"Element {i}")
-                {
-                    value = array[i].ToString()
-                };
-                textField.RegisterValueChangedCallback(evt =>
-                {
-                    if (typeof(T) == typeof(string))
+                    var options = scene.nextScenes ?? Array.Empty<NextScene>();
+                    for (int i = 0; i < options.Length; i++)
                     {
-                        array[index] = (T)(object)evt.newValue;
-                        onArrayChanged?.Invoke();
+                        int index = i;
+                        var option = options[i];
+                        var port = Port.Create<Edge>(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                        port.portName = $"{i + 1}. " + (string.IsNullOrEmpty(option?.optionLabel) ? "Next scene" : option.optionLabel);
+                        port.tooltip = option?.chooseText ?? "Missing option";
+                        port.userData = new OptionPort { Scene = scene, Index = i, Target = option?.scene, Key = $"option:{i}" };
+                        port.portColor = option?.scene == scene ? Color.red : option?.scene == null ? new Color(1, 0.65f, 0.2f) : new Color(0.5f, 0.8f, 1);
+                        port.Add(new Button(() =>
+                        {
+                            SceneGraphData.RemoveOption(scene, index);
+                            RefreshFromAssets();
+                        }) { text = "−", tooltip = "Delete this option, including its text and conditions" });
+                        node.outputContainer.Add(port);
                     }
-                });
-                elementContainer.Add(textField);
-
-                // Кнопка видалення
-                var removeButton = new Button(() =>
-                {
-                    array.RemoveAt(index);
-                    onArrayChanged?.Invoke();
-                    RefreshArrayFields(array, container, onArrayChanged);
-                })
-                {
-                    text = "X"
-                };
-                elementContainer.Add(removeButton);
-
-                // Додаємо елемент до контейнера
-                container.Add(elementContainer);
+                    foreach (var special in SceneGraphData.GetSpecialTransitions(scene))
+                    {
+                        var port = Port.Create<Edge>(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                        port.portName = $"{special.OptionIndex + 1}. {special.Field} (special)";
+                        port.portColor = special.Target == scene ? Color.red : new Color(0.8f, 0.6f, 1);
+                        port.userData = new OptionPort { Scene = scene, Index = special.OptionIndex, Target = special.Target, ReadOnly = true,
+                            Key = $"special:{special.OptionIndex}:{AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(special.Asset))}:{special.Field}" };
+                        port.tooltip = special.Asset.name + " — edit shared special asset in Inspector";
+                        port.Add(new Button(() => Selection.activeObject = special.Asset) { text = "Inspect" });
+                        node.outputContainer.Add(port);
+                    }
+                    node.extensionContainer.Add(new Button(() =>
+                    {
+                        SceneGraphData.AddOption(scene);
+                        RefreshFromAssets();
+                    }) { text = "+ Add option" });
+                    if (options.Length == 0) node.extensionContainer.Add(new Label("End of story"));
+                }
+                if ((scene.nextScenes ?? Array.Empty<NextScene>()).Any(o => o?.scene == scene))
+                    node.titleContainer.style.backgroundColor = new Color(0.6f, 0.15f, 0.15f);
             }
+            node.RefreshExpandedState();
+            node.RefreshPorts();
+            return node;
         }
+
+        private void Expand(SceneNode node)
+        {
+            RecordLayout();
+            foreach (var other in nodes.OfType<SceneNode>().Where(n => n.Scene == node.Scene)) other.ReturnNode = true;
+            node.ReturnNode = false;
+            CaptureLayout();
+            Rebuild();
+            FocusScene(node.Scene);
+        }
+
+        public void CreateNewSceneNode(string name, Vector2 position, bool isReturnNode)
+        {
+            RecordLayout();
+            AddElement(CreateNode(name, position, null, isReturnNode));
+            CaptureLayout();
+        }
+
+        public Group CreateCommentBlock(Rect rect, CommentBlockData data = null)
+        {
+            var group = new Group { title = data?.Title ?? "Scene group" };
+            group.SetPosition(rect);
+            AddElement(group);
+            return group;
+        }
+
+        public override List<Port> GetCompatiblePorts(Port start, NodeAdapter adapter) => ports.ToList().Where(port =>
+            port != start && port.direction != start.direction && port.node != start.node
+            && !(start.userData is OptionPort a && a.ReadOnly) && !(port.userData is OptionPort b && b.ReadOnly)
+            && !((SceneNode)start.node).EntryPointOrSameScene((SceneNode)port.node)).ToList();
+
+        public static string GetPortKey(Port port) => port.userData is OptionPort option ? option.Key : "Next";
+
+        private GraphViewChange OnGraphChanged(GraphViewChange change)
+        {
+            if (rebuilding) return change;
+            RecordLayout();
+            var removedNodes = (change.elementsToRemove ?? new List<GraphElement>()).OfType<SceneNode>().ToHashSet();
+            if (change.elementsToRemove != null)
+            {
+                foreach (var edge in change.elementsToRemove.OfType<Edge>())
+                {
+                    if (removedNodes.Contains(edge.input?.node as SceneNode) || removedNodes.Contains(edge.output?.node as SceneNode)) continue;
+                    if (edge.output?.userData is OptionPort option && !option.ReadOnly)
+                        SceneGraphData.SetTarget(option.Scene, option.Index, null);
+                }
+            }
+            if (change.edgesToCreate != null)
+            {
+                change.edgesToCreate = change.edgesToCreate.Where(edge =>
+                {
+                    if (!(edge.input?.node is SceneNode target) || !(edge.output?.node is SceneNode source)) return false;
+                    if (source.EntryPoint) return !target.EntryPoint;
+                    return edge.output.userData is OptionPort option && !option.ReadOnly && target.Scene != null
+                        && SceneGraphData.SetTarget(option.Scene, option.Index, target.Scene);
+                }).ToList();
+            }
+            QueueCapture(false);
+            return change;
+        }
+
+        private static void Connect(Port output, Port input, bool readOnly)
+        {
+            if (input == null) return;
+            var edge = output.ConnectTo(input);
+            if (readOnly) edge.capabilities &= ~Capabilities.Deletable;
+            output.GetFirstAncestorOfType<GraphView>().AddElement(edge);
+        }
+
+        private void RecordLayout()
+        {
+            if (Layout != null && !rebuilding) Undo.RegisterCompleteObjectUndo(Layout, "Edit narrative layout");
+        }
+
+        private void QueueCapture(bool record = true)
+        {
+            if (rebuilding || captureQueued) return;
+            if (record) RecordLayout();
+            captureQueued = true;
+            schedule.Execute(() =>
+            {
+                captureQueued = false;
+                CaptureLayout();
+            });
+        }
+
+        public void CaptureLayout()
+        {
+            if (Layout == null || rebuilding) return;
+            GraphSaveUtility.Capture(this, Layout);
+            owner?.MarkLayoutChanged();
+        }
+
+        public void RefreshFromAssets()
+        {
+            // Preserve visual positions, then reconstruct links from the current scene assets.
+            if (Layout != null) GraphSaveUtility.Capture(this, Layout);
+            Rebuild();
+        }
+
+        public bool FocusScene(ScreenSceneScriptableObject scene)
+        {
+            var node = FindTarget(scene);
+            if (node == null)
+            {
+                RecordLayout();
+                node = CreateNode(scene.SceneKey, Vector2.zero, scene, false);
+                AddElement(node);
+                CaptureLayout();
+                Rebuild();
+                node = FindTarget(scene);
+            }
+            ClearSelection();
+            AddToSelection(node);
+            FrameSelection();
+            return true;
+        }
+
+        public void Search(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return;
+            var found = nodes.OfType<SceneNode>().FirstOrDefault(n => n.Scene != null &&
+                (n.Scene.SceneKey.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0 || n.Scene.name.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0));
+            if (found != null) FocusScene(found.Scene);
+            else owner?.ShowNotification(new GUIContent("Scene not found in this layout"));
+        }
+    }
+
+    internal static class SceneNodeCompatibility
+    {
+        public static bool EntryPointOrSameScene(this SceneNode a, SceneNode b) => !a.EntryPoint && !b.EntryPoint && a.Scene != null && a.Scene == b.Scene;
     }
 }
