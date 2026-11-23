@@ -19,8 +19,10 @@ namespace ReflectionOfAmber.Scripts.Authenticator
             m_Authenticator = new SteamAuthenticator();
 #endif
             if (m_Authenticator == null)
-            {
+            { 
+#if STEAM_GAME
                 Debug.LogWarning("AuthenticatorService::Init - Authenticator is null");
+#endif
                 SignInAnonymously();
                 return;
             }
